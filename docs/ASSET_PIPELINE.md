@@ -21,7 +21,7 @@ scripts/                    # export and validation tools
 - Avoid hidden cameras/lights from Blender exports unless intentionally required.
 
 ## Export automation
-Create `scripts/export_blender.py` using Blender's Python API, run headlessly via Blender CLI. For each source file: validate names/UV/materials, apply documented export transforms, export GLB, and print a machine-readable report. Never assume Blender is installed in CI: skip gracefully with clear instructions.
+M2.1 uses `scripts/generate_blockout.py` to create the scene and export GLB through Blender's Python API. Run via `npm run assets:blockout` (wrapper `scripts/run_blender.mjs`, pinned to Blender 5.2.1). Missing Blender fails with an explicit installation/path message; normal Web build/test does not invoke Blender. `npm run assets:validate` parses the real GLB with GLTFLoader and writes `docs/m2.1/asset-validation.json`.
 
 ## Asset manifest
 A typed JSON manifest maps stable IDs to GLB paths, categories, scale, placement anchor, collider type and approval state. A validation script checks path existence, parseability, size budgets and naming conventions. Budgets should be measured and tuned after M2, not invented as universal limits.
@@ -42,8 +42,23 @@ Record author, license, source and modifications for external assets. Reference 
 
 ## M1 coordinate checkpoint
 
-当前所有几何直接使用运行时 Y-up 坐标。标准 Blender → glTF 基变换 `(x,y,z) → (x,z,-y)` 的三个基向量已通过数学测试，真实导出资产验证留到 M2。
+M1 几何直接使用运行时 Y-up 坐标。标准 Blender → glTF 基变换 `(x,y,z) → (x,z,-y)` 的三个基向量已通过数学测试。M2.1 已通过真实 Blender 导出资产验证。
 
-M2 需制作带可辨认 X/Y/Z 标记的轴测试 `.blend` 与 `.glb`，确认 Blender +Z 变为运行时 +Y、+Y 变为 −Z、+X 保持 +X，以及米制比例和地面锚点。若资产正面约定为运行时 −Z，则其 Blender 源正面应按此变换对应 +Y。保持 Blender exporter 的标准 Y-up 转换，避免在 GLTFLoader 之后重复旋转。
+M2.1 生成器将运行时输入点 `(x,y,z)` 存为 Blender `(x,-z,y)`，并保持 exporter 标准 `export_yup=True`；GLTFLoader 后不重复旋转。`axis_test_01.glb` 中三个命名标记从原生 Blender +X/+Y/+Z 导出，经真实解析确认 +X→+X、+Y→−Z、+Z→+Y，长度单位为米。轴测试和场景由同一脚本生成；轴节点是临时导出物，不残留在小屋 `.blend` 中。小屋 GLB 根锚点为岛屿海平面原点，小屋中心由参数/report 记录，当前为 X/Z=(2,−1)。
 
 M1 未导入、复制或打包用户参考图；也未创建 GLB、角色图集或 Art Lab JSON 预设。
+
+## M2.1 source and approval contract
+
+- `art-source/parameters/island_cottage_v1.json`: dimensions, terrain outlines, seed, output paths and fixed camera presets.
+- `art-source/blender/island_cottage_blockout_v1.blend`: editable source, default exterior visibility; renders use EEVEE/AgX.
+- `public/assets/models/island_cottage_blockout_v1.glb`: runtime meshes/PBR clay materials, UV channels, no texture images or Blender cameras/lights.
+- `public/assets/manifests/blockout_v1.json`: stable ID, SHA-256, meter/Y-up contract, metrics, camera presets, required nodes, hidden-node lists and `placeholder-awaiting-human` approval state. TypeScript validates it before loading.
+- `public/assets/models/axis_test_01.glb`: actual coordinate/scale checkpoint.
+- `docs/m2.1/`: spatial, asset, runtime and GLB reproducibility reports.
+
+Two runs with the same parameters/seed produced byte-identical GLB. `.blend` binary equality is not claimed. Backups `*.blend1` and Python caches are ignored. Group aliases/shared staircase and cutaway variants are documented in [M2 spatial contract](M2_SPATIAL_SPEC.md).
+
+Parameter provenance hashing normalizes CRLF to LF in both generator and validator so Git newline settings do not invalidate the report.
+
+UV presence is only a future-material checkpoint; current planar placeholder UVs are not a finished unwrap. Colliders, reusable master assets and material texture provenance are deferred. The original Golden Reference remains local; derived comparison evidence is committed as requested. The Web renderer is the final review authority.

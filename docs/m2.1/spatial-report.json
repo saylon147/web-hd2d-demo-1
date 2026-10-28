@@ -1,0 +1,448 @@
+{
+  "schemaVersion": 1,
+  "approval": "candidate-awaiting-human",
+  "generator": "scripts/generate_blockout.py",
+  "blenderVersion": "5.2.1 LTS",
+  "parametersSha256": "415415433ca9d85594a3652e4eceab0cdc673b0f264dc7feb356cea4dec11c4a",
+  "coordinates": {
+    "source": "Blender Z-up",
+    "runtime": "Three.js Y-up",
+    "mapping": "(x,y,z) -> (x,z,-y)",
+    "units": "meters"
+  },
+  "land": {
+    "definition": "sum of nonoverlapping usable plateau, lower terrace and beach plan areas; includes cottage and circulation, excludes coastal rocks/water/pier",
+    "areaM2": 324.00000000000006,
+    "cottageFootprintM2": 36,
+    "ratio": 9.000000000000002,
+    "outlineScale": 1.1115135379699892,
+    "outlines": [
+      [
+        [
+          -10.003621841729903,
+          -3.334540613909968
+        ],
+        [
+          -7.780594765789925,
+          -7.780594765789925
+        ],
+        [
+          -2.2230270759399784,
+          -10.003621841729903
+        ],
+        [
+          4.446054151879957,
+          -9.447865072744909
+        ],
+        [
+          8.892108303759914,
+          -5.557567689849946
+        ],
+        [
+          10.003621841729903,
+          0.0
+        ],
+        [
+          7.780594765789925,
+          5.001810920864951
+        ],
+        [
+          4.446054151879957,
+          6.11332445883494
+        ],
+        [
+          -5.557567689849946,
+          6.11332445883494
+        ],
+        [
+          -8.892108303759914,
+          2.2230270759399784
+        ]
+      ],
+      [
+        [
+          -5.557567689849946,
+          6.11332445883494
+        ],
+        [
+          4.446054151879957,
+          6.11332445883494
+        ],
+        [
+          3.334540613909968,
+          9.447865072744909
+        ],
+        [
+          -4.446054151879957,
+          9.447865072744909
+        ]
+      ],
+      [
+        [
+          -4.446054151879957,
+          9.447865072744909
+        ],
+        [
+          3.334540613909968,
+          9.447865072744909
+        ],
+        [
+          4.446054151879957,
+          11.670892148684887
+        ],
+        [
+          1.1115135379699892,
+          13.338162455639871
+        ],
+        [
+          -4.446054151879957,
+          12.782405686654876
+        ],
+        [
+          -6.669081227819936,
+          11.115135379699892
+        ]
+      ]
+    ],
+    "plateauY": 4.8,
+    "terraceY": 2.4,
+    "beachY": 0.45
+  },
+  "house": {
+    "width": 6,
+    "depth": 6,
+    "center": [
+      2,
+      -1
+    ],
+    "floorY": 5,
+    "clearHeight": 2.7,
+    "wallThickness": 0.3,
+    "floorThickness": 0.4,
+    "basementFloorY": 2.2,
+    "basementFloorThickness": 0.2,
+    "roofRise": 1.6,
+    "eaves": 0.3,
+    "basementClearHeight": 2.3999999999999995,
+    "basementCeilingY": 4.6,
+    "groundCeilingY": 7.7,
+    "aboveGroundStoreys": 1,
+    "basementStoreys": 1,
+    "seaClearance": 2.0,
+    "groundRooms": [
+      {
+        "name": "Living / kitchen",
+        "rect": [
+          -2.7,
+          0.65,
+          1.35,
+          2.7
+        ],
+        "areaM2": 8.303
+      },
+      {
+        "name": "Bedroom",
+        "rect": [
+          0.4,
+          -2.7,
+          2.7,
+          0.3
+        ],
+        "areaM2": 6.9
+      },
+      {
+        "name": "Bathroom",
+        "rect": [
+          1.4,
+          0.75,
+          2.7,
+          2.7
+        ],
+        "areaM2": 2.535
+      }
+    ],
+    "basementRooms": [
+      {
+        "name": "Storage",
+        "rect": [
+          -2.7,
+          0.65,
+          -0.65,
+          2.7
+        ],
+        "areaM2": 4.203
+      },
+      {
+        "name": "Workshop",
+        "rect": [
+          0.3,
+          -2.7,
+          2.7,
+          0.3
+        ],
+        "areaM2": 7.2
+      },
+      {
+        "name": "Rest / reading",
+        "rect": [
+          0.3,
+          0.65,
+          2.7,
+          2.7
+        ],
+        "areaM2": 4.92
+      }
+    ],
+    "roomAreaDefinition": "allocated zone envelopes, before partition thickness; not net architectural room areas"
+  },
+  "stair": {
+    "footprint": [
+      -2.7,
+      -2.7,
+      -0.7500000000000002,
+      0.4500000000000002
+    ],
+    "riser": 0.175,
+    "tread": 0.275,
+    "flightWidth": 0.9,
+    "landing": 0.95,
+    "totalRisers": 16,
+    "rise": 2.8,
+    "minimumHeadroom": 2.3999999999999995,
+    "headroomBasis": "full stair-bay opening through ground slab; no slab above either flight",
+    "corridorWidth": 0.9400000000000002
+  },
+  "coastalStair": {
+    "upperRiser": 0.1846153846153846,
+    "lowerRiser": 0.17727272727272728,
+    "width": 1.6,
+    "upperStartZ": 4.3,
+    "upperEndZ": 7.55,
+    "lowerStartZ": 8.45,
+    "lowerEndZ": 11.2
+  },
+  "courtyard": {
+    "outline": [
+      [
+        -5.5,
+        0
+      ],
+      [
+        -1.15,
+        0
+      ],
+      [
+        -1.15,
+        2.3
+      ],
+      [
+        5.1,
+        2.3
+      ],
+      [
+        5.1,
+        4.2
+      ],
+      [
+        -5.5,
+        4.2
+      ]
+    ],
+    "areaM2": 30.145
+  },
+  "circulation": {
+    "routes": {
+      "ground-to-stair": [
+        [
+          "ground",
+          [
+            -0.2,
+            3.3
+          ]
+        ],
+        [
+          "ground",
+          [
+            -0.2,
+            1.6
+          ]
+        ],
+        [
+          "ground",
+          [
+            -1.25,
+            0.9
+          ]
+        ],
+        [
+          "ground",
+          [
+            -1.25,
+            0.4500000000000002
+          ]
+        ]
+      ],
+      "ground-to-bedroom": [
+        [
+          "ground",
+          [
+            -0.2,
+            3.3
+          ]
+        ],
+        [
+          "ground",
+          [
+            -0.2,
+            1.6
+          ]
+        ],
+        [
+          "ground",
+          [
+            0.95,
+            0.5
+          ]
+        ],
+        [
+          "ground",
+          [
+            0.95,
+            -1.0
+          ]
+        ]
+      ],
+      "ground-to-bathroom": [
+        [
+          "ground",
+          [
+            -0.2,
+            3.3
+          ]
+        ],
+        [
+          "ground",
+          [
+            -0.2,
+            1.6
+          ]
+        ],
+        [
+          "ground",
+          [
+            0.7,
+            1.6
+          ]
+        ],
+        [
+          "ground",
+          [
+            1.7,
+            1.6
+          ]
+        ]
+      ],
+      "ground-to-kitchen": [
+        [
+          "ground",
+          [
+            -0.2,
+            3.3
+          ]
+        ],
+        [
+          "ground",
+          [
+            -0.2,
+            1.6
+          ]
+        ],
+        [
+          "ground",
+          [
+            -1.7,
+            2.0
+          ]
+        ]
+      ],
+      "basement-to-workshop": [
+        [
+          "basement",
+          [
+            -2.25,
+            0.4500000000000002
+          ]
+        ],
+        [
+          "basement",
+          [
+            -2.25,
+            1.4
+          ]
+        ],
+        [
+          "basement",
+          [
+            -0.2,
+            1.4
+          ]
+        ],
+        [
+          "basement",
+          [
+            0.85,
+            0.8
+          ]
+        ],
+        [
+          "basement",
+          [
+            0.85,
+            -0.2
+          ]
+        ]
+      ]
+    },
+    "wallRayTestsPassed": true,
+    "primaryOutdoorPathWidth": 1.2
+  },
+  "views": {
+    "exterior": {
+      "target": {
+        "x": 0,
+        "y": 3.4,
+        "z": 3
+      },
+      "baseYaw": 35,
+      "yawOffset": 0,
+      "pitch": 42,
+      "distance": 40,
+      "fov": 35
+    },
+    "ground-floor": {
+      "target": {
+        "x": 2,
+        "y": 5.8,
+        "z": -1
+      },
+      "baseYaw": 35,
+      "yawOffset": 0,
+      "pitch": 55,
+      "distance": 15,
+      "fov": 35
+    },
+    "basement": {
+      "target": {
+        "x": 2,
+        "y": 3,
+        "z": -0.8
+      },
+      "baseYaw": 35,
+      "yawOffset": 0,
+      "pitch": 50,
+      "distance": 16,
+      "fov": 35
+    }
+  },
+  "sourceMeshes": 123
+}

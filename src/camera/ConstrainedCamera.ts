@@ -1,18 +1,22 @@
 import { PerspectiveCamera } from 'three';
-import { CAMERA_SETTINGS, createCameraState } from '../config/camera';
-import type { CameraState } from '../config/camera';
+import { CAMERA_SETTINGS, FOUNDATION_CAMERA_PROFILE, createCameraState } from '../config/camera';
+import type { CameraProfile, CameraState } from '../config/camera';
 import { constrainCameraState, dampingAlpha, orbitPosition, zoomDistance } from './math';
 
 interface PointerPosition { x: number; y: number }
 
 export class ConstrainedCamera {
   readonly camera = new PerspectiveCamera(35, 1, CAMERA_SETTINGS.near, CAMERA_SETTINGS.far);
-  readonly state = createCameraState();
-  private readonly rendered: CameraState = createCameraState();
+  readonly state: CameraState;
+  private readonly rendered: CameraState;
+  private resetState: Readonly<CameraState>;
   private readonly pointers = new Map<number, PointerPosition>();
   private readonly events = new AbortController();
 
-  constructor(private readonly canvas: HTMLCanvasElement) {
+  constructor(private readonly canvas: HTMLCanvasElement, readonly profile: CameraProfile = FOUNDATION_CAMERA_PROFILE) {
+    this.state = createCameraState(profile.defaults);
+    this.rendered = createCameraState(profile.defaults);
+    this.resetState = createCameraState(profile.defaults);
     const options = { signal: this.events.signal };
     canvas.addEventListener('pointerdown', this.onPointerDown, options);
     canvas.addEventListener('pointermove', this.onPointerMove, options);
@@ -28,12 +32,19 @@ export class ConstrainedCamera {
 
   reset(): void {
     this.cancelGesture();
-    const defaults = createCameraState();
+    const defaults = createCameraState(this.resetState);
     Object.assign(this.state.target, defaults.target);
     Object.assign(this.state, { ...defaults, target: this.state.target });
     Object.assign(this.rendered.target, defaults.target);
     Object.assign(this.rendered, { ...defaults, target: this.rendered.target });
     this.applyCamera();
+  }
+
+  setPreset(preset: Readonly<CameraState>): void {
+    const defaults = createCameraState(preset);
+    constrainCameraState(defaults, this.profile);
+    this.resetState = defaults;
+    this.reset();
   }
 
   resize(width: number, height: number): void {
@@ -42,7 +53,7 @@ export class ConstrainedCamera {
   }
 
   update(deltaSeconds: number): void {
-    constrainCameraState(this.state);
+    constrainCameraState(this.state, this.profile);
     const alpha = dampingAlpha(deltaSeconds);
     for (const key of ['yawOffset', 'pitch', 'distance'] as const) {
       this.rendered[key] += (this.state[key] - this.rendered[key]) * alpha;
@@ -93,7 +104,7 @@ export class ConstrainedCamera {
       }
     }
     this.pointers.set(event.pointerId, next);
-    constrainCameraState(this.state);
+    constrainCameraState(this.state, this.profile);
   };
 
   private readonly onPointerEnd = (event: PointerEvent): void => {
@@ -106,7 +117,7 @@ export class ConstrainedCamera {
     event.preventDefault();
     const unit = event.deltaMode === WheelEvent.DOM_DELTA_LINE ? 16
       : event.deltaMode === WheelEvent.DOM_DELTA_PAGE ? this.canvas.clientHeight : 1;
-    this.state.distance = zoomDistance(this.state.distance, event.deltaY * unit);
+    this.state.distance = zoomDistance(this.state.distance, event.deltaY * unit, this.profile);
   };
 
   private readonly cancelGesture = (): void => {

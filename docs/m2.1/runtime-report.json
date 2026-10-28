@@ -1,0 +1,61 @@
+{
+  "browser": "155.0.8059.85",
+  "viewport": {
+    "width": 1600,
+    "height": 1000
+  },
+  "errors": [],
+  "records": [
+    {
+      "mode": "exterior",
+      "engine": "three.js r186",
+      "view": "exterior",
+      "roofVisible": "true",
+      "basementVisible": "true",
+      "stairVisible": "true",
+      "scene": "blockout",
+      "loaded": "true",
+      "pitch": "42",
+      "yaw": "0",
+      "distance": "40",
+      "cameraY": "30.165224254354328",
+      "aspect": "1.8475750577367205",
+      "drawCalls": "233",
+      "triangles": "3552"
+    },
+    {
+      "mode": "ground-floor",
+      "engine": "three.js r186",
+      "view": "ground-floor",
+      "roofVisible": "false",
+      "basementVisible": "false",
+      "stairVisible": "true",
+      "scene": "blockout",
+      "loaded": "true",
+      "pitch": "55",
+      "yaw": "0",
+      "distance": "15",
+      "cameraY": "18.087280664334877",
+      "aspect": "1.8475750577367205",
+      "drawCalls": "174",
+      "triangles": "2640"
+    },
+    {
+      "mode": "basement",
+      "engine": "three.js r186",
+      "view": "basement",
+      "roofVisible": "false",
+      "basementVisible": "true",
+      "stairVisible": "true",
+      "scene": "blockout",
+      "loaded": "true",
+      "pitch": "50",
+      "yaw": "0",
+      "distance": "16",
+      "cameraY": "15.256711089903648",
+      "aspect": "1.8475750577367205",
+      "drawCalls": "61",
+      "triangles": "900"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # M2 implementation plan — Golden Reference V1
 
-Status: planning approved in discussion; **visual asset file upload pending**. Do not treat the concept illustration as a dimensioned drawing.
+Status (2026-10-28): **M2.1 candidate implemented, awaiting human spatial approval**. Formal reference is available locally at `docs/references/golden-reference-v1.png`; its original binary remains outside Git. See [M2.1 handoff](M2_1_HANDOFF.md) for source, exports, measured dimensions, screenshots and validation. Do not treat the concept illustration as a dimensioned drawing.
 
 ## Art direction
 Hand-painted stylized 3D island cottage, warm terracotta roof, cream plaster/stone walls, green shutters, lush layered foliage, pink flowers, bright turquoise sea. No characters in M2. A **single above-ground floor and a basement**, NOT two above-ground floors. Island usable land area about **9× the cottage footprint**.
@@ -37,4 +37,4 @@ See [reference brief](GOLDEN_REFERENCE_V1.md), [spatial spec](M2_SPATIAL_SPEC.md
 No gameplay, inventory, combat, backend, procedural infinite terrain, complex simulation or finished character assets. Do not create a second above-ground story.
 
 ## Codex handoff for next run
-Read AGENTS.md, this file, GOLDEN_REFERENCE_V1.md, M2_SPATIAL_SPEC.md and M2_ACCEPTANCE.md. Implement **M2.1 only**. Treat all dimensions as adjustable parameters. Report screenshots and actual build results; request human signoff before M2.2.
+Read AGENTS.md, this file, GOLDEN_REFERENCE_V1.md, M2_SPATIAL_SPEC.md, M2_ACCEPTANCE.md and M2_1_HANDOFF.md. M2.1 is ready for review; adjust its blockout if requested. **Do not start M2.2 until the user confirms the spatial layout.** Treat all dimensions as adjustable parameters.

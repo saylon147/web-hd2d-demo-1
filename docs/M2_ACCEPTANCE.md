@@ -1,15 +1,17 @@
 # M2 acceptance gates
 
 ## M2.1 — blockout
-- [ ] Blender 5.2.1 Python script reproducibly generates island and house.
-- [ ] Island land area approximately nine times cottage footprint; parameter documented.
-- [ ] Single above-ground storey and one plausible basement embedded in rock.
-- [ ] Ground floor and basement rooms fit and connect via viable internal stairs.
-- [ ] Beach, pier, stairs, garden and main paths spatially coherent.
-- [ ] GLB exports with independently addressable roof/ground floor/basement groups.
-- [ ] Three.js loads scene and preserves M1 camera controls.
-- [ ] Exterior, ground-floor cutaway, basement cutaway and browser screenshots supplied.
+- [x] Blender 5.2.1 Python script reproducibly generates island and house.
+- [x] Island land area approximately nine times cottage footprint; parameter documented.
+- [x] Single above-ground storey and one plausible basement embedded in rock.
+- [x] Ground floor and basement rooms fit and connect via viable internal stairs (candidate layout; routes/headroom checked).
+- [x] Beach, pier, stairs, garden and main paths spatially coherent (blockout supplied for visual approval).
+- [x] GLB exports with independently addressable roof/ground floor/basement groups.
+- [x] Three.js loads scene and preserves M1 camera controls.
+- [x] Exterior, ground-floor cutaway, basement cutaway and browser screenshots supplied.
 - [ ] Human approval recorded before M2.2.
+
+Evidence and limitations: [M2.1 handoff](M2_1_HANDOFF.md). Engineering checks passed on 2026-10-28: lint, strict typecheck/build, 24 unit tests, 11 browser tests (including 7 M1 regressions), 54 asset/spatial checks. Repeated generation produced an identical GLB hash. These checks do not approve the layout or aesthetics. Review island/house ratio, courtyard space, basement height and the rear-left U stair before continuing.
 
 ## M2.2 — cottage
 - [ ] Approved clay silhouette.

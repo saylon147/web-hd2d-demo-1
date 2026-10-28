@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "firstGlbSha256": "8eca8043b21f6780d959b9d1ecbfa0261e911a9a8b653be6c5f552ea00393f32",
+  "secondGlbSha256": "8eca8043b21f6780d959b9d1ecbfa0261e911a9a8b653be6c5f552ea00393f32",
+  "scope": "Same parameters and seed produce byte-identical GLB; .blend binary reproducibility is not claimed."
+}

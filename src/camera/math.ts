@@ -1,25 +1,25 @@
 import {
-  CAMERA_DEFAULTS,
-  CAMERA_LIMITS,
+  FOUNDATION_CAMERA_PROFILE,
   CAMERA_SETTINGS,
 } from '../config/camera';
-import type { CameraState, Point3 } from '../config/camera';
+import type { CameraProfile, CameraState, Point3 } from '../config/camera';
 
 export function clampFinite(value: number, min: number, max: number, fallback: number): number {
   return Math.min(max, Math.max(min, Number.isFinite(value) ? value : fallback));
 }
 
 // Mutate the canonical state in place so GUI bindings always point to the same objects.
-export function constrainCameraState(state: CameraState): void {
-  state.pitch = clampFinite(state.pitch, CAMERA_LIMITS.pitch.min, CAMERA_LIMITS.pitch.max, CAMERA_DEFAULTS.pitch);
-  state.yawOffset = clampFinite(state.yawOffset, CAMERA_LIMITS.yawOffset.min, CAMERA_LIMITS.yawOffset.max, CAMERA_DEFAULTS.yawOffset);
-  state.distance = clampFinite(state.distance, CAMERA_LIMITS.distance.min, CAMERA_LIMITS.distance.max, CAMERA_DEFAULTS.distance);
-  state.baseYaw = CAMERA_DEFAULTS.baseYaw;
-  state.fov = CAMERA_DEFAULTS.fov;
+export function constrainCameraState(state: CameraState, profile: CameraProfile = FOUNDATION_CAMERA_PROFILE): void {
+  const { limits, defaults } = profile;
+  state.pitch = clampFinite(state.pitch, limits.pitch.min, limits.pitch.max, defaults.pitch);
+  state.yawOffset = clampFinite(state.yawOffset, limits.yawOffset.min, limits.yawOffset.max, defaults.yawOffset);
+  state.distance = clampFinite(state.distance, limits.distance.min, limits.distance.max, defaults.distance);
+  state.baseYaw = defaults.baseYaw;
+  state.fov = defaults.fov;
   for (const key of ['x', 'z'] as const) {
-    state.target[key] = clampFinite(state.target[key], CAMERA_LIMITS.targetHorizontal.min, CAMERA_LIMITS.targetHorizontal.max, CAMERA_DEFAULTS.target[key]);
+    state.target[key] = clampFinite(state.target[key], limits.targetHorizontal.min, limits.targetHorizontal.max, defaults.target[key]);
   }
-  state.target.y = clampFinite(state.target.y, CAMERA_LIMITS.targetHeight.min, CAMERA_LIMITS.targetHeight.max, CAMERA_DEFAULTS.target.y);
+  state.target.y = clampFinite(state.target.y, limits.targetHeight.min, limits.targetHeight.max, defaults.target.y);
 }
 
 export function orbitPosition(state: Readonly<CameraState>): Point3 {
@@ -40,8 +40,8 @@ export function dampingAlpha(deltaSeconds: number, rate = CAMERA_SETTINGS.dampin
   return -Math.expm1(-rate * Math.max(0, deltaSeconds));
 }
 
-export function zoomDistance(distance: number, wheelPixels: number): number {
+export function zoomDistance(distance: number, wheelPixels: number, profile: CameraProfile = FOUNDATION_CAMERA_PROFILE): number {
   // Limit one event's exponential to avoid overflow on unusual input devices.
   const exponent = Math.max(-4, Math.min(4, wheelPixels * CAMERA_SETTINGS.wheelSensitivity));
-  return clampFinite(distance * Math.exp(exponent), CAMERA_LIMITS.distance.min, CAMERA_LIMITS.distance.max, CAMERA_DEFAULTS.distance);
+  return clampFinite(distance * Math.exp(exponent), profile.limits.distance.min, profile.limits.distance.max, profile.defaults.distance);
 }

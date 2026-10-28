@@ -12,7 +12,7 @@ PerspectiveCamera with initial FOV 35°, pitch 42° down from horizontal, target
 ## Controls
 - Pointer drag: orbit yaw/pitch within clamps
 - Wheel: smooth zoom
-- WASD: move character relative to camera horizontal orientation
+- WASD: planned in M3 to move character relative to camera horizontal orientation
 - Touch: one-finger orbit, two-finger pinch zoom (when supported)
 - UI interactions must not propagate to camera drag
 
@@ -43,4 +43,12 @@ Test camera at every extreme, on 16:9 and portrait viewports, and while characte
 
 Blender Z-up 到运行时 Y-up 的标准基变换为绕 X 轴 −90°：`(x, y, z) → (x, z, -y)`。因此 Blender +Z → Three.js +Y，Blender +Y → Three.js −Z，+X 保持 +X。
 
-M1 单元测试已验证这三个基向量的数学映射。M1 没有 GLB 导入或 Blender 导出；**真实 Blender → GLB → Three.js 轴测试资产仍在 M2 验证**。不要对已经完成 Y-up 转换的 glTF 再额外旋转一次。
+M1 单元测试已验证这三个基向量的数学映射。M2.1 的 `axis_test_01.glb` 已通过真实 Blender 导出与 GLTFLoader 解析，验证命名 +X/+Y/+Z 标记的位置和米制尺度。不要对已经完成 Y-up 转换的 glTF 再额外旋转一次。
+
+## M2.1 camera profile
+
+相机控制器现在接受 profile 和 mode preset；默认 foundation profile 保留 M1 行为。M1 校准场景通过 `/?scene=foundation` 访问，历史参数不变。
+
+M2 profile 为完整岛屿扩展 distance 到 8–45 m，GUI target X/Z 到 ±12 m、Y 到 0–12 m；pitch 30–55°、yaw offset ±45°、base yaw 35°、垂直 FOV 35°、输入、阻尼和 resize 语义沿用 M1。三个预设由源参数生成至 `public/assets/manifests/blockout_v1.json`，数值见 [M2 spatial contract](M2_SPATIAL_SPEC.md)。切换模式立即应用预设；重置恢复当前模式的 target/pitch/yaw/distance。
+
+标准机位可检查外景和剖视，未实现完整相机/建筑碰撞系统；任意 GUI target 修改可能进入或裁切几何。竖屏不自动改变机位，因此可能裁切岛屿，尚未认证真实手机性能。Blender 固定外景/剖视与 Web 使用相同角度和距离，但画布宽高比与色彩/灯光不同；不以两者像素相等作为验收。俯视与高度剖面另用检查用正交相机。

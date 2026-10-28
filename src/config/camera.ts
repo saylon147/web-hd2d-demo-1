@@ -13,6 +13,19 @@ export interface CameraState {
   fov: number;
 }
 
+export interface CameraLimits {
+  pitch: { readonly min: number; readonly max: number };
+  yawOffset: { readonly min: number; readonly max: number };
+  distance: { readonly min: number; readonly max: number };
+  targetHorizontal: { readonly min: number; readonly max: number };
+  targetHeight: { readonly min: number; readonly max: number };
+}
+
+export interface CameraProfile {
+  readonly defaults: Readonly<CameraState>;
+  readonly limits: CameraLimits;
+}
+
 export const CAMERA_LIMITS = {
   pitch: { min: 30, max: 55 },
   yawOffset: { min: -45, max: 45 },
@@ -40,6 +53,8 @@ export const CAMERA_SETTINGS = {
   minimumGroundClearance: 0.25,
 } as const;
 
-export function createCameraState(): CameraState {
-  return { ...CAMERA_DEFAULTS, target: { ...CAMERA_DEFAULTS.target } };
+export const FOUNDATION_CAMERA_PROFILE: CameraProfile = { defaults: CAMERA_DEFAULTS, limits: CAMERA_LIMITS };
+
+export function createCameraState(defaults: Readonly<CameraState> = CAMERA_DEFAULTS): CameraState {
+  return { ...defaults, target: { ...defaults.target } };
 }

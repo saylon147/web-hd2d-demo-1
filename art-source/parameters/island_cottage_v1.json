@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "seed": 17,
+  "house": {
+    "width": 6, "depth": 6, "center": [2, -1],
+    "floorY": 5, "clearHeight": 2.7, "wallThickness": 0.3,
+    "floorThickness": 0.4, "basementFloorY": 2.2,
+    "basementFloorThickness": 0.2, "roofRise": 1.6, "eaves": 0.3
+  },
+  "internalStair": { "flightWidth": 0.9, "gap": 0.15, "landing": 0.95, "stepsPerFlight": 8, "tread": 0.275 },
+  "island": {
+    "landAreaRatio": 9, "plateauY": 4.8, "terraceY": 2.4, "beachY": 0.45,
+    "plateauOutline": [[-9,-3],[-7,-7],[-2,-9],[4,-8.5],[8,-5],[9,0],[7,4.5],[4,5.5],[-5,5.5],[-8,2]],
+    "terraceOutline": [[-5,5.5],[4,5.5],[3,8.5],[-4,8.5]],
+    "beachOutline": [[-4,8.5],[3,8.5],[4,10.5],[1,12],[-4,11.5],[-6,10]],
+    "mainStairX": -2.3, "mainStairStartZ": 4.3, "mainStairWidth": 1.6,
+    "mainStairTread": 0.25, "upperSteps": 13, "lowerSteps": 11, "landing": 0.9
+  },
+  "pier": { "width": 1.8, "length": 5, "startZ": 11.8, "deckY": 0.65 },
+  "views": {
+    "exterior": { "target": {"x": 0,"y": 3.4,"z": 3}, "baseYaw": 35,"yawOffset": 0,"pitch": 42,"distance": 40,"fov": 35 },
+    "ground-floor": { "target": {"x": 2,"y": 5.8,"z": -1}, "baseYaw": 35,"yawOffset": 0,"pitch": 55,"distance": 15,"fov": 35 },
+    "basement": { "target": {"x": 2,"y": 3,"z": -0.8}, "baseYaw": 35,"yawOffset": 0,"pitch": 50,"distance": 16,"fov": 35 }
+  },
+  "outputs": {
+    "blend": "art-source/blender/island_cottage_blockout_v1.blend",
+    "model": "public/assets/models/island_cottage_blockout_v1.glb",
+    "axis": "public/assets/models/axis_test_01.glb",
+    "manifest": "public/assets/manifests/blockout_v1.json",
+    "report": "docs/m2.1/spatial-report.json",
+    "evidence": "docs/screenshots/m2.1"
+  }
+}

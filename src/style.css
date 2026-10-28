@@ -85,6 +85,12 @@ h1 { margin: 12px 0 8px; font-size: 27px; font-weight: 550; letter-spacing: .08e
 .error-panel { position: absolute; z-index: 5; top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(440px, calc(100% - 32px)); background: #f9faf4; border: 1px solid #d6dccf; padding: 28px; border-radius: 12px; box-shadow: 0 12px 40px #27372e1a; }
 .error-panel h2 { font-size: 20px; font-weight: 550; margin: 0 0 14px; }
 .error-panel p { font-size: 13px; color: #72836d; line-height: 1.8; margin-bottom: 24px; overflow-wrap: anywhere; }
+.view-controls { position: absolute; top: 24px; left: 50%; transform: translateX(-50%); display: flex; padding: 4px; gap: 4px; border: 1px solid #d2dacb; border-radius: 9px; background: #f8f9f1ed; }
+.view-controls button { padding: 9px 14px; border: 0; border-radius: 5px; font-size: 11px; background: transparent; color: #6a7c69; cursor: pointer; white-space: nowrap; }
+.view-controls button[aria-pressed="true"] { background: #365f4c; color: #fff; }
+.spatial-metrics { display: block; margin-top: 17px; font: 11px/1.9 ui-monospace, "Microsoft YaHei", monospace; color: #72846e; white-space: pre-line; }
+.calibration-link { font-size: 10px; color: #73876c; text-decoration: none; }
+.calibration-link:hover { text-decoration: underline; }
 @media (max-width: 900px) {
   .milestone { display: none; }
   .scope-note { display: none; }
@@ -106,6 +112,12 @@ h1 { margin: 12px 0 8px; font-size: 27px; font-weight: 550; letter-spacing: .08e
   .camera-readout { width: 100%; font-size: 9px; padding: 9px; text-align: center; }
   .bottom-bar { min-height: 54px; padding: 9px 16px; gap: 8px; flex-wrap: wrap; font-size: 9px; }
   .control-hints { gap: 13px; }
+  .blockout-shell .view-controls { top: 13px; left: 20px; right: 20px; transform: none; justify-content: center; }
+  .blockout-shell .view-controls button { flex: 1; padding: 8px; font-size: 10px; }
+  .blockout-shell .scene-heading { top: 75px; }
+  .blockout-shell .debug-panel { top: 63px; }
+  .spatial-metrics { font-size: 9px; margin-top: 10px; }
+  .blockout-shell .scene-heading p { max-width: 270px; }
 }
 @media (max-height: 500px) {
   .topbar { min-height: 54px; }

@@ -1,7 +1,11 @@
 # Golden Reference V1 — visual design brief
 
 ## Status
-Approved concept **direction**, not final geometry. Concept image generated in the ChatGPT discussion on 2026-10-28. The binary image is **not yet committed to this repository**. Expected future path: `docs/references/golden-reference-v1.png`. Do not fabricate or silently substitute a different image.
+Approved concept **direction**, not final geometry. Concept image generated in the ChatGPT discussion on 2026-10-28. The user supplied the formal local image at `docs/references/golden-reference-v1.png` (1536×1024). The original is intentionally excluded from Git; no original reference is served as a runtime asset. Do not fabricate or silently substitute a different image.
+
+SHA-256: `6d538a42441a2c9b5b2e6736522687fa85aef08b8d87e1a71b0fa3ec2a1e61e3`.
+
+M2.1 [side-by-side evidence](screenshots/m2.1/reference-comparison.png) uses the unchanged reference, cropped to its exterior and two cutaway panels. The derived review sheet is committed at the user's request. It is spatial review evidence, not a claim of final art fidelity. A fresh checkout can run/build/test without the original; `npm run evidence:compare` requires placing the original at the path above.
 
 ## Main scene
 A miniature Mediterranean-inspired rocky island with a cream cottage, terracotta pitched roof, green door/shutters, climbing vines, flower beds, stone terrace, broad garden, trees, stone steps, sandy shore, wooden pier, moored rowboat, transparent turquoise water and scattered coastal rocks. Warm, painterly, richly layered but legible at the M1 fixed elevated perspective camera.
@@ -23,7 +27,7 @@ A miniature Mediterranean-inspired rocky island with a cream cottage, terracotta
 Soft painterly albedo, broad warm/cool value groups, mildly exaggerated architectural proportions, hand-shaped stones and foliage masses. Avoid photoreal textures, excessive uniform noise, flat low-poly placeholders masquerading as final art, harsh outlines and global pixelation.
 
 ## Required reference capture
-Once uploaded, store the concept image at `docs/references/golden-reference-v1.png`; optionally store source reference screenshots separately only if rights permit. Add any approved revisions as new versions, do not overwrite the history.
+Keep the formal local concept at `docs/references/golden-reference-v1.png`; optionally store source reference screenshots separately only if rights permit. Add any approved revisions as new versions, do not overwrite the history.
 
 ## Approval gates
 1. Blockout geometry and floor relationship.

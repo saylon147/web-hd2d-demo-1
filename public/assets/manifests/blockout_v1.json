@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "id": "island_cottage_blockout_v1",
+  "approval": "placeholder-awaiting-human",
+  "modelUrl": "/assets/models/island_cottage_blockout_v1.glb",
+  "axisUrl": "/assets/models/axis_test_01.glb",
+  "modelSha256": "8eca8043b21f6780d959b9d1ecbfa0261e911a9a8b653be6c5f552ea00393f32",
+  "units": "meters",
+  "upAxis": "Y",
+  "metrics": {
+    "landAreaM2": 324.00000000000006,
+    "houseAreaM2": 36,
+    "landRatio": 9.000000000000002,
+    "groundHeight": 2.7,
+    "basementHeight": 2.3999999999999995,
+    "courtyardAreaM2": 30.145
+  },
+  "views": {
+    "exterior": {
+      "target": {
+        "x": 0,
+        "y": 3.4,
+        "z": 3
+      },
+      "baseYaw": 35,
+      "yawOffset": 0,
+      "pitch": 42,
+      "distance": 40,
+      "fov": 35
+    },
+    "ground-floor": {
+      "target": {
+        "x": 2,
+        "y": 5.8,
+        "z": -1
+      },
+      "baseYaw": 35,
+      "yawOffset": 0,
+      "pitch": 55,
+      "distance": 15,
+      "fov": 35
+    },
+    "basement": {
+      "target": {
+        "x": 2,
+        "y": 3,
+        "z": -0.8
+      },
+      "baseYaw": 35,
+      "yawOffset": 0,
+      "pitch": 50,
+      "distance": 16,
+      "fov": 35
+    }
+  },
+  "requiredNodes": [
+    "IslandRoot",
+    "Terrain",
+    "TerrainExterior",
+    "TerrainSection",
+    "Shoreline",
+    "Water",
+    "Pier",
+    "Garden",
+    "Terrace",
+    "Paths",
+    "CottageRoot",
+    "Roof",
+    "ExteriorWalls",
+    "GroundFloor",
+    "GroundFloor_Structure",
+    "GroundFloor_InteriorWalls",
+    "GF_Interior_Full",
+    "GF_Interior_Cutaway",
+    "GroundFloor_Furniture",
+    "StairsDown",
+    "Basement",
+    "Basement_Structure",
+    "Basement_BackLeftWalls",
+    "Basement_FrontRightWalls",
+    "Basement_InteriorWalls",
+    "BS_Interior_Full",
+    "BS_Interior_Cutaway",
+    "Basement_Furniture",
+    "StairsUp",
+    "Exterior_Front",
+    "Exterior_Right",
+    "Exterior_Back",
+    "Exterior_Left"
+  ],
+  "modeHidden": {
+    "exterior": [
+      "TerrainSection",
+      "GF_Interior_Cutaway",
+      "BS_Interior_Cutaway"
+    ],
+    "ground-floor": [
+      "TerrainSection",
+      "Roof",
+      "Exterior_Front",
+      "Exterior_Right",
+      "GF_Interior_Full",
+      "Basement"
+    ],
+    "basement": [
+      "TerrainExterior",
+      "Roof",
+      "ExteriorWalls",
+      "GroundFloor_Structure",
+      "GroundFloor_InteriorWalls",
+      "GroundFloor_Furniture",
+      "Garden",
+      "Terrace",
+      "Paths",
+      "Shoreline",
+      "Pier",
+      "GF_Interior_Full",
+      "GF_Interior_Cutaway",
+      "BS_Interior_Full",
+      "Basement_FrontRightWalls"
+    ]
+  }
+}

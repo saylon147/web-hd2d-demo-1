@@ -3,10 +3,10 @@ import type { Page } from '@playwright/test';
 import { mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
-const evidenceDirectory = resolve('docs/screenshots');
+const evidenceDirectory = resolve('test-results/m1-regression');
 
 async function ready(page: Page): Promise<void> {
-  await page.goto('/');
+  await page.goto('/?scene=foundation');
   await expect(page.locator('#render-status')).toContainText('WebGL2');
   await expect(page.locator('#scene')).toHaveAttribute('data-distance', '16');
 }

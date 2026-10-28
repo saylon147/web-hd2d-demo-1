@@ -5,3 +5,7 @@ playwright-report/
 .vite/
 *.local
 *.tsbuildinfo
+*.blend1
+__pycache__/
+# User-supplied local concept; requested derived review sheets are committed.
+/docs/references/golden-reference-v1.png

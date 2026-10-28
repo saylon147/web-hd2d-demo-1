@@ -18,6 +18,8 @@ V3 web: compare GLB in browser to approved reference.
 ## Render evidence
 Produce `clay.png`, `albedo.png`, `beauty.png`, `web.png` per candidate at documented camera settings. Save prompt, seed, model, license and ComfyUI workflow JSON when AI textures are used. Store large intermediates outside runtime assets.
 
+M2.1 supplies only clay and Web evidence, named `blender-{exterior,ground-floor,basement,ground-plan,basement-plan,section}.png` and `web-{exterior,ground-floor,basement}.png` under `docs/screenshots/m2.1/`. Comparison sheets use the user's local Golden Reference. No albedo/beauty passes, AI textures or ComfyUI work have started; `placeholder-awaiting-human` remains the runtime approval state.
+
 ## Asset policy
 Start with one approved cottage master and several approved stone/plant masters. Parameterized variation should preserve shape language and palette. Flag unreviewed assets as candidates; never auto-promote them based on scripted checks.
 
