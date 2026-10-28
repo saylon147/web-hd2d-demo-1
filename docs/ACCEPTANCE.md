@@ -1,10 +1,12 @@
 # Phase 1 acceptance checklist
 
 ## M1
-- [ ] Fresh clone: npm install, npm run dev and npm run build succeed.
-- [ ] Camera supports clamped orbit/zoom and resize.
-- [ ] Input does not interfere with Art Lab controls.
-- [ ] No fatal console errors in desktop browser.
+- [x] Fresh clone: npm install, npm run dev and npm run build succeed.
+- [x] Camera supports clamped orbit/zoom and resize.
+- [x] Input does not interfere with Art Lab controls.
+- [x] No fatal console errors in desktop browser.
+
+M1 evidence (2026-10-28): [handoff, commands, screenshots and limitations](M1_HANDOFF.md). Installation was verified in the initially documentation-only workspace. Browser acceptance used the production build in local Chrome; mobile checks are emulated, not physical-device certification.
 
 ## M2
 - [ ] Diorama includes cottage, stairs, rocks, grass and flowers.

@@ -39,3 +39,11 @@ Sprite PNG uses transparent background and NearestFilter; JSON contains frame re
 
 ## Copyright and provenance
 Record author, license, source and modifications for external assets. Reference screenshots are style guidance, not a license to extract/reuse the original meshes or textures.
+
+## M1 coordinate checkpoint
+
+当前所有几何直接使用运行时 Y-up 坐标。标准 Blender → glTF 基变换 `(x,y,z) → (x,z,-y)` 的三个基向量已通过数学测试，真实导出资产验证留到 M2。
+
+M2 需制作带可辨认 X/Y/Z 标记的轴测试 `.blend` 与 `.glb`，确认 Blender +Z 变为运行时 +Y、+Y 变为 −Z、+X 保持 +X，以及米制比例和地面锚点。若资产正面约定为运行时 −Z，则其 Blender 源正面应按此变换对应 +Y。保持 Blender exporter 的标准 Y-up 转换，避免在 GLTFLoader 之后重复旋转。
+
+M1 未导入、复制或打包用户参考图；也未创建 GLB、角色图集或 Art Lab JSON 预设。
