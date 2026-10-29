@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "input": "art-source/tripo/inbox/rocky pyramid 3d model.glb",
+  "outputDirectory": "public/assets/models/tripo-rock",
+  "blend": "art-source/tripo/optimized/coastal_rock_spike.blend",
+  "reports": "artifacts/tripo-rock",
+  "manifest": "public/assets/manifests/tripo_rock_spike.json",
+  "triangleTargets": [5000, 10000, 20000, 50000],
+  "textureLimits": [4096, 2048, 1024],
+  "runtimeWidthM": 3.2,
+  "placement": [-9.5, -0.04, 9.8],
+  "rotationYDegrees": 0,
+  "lighting": { "hemisphere": 1.05, "sun": 2, "exposure": 1 },
+  "inspectionCamera": { "target": [-9.5, 0.7, 9.8], "pitch": 42, "distance": 8, "fov": 35, "frontYaw": 35, "sideYaw": 125, "backYaw": 215 },
+  "desktopViewport": [1600, 1000],
+  "mobileViewport": [390, 844],
+  "performance": { "warmupFrames": 60, "sampleFrames": 120 },
+  "defaultVariant": "20k-2k",
+  "normalMapPolicy": "preserve UV and original tangent-space texture; no high-to-low normal baking"
+}

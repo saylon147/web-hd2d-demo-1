@@ -9,3 +9,13 @@ playwright-report/
 __pycache__/
 # User-supplied local concept; requested derived review sheets are committed.
 /docs/references/golden-reference-v1.png
+# Local Tripo originals and regenerated binary candidates; retain metadata/.gitkeep.
+/art-source/tripo/inbox/*.glb
+/art-source/tripo/optimized/*.blend
+/art-source/tripo/optimized/*.glb
+/public/assets/models/tripo-rock/*.glb
+/artifacts/tripo-rock/*.blend
+/artifacts/tripo-rock/*.png
+/artifacts/tripo-rock/*.log
+/artifacts/tripo-rock/texture-cache/
+/artifacts/tripo-rock/geometry-cache/

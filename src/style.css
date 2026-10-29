@@ -126,3 +126,8 @@ h1 { margin: 12px 0 8px; font-size: 27px; font-weight: 550; letter-spacing: .08e
   .scene-heading p, .placeholder-badge { display: none; }
   .debug-panel { top: 12px; max-height: calc(100% - 62px); }
 }
+/* Isolated asset workflow spike; default M1/M2 layout remains unchanged. */
+.tripo-controls { flex-wrap: wrap; max-width: calc(100% - 32px); }
+.tripo-controls label { display: inline-flex; gap: 5px; align-items: center; font-size: 12px; padding: 4px; }
+.tripo-controls select { border: 1px solid #b4beb0; border-radius: 5px; padding: 5px; background: #f4f4ed; color: #34403c; }
+.tripo-controls a { font-size: 12px; padding: 6px; color: #34403c; }

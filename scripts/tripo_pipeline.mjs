@@ -1,0 +1,47 @@
+import { spawn } from 'node:child_process';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { fileURLToPath, URL } from 'node:url';
+import assert from 'node:assert/strict';
+import process from 'node:process';
+
+const root=fileURLToPath(new URL('../',import.meta.url));
+const config=JSON.parse(readFileSync(resolve(root,'art-source/tripo/rock_pipeline.json'),'utf8'));
+if(!existsSync(resolve(root,config.input)))throw new Error(`Missing Tripo original. Expected ${resolve(root,config.input)}. Place the downloaded GLB there, then rerun.`);
+for(const path of [config.outputDirectory,config.reports,'art-source/tripo/optimized','docs/tripo-rock-spike/images'])mkdirSync(resolve(root,path),{recursive:true});
+const defaultBlender='C:/Program Files/Blender Foundation/Blender 5.2/blender.exe';
+const blender=process.env.BLENDER_PATH || (existsSync(defaultBlender)?defaultBlender:'blender');
+const chrome='C:/Program Files/Google/Chrome/Application/chrome.exe';
+const env={...process.env,M2_EVIDENCE_DIR:'test-results/tripo-baseline',M2_RUNTIME_REPORT_PATH:'test-results/tripo-baseline/runtime-report.json'};
+if(!env.PLAYWRIGHT_BROWSER_PATH && existsSync(chrome))env.PLAYWRIGHT_BROWSER_PATH=chrome;
+const run=(command,args,label)=>new Promise((done,reject)=>{
+  process.stdout.write(`\nTRIPO STAGE: ${label}\n`);
+  const child=spawn(command,args,{cwd:root,env,stdio:'inherit',shell:false,windowsHide:true});
+  child.on('error',(error)=>reject(new Error(`${label}: ${error.message}. Configure BLENDER_PATH / install project dependencies as documented.`)));
+  child.on('exit',(code)=>code===0?done():reject(new Error(`${label} failed (exit ${code})`)));
+});
+const node=(script,args,label)=>run(process.execPath,[resolve(root,script),...args],label);
+const optimize=()=>run(blender,['--background','--factory-startup','--python-exit-code','1','--python',resolve(root,'scripts/optimize_tripo_asset.py')],'Blender optimize');
+const started=Date.now();
+await optimize();
+const first=JSON.parse(readFileSync(resolve(root,config.manifest),'utf8'));
+await optimize();
+const second=JSON.parse(readFileSync(resolve(root,config.manifest),'utf8'));
+const comparisons=first.variants.map((variant)=>{
+  const repeated=second.variants.find((v)=>v.id===variant.id);
+  assert.ok(repeated,`Missing repeated ${variant.id}`);
+  assert.equal(repeated.triangleCount,variant.triangleCount);assert.equal(repeated.fileBytes,variant.fileBytes);
+  assert.deepEqual(repeated.primitives,variant.primitives);assert.deepEqual(repeated.images,variant.images);
+  return {id:variant.id,byteIdentical:repeated.sha256===variant.sha256,triangles:variant.triangleCount,bytes:variant.fileBytes,sha256:repeated.sha256};
+});
+writeFileSync(resolve(root,config.reports,'reproducibility.json'),JSON.stringify({passed:true,statsAndTextureHashesIdentical:true,byteIdentical:comparisons.every((v)=>v.byteIdentical),comparisons},null,2)+'\n');
+await node('scripts/validate_tripo.mjs',[],'independent GLB validation');
+await run(blender,['--background','--factory-startup','--python-exit-code','1','--python',resolve(root,'scripts/render_tripo.py')],'Blender render');
+await node('node_modules/eslint/bin/eslint.js',['.','--max-warnings','0'],'lint');
+await node('node_modules/typescript/bin/tsc',['--noEmit'],'strict typecheck');
+await node('node_modules/vitest/vitest.mjs',['run'],'unit tests');
+await node('node_modules/vite/bin/vite.js',['build'],'production build');
+await node('node_modules/@playwright/test/cli.js',['test'],'M1/M2/Tripo browser tests');
+await node('scripts/report_tripo.mjs',[],'comparison sheets and decision report');
+writeFileSync(resolve(root,config.reports,'pipeline-run.json'),JSON.stringify({passed:true,command:'npm run tripo:pipeline',seconds:(Date.now()-started)/1000,sourceSha256:second.sourceSha256,stages:['optimize ×2','independent validation','Blender render','lint','typecheck','unit','build','browser','report'],originalPreserved:true},null,2)+'\n');
+process.stdout.write('TRIPO PIPELINE COMPLETE — experimental, baseline not replaced.\n');

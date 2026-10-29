@@ -1,5 +1,7 @@
 # HD-2D Web visual study
 
+Tripo 岩石数据来源实验使用独立 `?scene=tripo-rock` 路由，基线保留。把原始 GLB 放入 `art-source/tripo/inbox/rocky pyramid 3d model.glb`，运行 `npm run tripo:pipeline` 即可自动优化、导出、验证与截图；原始/生成二进制 ignored。[工作流说明](docs/TRIPO_ASSET_PIPELINE.md) / [实测结果](docs/tripo-rock-spike/RESULTS.md)。
+
 **M2.1 V1 corrective candidate is ready for human review. M2.2 has not started.** V0 was visually rejected and remains available for comparison. All current geometry, furniture, vegetation and materials are placeholders.
 
 ## Run

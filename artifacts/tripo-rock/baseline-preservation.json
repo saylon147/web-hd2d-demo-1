@@ -1,0 +1,30 @@
+{
+  "branch": "codex/m2-1-v1-corrections",
+  "files": [
+    {
+      "file": "art-source/blender/island_cottage_blockout_v2.blend",
+      "sha256": "1800a84cc7c0634273e2785e2cee1c8c6c65557486c5393cc93959a967af7c17",
+      "unchanged": true
+    },
+    {
+      "file": "art-source/parameters/island_cottage_v2.json",
+      "sha256": "9182aca07b8777f71df5ec75a494b7de3036e6df32ae6a2172f77851572dfef3",
+      "unchanged": true
+    },
+    {
+      "file": "public/assets/models/island_cottage_blockout_v2.glb",
+      "sha256": "2992f132f2c6f852475568074c5481dc0730a0667e369bbc54c18779df32c51d",
+      "unchanged": true
+    },
+    {
+      "file": "public/assets/manifests/blockout_v2.json",
+      "sha256": "396986d68f59baa4356d3b915ec378b21c523b9abec880632ee7cad5c2b7ce3d",
+      "unchanged": true
+    },
+    {
+      "file": "public/assets/models/island_cottage_blockout_v1.glb",
+      "sha256": "8eca8043b21f6780d959b9d1ecbfa0261e911a9a8b653be6c5f552ea00393f32",
+      "unchanged": true
+    }
+  ]
+}

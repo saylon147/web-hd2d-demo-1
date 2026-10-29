@@ -1,0 +1,111 @@
+{
+  "input": "D:\\web-hd2d-demo-1\\art-source\\tripo\\inbox\\rocky pyramid 3d model.glb",
+  "fileBytes": 69074820,
+  "sha256": "157e8f4ad758cbf2a0ad5cb333401a9269500f19413068db035703cb2acfa429",
+  "asset": {
+    "version": "2.0",
+    "generator": "Tripo"
+  },
+  "nodes": [
+    {
+      "name": "tripo_node_8348e49c-4889-41a1-aa75-170cec3b5b26",
+      "mesh": 0
+    }
+  ],
+  "meshes": 1,
+  "primitives": [
+    {
+      "mode": 4,
+      "vertices": 1000691,
+      "triangles": 1944098,
+      "attributes": {
+        "POSITION": 0,
+        "NORMAL": 1,
+        "TEXCOORD_0": 2
+      },
+      "material": 0,
+      "positionBounds": [
+        [
+          -0.490142822265625,
+          0.0,
+          -0.473236083984375
+        ],
+        [
+          0.490142822265625,
+          0.4827423095703125,
+          0.473236083984375
+        ]
+      ]
+    }
+  ],
+  "triangleCount": 1944098,
+  "images": [
+    {
+      "name": "rocky_pyramid_3d_model_basecolor.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 4506078,
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "sha256": "4f73c02cfc26c9b0c5bdcef5677322e9c0ed97bb47db0629c1e4fa08153a0356"
+    },
+    {
+      "name": "rocky_pyramid_3d_model_rm.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 2263533,
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "sha256": "d622888967f1f05664e99f9c4eaa3168bd6b6f86b104f2b3af15b003360a5bc3"
+    },
+    {
+      "name": "rocky_pyramid_3d_model_normal.png",
+      "mimeType": "image/png",
+      "bytes": 6951893,
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "sha256": "7862129bede6edc4258e59bfe364166e4f5aec1c92fec585527b7fb87a93928c"
+    }
+  ],
+  "materials": [
+    {
+      "name": "tripo_material_8348e49c-4889-41a1-aa75-170cec3b5b26",
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicRoughnessTexture": {
+          "index": 1
+        }
+      },
+      "normalTexture": {
+        "index": 2
+      }
+    }
+  ],
+  "textures": [
+    {
+      "source": 0,
+      "sampler": 0
+    },
+    {
+      "source": 1,
+      "sampler": 1
+    },
+    {
+      "source": 2,
+      "sampler": 2
+    }
+  ],
+  "extensionsUsed": [
+    "KHR_materials_volume",
+    "FB_ngon_encoding"
+  ],
+  "extensionsRequired": [],
+  "gpuTextureRgbaMipEstimateBytes": 268435456.0,
+  "gpuEstimateDefinition": "RGBA8 plus complete mip chain; excludes geometry/framebuffer; browser allocation may differ"
+}

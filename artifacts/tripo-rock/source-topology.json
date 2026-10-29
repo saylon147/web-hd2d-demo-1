@@ -1,0 +1,15 @@
+{
+  "vertices": 972047,
+  "edges": 2916147,
+  "faces": 1944098,
+  "boundaryEdges": 0,
+  "nonmanifoldEdges": 0,
+  "looseVertices": 0,
+  "zeroAreaFaces": 0,
+  "connectedShellCount": 1,
+  "largestShellVertexCounts": [
+    972047
+  ],
+  "signedVolumeM3": 4.565029451164098,
+  "hiddenFacesAssessment": "Topology only; enclosed/intersecting/internal sheets cannot be reliably classified without an expensive solid analysis. Front/back renders are required."
+}

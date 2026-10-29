@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "command": "npm run tripo:pipeline",
+  "seconds": 185.478,
+  "sourceSha256": "157e8f4ad758cbf2a0ad5cb333401a9269500f19413068db035703cb2acfa429",
+  "stages": [
+    "optimize ×2",
+    "independent validation",
+    "Blender render",
+    "lint",
+    "typecheck",
+    "unit",
+    "build",
+    "browser",
+    "report"
+  ],
+  "originalPreserved": true
+}

@@ -1,0 +1,98 @@
+{
+  "passed": true,
+  "statsAndTextureHashesIdentical": true,
+  "byteIdentical": false,
+  "comparisons": [
+    {
+      "id": "original-4k",
+      "byteIdentical": true,
+      "triangles": 1944098,
+      "bytes": 69074820,
+      "sha256": "157e8f4ad758cbf2a0ad5cb333401a9269500f19413068db035703cb2acfa429"
+    },
+    {
+      "id": "50k-4k",
+      "byteIdentical": false,
+      "triangles": 50000,
+      "bytes": 15539144,
+      "sha256": "e7164b02e67787377ebded23159b065f94d083e9887753991c20c9f91933c99e"
+    },
+    {
+      "id": "50k-2k",
+      "byteIdentical": false,
+      "triangles": 50000,
+      "bytes": 6368680,
+      "sha256": "ef3012c0f41db16cf17b89249f5599f8b858eee943615ed0b603b1025492f835"
+    },
+    {
+      "id": "50k-1k",
+      "byteIdentical": false,
+      "triangles": 50000,
+      "bytes": 3322152,
+      "sha256": "c654d92287940c0ab81506c5408b4e60073628795cba960d074fabcb9f727449"
+    },
+    {
+      "id": "20k-4k",
+      "byteIdentical": false,
+      "triangles": 20000,
+      "bytes": 14511556,
+      "sha256": "a8ae855a0f6f83bdc46e535e86126cb4ee48afe13abfe02c6e23181f030a2ebc"
+    },
+    {
+      "id": "20k-2k",
+      "byteIdentical": false,
+      "triangles": 20000,
+      "bytes": 5341088,
+      "sha256": "6087a568477b53c5220e9e0508fe2491cb4911ea05161926306cf7b503b1ffab"
+    },
+    {
+      "id": "20k-1k",
+      "byteIdentical": false,
+      "triangles": 20000,
+      "bytes": 2294564,
+      "sha256": "6e52d44872d8cbbe33bcd1c2b733789d658f0d09293977f70376b7413902fb76"
+    },
+    {
+      "id": "10k-4k",
+      "byteIdentical": true,
+      "triangles": 10000,
+      "bytes": 14159608,
+      "sha256": "798faf312f26ca5d0f8711a7a6ad3deccf41b61e78d6ef641cec1d066df9b767"
+    },
+    {
+      "id": "10k-2k",
+      "byteIdentical": true,
+      "triangles": 10000,
+      "bytes": 4989140,
+      "sha256": "5e6257d25f35c0429e673a9fddcdac21fb06621a3d8a08e48048e72b58ef7c37"
+    },
+    {
+      "id": "10k-1k",
+      "byteIdentical": true,
+      "triangles": 10000,
+      "bytes": 1942616,
+      "sha256": "0003add9e03e8da9d716bf82920d65efab86fd5946b82c5f8669f3ad4185649c"
+    },
+    {
+      "id": "5k-4k",
+      "byteIdentical": true,
+      "triangles": 5000,
+      "bytes": 13970968,
+      "sha256": "d4034fd8d3437937e4c8f8f7d8366c47f17ddd25ef87a50da79eb9e6298dd34c"
+    },
+    {
+      "id": "5k-2k",
+      "byteIdentical": true,
+      "triangles": 5000,
+      "bytes": 4800500,
+      "sha256": "1e067f30f2446360a1285a9949ee45281c19252cb81e8c0093bd78edd7081f8e"
+    },
+    {
+      "id": "5k-1k",
+      "byteIdentical": true,
+      "triangles": 5000,
+      "bytes": 1753972,
+      "sha256": "78a1bbfa2843a9aeabda1416b89e1aea1b4a328283cc524d548cfbabfeceedbe"
+    }
+  ]
+}

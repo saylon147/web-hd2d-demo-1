@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { readFileSync } from 'node:fs';
 const manifest = JSON.parse(readFileSync('public/assets/manifests/blockout_v2.json', 'utf8')) as { metrics: { landRatio: number } };
 
-const evidence = resolve('docs/screenshots/m2.1-v1');
+const evidence = resolve(process.env.M2_EVIDENCE_DIR ?? 'docs/screenshots/m2.1-v1');
 async function ready(page: Page): Promise<void> {
   await page.goto('/');
   await expect(page.locator('#scene')).toHaveAttribute('data-loaded', 'true');
@@ -41,7 +41,7 @@ test('GLB scene and three named cutaways render at fixed camera presets', async 
   await expect(page.locator('#spatial-metrics')).toContainText('9.00×');
   await page.locator('#scene').screenshot({ path: resolve(evidence, 'web-v0-exterior.png'), style: '.scene-heading,.view-controls,.scene-footer,.debug-panel { visibility: hidden !important; }' });
   expect(errors).toEqual([]);
-  await writeFile(resolve('docs/m2.1-v1/runtime-report.json'), JSON.stringify({ browser: browser.version(), viewport: { width: 1600, height: 1000 }, errors, records }, null, 2)+'\n');
+  await writeFile(resolve(process.env.M2_RUNTIME_REPORT_PATH ?? 'docs/m2.1-v1/runtime-report.json'), JSON.stringify({ browser: browser.version(), viewport: { width: 1600, height: 1000 }, errors, records }, null, 2)+'\n');
 });
 
 test('M2 orbit/zoom clamps and reset retain the current inspection mode', async ({ page }) => {
