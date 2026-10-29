@@ -127,7 +127,38 @@ h1 { margin: 12px 0 8px; font-size: 27px; font-weight: 550; letter-spacing: .08e
   .debug-panel { top: 12px; max-height: calc(100% - 62px); }
 }
 /* Isolated asset workflow spike; default M1/M2 layout remains unchanged. */
-.tripo-controls { flex-wrap: wrap; max-width: calc(100% - 32px); }
-.tripo-controls label { display: inline-flex; gap: 5px; align-items: center; font-size: 12px; padding: 4px; }
-.tripo-controls select { border: 1px solid #b4beb0; border-radius: 5px; padding: 5px; background: #f4f4ed; color: #34403c; }
-.tripo-controls a { font-size: 12px; padding: 6px; color: #34403c; }
+.tripo-shell .tripo-controls {
+  position: static;
+  transform: none;
+  flex: 0 0 auto;
+  min-width: 0;
+  max-width: none;
+  max-height: min(32dvh, 160px);
+  overflow: auto;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: 0;
+  border-bottom: 1px solid #d2dacb;
+  border-radius: 0;
+  background: #f8f9f1;
+}
+.tripo-controls label { display: inline-flex; flex: 0 0 auto; gap: 6px; align-items: center; font-size: 12px; white-space: nowrap; }
+.tripo-controls select { min-height: 34px; border: 1px solid #b4beb0; border-radius: 5px; padding: 5px 8px; background: #f4f4ed; color: #34403c; font: inherit; }
+.tripo-shell .tripo-controls button, .tripo-shell .tripo-controls a {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 12px;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+.tripo-controls a { color: #365f4c; text-decoration: none; }
+.tripo-controls a:hover { background: #e7ecdf; text-decoration: underline; }
+.tripo-shell .scene-heading { top: 20px; }

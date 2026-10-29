@@ -13,6 +13,8 @@ const optimization=JSON.parse(await readFile(resolve(root,'artifacts/tripo-rock/
 const desktop=JSON.parse(await readFile(resolve(root,'artifacts/tripo-rock/browser-desktop.json'),'utf8'));
 const mobile=JSON.parse(await readFile(resolve(root,'artifacts/tripo-rock/browser-mobile.json'),'utf8'));
 const reproducibility=JSON.parse(await readFile(resolve(root,'artifacts/tripo-rock/reproducibility.json'),'utf8'));
+const desktopViewport=desktop.records[0].viewport;
+const mobileViewport=mobile.records[0].viewport;
 const imageRoot=resolve(root,'docs/tripo-rock-spike/images');
 await mkdir(imageRoot,{recursive:true});
 const image=async(name)=>`data:image/png;base64,${(await readFile(resolve(imageRoot,name+'.png'))).toString('base64')}`;
@@ -26,10 +28,12 @@ try {
     await page.locator('img').evaluateAll((images)=>Promise.all(images.map((item)=>item.decode())));
     await page.screenshot({path:resolve(imageRoot,name+'.png'),fullPage:true});
   };
-  const crop=async(name,index)=>`<svg viewBox="535 215 560 545"><defs><clipPath id="crop-${index}"><rect x="535" y="215" width="560" height="545"/></clipPath></defs><image href="${await image(name)}" width="1600" height="866" clip-path="url(#crop-${index})"/></svg>`;
+  const cropX=535*desktopViewport.width/1600, cropY=215*desktopViewport.height/866;
+  const cropWidth=560*desktopViewport.width/1600, cropHeight=545*desktopViewport.height/866;
+  const crop=async(name,index)=>`<svg viewBox="${cropX} ${cropY} ${cropWidth} ${cropHeight}"><defs><clipPath id="crop-${index}"><rect x="${cropX}" y="${cropY}" width="${cropWidth}" height="${cropHeight}"/></clipPath></defs><image href="${await image(name)}" width="${desktopViewport.width}" height="${desktopViewport.height}" clip-path="url(#crop-${index})"/></svg>`;
   let cells='';
   for(const [index,id] of ['original-4k','50k-4k','20k-4k','10k-4k','5k-4k'].entries())cells+=`<article><label>${id}</label>${await crop('web-'+id+'-front',index)}</article>`;
-  await render('geometry-comparison','<h1>Tripo → 自动降面 · 几何比较</h1><p>相同 4K 源贴图、相机、灯光、1600×866 canvas；每张截取同一岩石区域。原始 1,944,098 tris / 四档目标均达到。</p><div class="row" style="grid-template-columns:repeat(5,1fr)">'+cells+'</div>');
+  await render('geometry-comparison',`<h1>Tripo → 自动降面 · 几何比较</h1><p>相同 4K 源贴图、相机、灯光、${desktopViewport.width}×${desktopViewport.height} canvas；每张截取同一岩石区域。原始 1,944,098 tris / 四档目标均达到。</p><div class="row" style="grid-template-columns:repeat(5,1fr)">`+cells+'</div>');
   cells='';
   for(const [index,id] of ['20k-4k','20k-2k','20k-1k'].entries())cells+=`<article><label>${id}</label>${await crop('web-'+id+'-front',index)}</article>`;
   await render('texture-comparison','<h1>同一 20k 几何 · 4K / 2K / 1K</h1><p>保持相机与光照；4K 三张原始贴图字节保留，2K/1K 由 Blender 缩图，未进行高低模法线烘焙。</p><div class="row" style="grid-template-columns:repeat(3,1fr)">'+cells+'</div>');
@@ -98,13 +102,13 @@ ${rows}
 
 Chrome ${desktop.browser}，GPU：${desktop.records[0].gpu}。固定机位 front yaw 35°、pitch 42°、distance 8 m、垂直 FOV 35°；侧面 yaw 125°、背面 215°，全景用既有机位。所有候选在同一光照/曝光、视口下截图。基线相机/资产仍能单独访问。
 
-60 帧预热，随后 120 个 RAF 间隔；CPU render 时间只测提交命令，不含 GPU 完成时间。fetch/parse 为本机 localhost 当前请求的响应体/GLTFLoader 时间，不称为真实互联网冷加载。桌面画布 1600×866、DPR=1。三角形/调用数含阴影；近景裁剪会减少岛屿绘制，与全景基线不是同一 draw-call 口径。
+60 帧预热，随后 120 个 RAF 间隔；CPU render 时间只测提交命令，不含 GPU 完成时间。fetch/parse 为本机 localhost 当前请求的响应体/GLTFLoader 时间，不称为真实互联网冷加载。桌面画布 ${desktopViewport.width}×${desktopViewport.height}、DPR=${desktopViewport.dpr}。三角形/调用数含阴影；近景裁剪会减少岛屿绘制，与全景基线不是同一 draw-call 口径。
 
 | 桌面版本 | fetch ms | parse ms | FPS | 帧 p95 ms | CPU 提交 p95 ms | calls | 渲染 tris |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 ${perfRows(desktop)}
 
-移动大小视口：390×844 页面，390×722 canvas，DPR=1；仍是同一桌面 Chrome/GPU，**没有物理手机性能认证**。
+移动大小视口：390×844 页面，${mobileViewport.width}×${mobileViewport.height} canvas，DPR=${mobileViewport.dpr}；仍是同一桌面 Chrome/GPU，**没有物理手机性能认证**。
 
 | 移动视口版本 | fetch ms | parse ms | FPS | 帧 p95 ms | CPU 提交 p95 ms | calls | 渲染 tris |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |

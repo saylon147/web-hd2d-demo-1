@@ -43,6 +43,8 @@ export class TripoApplication {
     this.shell.viewport.querySelector('.placeholder-badge')!.textContent='新来源流程测试 · 未批准素材';
     this.shell.viewControls.innerHTML='<label>几何 <select id="rock-geometry"><option value="original">原始</option><option>5k</option><option>10k</option><option>20k</option><option>50k</option></select></label><label>贴图 <select id="rock-texture"><option>1k</option><option>2k</option><option>4k</option></select></label><button id="rock-toggle" type="button" aria-pressed="true">显示岩石</button><button data-angle="front">正面</button><button data-angle="side">侧面</button><button data-angle="back">背面</button><button data-angle="site">岛屿全景</button><a href="./">返回 M2.1 基线 ↗</a>';
     this.shell.viewControls.classList.add('tripo-controls');
+    this.shell.viewport.parentElement!.classList.add('tripo-shell');
+    this.shell.viewport.before(this.shell.viewControls);
     this.shell.debugPanel.hidden=true;
     this.shell.debugToggle.hidden=true;
     void this.initialize().catch((error: unknown)=>this.fail(error));
