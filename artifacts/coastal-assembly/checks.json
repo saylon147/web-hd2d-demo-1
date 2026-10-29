@@ -1,0 +1,55 @@
+{
+  "passed": true,
+  "lint": true,
+  "typecheck": true,
+  "build": true,
+  "unitTestsPassed": 32,
+  "browserTestsPassed": 20,
+  "stages": [
+    {
+      "label": "four-asset optimize and source/LOD views",
+      "exitCode": 0
+    },
+    {
+      "label": "repeat optimization statistics",
+      "exitCode": 0
+    },
+    {
+      "label": "independent asset/baseline/placement validation",
+      "exitCode": 0
+    },
+    {
+      "label": "lint",
+      "exitCode": 0
+    },
+    {
+      "label": "strict typecheck",
+      "exitCode": 0
+    },
+    {
+      "label": "unit tests",
+      "exitCode": 0
+    },
+    {
+      "label": "production build",
+      "exitCode": 0
+    },
+    {
+      "label": "M1/M2/Tripo/coastal browser tests",
+      "exitCode": 0
+    },
+    {
+      "label": "final coastal initialization/switch/layout/asset regression (6 tests)",
+      "exitCode": 0
+    }
+  ],
+  "fullPipelineBrowserTestsPassed": 19,
+  "followUp": {
+    "command": "npm run build && npm run test:browser -- tests/browser/coastal.spec.ts",
+    "coastalTestsPassed": 6,
+    "unitTestsPassed": 32,
+    "lintPassed": true,
+    "typecheckAndBuildPassed": true,
+    "reason": "Final initialization/cancellation guard and isolated historical evidence output paths; 14 unchanged foundation/Tripo tests passed in full pipeline, six current coastal tests passed after final build."
+  }
+}

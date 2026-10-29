@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "baselineRef": "dd5e076",
+  "baselineParameters": "art-source/parameters/island_cottage_v2.json",
+  "outputDirectory": "public/assets/models/coastal-assembly",
+  "workingDirectory": "art-source/tripo/coastal-optimized",
+  "reports": "artifacts/coastal-assembly",
+  "manifest": "public/assets/manifests/coastal-assembly.json",
+  "placements": "public/assets/presets/coastal-assembly.json",
+  "evidence": "docs/m2.2-coastal-assembly/images",
+  "variants": ["10k-1k", "20k-2k"],
+  "defaultVariant": "10k-1k",
+  "assets": [
+    {"id":"A1","input":"art-source/tripo/inbox/coastal_cliff_A1_multiview.glb","runtimeWidthM":5.8,"usage":"vertical relief at the east shoulder","scaleRange":[0.8,1.2],"frontYaw":35,"embeddingM":[0.1,1.4],"removeTinyShellsMaxVertices":32},
+    {"id":"A2","input":"art-source/tripo/inbox/coastal_cliff_A2_multiview.glb","runtimeWidthM":6,"usage":"lower horizontal cliff beside the front cove","scaleRange":[0.8,1.2],"frontYaw":35,"embeddingM":[0.1,1.5]},
+    {"id":"A3","input":"art-source/tripo/inbox/coastal_corner_A3_multiview.glb","runtimeWidthM":5,"usage":"asymmetric turn toward the front beach","scaleRange":[0.8,1.2],"frontYaw":35,"embeddingM":[0.1,1.4]},
+    {"id":"A4","input":"art-source/tripo/inbox/coastal_platform_A4_multiview.glb","runtimeWidthM":4.8,"usage":"decorative shoulder transition below the traversable plateau","scaleRange":[0.8,1.2],"frontYaw":35,"embeddingM":[0.15,1.5]}
+  ]
+}

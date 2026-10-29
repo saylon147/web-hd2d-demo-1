@@ -1,0 +1,488 @@
+{
+  "passed": true,
+  "geometryParser": "independent Three.js GLTFLoader (textures stripped only for Node; browser validates actual PBR maps)",
+  "records": [
+    {
+      "asset": "A1",
+      "lod": "20k-2k",
+      "sourceSha256": "2a1a9977d08b1a1db1b3981094a4fdd22acda418c5cf907ba966743a41de4805",
+      "sourceTopology": {
+        "vertices": 996204,
+        "edges": 2988588,
+        "faces": 1992384,
+        "boundaryEdges": 24,
+        "nonmanifoldEdges": 24,
+        "looseVertices": 0,
+        "zeroAreaFaces": 0,
+        "connectedShellCount": 10,
+        "largestShellVertexCounts": [
+          996176,
+          4,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ],
+        "signedVolumeM3": 32.77651213164687,
+        "hiddenFacesAssessment": "Topology only; enclosed/intersecting/internal sheets cannot be reliably classified without an expensive solid analysis. Front/back renders are required."
+      },
+      "triangles": 20000,
+      "dimensions": [
+        5.806338787078857,
+        3.278190210010507,
+        5.7989723682403564
+      ],
+      "origin": [
+        -0.0011169910430908203,
+        0.0001916144829010591,
+        0.000573277473449707
+      ],
+      "normalVectorsUnit": true,
+      "passed": true
+    },
+    {
+      "asset": "A1",
+      "lod": "10k-1k",
+      "sourceSha256": "2a1a9977d08b1a1db1b3981094a4fdd22acda418c5cf907ba966743a41de4805",
+      "sourceTopology": {
+        "vertices": 996204,
+        "edges": 2988588,
+        "faces": 1992384,
+        "boundaryEdges": 24,
+        "nonmanifoldEdges": 24,
+        "looseVertices": 0,
+        "zeroAreaFaces": 0,
+        "connectedShellCount": 10,
+        "largestShellVertexCounts": [
+          996176,
+          4,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ],
+        "signedVolumeM3": 32.77651213164687,
+        "hiddenFacesAssessment": "Topology only; enclosed/intersecting/internal sheets cannot be reliably classified without an expensive solid analysis. Front/back renders are required."
+      },
+      "triangles": 10000,
+      "dimensions": [
+        5.793956995010376,
+        3.2779689135204535,
+        5.796022653579712
+      ],
+      "origin": [
+        -0.0011538267135620117,
+        0.00041291097295470536,
+        0.0020481348037719727
+      ],
+      "normalVectorsUnit": true,
+      "passed": true
+    },
+    {
+      "asset": "A2",
+      "lod": "20k-2k",
+      "sourceSha256": "fd24331c347bd24c6772a47923a701460f8297cd50edf1bcb4b0aea104070e13",
+      "sourceTopology": {
+        "vertices": 947723,
+        "edges": 2843193,
+        "faces": 1895462,
+        "boundaryEdges": 0,
+        "nonmanifoldEdges": 0,
+        "looseVertices": 0,
+        "zeroAreaFaces": 0,
+        "connectedShellCount": 1,
+        "largestShellVertexCounts": [
+          947723
+        ],
+        "signedVolumeM3": 26.55547173481673,
+        "hiddenFacesAssessment": "Topology only; enclosed/intersecting/internal sheets cannot be reliably classified without an expensive solid analysis. Front/back renders are required."
+      },
+      "triangles": 20000,
+      "dimensions": [
+        6.000787019729614,
+        2.072013612370938,
+        5.485252141952515
+      ],
+      "origin": [
+        -0.0022040605545043945,
+        0.007663730997592211,
+        -0.000030875205993652344
+      ],
+      "normalVectorsUnit": true,
+      "passed": true
+    },
+    {
+      "asset": "A2",
+      "lod": "10k-1k",
+      "sourceSha256": "fd24331c347bd24c6772a47923a701460f8297cd50edf1bcb4b0aea104070e13",
+      "sourceTopology": {
+        "vertices": 947723,
+        "edges": 2843193,
+        "faces": 1895462,
+        "boundaryEdges": 0,
+        "nonmanifoldEdges": 0,
+        "looseVertices": 0,
+        "zeroAreaFaces": 0,
+        "connectedShellCount": 1,
+        "largestShellVertexCounts": [
+          947723
+        ],
+        "signedVolumeM3": 26.55547173481673,
+        "hiddenFacesAssessment": "Topology only; enclosed/intersecting/internal sheets cannot be reliably classified without an expensive solid analysis. Front/back renders are required."
+      },
+      "triangles": 10000,
+      "dimensions": [
+        6.002699851989746,
+        2.0711686545982957,
+        5.488606929779053
+      ],
+      "origin": [
+        -0.0012476444244384766,
+        0.008508688770234585,
+        0.0016465187072753906
+      ],
+      "normalVectorsUnit": true,
+      "passed": true
+    },
+    {
+      "asset": "A3",
+      "lod": "20k-2k",
+      "sourceSha256": "e179cbb37b51736aa6fb7e9c103dfd7ff79a15979dbe87aecd3a99282d1f06bc",
+      "sourceTopology": {
+        "vertices": 947075,
+        "edges": 2841237,
+        "faces": 1894158,
+        "boundaryEdges": 0,
+        "nonmanifoldEdges": 0,
+        "looseVertices": 0,
+        "zeroAreaFaces": 0,
+        "connectedShellCount": 1,
+        "largestShellVertexCounts": [
+          947075
+        ],
+        "signedVolumeM3": 13.4789596414785,
+        "hiddenFacesAssessment": "Topology only; enclosed/intersecting/internal sheets cannot be reliably classified without an expensive solid analysis. Front/back renders are required."
+      },
+      "triangles": 20000,
+      "dimensions": [
+        5.005661964416504,
+        2.284405248821713,
+        4.942502498626709
+      ],
+      "origin": [
+        -0.000644683837890625,
+        0.00118134671356529,
+        -0.0017104148864746094
+      ],
+      "normalVectorsUnit": true,
+      "passed": true
+    },
+    {
+      "asset": "A3",
+      "lod": "10k-1k",
+      "sourceSha256": "e179cbb37b51736aa6fb7e9c103dfd7ff79a15979dbe87aecd3a99282d1f06bc",
+      "sourceTopology": {
+        "vertices": 947075,
+        "edges": 2841237,
+        "faces": 1894158,
+        "boundaryEdges": 0,
+        "nonmanifoldEdges": 0,
+        "looseVertices": 0,
+        "zeroAreaFaces": 0,
+        "connectedShellCount": 1,
+        "largestShellVertexCounts": [
+          947075
+        ],
+        "signedVolumeM3": 13.4789596414785,
+        "hiddenFacesAssessment": "Topology only; enclosed/intersecting/internal sheets cannot be reliably classified without an expensive solid analysis. Front/back renders are required."
+      },
+      "triangles": 10000,
+      "dimensions": [
+        5.004047393798828,
+        2.272240179241635,
+        4.943562984466553
+      ],
+      "origin": [
+        0.00044846534729003906,
+        0.00118134671356529,
+        0.003222227096557617
+      ],
+      "normalVectorsUnit": true,
+      "passed": true
+    },
+    {
+      "asset": "A4",
+      "lod": "20k-2k",
+      "sourceSha256": "13f1d85b36fe7192d43d8130c07583138d53fd8694f0276b0a32576582e54672",
+      "sourceTopology": {
+        "vertices": 939739,
+        "edges": 2819211,
+        "faces": 1879474,
+        "boundaryEdges": 0,
+        "nonmanifoldEdges": 0,
+        "looseVertices": 0,
+        "zeroAreaFaces": 0,
+        "connectedShellCount": 1,
+        "largestShellVertexCounts": [
+          939739
+        ],
+        "signedVolumeM3": 9.74401552928688,
+        "hiddenFacesAssessment": "Topology only; enclosed/intersecting/internal sheets cannot be reliably classified without an expensive solid analysis. Front/back renders are required."
+      },
+      "triangles": 20000,
+      "dimensions": [
+        4.803152322769165,
+        1.0247172960953321,
+        4.6879096031188965
+      ],
+      "origin": [
+        0.000013947486877441406,
+        0.00028399136499501765,
+        -0.0012655258178710938
+      ],
+      "normalVectorsUnit": true,
+      "passed": true
+    },
+    {
+      "asset": "A4",
+      "lod": "10k-1k",
+      "sourceSha256": "13f1d85b36fe7192d43d8130c07583138d53fd8694f0276b0a32576582e54672",
+      "sourceTopology": {
+        "vertices": 939739,
+        "edges": 2819211,
+        "faces": 1879474,
+        "boundaryEdges": 0,
+        "nonmanifoldEdges": 0,
+        "looseVertices": 0,
+        "zeroAreaFaces": 0,
+        "connectedShellCount": 1,
+        "largestShellVertexCounts": [
+          939739
+        ],
+        "signedVolumeM3": 9.74401552928688,
+        "hiddenFacesAssessment": "Topology only; enclosed/intersecting/internal sheets cannot be reliably classified without an expensive solid analysis. Front/back renders are required."
+      },
+      "triangles": 10000,
+      "dimensions": [
+        4.805644989013672,
+        1.0194097561761737,
+        4.690353631973267
+      ],
+      "origin": [
+        0.0012602806091308594,
+        0.002638597972691059,
+        -0.0024875402450561523
+      ],
+      "normalVectorsUnit": true,
+      "passed": true
+    }
+  ],
+  "preservation": [
+    {
+      "path": "art-source/parameters/island_cottage_v2.json",
+      "sha256": "9182aca07b8777f71df5ec75a494b7de3036e6df32ae6a2172f77851572dfef3",
+      "unchanged": true
+    },
+    {
+      "path": "art-source/blender/island_cottage_blockout_v2.blend",
+      "sha256": "1800a84cc7c0634273e2785e2cee1c8c6c65557486c5393cc93959a967af7c17",
+      "unchanged": true
+    },
+    {
+      "path": "public/assets/models/island_cottage_blockout_v2.glb",
+      "sha256": "2992f132f2c6f852475568074c5481dc0730a0667e369bbc54c18779df32c51d",
+      "unchanged": true
+    },
+    {
+      "path": "public/assets/manifests/blockout_v2.json",
+      "sha256": "396986d68f59baa4356d3b915ec378b21c523b9abec880632ee7cad5c2b7ce3d",
+      "unchanged": true
+    },
+    {
+      "path": "public/assets/models/island_cottage_blockout_v1.glb",
+      "sha256": "8eca8043b21f6780d959b9d1ecbfa0261e911a9a8b653be6c5f552ea00393f32",
+      "unchanged": true
+    }
+  ],
+  "worldScale": {
+    "house": {
+      "width": 6,
+      "depth": 6,
+      "center": [
+        2,
+        -1
+      ],
+      "floorY": 4,
+      "clearHeight": 2.7,
+      "wallThickness": 0.3,
+      "floorThickness": 0.4,
+      "basementFloorY": 1.2,
+      "basementFloorThickness": 0.2,
+      "roofRise": 1.15,
+      "eaves": 0.25
+    },
+    "island": {
+      "landRatioRange": [
+        8.5,
+        9.5
+      ],
+      "plateauY": 3.8,
+      "terraceY": 2.2,
+      "beachY": 0.45,
+      "terrain": {
+        "segments": 64,
+        "center": [
+          0,
+          -1.8
+        ],
+        "radiusX": 10.5,
+        "radiusZ": 9.4,
+        "frontCompression": 0.17,
+        "shoreExpansion": 1.2,
+        "beachExtension": 4.2,
+        "edgeVariation": 0.42,
+        "slopeLimitDegrees": 30,
+        "areaGrid": 0.1
+      },
+      "mainStairX": -2.3,
+      "mainStairStartZ": 4.3,
+      "mainStairWidth": 1.6,
+      "mainStairTread": 0.25,
+      "upperSteps": 13,
+      "lowerSteps": 11,
+      "landing": 0.9
+    },
+    "pier": {
+      "width": 1.8,
+      "length": 5,
+      "startZ": 11.8,
+      "deckY": 0.65
+    },
+    "fixedCamera": {
+      "target": {
+        "x": 0,
+        "y": 3.4,
+        "z": 3
+      },
+      "baseYaw": 35,
+      "yawOffset": 0,
+      "pitch": 42,
+      "distance": 40,
+      "fov": 35
+    },
+    "lighting": {
+      "hemisphere": 1.05,
+      "sun": 2,
+      "basementFill": 1.5,
+      "exposure": 1,
+      "blenderWorld": 0.45,
+      "blenderSun": 1.8
+    }
+  },
+  "contacts": [
+    {
+      "instance": "east-cliff",
+      "asset": "A1",
+      "min": [
+        5.988565233432154,
+        -0.15950450683245435,
+        -2.6069159332444016
+      ],
+      "max": [
+        13.010212927483355,
+        3.7740581893920897,
+        4.211272055875939
+      ],
+      "centerSupportY": 3.4582628723519697,
+      "anchorY": -0.16,
+      "centerBurialM": 3.61826287235197,
+      "protectedEnvelopesClear": true
+    },
+    {
+      "instance": "front-wall",
+      "asset": "A2",
+      "min": [
+        5.232793407972011,
+        -0.1397895734757185,
+        1.6034430423167665
+      ],
+      "max": [
+        12.564075272712639,
+        2.345612812042236,
+        7.399423338209634
+      ],
+      "centerSupportY": 2.531181341504876,
+      "anchorY": -0.15,
+      "centerBurialM": 2.681181341504876,
+      "protectedEnvelopesClear": true
+    },
+    {
+      "instance": "cove-turn",
+      "asset": "A3",
+      "min": [
+        1.9972888660201549,
+        -0.1486414512793999,
+        2.9006518327035087
+      ],
+      "max": [
+        9.200007761136302,
+        2.46443475484848,
+        9.904929109874374
+      ],
+      "centerSupportY": 3.074434985887752,
+      "anchorY": -0.15,
+      "centerBurialM": 3.224434985887752,
+      "protectedEnvelopesClear": true
+    },
+    {
+      "instance": "east-shoulder",
+      "asset": "A4",
+      "min": [
+        6.003029799600201,
+        2.622638597972691,
+        -1.7765085596882964
+      ],
+      "max": [
+        11.79818161227459,
+        3.642048354148865,
+        3.77129090964406
+      ],
+      "centerSupportY": 3.561100657397567,
+      "anchorY": 2.62,
+      "centerBurialM": 0.9411006573975671,
+      "protectedEnvelopesClear": true
+    },
+    {
+      "instance": "front-shoulder",
+      "asset": "A4",
+      "min": [
+        5.46924861894035,
+        1.852374738175422,
+        1.2417694867156888
+      ],
+      "max": [
+        11.73485486033071,
+        2.7698435187339783,
+        7.154694406025743
+      ],
+      "centerSupportY": 2.2270928686498537,
+      "anchorY": 1.85,
+      "centerBurialM": 0.3770928686498536,
+      "protectedEnvelopesClear": true
+    }
+  ],
+  "footprintEstimate": {
+    "perimeterM": 64.1037213595993,
+    "coveredArcM": 14.202510470968829,
+    "percent": 22.155516356527485,
+    "method": "plateau edge segment midpoints in transformed instance AABBs; conservative footprint estimate, not pixel visibility or walkable area"
+  }
+}

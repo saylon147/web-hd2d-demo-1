@@ -1,0 +1,45 @@
+{
+  "passed": true,
+  "command": "npm run coastal:pipeline",
+  "seconds": 836.751,
+  "stages": [
+    {
+      "label": "four-asset optimize and source/LOD views",
+      "exitCode": 0
+    },
+    {
+      "label": "repeat optimization statistics",
+      "exitCode": 0
+    },
+    {
+      "label": "independent asset/baseline/placement validation",
+      "exitCode": 0
+    },
+    {
+      "label": "lint",
+      "exitCode": 0
+    },
+    {
+      "label": "strict typecheck",
+      "exitCode": 0
+    },
+    {
+      "label": "unit tests",
+      "exitCode": 0
+    },
+    {
+      "label": "production build",
+      "exitCode": 0
+    },
+    {
+      "label": "M1/M2/Tripo/coastal browser tests",
+      "exitCode": 0
+    },
+    {
+      "label": "Golden Reference and acceptance report",
+      "exitCode": 0
+    }
+  ],
+  "originalPreserved": true,
+  "status": "engineering-complete-visual-review-pending"
+}

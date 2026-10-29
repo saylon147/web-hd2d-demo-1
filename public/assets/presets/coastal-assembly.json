@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "m2-2-coastal-assembly-v1",
+  "baselineParameters": "art-source/parameters/island_cottage_v2.json",
+  "coordinates": "meters, Three.js Y-up; position is bottom-center anchor, yaw around +Y",
+  "embeddingMeaning": "embeddingM is a placement design target; measured center support/burial is recorded by validation, not an exact surface-fit guarantee",
+  "scope": "front/east coastal arc; five decorative modules, about one quarter of shoreline; original navigable geometry retained",
+  "defaultLod": "10k-1k",
+  "hiddenBaselineDecorations": ["Coastal_Rock_Visual_02", "Coastal_Rock_Visual_03"],
+  "lighting": {"exposure":1,"tintPolicy":"small linear material color multipliers; no texture repaint or roughness-map replacement"},
+  "cameraViews": {
+    "golden":{"target":{"x":0,"y":3.4,"z":3},"baseYaw":35,"yawOffset":0,"pitch":42,"distance":40,"fov":35},
+    "front":{"target":{"x":8,"y":1.9,"z":4.3},"baseYaw":35,"yawOffset":0,"pitch":42,"distance":23,"fov":35},
+    "side":{"target":{"x":8,"y":1.9,"z":4.3},"baseYaw":100,"yawOffset":0,"pitch":42,"distance":23,"fov":35},
+    "back":{"target":{"x":8,"y":1.9,"z":4.3},"baseYaw":215,"yawOffset":0,"pitch":42,"distance":25,"fov":35},
+    "corner":{"target":{"x":6.7,"y":1.5,"z":6.5},"baseYaw":58,"yawOffset":0,"pitch":38,"distance":16,"fov":35},
+    "top":{"target":{"x":0,"y":2,"z":2},"baseYaw":35,"yawOffset":0,"pitch":89.9,"distance":44,"fov":35}
+  },
+  "placements": [
+    {"id":"east-cliff","asset":"A1","position":[9.5,-0.16,0.8],"yaw":15,"scale":[1,1.2,0.95],"tint":[0.94,0.97,1.06],"embeddingM":1.2,"reason":"east relief; 20% vertical stretch closes plateau gap; base below sea and inner half embedded into shoulder"},
+    {"id":"front-wall","asset":"A2","position":[8.9,-0.15,4.5],"yaw":-5,"scale":[1.15,1.2,0.95],"tint":[0.96,0.98,1.04],"embeddingM":1.4,"reason":"lower cliff overlaps A1 and A3, outside house and stair approach"},
+    {"id":"cove-turn","asset":"A3","position":[5.6,-0.15,6.4],"yaw":-35,"scale":[1.1,1.15,0.95],"tint":[0.97,0.99,1.04],"embeddingM":1.2,"reason":"asymmetric turn embeds into beach flank; pier and stairs remain clear"},
+    {"id":"east-shoulder","asset":"A4","position":[8.9,2.62,1],"yaw":15,"scale":[1,1,0.95],"tint":[0.96,0.98,1.06],"embeddingM":1.2,"reason":"cap partially inside plateau and A1, no separate floating shelf"},
+    {"id":"front-shoulder","asset":"A4","position":[8.6,1.85,4.2],"yaw":-20,"scale":[1.05,0.9,0.95],"tint":[0.98,0.99,1.04],"embeddingM":1.2,"reason":"lower shoulder nested into terrain/A2, clear of basement; second A4 use rotated and modestly scaled"}
+  ]
+}

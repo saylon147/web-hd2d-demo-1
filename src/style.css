@@ -162,3 +162,6 @@ h1 { margin: 12px 0 8px; font-size: 27px; font-weight: 550; letter-spacing: .08e
 .tripo-controls a { color: #365f4c; text-decoration: none; }
 .tripo-controls a:hover { background: #e7ecdf; text-decoration: underline; }
 .tripo-shell .scene-heading { top: 20px; }
+.coastal-shell .scene-heading { max-width: min(320px, calc(100% - 40px)); padding: 12px; border-radius: 8px; background: #f8f9f1de; }
+.coastal-shell h1 { margin: 8px 0; font-size: 23px; }
+.coastal-shell .placeholder-badge, .coastal-shell .spatial-metrics { margin-top: 10px; }

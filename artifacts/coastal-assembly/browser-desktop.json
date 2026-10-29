@@ -1,0 +1,93 @@
+{
+  "browser": "155.0.8059.85",
+  "errors": [],
+  "records": [
+    {
+      "frames": 120,
+      "frameMeanMs": 18.515833333333333,
+      "frameMedianMs": 18.5,
+      "frameP95Ms": 20,
+      "fps": 54.00783113551465,
+      "cpuSubmissionP95Ms": 1.5999999940395355,
+      "mode": "baseline",
+      "lod": "10k-1k",
+      "asset": "A1",
+      "view": "golden",
+      "instances": 0,
+      "uniqueAssets": 0,
+      "moduleTriangles": 0,
+      "transferBytes": 0,
+      "fetchMs": 0,
+      "parseMs": 0,
+      "textureEstimateBytes": 0,
+      "drawCalls": 231,
+      "triangles": 5604,
+      "textures": 3,
+      "viewport": {
+        "width": 1600,
+        "height": 811,
+        "dpr": 1
+      },
+      "gpu": "ANGLE (Intel, Intel(R) UHD Graphics 770 (0x0000A780) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "method": "60 warmup frames / 120 RAF samples; CPU submission excludes GPU completion; sequential localhost fetch/parse; unique loaded GLB bytes; RGBA8+mip estimate, not measured VRAM"
+    },
+    {
+      "frames": 120,
+      "frameMeanMs": 18.367499999999996,
+      "frameMedianMs": 18.099999999999454,
+      "frameP95Ms": 20,
+      "fps": 54.443990744521585,
+      "cpuSubmissionP95Ms": 1.7000000029802322,
+      "mode": "assembly",
+      "lod": "10k-1k",
+      "asset": "A1",
+      "view": "golden",
+      "instances": 5,
+      "uniqueAssets": 4,
+      "moduleTriangles": 50000,
+      "transferBytes": 8307112,
+      "fetchMs": 131.30000001192093,
+      "parseMs": 146.40000000596046,
+      "textureEstimateBytes": 67108864,
+      "drawCalls": 237,
+      "triangles": 105524,
+      "textures": 15,
+      "viewport": {
+        "width": 1600,
+        "height": 811,
+        "dpr": 1
+      },
+      "gpu": "ANGLE (Intel, Intel(R) UHD Graphics 770 (0x0000A780) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "method": "60 warmup frames / 120 RAF samples; CPU submission excludes GPU completion; sequential localhost fetch/parse; unique loaded GLB bytes; RGBA8+mip estimate, not measured VRAM"
+    },
+    {
+      "frames": 120,
+      "frameMeanMs": 16.666666666666668,
+      "frameMedianMs": 16.699999999999818,
+      "frameP95Ms": 16.799999999999272,
+      "fps": 59.99999999999999,
+      "cpuSubmissionP95Ms": 1,
+      "mode": "assembly",
+      "lod": "20k-2k",
+      "asset": "A1",
+      "view": "golden",
+      "instances": 5,
+      "uniqueAssets": 4,
+      "moduleTriangles": 100000,
+      "transferBytes": 23750920,
+      "fetchMs": 2202.199999988079,
+      "parseMs": 399,
+      "textureEstimateBytes": 268435456,
+      "drawCalls": 237,
+      "triangles": 205524,
+      "textures": 15,
+      "viewport": {
+        "width": 1600,
+        "height": 811,
+        "dpr": 1
+      },
+      "gpu": "ANGLE (Intel, Intel(R) UHD Graphics 770 (0x0000A780) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "method": "60 warmup frames / 120 RAF samples; CPU submission excludes GPU completion; sequential localhost fetch/parse; unique loaded GLB bytes; RGBA8+mip estimate, not measured VRAM"
+    }
+  ]
+}

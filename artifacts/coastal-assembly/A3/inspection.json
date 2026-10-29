@@ -1,0 +1,111 @@
+{
+  "input": "D:\\web-hd2d-demo-1\\art-source\\tripo\\inbox\\coastal_corner_A3_multiview.glb",
+  "fileBytes": 69196928,
+  "sha256": "e179cbb37b51736aa6fb7e9c103dfd7ff79a15979dbe87aecd3a99282d1f06bc",
+  "asset": {
+    "version": "2.0",
+    "generator": "Tripo"
+  },
+  "nodes": [
+    {
+      "name": "tripo_node_e5bd59f5-4b3d-4902-804e-ea6391e544d3",
+      "mesh": 0
+    }
+  ],
+  "meshes": 1,
+  "primitives": [
+    {
+      "mode": 4,
+      "vertices": 980294,
+      "triangles": 1894158,
+      "attributes": {
+        "POSITION": 0,
+        "NORMAL": 1,
+        "TEXCOORD_0": 2
+      },
+      "material": 0,
+      "positionBounds": [
+        [
+          -0.48956298828125,
+          0.0,
+          -0.4839324951171875
+        ],
+        [
+          0.48956298828125,
+          0.4470062255859375,
+          0.4839324951171875
+        ]
+      ]
+    }
+  ],
+  "triangleCount": 1894158,
+  "images": [
+    {
+      "name": "coastal_corner_A3_multiview_basecolor.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 4891699,
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "sha256": "c6e17beb475812a634e482e1691108e0f4b04880a9efbfacf0cae095eaeed6a4"
+    },
+    {
+      "name": "coastal_corner_A3_multiview_rm.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 1759861,
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "sha256": "de988661eee2bbaae85504a05927221ac8952de23e0a5b52821512b37f9fab00"
+    },
+    {
+      "name": "coastal_corner_A3_multiview_normal.png",
+      "mimeType": "image/png",
+      "bytes": 8444030,
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "sha256": "6182b435b0404db6f3a5186b7c46b86e2f4f255ac47935b55b202dc1dc2929a9"
+    }
+  ],
+  "materials": [
+    {
+      "name": "tripo_material_e5bd59f5-4b3d-4902-804e-ea6391e544d3",
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicRoughnessTexture": {
+          "index": 1
+        }
+      },
+      "normalTexture": {
+        "index": 2
+      }
+    }
+  ],
+  "textures": [
+    {
+      "source": 0,
+      "sampler": 0
+    },
+    {
+      "source": 1,
+      "sampler": 1
+    },
+    {
+      "source": 2,
+      "sampler": 2
+    }
+  ],
+  "extensionsUsed": [
+    "KHR_materials_volume",
+    "FB_ngon_encoding"
+  ],
+  "extensionsRequired": [],
+  "gpuTextureRgbaMipEstimateBytes": 268435456.0,
+  "gpuEstimateDefinition": "RGBA8 plus complete mip chain; excludes geometry/framebuffer; browser allocation may differ"
+}

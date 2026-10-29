@@ -1,0 +1,111 @@
+{
+  "input": "D:\\web-hd2d-demo-1\\art-source\\tripo\\inbox\\coastal_cliff_A1_multiview.glb",
+  "fileBytes": 74232204,
+  "sha256": "2a1a9977d08b1a1db1b3981094a4fdd22acda418c5cf907ba966743a41de4805",
+  "asset": {
+    "version": "2.0",
+    "generator": "Tripo"
+  },
+  "nodes": [
+    {
+      "name": "tripo_node_b60ff73b-11f8-46e9-93e7-f527ad5c2cb6",
+      "mesh": 0
+    }
+  ],
+  "meshes": 1,
+  "primitives": [
+    {
+      "mode": 4,
+      "vertices": 1032463,
+      "triangles": 1992384,
+      "attributes": {
+        "POSITION": 0,
+        "NORMAL": 1,
+        "TEXCOORD_0": 2
+      },
+      "material": 0,
+      "positionBounds": [
+        [
+          -0.489501953125,
+          0.0,
+          -0.48919677734375
+        ],
+        [
+          0.489501953125,
+          0.55316162109375,
+          0.48919677734375
+        ]
+      ]
+    }
+  ],
+  "triangleCount": 1992384,
+  "images": [
+    {
+      "name": "rock_formation_3d_model_basecolor.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 5681914,
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "sha256": "823dd5911c2d595a421cc3cbfd629d2cafb07db0ab949865033eec9e56afaf2e"
+    },
+    {
+      "name": "rock_formation_3d_model_rm.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 1868342,
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "sha256": "cda9bf4d7d33dfbb2073da6af5a39d562765d39ca470fc31da9fbd467af20c97"
+    },
+    {
+      "name": "rock_formation_3d_model_normal.png",
+      "mimeType": "image/png",
+      "bytes": 9732505,
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "sha256": "39a9d92af5b2eeb6f8c870bd81f0fe232a6c7ff97fc2be4a6555c7c6aa6f8cd3"
+    }
+  ],
+  "materials": [
+    {
+      "name": "tripo_material_b60ff73b-11f8-46e9-93e7-f527ad5c2cb6",
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicRoughnessTexture": {
+          "index": 1
+        }
+      },
+      "normalTexture": {
+        "index": 2
+      }
+    }
+  ],
+  "textures": [
+    {
+      "source": 0,
+      "sampler": 0
+    },
+    {
+      "source": 1,
+      "sampler": 1
+    },
+    {
+      "source": 2,
+      "sampler": 2
+    }
+  ],
+  "extensionsUsed": [
+    "KHR_materials_volume",
+    "FB_ngon_encoding"
+  ],
+  "extensionsRequired": [],
+  "gpuTextureRgbaMipEstimateBytes": 268435456.0,
+  "gpuEstimateDefinition": "RGBA8 plus complete mip chain; excludes geometry/framebuffer; browser allocation may differ"
+}

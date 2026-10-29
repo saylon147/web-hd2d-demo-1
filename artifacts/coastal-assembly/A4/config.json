@@ -1,0 +1,59 @@
+{
+  "id": "A4",
+  "input": "art-source/tripo/inbox/coastal_platform_A4_multiview.glb",
+  "runtimeWidthM": 4.8,
+  "usage": "decorative shoulder transition below the traversable plateau",
+  "scaleRange": [
+    0.8,
+    1.2
+  ],
+  "frontYaw": 35,
+  "embeddingM": [
+    0.15,
+    1.5
+  ],
+  "schemaVersion": 1,
+  "outputDirectory": "public/assets/models/coastal-assembly/A4",
+  "reports": "artifacts/coastal-assembly/A4",
+  "blend": "art-source/tripo/coastal-optimized/A4/coastal.blend",
+  "manifest": "artifacts/coastal-assembly/A4/variants.json",
+  "triangleTargets": [
+    20000,
+    10000
+  ],
+  "textureLimits": [
+    2048,
+    1024
+  ],
+  "runtimeUrlPrefix": "/assets/models/coastal-assembly/A4/",
+  "defaultVariant": "10k-1k",
+  "placement": [
+    0,
+    0,
+    0
+  ],
+  "rotationYDegrees": 0,
+  "lighting": {
+    "hemisphere": 1.05,
+    "sun": 2,
+    "exposure": 1
+  },
+  "inspectionCamera": {
+    "target": [
+      0,
+      1,
+      0
+    ],
+    "pitch": 42,
+    "distance": 15,
+    "fov": 35,
+    "frontYaw": 35,
+    "sideYaw": 125,
+    "backYaw": 215
+  },
+  "performance": {
+    "warmupFrames": 60,
+    "sampleFrames": 120
+  },
+  "evidence": "docs/m2.2-coastal-assembly/images"
+}

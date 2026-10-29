@@ -1,0 +1,21 @@
+{
+  "missing": [],
+  "records": [
+    {
+      "id": "A1",
+      "status": "processed"
+    },
+    {
+      "id": "A2",
+      "status": "processed"
+    },
+    {
+      "id": "A3",
+      "status": "processed"
+    },
+    {
+      "id": "A4",
+      "status": "processed"
+    }
+  ]
+}

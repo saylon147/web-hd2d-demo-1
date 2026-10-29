@@ -1,0 +1,727 @@
+{
+  "schemaVersion": 1,
+  "approval": "experimental-awaiting-human",
+  "units": "meters",
+  "upAxis": "Y",
+  "defaultVariant": "10k-1k",
+  "complete": true,
+  "assets": [
+    {
+      "id": "A1",
+      "input": "art-source/tripo/inbox/coastal_cliff_A1_multiview.glb",
+      "runtimeWidthM": 5.8,
+      "usage": "vertical relief at the east shoulder",
+      "scaleRange": [
+        0.8,
+        1.2
+      ],
+      "frontYaw": 35,
+      "embeddingM": [
+        0.1,
+        1.4
+      ],
+      "removeTinyShellsMaxVertices": 32,
+      "status": "optimized-awaiting-review",
+      "sourceSha256": "2a1a9977d08b1a1db1b3981094a4fdd22acda418c5cf907ba966743a41de4805",
+      "sourceBytes": 74232204,
+      "sourceTriangles": 1992384,
+      "sourceBounds": [
+        [
+          -0.489501953125,
+          0,
+          -0.48919677734375
+        ],
+        [
+          0.489501953125,
+          0.55316162109375,
+          0.48919677734375
+        ]
+      ],
+      "variants": [
+        {
+          "id": "20k-2k",
+          "modelUrl": "/assets/models/coastal-assembly/A1/rock-20k-2k.glb",
+          "sha256": "d4416ba1f7632d28a47b3a90eec888d7a41f4a3ddc31c283ec697dd599b5a28f",
+          "fileBytes": 6329440,
+          "triangleCount": 20000,
+          "dimensions": [
+            5.806338787078857,
+            3.278190210010507,
+            5.7989723682403564
+          ],
+          "bounds": [
+            [
+              -2.9042863845825195,
+              0.0001916144829010591,
+              -2.8989129066467285
+            ],
+            [
+              2.902052402496338,
+              3.278381824493408,
+              2.900059461593628
+            ]
+          ],
+          "images": [
+            {
+              "name": "rock_0_2048",
+              "mimeType": "image/jpeg",
+              "bytes": 1181109,
+              "dimensions": [
+                2048,
+                2048
+              ],
+              "sha256": "909c768ffcb1f3775b47c34bff7192cf5a652bd6b2f3c09227806db689726ade"
+            },
+            {
+              "name": "rock_1_2048",
+              "mimeType": "image/jpeg",
+              "bytes": 359373,
+              "dimensions": [
+                2048,
+                2048
+              ],
+              "sha256": "d3b40076a63df1337f30e25dbfcbb54bb05856e0532799458000ae24f244cc0b"
+            },
+            {
+              "name": "rock_2_2048",
+              "mimeType": "image/png",
+              "bytes": 3953791,
+              "dimensions": [
+                2048,
+                2048
+              ],
+              "sha256": "538a5e685bad99719bce5887ec20a09fc8bf425d1d1c77acf58441c61bb60bed"
+            }
+          ],
+          "gpuTextureRgbaMipEstimateBytes": 67108864,
+          "topology": {
+            "vertices": 9990,
+            "edges": 30000,
+            "faces": 20000,
+            "boundaryEdges": 0,
+            "nonmanifoldEdges": 0,
+            "looseVertices": 0,
+            "zeroAreaFaces": 0,
+            "connectedShellCount": 1,
+            "largestShellVertexCounts": [
+              9990
+            ],
+            "signedVolumeM3": 32.698842994302396,
+            "hiddenFacesAssessment": "Topology only; enclosed/intersecting/internal sheets cannot be reliably classified without an expensive solid analysis. Front/back renders are required."
+          }
+        },
+        {
+          "id": "10k-1k",
+          "modelUrl": "/assets/models/coastal-assembly/A1/rock-10k-1k.glb",
+          "sha256": "622c7df96353f35add8811f14528a09d3cd1cdd86f62667a183c52bdebc67ed5",
+          "fileBytes": 2187824,
+          "triangleCount": 10000,
+          "dimensions": [
+            5.793956995010376,
+            3.2779689135204535,
+            5.796022653579712
+          ],
+          "bounds": [
+            [
+              -2.89813232421875,
+              0.00041291097295470536,
+              -2.895963191986084
+            ],
+            [
+              2.895824670791626,
+              3.278381824493408,
+              2.900059461593628
+            ]
+          ],
+          "images": [
+            {
+              "name": "rock_0_1024",
+              "mimeType": "image/jpeg",
+              "bytes": 377786,
+              "dimensions": [
+                1024,
+                1024
+              ],
+              "sha256": "a75c5232375ee14ae6b50a43f6fcfba37483189ee974eda86bee21b9723619d0"
+            },
+            {
+              "name": "rock_1_1024",
+              "mimeType": "image/jpeg",
+              "bytes": 119318,
+              "dimensions": [
+                1024,
+                1024
+              ],
+              "sha256": "073f72fb4cd5a84c5964f5ac6dcff56983c07da0cf12ce99a4714e449456418c"
+            },
+            {
+              "name": "rock_2_1024",
+              "mimeType": "image/png",
+              "bytes": 1226127,
+              "dimensions": [
+                1024,
+                1024
+              ],
+              "sha256": "33ef3d821e5c99dca46cbad54e70a904be8dc2a2c205be7c588664abc9644dd5"
+            }
+          ],
+          "gpuTextureRgbaMipEstimateBytes": 16777216,
+          "topology": {
+            "vertices": 4990,
+            "edges": 15000,
+            "faces": 10000,
+            "boundaryEdges": 0,
+            "nonmanifoldEdges": 0,
+            "looseVertices": 0,
+            "zeroAreaFaces": 0,
+            "connectedShellCount": 1,
+            "largestShellVertexCounts": [
+              4990
+            ],
+            "signedVolumeM3": 32.64007219563985,
+            "hiddenFacesAssessment": "Topology only; enclosed/intersecting/internal sheets cannot be reliably classified without an expensive solid analysis. Front/back renders are required."
+          }
+        }
+      ],
+      "normalBakingPerformed": false,
+      "constraints": "One mesh, one primitive, one PBR material; active extensions rejected. Uniform normalization, no source mutation."
+    },
+    {
+      "id": "A2",
+      "input": "art-source/tripo/inbox/coastal_cliff_A2_multiview.glb",
+      "runtimeWidthM": 6,
+      "usage": "lower horizontal cliff beside the front cove",
+      "scaleRange": [
+        0.8,
+        1.2
+      ],
+      "frontYaw": 35,
+      "embeddingM": [
+        0.1,
+        1.5
+      ],
+      "status": "optimized-awaiting-review",
+      "sourceSha256": "fd24331c347bd24c6772a47923a701460f8297cd50edf1bcb4b0aea104070e13",
+      "sourceBytes": 69865248,
+      "sourceTriangles": 1895462,
+      "sourceBounds": [
+        [
+          -0.4895172119140625,
+          0,
+          -0.4472808837890625
+        ],
+        [
+          0.4895172119140625,
+          0.3395538330078125,
+          0.4472808837890625
+        ]
+      ],
+      "variants": [
+        {
+          "id": "20k-2k",
+          "modelUrl": "/assets/models/coastal-assembly/A2/rock-20k-2k.glb",
+          "sha256": "28823fe2910158b363092ceb4a31bdf21967fdb05ca59180127ff72dddd40f79",
+          "fileBytes": 5896304,
+          "triangleCount": 20000,
+          "dimensions": [
+            6.000787019729614,
+            2.072013612370938,
+            5.485252141952515
+          ],
+          "bounds": [
+            [
+              -3.0025975704193115,
+              0.007663730997592211,
+              -2.742656946182251
+            ],
+            [
+              2.9981894493103027,
+              2.0796773433685303,
+              2.7425951957702637
+            ]
+          ],
+          "images": [
+            {
+              "name": "rock_0_2048",
+              "mimeType": "image/jpeg",
+              "bytes": 1138344,
+              "dimensions": [
+                2048,
+                2048
+              ],
+              "sha256": "a78dfcc6c578312318999e10a56241092a0f17db47a742d64a17ba2ad7994c0b"
+            },
+            {
+              "name": "rock_1_2048",
+              "mimeType": "image/jpeg",
+              "bytes": 329866,
+              "dimensions": [
+                2048,
+                2048
+              ],
+              "sha256": "dc1cad1754b853d214acc22b77876a498e8f14029dc0bc58f3ca70cafd52254f"
+            },
+            {
+              "name": "rock_2_2048",
+              "mimeType": "image/png",
+              "bytes": 3593987,
+              "dimensions": [
+                2048,
+                2048
+              ],
+              "sha256": "e326bf08b93f867d0f8bb1c4f2d4098ea96bfa20281340477bf0164dd69c8d02"
+            }
+          ],
+          "gpuTextureRgbaMipEstimateBytes": 67108864,
+          "topology": {
+            "vertices": 9992,
+            "edges": 30000,
+            "faces": 20000,
+            "boundaryEdges": 0,
+            "nonmanifoldEdges": 0,
+            "looseVertices": 0,
+            "zeroAreaFaces": 0,
+            "connectedShellCount": 1,
+            "largestShellVertexCounts": [
+              9992
+            ],
+            "signedVolumeM3": 26.521901496747088,
+            "hiddenFacesAssessment": "Topology only; enclosed/intersecting/internal sheets cannot be reliably classified without an expensive solid analysis. Front/back renders are required."
+          }
+        },
+        {
+          "id": "10k-1k",
+          "modelUrl": "/assets/models/coastal-assembly/A2/rock-10k-1k.glb",
+          "sha256": "1f7d69dff49c99c4d9c4343f113f20b02eaece432d5470182cd49dfed9ed42ff",
+          "fileBytes": 2081916,
+          "triangleCount": 10000,
+          "dimensions": [
+            6.002699851989746,
+            2.0711686545982957,
+            5.488606929779053
+          ],
+          "bounds": [
+            [
+              -3.0025975704193115,
+              0.008508688770234585,
+              -2.742656946182251
+            ],
+            [
+              3.0001022815704346,
+              2.0796773433685303,
+              2.7459499835968018
+            ]
+          ],
+          "images": [
+            {
+              "name": "rock_0_1024",
+              "mimeType": "image/jpeg",
+              "bytes": 365602,
+              "dimensions": [
+                1024,
+                1024
+              ],
+              "sha256": "1db086baf1ebb5e7d22f9a7cfbfea2996473c8cfaf45c0ff60a679155c42e25c"
+            },
+            {
+              "name": "rock_1_1024",
+              "mimeType": "image/jpeg",
+              "bytes": 112386,
+              "dimensions": [
+                1024,
+                1024
+              ],
+              "sha256": "e82c46ed19f833688ca08c9af3adc05f7b727598ac8a4b8c68172d0fe2bfa849"
+            },
+            {
+              "name": "rock_2_1024",
+              "mimeType": "image/png",
+              "bytes": 1141491,
+              "dimensions": [
+                1024,
+                1024
+              ],
+              "sha256": "830af148aa7c82df557362c1ef759a1e055802fce0dac143c641205d16146044"
+            }
+          ],
+          "gpuTextureRgbaMipEstimateBytes": 16777216,
+          "topology": {
+            "vertices": 4992,
+            "edges": 15000,
+            "faces": 10000,
+            "boundaryEdges": 0,
+            "nonmanifoldEdges": 0,
+            "looseVertices": 0,
+            "zeroAreaFaces": 0,
+            "connectedShellCount": 1,
+            "largestShellVertexCounts": [
+              4992
+            ],
+            "signedVolumeM3": 26.472907045674397,
+            "hiddenFacesAssessment": "Topology only; enclosed/intersecting/internal sheets cannot be reliably classified without an expensive solid analysis. Front/back renders are required."
+          }
+        }
+      ],
+      "normalBakingPerformed": false,
+      "constraints": "One mesh, one primitive, one PBR material; active extensions rejected. Uniform normalization, no source mutation."
+    },
+    {
+      "id": "A3",
+      "input": "art-source/tripo/inbox/coastal_corner_A3_multiview.glb",
+      "runtimeWidthM": 5,
+      "usage": "asymmetric turn toward the front beach",
+      "scaleRange": [
+        0.8,
+        1.2
+      ],
+      "frontYaw": 35,
+      "embeddingM": [
+        0.1,
+        1.4
+      ],
+      "status": "optimized-awaiting-review",
+      "sourceSha256": "e179cbb37b51736aa6fb7e9c103dfd7ff79a15979dbe87aecd3a99282d1f06bc",
+      "sourceBytes": 69196928,
+      "sourceTriangles": 1894158,
+      "sourceBounds": [
+        [
+          -0.48956298828125,
+          0,
+          -0.4839324951171875
+        ],
+        [
+          0.48956298828125,
+          0.4470062255859375,
+          0.4839324951171875
+        ]
+      ],
+      "variants": [
+        {
+          "id": "20k-2k",
+          "modelUrl": "/assets/models/coastal-assembly/A3/rock-20k-2k.glb",
+          "sha256": "ce9dd331c34da061e735102f6e2cc27b1db28c1fd030be1228018f298f201240",
+          "fileBytes": 5700644,
+          "triangleCount": 20000,
+          "dimensions": [
+            5.005661964416504,
+            2.284405248821713,
+            4.942502498626709
+          ],
+          "bounds": [
+            [
+              -2.5034756660461426,
+              0.00118134671356529,
+              -2.472961664199829
+            ],
+            [
+              2.5021862983703613,
+              2.2855865955352783,
+              2.46954083442688
+            ]
+          ],
+          "images": [
+            {
+              "name": "rock_0_2048",
+              "mimeType": "image/jpeg",
+              "bytes": 1040354,
+              "dimensions": [
+                2048,
+                2048
+              ],
+              "sha256": "6a0363d503df25f91454dd633a74e196f90b5e528a78ce984de19c2b96793430"
+            },
+            {
+              "name": "rock_1_2048",
+              "mimeType": "image/jpeg",
+              "bytes": 345961,
+              "dimensions": [
+                2048,
+                2048
+              ],
+              "sha256": "002a5f78b3d76143f7fe891a030c72ad723fba138675523d86347b4bc3b1b755"
+            },
+            {
+              "name": "rock_2_2048",
+              "mimeType": "image/png",
+              "bytes": 3520063,
+              "dimensions": [
+                2048,
+                2048
+              ],
+              "sha256": "1a0d58d98456801ccd996f745c76f9d2d56ff238d617bb68af81e4c7417b2474"
+            }
+          ],
+          "gpuTextureRgbaMipEstimateBytes": 67108864,
+          "topology": {
+            "vertices": 9996,
+            "edges": 30000,
+            "faces": 20000,
+            "boundaryEdges": 0,
+            "nonmanifoldEdges": 0,
+            "looseVertices": 0,
+            "zeroAreaFaces": 0,
+            "connectedShellCount": 1,
+            "largestShellVertexCounts": [
+              9996
+            ],
+            "signedVolumeM3": 13.431172023159554,
+            "hiddenFacesAssessment": "Topology only; enclosed/intersecting/internal sheets cannot be reliably classified without an expensive solid analysis. Front/back renders are required."
+          }
+        },
+        {
+          "id": "10k-1k",
+          "modelUrl": "/assets/models/coastal-assembly/A3/rock-10k-1k.glb",
+          "sha256": "e79a163acf4bd92868dd62447691c7585115881bcf4a3b3f218a2c3ad145e649",
+          "fileBytes": 2016088,
+          "triangleCount": 10000,
+          "dimensions": [
+            5.004047393798828,
+            2.272240179241635,
+            4.943562984466553
+          ],
+          "bounds": [
+            [
+              -2.501575231552124,
+              0.00118134671356529,
+              -2.4685592651367188
+            ],
+            [
+              2.502472162246704,
+              2.2734215259552,
+              2.475003719329834
+            ]
+          ],
+          "images": [
+            {
+              "name": "rock_0_1024",
+              "mimeType": "image/jpeg",
+              "bytes": 346894,
+              "dimensions": [
+                1024,
+                1024
+              ],
+              "sha256": "775b418cbee38acd357f64494aa6c5af10a896a2b8dc020c294e32fcf44d0ceb"
+            },
+            {
+              "name": "rock_1_1024",
+              "mimeType": "image/jpeg",
+              "bytes": 117381,
+              "dimensions": [
+                1024,
+                1024
+              ],
+              "sha256": "7fcc739b35da2dcbdb32610244a48dbdbd80b11603781df5bcbeadeff13bb70e"
+            },
+            {
+              "name": "rock_2_1024",
+              "mimeType": "image/png",
+              "bytes": 1111894,
+              "dimensions": [
+                1024,
+                1024
+              ],
+              "sha256": "3a7d0d1e0543ed33f5ab81d525a7b885a83c94b453eb29820d4c3dc5c020698c"
+            }
+          ],
+          "gpuTextureRgbaMipEstimateBytes": 16777216,
+          "topology": {
+            "vertices": 4996,
+            "edges": 15000,
+            "faces": 10000,
+            "boundaryEdges": 0,
+            "nonmanifoldEdges": 0,
+            "looseVertices": 0,
+            "zeroAreaFaces": 0,
+            "connectedShellCount": 1,
+            "largestShellVertexCounts": [
+              4996
+            ],
+            "signedVolumeM3": 13.394571622504289,
+            "hiddenFacesAssessment": "Topology only; enclosed/intersecting/internal sheets cannot be reliably classified without an expensive solid analysis. Front/back renders are required."
+          }
+        }
+      ],
+      "normalBakingPerformed": false,
+      "constraints": "One mesh, one primitive, one PBR material; active extensions rejected. Uniform normalization, no source mutation."
+    },
+    {
+      "id": "A4",
+      "input": "art-source/tripo/inbox/coastal_platform_A4_multiview.glb",
+      "runtimeWidthM": 4.8,
+      "usage": "decorative shoulder transition below the traversable plateau",
+      "scaleRange": [
+        0.8,
+        1.2
+      ],
+      "frontYaw": 35,
+      "embeddingM": [
+        0.15,
+        1.5
+      ],
+      "status": "optimized-awaiting-review",
+      "sourceSha256": "13f1d85b36fe7192d43d8130c07583138d53fd8694f0276b0a32576582e54672",
+      "sourceBytes": 69047000,
+      "sourceTriangles": 1879474,
+      "sourceBounds": [
+        [
+          -0.4900970757007599,
+          0,
+          -0.47869873046875
+        ],
+        [
+          0.4900970757007599,
+          0.21021269261837006,
+          0.47869873046875
+        ]
+      ],
+      "variants": [
+        {
+          "id": "20k-2k",
+          "modelUrl": "/assets/models/coastal-assembly/A4/rock-20k-2k.glb",
+          "sha256": "1491277274630c76bd9075d8897794661814256fee3025535c37432317597813",
+          "fileBytes": 5824532,
+          "triangleCount": 20000,
+          "dimensions": [
+            4.803152322769165,
+            1.0247172960953321,
+            4.6879096031188965
+          ],
+          "bounds": [
+            [
+              -2.401562213897705,
+              0.00028399136499501765,
+              -2.3452203273773193
+            ],
+            [
+              2.40159010887146,
+              1.0250012874603271,
+              2.342689275741577
+            ]
+          ],
+          "images": [
+            {
+              "name": "rock_0_2048",
+              "mimeType": "image/jpeg",
+              "bytes": 963285,
+              "dimensions": [
+                2048,
+                2048
+              ],
+              "sha256": "136d47a7fa53c86a7bdf80f3f6aacd32bba528dc411d7fac18e07e1e2a070071"
+            },
+            {
+              "name": "rock_1_2048",
+              "mimeType": "image/jpeg",
+              "bytes": 311822,
+              "dimensions": [
+                2048,
+                2048
+              ],
+              "sha256": "cc52e2991ed3eb2c78059e2d2ae646e61892255f6670c8378cc5eb3da6e435d3"
+            },
+            {
+              "name": "rock_2_2048",
+              "mimeType": "image/png",
+              "bytes": 3770081,
+              "dimensions": [
+                2048,
+                2048
+              ],
+              "sha256": "c79b0ec4f67df3187c4138daf7c6a7970805ca4bb3fc2ce722fe3cfccff19963"
+            }
+          ],
+          "gpuTextureRgbaMipEstimateBytes": 67108864,
+          "topology": {
+            "vertices": 10002,
+            "edges": 30000,
+            "faces": 20000,
+            "boundaryEdges": 0,
+            "nonmanifoldEdges": 0,
+            "looseVertices": 0,
+            "zeroAreaFaces": 0,
+            "connectedShellCount": 1,
+            "largestShellVertexCounts": [
+              10002
+            ],
+            "signedVolumeM3": 9.714319957127614,
+            "hiddenFacesAssessment": "Topology only; enclosed/intersecting/internal sheets cannot be reliably classified without an expensive solid analysis. Front/back renders are required."
+          }
+        },
+        {
+          "id": "10k-1k",
+          "modelUrl": "/assets/models/coastal-assembly/A4/rock-10k-1k.glb",
+          "sha256": "4854a6c5c75bb843db2ba0f85160d25f616aa1989d53115a39c05df2ff1e707c",
+          "fileBytes": 2021284,
+          "triangleCount": 10000,
+          "dimensions": [
+            4.805644989013672,
+            1.0194097561761737,
+            4.690353631973267
+          ],
+          "bounds": [
+            [
+              -2.401562213897705,
+              0.002638597972691059,
+              -2.3476643562316895
+            ],
+            [
+              2.404082775115967,
+              1.0220483541488647,
+              2.342689275741577
+            ]
+          ],
+          "images": [
+            {
+              "name": "rock_0_1024",
+              "mimeType": "image/jpeg",
+              "bytes": 311685,
+              "dimensions": [
+                1024,
+                1024
+              ],
+              "sha256": "61608ecfa2c612e72f451f010622d7132654f90ca4c91f4cff20b95497cded2f"
+            },
+            {
+              "name": "rock_1_1024",
+              "mimeType": "image/jpeg",
+              "bytes": 104155,
+              "dimensions": [
+                1024,
+                1024
+              ],
+              "sha256": "7efb2a369d15b0a4a89cc767f41da70ab35c75814a20f82e09bfbe41c59ba137"
+            },
+            {
+              "name": "rock_2_1024",
+              "mimeType": "image/png",
+              "bytes": 1179060,
+              "dimensions": [
+                1024,
+                1024
+              ],
+              "sha256": "6671a84877a9d3dfd35fde66de3472500a6ca72ddda9f9f3bc576b9c7d7efb34"
+            }
+          ],
+          "gpuTextureRgbaMipEstimateBytes": 16777216,
+          "topology": {
+            "vertices": 5002,
+            "edges": 15000,
+            "faces": 10000,
+            "boundaryEdges": 0,
+            "nonmanifoldEdges": 0,
+            "looseVertices": 0,
+            "zeroAreaFaces": 0,
+            "connectedShellCount": 1,
+            "largestShellVertexCounts": [
+              5002
+            ],
+            "signedVolumeM3": 9.684719921997742,
+            "hiddenFacesAssessment": "Topology only; enclosed/intersecting/internal sheets cannot be reliably classified without an expensive solid analysis. Front/back renders are required."
+          }
+        }
+      ],
+      "normalBakingPerformed": false,
+      "constraints": "One mesh, one primitive, one PBR material; active extensions rejected. Uniform normalization, no source mutation."
+    }
+  ]
+}

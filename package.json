@@ -19,6 +19,10 @@
     "tripo:validate": "node scripts/validate_tripo.mjs",
     "tripo:report": "node scripts/report_tripo.mjs",
     "tripo:pipeline": "node scripts/tripo_pipeline.mjs",
+    "coastal:optimize": "node scripts/coastal_batch.mjs",
+    "coastal:validate": "node scripts/validate_coastal.mjs",
+    "coastal:report": "node scripts/report_coastal.mjs",
+    "coastal:pipeline": "node scripts/coastal_pipeline.mjs",
     "evidence:compare": "node scripts/compare_blockout.mjs",
     "build": "npm run typecheck && vite build",
     "preview": "vite preview --host 127.0.0.1"

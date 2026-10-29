@@ -40,7 +40,10 @@ started=time.perf_counter()
 original=inspect(input_path)
 (reports/'inspection.json').write_text(json.dumps(original,indent=2)+'\n',encoding='utf-8')
 source_json, source_bin, source_bytes=read_glb(input_path)
-assert len(source_json['meshes'])==1 and len(source_json['materials'])==1, 'This spike expects the provided single rock/material'
+assert len(source_json.get('meshes',[]))==1 and len(source_json.get('materials',[]))==1 and len(source_json['meshes'][0]['primitives'])==1, f"Unsupported Tripo structure: {len(source_json.get('meshes',[]))} meshes / {len(source_json.get('materials',[]))} materials. This pipeline requires one mesh, one primitive, one material; explicit conversion is needed."
+assert len(source_json.get('images',[]))==3, 'Expected three embedded PBR images; explicit texture conversion is needed'
+source_material=source_json['materials'][0]
+assert source_material.get('pbrMetallicRoughness',{}).get('baseColorTexture',{}).get('index')==0 and source_material.get('pbrMetallicRoughness',{}).get('metallicRoughnessTexture',{}).get('index')==1 and source_material.get('normalTexture',{}).get('index')==2, 'Unsupported PBR texture layout; explicit channel conversion is needed'
 assert not source_json.get('extensionsRequired'), 'Required extensions need explicit conversion first'
 assert not source_json['materials'][0].get('extensions'), 'Active material extensions require an explicit conversion policy'
 
@@ -99,6 +102,43 @@ print('TOPOLOGY_START',flush=True)
 source_topology=topology(high)
 print('TOPOLOGY',json.dumps(source_topology),flush=True)
 (reports/'source-topology.json').write_text(json.dumps(source_topology,indent=2)+'\n',encoding='utf-8')
+
+# Opt-in cleanup on a copy: only tiny disconnected input fragments, never the high reference.
+cleaned_high=high
+cleanup_report={'performed':False}
+shell_limit=config.get('removeTinyShellsMaxVertices',0)
+if shell_limit:
+    cleaned_high=high.copy()
+    cleaned_high.data=high.data.copy()
+    bpy.context.collection.objects.link(cleaned_high)
+    cleaned_high.name='Tripo_Rock_Cleaned'
+    bm=bmesh.new()
+    bm.from_mesh(cleaned_high.data)
+    visited=set()
+    remove=[]
+    for start in bm.verts:
+        if start in visited:
+            continue
+        stack=[start]
+        visited.add(start)
+        component=[]
+        while stack:
+            vertex=stack.pop()
+            component.append(vertex)
+            for edge in vertex.link_edges:
+                other=edge.other_vert(vertex)
+                if other not in visited:
+                    visited.add(other)
+                    stack.append(other)
+        if len(component)<=shell_limit:
+            remove.extend(component)
+    assert len(remove)<len(bm.verts)*0.001, 'Tiny-fragment cleanup exceeds 0.1%; review input explicitly'
+    removed=len(remove)
+    bmesh.ops.delete(bm,geom=remove,context='VERTS')
+    bm.to_mesh(cleaned_high.data)
+    bm.free()
+    cleaned_high.data.update()
+    cleanup_report={'performed':True,'removedVertices':removed,'maxShellVertices':shell_limit,'after':topology(cleaned_high),'policy':'copy only; disconnected shells up to configured vertex threshold, total <0.1%; high reference unmodified'}
 
 # Exact source blobs at 4K; downscales through Blender Image, no map rebaking.
 textures={}
@@ -164,13 +204,14 @@ def export_geometry(obj,path):
 
 
 variants=[]
+url_prefix=config.get('runtimeUrlPrefix','/assets/models/tripo-rock/')
 reference_path=output/'rock-original-4k.glb'
 shutil.copyfile(input_path,reference_path)
 variants.append({'id':'original-4k','trianglesTarget':original['triangleCount'],'textureLimit':4096,'original':True,
-                 'modelUrl':'/assets/models/tripo-rock/'+reference_path.name,**inspect(reference_path)})
+                 'modelUrl':url_prefix+reference_path.name,**inspect(reference_path)})
 geometry_cache=reports/'geometry-cache'
 geometry_cache.mkdir(exist_ok=True)
-previous=high
+previous=cleaned_high
 for target in sorted(config['triangleTargets'],reverse=True):
     print('DECIMATE_START',target,flush=True)
     obj=previous.copy()
@@ -200,7 +241,7 @@ for target in sorted(config['triangleTargets'],reverse=True):
         assert len(info['images'])==3 and all(max(image['dimensions'])<=limit for image in info['images'])
         assert all('NORMAL' in primitive['attributes'] and 'TEXCOORD_0' in primitive['attributes'] for primitive in info['primitives'])
         variants.append({'id':f'{target//1000}k-{limit//1024}k','trianglesTarget':target,'textureLimit':limit,
-                         'targetDeviation':info['triangleCount']-target,'modelUrl':'/assets/models/tripo-rock/'+destination.name,
+                         'targetDeviation':info['triangleCount']-target,'modelUrl':url_prefix+destination.name,
                          'topology':lod_topology,**info})
     previous=obj
     print('DECIMATE_DONE',target,len(obj.data.loop_triangles),flush=True)
@@ -218,9 +259,9 @@ manifest={'schemaVersion':1,'approval':'experimental-awaiting-human','sourceSha2
           'performance':config['performance'],'variants':variants}
 (ROOT/config['manifest']).write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8')
 result={'blenderVersion':bpy.app.version_string,'seconds':time.perf_counter()-started,'sourceSha256':original['sha256'],
-        'originalPreserved':True,'strategy':'progressive Blender COLLAPSE QEM 50k→20k→10k→5k; UV interpolation, normals exported',
+        'originalPreserved':True,'strategy':'progressive Blender COLLAPSE QEM '+ '→'.join(str(target) for target in sorted(config['triangleTargets'],reverse=True)) + '; UV interpolation, normals exported',
         'normalBakingPerformed':False,'extensions':'source volume/ngon declarations have no active payload or required entry; output uses standard PBR',
         'texturePolicy':'4K blobs preserved exactly; 2K/1K downscaled with Blender Image, base sRGB, ORM/normal Non-Color',
-        'sourceTopology':source_topology,'variants':variants}
+        'sourceTopology':source_topology,'cleanup':cleanup_report,'variants':variants}
 (reports/'optimization.json').write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8')
 print('OPTIMIZATION_COMPLETE',result['seconds'],flush=True)

@@ -1,0 +1,99 @@
+{
+  "passed": true,
+  "tolerance": {
+    "trianglesRelative": 0.005,
+    "fileBytesRelative": 0.001,
+    "dimensionsMeters": 0.02,
+    "textureHashes": "exact"
+  },
+  "comparisons": [
+    {
+      "asset": "A1",
+      "lod": "20k-2k",
+      "firstTriangles": 20000,
+      "repeatedTriangles": 20000,
+      "firstBytes": 6329440,
+      "repeatedBytes": 6329440,
+      "byteIdentical": false,
+      "textureHashesIdentical": true,
+      "passed": true
+    },
+    {
+      "asset": "A1",
+      "lod": "10k-1k",
+      "firstTriangles": 10000,
+      "repeatedTriangles": 10000,
+      "firstBytes": 2187824,
+      "repeatedBytes": 2187824,
+      "byteIdentical": true,
+      "textureHashesIdentical": true,
+      "passed": true
+    },
+    {
+      "asset": "A2",
+      "lod": "20k-2k",
+      "firstTriangles": 20000,
+      "repeatedTriangles": 20000,
+      "firstBytes": 5896304,
+      "repeatedBytes": 5896304,
+      "byteIdentical": false,
+      "textureHashesIdentical": true,
+      "passed": true
+    },
+    {
+      "asset": "A2",
+      "lod": "10k-1k",
+      "firstTriangles": 10000,
+      "repeatedTriangles": 10000,
+      "firstBytes": 2081916,
+      "repeatedBytes": 2081916,
+      "byteIdentical": true,
+      "textureHashesIdentical": true,
+      "passed": true
+    },
+    {
+      "asset": "A3",
+      "lod": "20k-2k",
+      "firstTriangles": 20000,
+      "repeatedTriangles": 20000,
+      "firstBytes": 5700644,
+      "repeatedBytes": 5700644,
+      "byteIdentical": false,
+      "textureHashesIdentical": true,
+      "passed": true
+    },
+    {
+      "asset": "A3",
+      "lod": "10k-1k",
+      "firstTriangles": 10000,
+      "repeatedTriangles": 10000,
+      "firstBytes": 2016088,
+      "repeatedBytes": 2016088,
+      "byteIdentical": true,
+      "textureHashesIdentical": true,
+      "passed": true
+    },
+    {
+      "asset": "A4",
+      "lod": "20k-2k",
+      "firstTriangles": 20000,
+      "repeatedTriangles": 20000,
+      "firstBytes": 5824532,
+      "repeatedBytes": 5824532,
+      "byteIdentical": false,
+      "textureHashesIdentical": true,
+      "passed": true
+    },
+    {
+      "asset": "A4",
+      "lod": "10k-1k",
+      "firstTriangles": 10000,
+      "repeatedTriangles": 10000,
+      "firstBytes": 2021284,
+      "repeatedBytes": 2021284,
+      "byteIdentical": true,
+      "textureHashesIdentical": true,
+      "passed": true
+    }
+  ]
+}

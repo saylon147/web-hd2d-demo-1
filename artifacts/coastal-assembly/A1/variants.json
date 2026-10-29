@@ -1,0 +1,669 @@
+{
+  "schemaVersion": 1,
+  "approval": "experimental-awaiting-human",
+  "sourceSha256": "2a1a9977d08b1a1db1b3981094a4fdd22acda418c5cf907ba966743a41de4805",
+  "defaultVariant": "10k-1k",
+  "runtimeWidthM": 5.8,
+  "placement": [
+    0,
+    0,
+    0
+  ],
+  "rotationYDegrees": 0,
+  "lighting": {
+    "hemisphere": 1.05,
+    "sun": 2,
+    "exposure": 1
+  },
+  "inspectionCamera": {
+    "target": [
+      0,
+      1,
+      0
+    ],
+    "pitch": 42,
+    "distance": 15,
+    "fov": 35,
+    "frontYaw": 35,
+    "sideYaw": 125,
+    "backYaw": 215
+  },
+  "performance": {
+    "warmupFrames": 60,
+    "sampleFrames": 120
+  },
+  "variants": [
+    {
+      "id": "original-4k",
+      "trianglesTarget": 1992384,
+      "textureLimit": 4096,
+      "original": true,
+      "modelUrl": "/assets/models/coastal-assembly/A1/rock-original-4k.glb",
+      "input": "D:\\web-hd2d-demo-1\\public\\assets\\models\\coastal-assembly\\A1\\rock-original-4k.glb",
+      "fileBytes": 74232204,
+      "sha256": "2a1a9977d08b1a1db1b3981094a4fdd22acda418c5cf907ba966743a41de4805",
+      "asset": {
+        "version": "2.0",
+        "generator": "Tripo"
+      },
+      "nodes": [
+        {
+          "name": "tripo_node_b60ff73b-11f8-46e9-93e7-f527ad5c2cb6",
+          "mesh": 0
+        }
+      ],
+      "meshes": 1,
+      "primitives": [
+        {
+          "mode": 4,
+          "vertices": 1032463,
+          "triangles": 1992384,
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1,
+            "TEXCOORD_0": 2
+          },
+          "material": 0,
+          "positionBounds": [
+            [
+              -0.489501953125,
+              0.0,
+              -0.48919677734375
+            ],
+            [
+              0.489501953125,
+              0.55316162109375,
+              0.48919677734375
+            ]
+          ]
+        }
+      ],
+      "triangleCount": 1992384,
+      "images": [
+        {
+          "name": "rock_formation_3d_model_basecolor.jpg",
+          "mimeType": "image/jpeg",
+          "bytes": 5681914,
+          "dimensions": [
+            4096,
+            4096
+          ],
+          "sha256": "823dd5911c2d595a421cc3cbfd629d2cafb07db0ab949865033eec9e56afaf2e"
+        },
+        {
+          "name": "rock_formation_3d_model_rm.jpg",
+          "mimeType": "image/jpeg",
+          "bytes": 1868342,
+          "dimensions": [
+            4096,
+            4096
+          ],
+          "sha256": "cda9bf4d7d33dfbb2073da6af5a39d562765d39ca470fc31da9fbd467af20c97"
+        },
+        {
+          "name": "rock_formation_3d_model_normal.png",
+          "mimeType": "image/png",
+          "bytes": 9732505,
+          "dimensions": [
+            4096,
+            4096
+          ],
+          "sha256": "39a9d92af5b2eeb6f8c870bd81f0fe232a6c7ff97fc2be4a6555c7c6aa6f8cd3"
+        }
+      ],
+      "materials": [
+        {
+          "name": "tripo_material_b60ff73b-11f8-46e9-93e7-f527ad5c2cb6",
+          "pbrMetallicRoughness": {
+            "baseColorTexture": {
+              "index": 0
+            },
+            "metallicRoughnessTexture": {
+              "index": 1
+            }
+          },
+          "normalTexture": {
+            "index": 2
+          }
+        }
+      ],
+      "textures": [
+        {
+          "source": 0,
+          "sampler": 0
+        },
+        {
+          "source": 1,
+          "sampler": 1
+        },
+        {
+          "source": 2,
+          "sampler": 2
+        }
+      ],
+      "extensionsUsed": [
+        "KHR_materials_volume",
+        "FB_ngon_encoding"
+      ],
+      "extensionsRequired": [],
+      "gpuTextureRgbaMipEstimateBytes": 268435456.0,
+      "gpuEstimateDefinition": "RGBA8 plus complete mip chain; excludes geometry/framebuffer; browser allocation may differ"
+    },
+    {
+      "id": "20k-2k",
+      "trianglesTarget": 20000,
+      "textureLimit": 2048,
+      "targetDeviation": 0,
+      "modelUrl": "/assets/models/coastal-assembly/A1/rock-20k-2k.glb",
+      "topology": {
+        "vertices": 9990,
+        "edges": 30000,
+        "faces": 20000,
+        "boundaryEdges": 0,
+        "nonmanifoldEdges": 0,
+        "looseVertices": 0,
+        "zeroAreaFaces": 0,
+        "connectedShellCount": 1,
+        "largestShellVertexCounts": [
+          9990
+        ],
+        "signedVolumeM3": 32.698842994302396,
+        "hiddenFacesAssessment": "Topology only; enclosed/intersecting/internal sheets cannot be reliably classified without an expensive solid analysis. Front/back renders are required."
+      },
+      "input": "D:\\web-hd2d-demo-1\\public\\assets\\models\\coastal-assembly\\A1\\rock-20k-2k.glb",
+      "fileBytes": 6329440,
+      "sha256": "d4416ba1f7632d28a47b3a90eec888d7a41f4a3ddc31c283ec697dd599b5a28f",
+      "asset": {
+        "generator": "Khronos glTF Blender I/O v5.2.40",
+        "version": "2.0"
+      },
+      "nodes": [
+        {
+          "mesh": 0,
+          "name": "Coastal_Rock_20000"
+        }
+      ],
+      "meshes": 1,
+      "primitives": [
+        {
+          "mode": 4,
+          "vertices": 14860,
+          "triangles": 20000,
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1,
+            "TEXCOORD_0": 2,
+            "TANGENT": 3
+          },
+          "material": 0,
+          "positionBounds": [
+            [
+              -2.9042863845825195,
+              0.0001916144829010591,
+              -2.8989129066467285
+            ],
+            [
+              2.902052402496338,
+              3.278381824493408,
+              2.900059461593628
+            ]
+          ]
+        }
+      ],
+      "triangleCount": 20000,
+      "images": [
+        {
+          "name": "rock_0_2048",
+          "mimeType": "image/jpeg",
+          "bytes": 1181109,
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "sha256": "909c768ffcb1f3775b47c34bff7192cf5a652bd6b2f3c09227806db689726ade"
+        },
+        {
+          "name": "rock_1_2048",
+          "mimeType": "image/jpeg",
+          "bytes": 359373,
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "sha256": "d3b40076a63df1337f30e25dbfcbb54bb05856e0532799458000ae24f244cc0b"
+        },
+        {
+          "name": "rock_2_2048",
+          "mimeType": "image/png",
+          "bytes": 3953791,
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "sha256": "538a5e685bad99719bce5887ec20a09fc8bf425d1d1c77acf58441c61bb60bed"
+        }
+      ],
+      "materials": [
+        {
+          "name": "tripo_material_b60ff73b-11f8-46e9-93e7-f527ad5c2cb6",
+          "pbrMetallicRoughness": {
+            "baseColorTexture": {
+              "index": 0
+            },
+            "metallicRoughnessTexture": {
+              "index": 1
+            }
+          },
+          "normalTexture": {
+            "index": 2
+          }
+        }
+      ],
+      "textures": [
+        {
+          "source": 0,
+          "sampler": 0
+        },
+        {
+          "source": 1,
+          "sampler": 1
+        },
+        {
+          "source": 2,
+          "sampler": 2
+        }
+      ],
+      "extensionsUsed": [],
+      "extensionsRequired": [],
+      "gpuTextureRgbaMipEstimateBytes": 67108864.0,
+      "gpuEstimateDefinition": "RGBA8 plus complete mip chain; excludes geometry/framebuffer; browser allocation may differ"
+    },
+    {
+      "id": "20k-1k",
+      "trianglesTarget": 20000,
+      "textureLimit": 1024,
+      "targetDeviation": 0,
+      "modelUrl": "/assets/models/coastal-assembly/A1/rock-20k-1k.glb",
+      "topology": {
+        "vertices": 9990,
+        "edges": 30000,
+        "faces": 20000,
+        "boundaryEdges": 0,
+        "nonmanifoldEdges": 0,
+        "looseVertices": 0,
+        "zeroAreaFaces": 0,
+        "connectedShellCount": 1,
+        "largestShellVertexCounts": [
+          9990
+        ],
+        "signedVolumeM3": 32.698842994302396,
+        "hiddenFacesAssessment": "Topology only; enclosed/intersecting/internal sheets cannot be reliably classified without an expensive solid analysis. Front/back renders are required."
+      },
+      "input": "D:\\web-hd2d-demo-1\\public\\assets\\models\\coastal-assembly\\A1\\rock-20k-1k.glb",
+      "fileBytes": 2558396,
+      "sha256": "7c52a455a3efd78cda833de8e127ce420ff6c5d538be3d9209b2c4b0521585a9",
+      "asset": {
+        "generator": "Khronos glTF Blender I/O v5.2.40",
+        "version": "2.0"
+      },
+      "nodes": [
+        {
+          "mesh": 0,
+          "name": "Coastal_Rock_20000"
+        }
+      ],
+      "meshes": 1,
+      "primitives": [
+        {
+          "mode": 4,
+          "vertices": 14860,
+          "triangles": 20000,
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1,
+            "TEXCOORD_0": 2,
+            "TANGENT": 3
+          },
+          "material": 0,
+          "positionBounds": [
+            [
+              -2.9042863845825195,
+              0.0001916144829010591,
+              -2.8989129066467285
+            ],
+            [
+              2.902052402496338,
+              3.278381824493408,
+              2.900059461593628
+            ]
+          ]
+        }
+      ],
+      "triangleCount": 20000,
+      "images": [
+        {
+          "name": "rock_0_1024",
+          "mimeType": "image/jpeg",
+          "bytes": 377786,
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "sha256": "a75c5232375ee14ae6b50a43f6fcfba37483189ee974eda86bee21b9723619d0"
+        },
+        {
+          "name": "rock_1_1024",
+          "mimeType": "image/jpeg",
+          "bytes": 119318,
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "sha256": "073f72fb4cd5a84c5964f5ac6dcff56983c07da0cf12ce99a4714e449456418c"
+        },
+        {
+          "name": "rock_2_1024",
+          "mimeType": "image/png",
+          "bytes": 1226127,
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "sha256": "33ef3d821e5c99dca46cbad54e70a904be8dc2a2c205be7c588664abc9644dd5"
+        }
+      ],
+      "materials": [
+        {
+          "name": "tripo_material_b60ff73b-11f8-46e9-93e7-f527ad5c2cb6",
+          "pbrMetallicRoughness": {
+            "baseColorTexture": {
+              "index": 0
+            },
+            "metallicRoughnessTexture": {
+              "index": 1
+            }
+          },
+          "normalTexture": {
+            "index": 2
+          }
+        }
+      ],
+      "textures": [
+        {
+          "source": 0,
+          "sampler": 0
+        },
+        {
+          "source": 1,
+          "sampler": 1
+        },
+        {
+          "source": 2,
+          "sampler": 2
+        }
+      ],
+      "extensionsUsed": [],
+      "extensionsRequired": [],
+      "gpuTextureRgbaMipEstimateBytes": 16777216.0,
+      "gpuEstimateDefinition": "RGBA8 plus complete mip chain; excludes geometry/framebuffer; browser allocation may differ"
+    },
+    {
+      "id": "10k-2k",
+      "trianglesTarget": 10000,
+      "textureLimit": 2048,
+      "targetDeviation": 0,
+      "modelUrl": "/assets/models/coastal-assembly/A1/rock-10k-2k.glb",
+      "topology": {
+        "vertices": 4990,
+        "edges": 15000,
+        "faces": 10000,
+        "boundaryEdges": 0,
+        "nonmanifoldEdges": 0,
+        "looseVertices": 0,
+        "zeroAreaFaces": 0,
+        "connectedShellCount": 1,
+        "largestShellVertexCounts": [
+          4990
+        ],
+        "signedVolumeM3": 32.64007219563985,
+        "hiddenFacesAssessment": "Topology only; enclosed/intersecting/internal sheets cannot be reliably classified without an expensive solid analysis. Front/back renders are required."
+      },
+      "input": "D:\\web-hd2d-demo-1\\public\\assets\\models\\coastal-assembly\\A1\\rock-10k-2k.glb",
+      "fileBytes": 5958872,
+      "sha256": "1d3ddb3ad7599e12c3a254c42cd6946a956c19965a04ca91dc46c6b0e6d7b856",
+      "asset": {
+        "generator": "Khronos glTF Blender I/O v5.2.40",
+        "version": "2.0"
+      },
+      "nodes": [
+        {
+          "mesh": 0,
+          "name": "Coastal_Rock_10000"
+        }
+      ],
+      "meshes": 1,
+      "primitives": [
+        {
+          "mode": 4,
+          "vertices": 8390,
+          "triangles": 10000,
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1,
+            "TEXCOORD_0": 2,
+            "TANGENT": 3
+          },
+          "material": 0,
+          "positionBounds": [
+            [
+              -2.89813232421875,
+              0.00041291097295470536,
+              -2.895963191986084
+            ],
+            [
+              2.895824670791626,
+              3.278381824493408,
+              2.900059461593628
+            ]
+          ]
+        }
+      ],
+      "triangleCount": 10000,
+      "images": [
+        {
+          "name": "rock_0_2048",
+          "mimeType": "image/jpeg",
+          "bytes": 1181109,
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "sha256": "909c768ffcb1f3775b47c34bff7192cf5a652bd6b2f3c09227806db689726ade"
+        },
+        {
+          "name": "rock_1_2048",
+          "mimeType": "image/jpeg",
+          "bytes": 359373,
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "sha256": "d3b40076a63df1337f30e25dbfcbb54bb05856e0532799458000ae24f244cc0b"
+        },
+        {
+          "name": "rock_2_2048",
+          "mimeType": "image/png",
+          "bytes": 3953791,
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "sha256": "538a5e685bad99719bce5887ec20a09fc8bf425d1d1c77acf58441c61bb60bed"
+        }
+      ],
+      "materials": [
+        {
+          "name": "tripo_material_b60ff73b-11f8-46e9-93e7-f527ad5c2cb6",
+          "pbrMetallicRoughness": {
+            "baseColorTexture": {
+              "index": 0
+            },
+            "metallicRoughnessTexture": {
+              "index": 1
+            }
+          },
+          "normalTexture": {
+            "index": 2
+          }
+        }
+      ],
+      "textures": [
+        {
+          "source": 0,
+          "sampler": 0
+        },
+        {
+          "source": 1,
+          "sampler": 1
+        },
+        {
+          "source": 2,
+          "sampler": 2
+        }
+      ],
+      "extensionsUsed": [],
+      "extensionsRequired": [],
+      "gpuTextureRgbaMipEstimateBytes": 67108864.0,
+      "gpuEstimateDefinition": "RGBA8 plus complete mip chain; excludes geometry/framebuffer; browser allocation may differ"
+    },
+    {
+      "id": "10k-1k",
+      "trianglesTarget": 10000,
+      "textureLimit": 1024,
+      "targetDeviation": 0,
+      "modelUrl": "/assets/models/coastal-assembly/A1/rock-10k-1k.glb",
+      "topology": {
+        "vertices": 4990,
+        "edges": 15000,
+        "faces": 10000,
+        "boundaryEdges": 0,
+        "nonmanifoldEdges": 0,
+        "looseVertices": 0,
+        "zeroAreaFaces": 0,
+        "connectedShellCount": 1,
+        "largestShellVertexCounts": [
+          4990
+        ],
+        "signedVolumeM3": 32.64007219563985,
+        "hiddenFacesAssessment": "Topology only; enclosed/intersecting/internal sheets cannot be reliably classified without an expensive solid analysis. Front/back renders are required."
+      },
+      "input": "D:\\web-hd2d-demo-1\\public\\assets\\models\\coastal-assembly\\A1\\rock-10k-1k.glb",
+      "fileBytes": 2187824,
+      "sha256": "622c7df96353f35add8811f14528a09d3cd1cdd86f62667a183c52bdebc67ed5",
+      "asset": {
+        "generator": "Khronos glTF Blender I/O v5.2.40",
+        "version": "2.0"
+      },
+      "nodes": [
+        {
+          "mesh": 0,
+          "name": "Coastal_Rock_10000"
+        }
+      ],
+      "meshes": 1,
+      "primitives": [
+        {
+          "mode": 4,
+          "vertices": 8390,
+          "triangles": 10000,
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1,
+            "TEXCOORD_0": 2,
+            "TANGENT": 3
+          },
+          "material": 0,
+          "positionBounds": [
+            [
+              -2.89813232421875,
+              0.00041291097295470536,
+              -2.895963191986084
+            ],
+            [
+              2.895824670791626,
+              3.278381824493408,
+              2.900059461593628
+            ]
+          ]
+        }
+      ],
+      "triangleCount": 10000,
+      "images": [
+        {
+          "name": "rock_0_1024",
+          "mimeType": "image/jpeg",
+          "bytes": 377786,
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "sha256": "a75c5232375ee14ae6b50a43f6fcfba37483189ee974eda86bee21b9723619d0"
+        },
+        {
+          "name": "rock_1_1024",
+          "mimeType": "image/jpeg",
+          "bytes": 119318,
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "sha256": "073f72fb4cd5a84c5964f5ac6dcff56983c07da0cf12ce99a4714e449456418c"
+        },
+        {
+          "name": "rock_2_1024",
+          "mimeType": "image/png",
+          "bytes": 1226127,
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "sha256": "33ef3d821e5c99dca46cbad54e70a904be8dc2a2c205be7c588664abc9644dd5"
+        }
+      ],
+      "materials": [
+        {
+          "name": "tripo_material_b60ff73b-11f8-46e9-93e7-f527ad5c2cb6",
+          "pbrMetallicRoughness": {
+            "baseColorTexture": {
+              "index": 0
+            },
+            "metallicRoughnessTexture": {
+              "index": 1
+            }
+          },
+          "normalTexture": {
+            "index": 2
+          }
+        }
+      ],
+      "textures": [
+        {
+          "source": 0,
+          "sampler": 0
+        },
+        {
+          "source": 1,
+          "sampler": 1
+        },
+        {
+          "source": 2,
+          "sampler": 2
+        }
+      ],
+      "extensionsUsed": [],
+      "extensionsRequired": [],
+      "gpuTextureRgbaMipEstimateBytes": 16777216.0,
+      "gpuEstimateDefinition": "RGBA8 plus complete mip chain; excludes geometry/framebuffer; browser allocation may differ"
+    }
+  ]
+}

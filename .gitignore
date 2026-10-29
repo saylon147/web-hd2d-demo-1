@@ -19,3 +19,12 @@ __pycache__/
 /artifacts/tripo-rock/*.log
 /artifacts/tripo-rock/texture-cache/
 /artifacts/tripo-rock/geometry-cache/
+# M2.2 local high/low meshes and Blender/texture intermediates.
+/art-source/tripo/coastal-optimized/**/*.blend
+/art-source/tripo/coastal-optimized/**/*.glb
+/public/assets/models/coastal-assembly/**/*.glb
+/artifacts/coastal-assembly/**/*.glb
+/artifacts/coastal-assembly/**/*.blend
+/artifacts/coastal-assembly/**/*.log
+/artifacts/coastal-assembly/**/texture-cache/
+/artifacts/coastal-assembly/**/geometry-cache/
