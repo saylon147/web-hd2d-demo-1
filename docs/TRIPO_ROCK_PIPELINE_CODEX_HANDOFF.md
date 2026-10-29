@@ -12,7 +12,7 @@ Validate whether a Tripo image-to-3D rock asset can be optimized automatically a
 - 1 mesh / 1 primitive / 1 material / 3 embedded texture images (base color JPEG, roughness-metallic JPEG, normal PNG).
 - 1,000,691 vertex positions; **1,944,098 triangles** (index count 5,832,294).
 - Extensions reported: `KHR_materials_volume`, `FB_ngon_encoding`; validate compatibility and fallback handling before processing.
-- Input file is currently attached to the ChatGPT conversation, **not committed to the repository**. Codex must request or locate a local copy from the project owner, e.g. `art-source/tripo/inbox/mediterranean_coastal_rock_01.glb`. Do not pretend the file is already in Git. Add local inbox, source GLBs and generated binary exports to `.gitignore` as appropriate; do not push 66 MB original into normal Git history.
+- The owner will place the downloaded GLB directly in the local repository at **`art-source/tripo/inbox/rocky pyramid 3d model.glb`**. Codex should read this exact path; no chat attachment is necessary. Create the directory if absent and commit a `.gitkeep` to preserve it in Git. Add `art-source/tripo/inbox/*.glb` and generated binary exports to `.gitignore` (preserve `.gitkeep`); do not push the ~66 MB original into normal Git history. Fail with an explicit error and expected path if the file is absent. Optionally accept a configurable input path while using this location as default.
 
 ## Constraints
 1. Preserve the original GLB unmodified; all transforms run on copies.
@@ -68,7 +68,7 @@ Initial targets (hypotheses, **not** guaranteed):
 - A concise manual QA checklist for visual judgment.
 
 ## Owner action
-Copy the downloaded Tripo GLB into the documented local inbox path and provide it to Codex running on the PC. No Blender UI operations are required from the owner.
+Copy the downloaded Tripo GLB into the checked-out repository at **`art-source/tripo/inbox/rocky pyramid 3d model.glb`**. Then tell Codex to run the pipeline. Do not upload the binary to Codex chat or GitHub. No Blender UI operations are required from the owner.
 
 ## Important
 This is a **pipeline feasibility spike**, not authorization to mass-generate rocks, remodel the island, buy more credits or merge the current M2.1 corrective branch. Report results before expanding to other asset categories.
