@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "id": "island_cottage_blockout_v2",
+  "lighting": {
+    "hemisphere": 1.05,
+    "sun": 2,
+    "basementFill": 1.5,
+    "exposure": 1,
+    "blenderWorld": 0.45,
+    "blenderSun": 1.8
+  },
+  "approval": "placeholder-awaiting-human",
+  "modelUrl": "/assets/models/island_cottage_blockout_v2.glb",
+  "axisUrl": "/assets/models/axis_test_02.glb",
+  "modelSha256": "2992f132f2c6f852475568074c5481dc0730a0667e369bbc54c18779df32c51d",
+  "units": "meters",
+  "upAxis": "Y",
+  "metrics": {
+    "landAreaM2": 333.21000000000004,
+    "houseAreaM2": 36,
+    "landRatio": 9.255833333333335,
+    "groundHeight": 2.7,
+    "basementHeight": 2.4000000000000004,
+    "courtyardAreaM2": 19.5
+  },
+  "views": {
+    "exterior": {
+      "target": {
+        "x": 0,
+        "y": 3.4,
+        "z": 3
+      },
+      "baseYaw": 35,
+      "yawOffset": 0,
+      "pitch": 42,
+      "distance": 40,
+      "fov": 35
+    },
+    "ground-floor": {
+      "target": {
+        "x": 2,
+        "y": 4.8,
+        "z": -1
+      },
+      "baseYaw": 35,
+      "yawOffset": 0,
+      "pitch": 55,
+      "distance": 15,
+      "fov": 35
+    },
+    "basement": {
+      "target": {
+        "x": 2,
+        "y": 2,
+        "z": -0.8
+      },
+      "baseYaw": 35,
+      "yawOffset": 0,
+      "pitch": 50,
+      "distance": 16,
+      "fov": 35
+    }
+  },
+  "requiredNodes": [
+    "IslandRoot",
+    "Terrain",
+    "TerrainExterior",
+    "TerrainSection",
+    "Shoreline",
+    "Water",
+    "Pier",
+    "Garden",
+    "Terrace",
+    "Paths",
+    "CottageRoot",
+    "Roof",
+    "ExteriorWalls",
+    "GroundFloor",
+    "GroundFloor_Structure",
+    "GroundFloor_InteriorWalls",
+    "GF_Interior_Full",
+    "GF_Interior_Cutaway",
+    "GroundFloor_Furniture",
+    "StairsDown",
+    "Basement",
+    "Basement_Structure",
+    "Basement_BackLeftWalls",
+    "Basement_FrontRightWalls",
+    "Basement_InteriorWalls",
+    "BS_Interior_Full",
+    "BS_Interior_Cutaway",
+    "Basement_Furniture",
+    "StairsUp",
+    "Exterior_Front",
+    "Exterior_Right",
+    "Exterior_Back",
+    "Exterior_Left"
+  ],
+  "modeHidden": {
+    "exterior": [
+      "TerrainSection",
+      "GF_Interior_Cutaway",
+      "BS_Interior_Cutaway"
+    ],
+    "ground-floor": [
+      "TerrainSection",
+      "Roof",
+      "Exterior_Front",
+      "Exterior_Right",
+      "GF_Interior_Full",
+      "Basement"
+    ],
+    "basement": [
+      "TerrainExterior",
+      "Roof",
+      "ExteriorWalls",
+      "GroundFloor_Structure",
+      "GroundFloor_InteriorWalls",
+      "GroundFloor_Furniture",
+      "Garden",
+      "Terrace",
+      "Paths",
+      "Shoreline",
+      "Pier",
+      "GF_Interior_Full",
+      "GF_Interior_Cutaway",
+      "BS_Interior_Full",
+      "Basement_FrontRightWalls"
+    ]
+  }
+}

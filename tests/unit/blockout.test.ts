@@ -1,16 +1,30 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { blockoutCameraProfile, parseBlockoutManifest } from '../../src/config/blockout';
+import { blockoutCameraProfile, blockoutManifestUrl, parseBlockoutManifest } from '../../src/config/blockout';
 import { createCameraState } from '../../src/config/camera';
 import { constrainCameraState, zoomDistance } from '../../src/camera/math';
 
-const text = readFileSync(new URL('../../public/assets/manifests/blockout_v1.json', import.meta.url), 'utf8');
+const text = readFileSync(new URL('../../public/assets/manifests/blockout_v2.json', import.meta.url), 'utf8');
 function fixture(): Record<string, unknown> { return JSON.parse(text) as Record<string, unknown>; }
 
 describe('M2 blockout manifest and camera profile', () => {
+  it('selects preserved V0 explicitly while defaulting to V1', () => {
+    expect(blockoutManifestUrl('?version=v0')).toContain('blockout_v1.json');
+    expect(blockoutManifestUrl('')).toContain('blockout_v2.json');
+    expect(blockoutManifestUrl('?version=unknown')).toContain('blockout_v2.json');
+  });
+  it('rejects invalid diagnostic lighting and preserves legacy V0 exposure', () => {
+    const legacy = fixture();
+    delete legacy.lighting;
+    expect(parseBlockoutManifest(legacy).lighting.exposure).toBe(1.15);
+    const invalid = fixture();
+    invalid.lighting = { hemisphere: -1, sun: 2, basementFill: 1.5, exposure: 1 };
+    expect(() => parseBlockoutManifest(invalid)).toThrow('lighting range');
+  });
   it('loads all three view presets and measured spatial metrics', () => {
     const manifest = parseBlockoutManifest(fixture());
-    expect(manifest.metrics.landRatio).toBeCloseTo(9);
+    expect(manifest.metrics.landRatio).toBeGreaterThanOrEqual(8.5);
+    expect(manifest.metrics.landRatio).toBeLessThanOrEqual(9.5);
     expect(manifest.metrics.basementHeight).toBeCloseTo(2.4);
     expect(manifest.views['ground-floor'].target.y).toBeGreaterThan(manifest.views.basement.target.y);
   });

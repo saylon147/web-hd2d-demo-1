@@ -1,31 +1,38 @@
 # M2 acceptance gates
 
-## M2.1 — blockout
-- [x] Blender 5.2.1 Python script reproducibly generates island and house.
-- [x] Island land area approximately nine times cottage footprint; parameter documented.
-- [x] Single above-ground storey and one plausible basement embedded in rock.
-- [x] Ground floor and basement rooms fit and connect via viable internal stairs (candidate layout; routes/headroom checked).
-- [x] Beach, pier, stairs, garden and main paths spatially coherent (blockout supplied for visual approval).
-- [x] GLB exports with independently addressable roof/ground floor/basement groups.
-- [x] Three.js loads scene and preserves M1 camera controls.
-- [x] Exterior, ground-floor cutaway, basement cutaway and browser screenshots supplied.
-- [ ] Human approval recorded before M2.2.
+Current status (2026-10-29): **M2.1 V0 visually rejected; V1 corrective candidate submitted for human review.** Engineering success does not approve silhouette or art. [V1 handoff](M2_1_V1_HANDOFF.md), [review requirements](M2_1_REVIEW.md).
 
-Evidence and limitations: [M2.1 handoff](M2_1_HANDOFF.md). Engineering checks passed on 2026-10-28: lint, strict typecheck/build, 24 unit tests, 11 browser tests (including 7 M1 regressions), 54 asset/spatial checks. Repeated generation produced an identical GLB hash. These checks do not approve the layout or aesthetics. Review island/house ratio, courtyard space, basement height and the rear-left U stair before continuing.
+## M2.1 V1 corrective pass
 
-## M2.2 — cottage
+- [x] Preserve original V0 parameters, Blender/GLB assets and screenshots; explicit Web comparison URL.
+- [x] Replace tiered prisms with one irregular multi-ring coastal mesh, actual basement excavation and tread recesses.
+- [x] Lower site/house elevations, roof rise and eaves; retain one above-ground storey + one basement.
+- [x] Report connected, nonoverlapping surface union and 8.5–9.5× range; no exact-target rescaling.
+- [x] Correct bedroom/bath access; annotate net dimensions, wall openings, swings, shared circulation and U-stair route.
+- [x] Retain three Three.js modes and M1 camera/touch/resize behavior.
+- [x] Restrained diagnostic palette/lighting; actual Web views and Blender physical section provided.
+- [x] Fixed-camera V0/V1 exterior, reference crop with perspective caveat, plans, survey and section committed.
+- [x] Lint, strict typecheck/build, 26 unit tests, 11 browser tests, 70 asset/spatial checks and repeated GLB export pass.
+- [ ] Human agrees island silhouette, cottage/site proportions and compact-room plan are acceptable.
+- [ ] Human explicitly approves M2.1 before M2.2.
+
+The natural cliff shape, density and proportions remain visual decisions. The plan is a compact single-occupant candidate; door swings are schematic, basement zones partly open, and there is no gameplay collision/navigation implementation or architectural certification.
+
+## M2.2 — cottage (not started)
+
 - [ ] Approved clay silhouette.
 - [ ] Material/albedo references reviewed.
 - [ ] Blender beauty and Web runtime images compared.
 - [ ] Cottage designated as approved master asset.
 
-## M2.3 — environment
+## M2.3 — environment (not started)
+
 - [ ] Approved master assets for rocks, stairs, vegetation and pier.
 - [ ] Variations are seeded, reusable and stylistically consistent.
-- [ ] Any AI-generated textures have provenance and licensing notes.
+- [ ] AI texture provenance/licensing recorded if used.
 
-## M2.4 — final assembly
-- [ ] Island exterior and two interior inspection modes work.
-- [ ] Visual differences and known limitations documented.
-- [ ] Typecheck/build pass; browser performance measured.
-- [ ] User approves final M2 before M3 begins.
+## M2.4 — final assembly (not started)
+
+- [ ] Island exterior and two interior inspection modes work with approved art.
+- [ ] Visual differences, performance statistics and platform limitations documented.
+- [ ] Typecheck/build pass and user approves M2 before M3.

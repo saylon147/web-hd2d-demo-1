@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "command": "npm run assets:reproduce",
+  "parameters": "art-source/parameters/island_cottage_v2.json",
+  "runs": [
+    {
+      "run": 1,
+      "sha256": "2992f132f2c6f852475568074c5481dc0730a0667e369bbc54c18779df32c51d"
+    },
+    {
+      "run": 2,
+      "sha256": "2992f132f2c6f852475568074c5481dc0730a0667e369bbc54c18779df32c51d"
+    }
+  ],
+  "blendByteEqualityClaimed": false
+}

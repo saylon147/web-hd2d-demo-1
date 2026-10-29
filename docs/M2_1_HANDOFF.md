@@ -1,5 +1,8 @@
 # M2.1 空间白模交付 — 待人工确认
 
+Historical V0 handoff. **V0 was visually rejected on 2026-10-29**; original evidence/assets are preserved. Current corrective submission: [M2.1 V1 handoff](M2_1_V1_HANDOFF.md). The dimensions and approval request below are the original V0 record.
+
+
 日期：2026-10-28。当前只完成空间白模候选版；M2.2 尚未开始。正式参考为用户提供的本地 `docs/references/golden-reference-v1.png`，来源与哈希见 [Golden Reference V1](GOLDEN_REFERENCE_V1.md)。参考方向用于构图与空间比较，概念剖视没有直接作为施工尺寸图。
 
 ## 可运行结果

@@ -1,5 +1,8 @@
 # M2 art production and review pipeline
 
+M2.1 V1 means the corrective blockout iteration, **not** an albedo/art pass. It uses diagnostic colors only, under `docs/screenshots/m2.1-v1/`; V0 screenshots are retained in `m2.1/`. Current evidence and limitations: [V1 handoff](M2_1_V1_HANDOFF.md). No textures, beauty pass or ComfyUI have started.
+
+
 ## Core principle
 AI concept image → human-approved design → Blender parametric geometry → UV/material textures → GLB → Three.js screenshot → human visual review.
 

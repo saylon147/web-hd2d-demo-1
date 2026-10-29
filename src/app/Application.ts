@@ -71,6 +71,10 @@ export class Application {
       }, options);
     }
     if (this.blockout) {
+      this.renderer.toneMappingExposure = this.blockout.manifest.lighting.exposure;
+      this.shell.canvas.dataset.version = this.blockout.manifest.id;
+      this.shell.canvas.dataset.modelHash = this.blockout.manifest.modelSha256;
+      this.shell.viewport.querySelector('.placeholder-badge')!.textContent = `${this.blockout.manifest.id.endsWith('v2') ? 'V1 修正版' : 'V0 对比版'} · 一层 + 地下室 · 占位待确认`;
       const metrics = this.blockout.manifest.metrics;
       this.shell.metrics.textContent = `陆地 ${metrics.landAreaM2.toFixed(0)}㎡ / 小屋 ${metrics.houseAreaM2.toFixed(0)}㎡\n面积比 ${metrics.landRatio.toFixed(2)}× · 庭院 ${metrics.courtyardAreaM2.toFixed(1)}㎡`;
       const queryMode = new URLSearchParams(window.location.search).get('view');

@@ -1,65 +1,47 @@
-# Web HD-2D Demo 1
+# HD-2D Web visual study
 
-A browser visual prototype combining stylized 3D environments with future pixel-art 2D characters. Current default is **M2.1 island/cottage spatial blockout**, awaiting user approval. All current geometry/materials are placeholders. Detailed art and characters have not started.
+**M2.1 V1 corrective candidate is ready for human review. M2.2 has not started.** V0 was visually rejected and remains available for comparison. All current geometry, furniture, vegetation and materials are placeholders.
 
-## Run locally
+## Run
 
-Requires Node.js 22.12+ (Node 24 recommended), npm and a WebGL2 browser. Blender is required only to regenerate source assets; committed GLBs run without it.
+Node.js 22.12+ (24 recommended), npm and a WebGL2 browser:
 
 ```sh
 npm install
 npm run dev
 ```
 
-Open <http://127.0.0.1:5173/> for M2.1, or <http://127.0.0.1:5173/?scene=foundation> for the original M1 camera calibration. To access from another device use `npm run dev -- --host 0.0.0.0` and the computer's LAN address.
+Open <http://127.0.0.1:5173/> for V1; <http://127.0.0.1:5173/?version=v0> for V0; <http://127.0.0.1:5173/?scene=foundation> for M1. Add `&view=ground-floor` or `&view=basement` to a version URL for a cutaway. Committed GLBs require neither Blender nor the Golden Reference. For LAN access use `npm run dev -- --host 0.0.0.0`.
+
+Drag / one-finger drag rotates within pitch 30–55° and yaw ±45°. Wheel / two-finger pinch zooms. Buttons switch exterior, ground-floor and basement views; reset returns to the current mode preset. Debug exposes target/camera/grid/axes. M2 distance 8–45 m; M1 8–25 m. Units are meters, +Y up; house entrance faces +Z.
+
+V1 retains a 6×6 m single-storey cottage and basement, lowers ground/plateau Y to 4.00 / 3.80 m, basement floor Y=1.20 m, clear heights 2.70 / 2.40 m, and bottom clearance 1.00 m above sea. Connected usable land projection plus occupied house pad is 333.21 m² / 36 m² = 9.26×. Area method and compact-room limitations: [spatial contract](docs/M2_SPATIAL_SPEC.md).
+
+## Generate and verify
+
+Blender **5.2.1 LTS**, using its embedded Python, is required only for regeneration. The wrapper discovers `C:/Program Files/Blender Foundation/Blender 5.2/blender.exe`, otherwise use `BLENDER_PATH` or Blender on PATH.
+
+```powershell
+$env:BLENDER_PATH = 'C:\Program Files\Blender Foundation\Blender 5.2\blender.exe'
+npm run assets:blockout
+npm run assets:reproduce
+npm run assets:validate
+```
+
+Default parameters: `art-source/parameters/island_cottage_v2.json`; outputs: editable `.blend`, GLB, axis GLB, manifest, spatial report and six Blender views. `npm run assets:blockout -- --skip-renders` skips only images. `-- --params path/to/file.json` selects explicit parameters. The 6×6 interior plan is pinned for this candidate; footprint changes must revise net-room plans as well. Source/exports/presets are separated under `art-source/`, `public/assets/models/`, `public/assets/manifests/`.
+
+V0 generator/validator/comparison code is archived in `scripts/archive/`; V0 sources and outputs remain unchanged. `npm run assets:blockout:v0` explicitly regenerates historical outputs; it is never invoked by V1 commands. `npm run assets:validate:v0` verifies the original GLB. Normal dev/build/test does not regenerate either version.
 
 ```sh
 npm run lint
 npm run typecheck
 npm test
 npm run build
-npm run preview
-```
-
-Production preview is <http://127.0.0.1:4173/> and requires build first.
-
-## Controls and spatial inspection
-
-- Left mouse drag / one-finger drag: limited yaw and pitch.
-- Wheel / two-finger pinch: smooth zoom.
-- **外景 / 一层剖视 / 地下室剖视**: switch geometry visibility and fixed camera preset.
-- **重置视角**: restore the current mode's target and camera parameters.
-- **调试参数**: camera GUI, grid and axes; initially collapsed on narrow portrait screens.
-- Pitch 30–55°, yaw offset ±45°, vertical FOV 35°. M2 distance 8–45 m; M1 retains 8–25 m and its original 16 m default. There is no free orbit or character movement yet.
-
-The house has one above-ground floor and an embedded basement. Usable land 324 m² / house 36 m² = 9×; courtyard 30.145 m²; floor clear heights 2.70 / 2.40 m. The rear-left U stair is a proposed change from the concept and needs user review.
-
-World scale is 1 unit = 1 m, +Y up, +X right, −Z forward. The cottage entrance faces +Z. See [spatial contract](docs/M2_SPATIAL_SPEC.md) and [camera semantics](docs/CAMERA_SPEC.md).
-
-## Generate and validate M2.1 assets
-
-Blender **5.2.1 LTS** and Python via Blender's embedded interpreter are required. On Windows the wrapper discovers `C:/Program Files/Blender Foundation/Blender 5.2/blender.exe`; otherwise set `BLENDER_PATH` or provide `blender` on PATH.
-
-```powershell
-$env:BLENDER_PATH = 'C:\Program Files\Blender Foundation\Blender 5.2\blender.exe'
-npm run assets:blockout
-npm run assets:validate
-```
-
-Source parameters live in `art-source/parameters/island_cottage_v1.json`; generation writes the `.blend`, GLB, axis-test GLB, typed-manifest data, spatial report and six Blender screenshots. To regenerate only geometry use `npm run assets:blockout -- --skip-renders`. Alternative parameters can be passed with `-- --params path/to/parameters.json`; generated runtime paths must still follow the manifest naming contract.
-
-Editable source: [Blender scene](art-source/blender/island_cottage_blockout_v1.blend), [Python generator](scripts/generate_blockout.py), [parameters](art-source/parameters/island_cottage_v1.json). Runtime exports and presets are under `public/assets/models/` and `public/assets/manifests/`.
-
-## Browser evidence and comparison
-
-```sh
-npm run build
-npx playwright install chromium
 npm run test:browser
 npm run evidence:compare
 ```
 
-Existing Chrome/Edge can be used instead of downloading Chromium:
+Browser evidence uses installed Chrome/Edge or Playwright Chromium:
 
 ```powershell
 $env:PLAYWRIGHT_BROWSER_PATH = 'C:\Program Files\Google\Chrome\Application\chrome.exe'
@@ -67,14 +49,12 @@ npm run test:browser
 npm run evidence:compare
 ```
 
-Browser tests start/stop the production preview, check M1 regressions and M2 modes, and write M2 Web screenshots plus runtime statistics. Historical M1 screenshots remain unchanged; new M1 regression screenshots and traces go to ignored `test-results/`.
+Alternatively run `npx playwright install chromium`. Tests manage production preview at <http://127.0.0.1:4173/>. V1 screenshots/reports go to `docs/screenshots/m2.1-v1/` and `docs/m2.1-v1/`; the newly rendered V0 exterior goes into the V1 comparison folder. Original V0 and M1 evidence is preserved. `evidence:compare` rejects stale Web model hashes and checks V0 preservation against its original commit.
 
-`evidence:compare` needs the user-supplied original at `docs/references/golden-reference-v1.png`, deliberately excluded from Git. A fresh checkout can run/build/test without it. Committed [comparison](docs/screenshots/m2.1/reference-comparison.png), [plan](docs/screenshots/m2.1/floor-plan-check.png) and [height/stair](docs/screenshots/m2.1/height-and-stair-check.png) sheets are available for review. Reference provenance/hash: [Golden Reference V1](docs/GOLDEN_REFERENCE_V1.md).
+The Golden Reference original is intentionally ignored at `docs/references/golden-reference-v1.png`. If present, its recorded hash is checked; if absent, comparison uses the same concept crop from the committed V0 sheet and records that source. Run/build/tests do not depend on it. No new or substituted reference is generated.
 
-## Milestone status and scope
+## Review evidence
 
-M1 completed: [handoff](docs/M1_HANDOFF.md). M2.1 candidate completed: [handoff and measured checks](docs/M2_1_HANDOFF.md), [acceptance gates](docs/M2_ACCEPTANCE.md). Await user confirmation of proportions, courtyard, basement height and stair placement before M2.2 cottage art.
+[Complete V1 handoff](docs/M2_1_V1_HANDOFF.md), [same-camera V0/V1](docs/screenshots/m2.1-v1/v0-v1-exterior.png), [full review sheet](docs/screenshots/m2.1-v1/review-sheet.png), [annotated plans](docs/screenshots/m2.1-v1/annotated-plans.png), [physical section](docs/screenshots/m2.1-v1/annotated-section.png), [acceptance](docs/M2_ACCEPTANCE.md). V0 history: [handoff](docs/M2_1_HANDOFF.md), [review](docs/M2_1_REVIEW.md). Read [PLAN](PLAN.md), [M2 implementation](docs/M2_IMPLEMENTATION.md), [art pipeline](docs/M2_ART_PIPELINE.md), [asset pipeline](docs/ASSET_PIPELINE.md) and [AGENTS](AGENTS.md).
 
-Phase 1 targets Three.js/TypeScript/Vite, constrained perspective, a small diorama, crisp pixel characters and a Blender→GLB pipeline. Current work excludes gameplay, backend, accounts, detailed textures/vegetation and ComfyUI.
-
-Read [PLAN](PLAN.md), [M2 implementation](docs/M2_IMPLEMENTATION.md), [art pipeline](docs/M2_ART_PIPELINE.md), [asset pipeline](docs/ASSET_PIPELINE.md), [character rendering](docs/CHARACTER_RENDERING.md) and [Codex instructions](AGENTS.md).
+**Stop for human confirmation.** No detailed roofing tiles, painted textures, dense foliage, ComfyUI, characters or M2.2 work has started.

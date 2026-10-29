@@ -1,6 +1,6 @@
 import { AxesHelper, Color, DirectionalLight, GridHelper, HemisphereLight, Mesh, PointLight, Scene } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { BLOCKOUT_MANIFEST_URL, parseBlockoutManifest } from '../config/blockout';
+import { blockoutManifestUrl, parseBlockoutManifest } from '../config/blockout';
 import type { BlockoutManifest, ViewMode } from '../config/blockout';
 import type { FoundationWorld } from './foundation';
 import { disposeObject } from '../core/dispose';
@@ -17,7 +17,7 @@ async function response(url: string, signal: AbortSignal): Promise<Response> {
 }
 
 export async function createBlockoutWorld(signal: AbortSignal): Promise<BlockoutWorld> {
-  const manifestResponse = await response(BLOCKOUT_MANIFEST_URL, signal);
+  const manifestResponse = await response(blockoutManifestUrl(), signal);
   const manifest = parseBlockoutManifest(await manifestResponse.json() as unknown);
   const assetResponse = await response(manifest.modelUrl, signal);
   const asset = await new GLTFLoader().parseAsync(await assetResponse.arrayBuffer(), import.meta.env.BASE_URL);
@@ -43,8 +43,8 @@ export async function createBlockoutWorld(signal: AbortSignal): Promise<Blockout
   grid.visible = false;
   const axes = new AxesHelper(2);
   axes.visible = false;
-  scene.add(grid, axes, new HemisphereLight('#fffaf0', '#abb8b9', 2.4));
-  const sun = new DirectionalLight('#fff7e9', 3);
+  scene.add(grid, axes, new HemisphereLight('#fffaf0', '#abb8b9', manifest.lighting.hemisphere));
+  const sun = new DirectionalLight('#fff7e9', manifest.lighting.sun);
   sun.position.set(-8, 15, 10);
   sun.castShadow = true;
   sun.shadow.mapSize.set(2048, 2048);
@@ -55,8 +55,8 @@ export async function createBlockoutWorld(signal: AbortSignal): Promise<Blockout
   sun.shadow.camera.near = 0.5;
   sun.shadow.camera.far = 60;
   sun.shadow.normalBias = 0.03;
-  const interiorFill = new PointLight('#ffffff', 8, 10, 2);
-  interiorFill.position.set(manifest.views.basement.target.x, 4, manifest.views.basement.target.z);
+  const interiorFill = new PointLight('#ffffff', manifest.lighting.basementFill, 10, 2);
+  interiorFill.position.set(manifest.views.basement.target.x, manifest.views.basement.target.y+1, manifest.views.basement.target.z);
   scene.add(sun, interiorFill);
   const world: BlockoutWorld = {
     scene, grid, axes, manifest,

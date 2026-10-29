@@ -4,7 +4,10 @@ import type { CameraProfile, CameraState } from './camera';
 export const VIEW_MODES = ['exterior', 'ground-floor', 'basement'] as const;
 export type ViewMode = typeof VIEW_MODES[number];
 export const VIEW_LABELS: Record<ViewMode, string> = { exterior: '外景', 'ground-floor': '一层剖视', basement: '地下室剖视' };
-export const BLOCKOUT_MANIFEST_URL = `${import.meta.env.BASE_URL}assets/manifests/blockout_v1.json`;
+export function blockoutManifestUrl(search = window.location.search): string {
+  const version = new URLSearchParams(search).get('version') === 'v0' ? 'v1' : 'v2';
+  return `${import.meta.env.BASE_URL}assets/manifests/blockout_${version}.json`;
+}
 
 export interface BlockoutManifest {
   schemaVersion: 1;
@@ -13,6 +16,7 @@ export interface BlockoutManifest {
   modelUrl: string;
   axisUrl: string;
   modelSha256: string;
+  lighting: { hemisphere: number; sun: number; basementFill: number; exposure: number };
   metrics: { landAreaM2: number; houseAreaM2: number; landRatio: number; groundHeight: number; basementHeight: number; courtyardAreaM2: number };
   views: Record<ViewMode, CameraState>;
   requiredNodes: string[];
@@ -41,6 +45,12 @@ export function parseBlockoutManifest(value: unknown): BlockoutManifest {
   if (data.schemaVersion !== 1 || data.units !== 'meters' || data.upAxis !== 'Y') throw new Error('Unsupported asset schema or coordinates');
   if (typeof data.id !== 'string' || typeof data.approval !== 'string' || typeof data.modelSha256 !== 'string' || !/^[a-f0-9]{64}$/.test(data.modelSha256)) throw new Error('Invalid asset identity');
   const metrics = record(data.metrics, 'metrics');
+  const rawLighting = data.lighting === undefined ? { hemisphere: 2.4, sun: 3, basementFill: 8, exposure: 1.15 } : record(data.lighting, 'lighting');
+  const lighting = {
+    hemisphere: number(rawLighting.hemisphere, 'hemisphere light'), sun: number(rawLighting.sun, 'sun light'),
+    basementFill: number(rawLighting.basementFill, 'basement fill'), exposure: number(rawLighting.exposure, 'exposure'),
+  };
+  if (Object.values(lighting).some((value) => value <= 0 || value > 10)) throw new Error('Invalid lighting range');
   const parsedMetrics = {
     landAreaM2: number(metrics.landAreaM2, 'land area'), houseAreaM2: number(metrics.houseAreaM2, 'house area'),
     landRatio: number(metrics.landRatio, 'land ratio'), groundHeight: number(metrics.groundHeight, 'ground clear height'),
@@ -65,7 +75,7 @@ export function parseBlockoutManifest(value: unknown): BlockoutManifest {
     modeHidden[mode] = strings(rawHidden[mode], `${mode} hidden nodes`);
     if (modeHidden[mode].some((name) => !requiredNodes.includes(name))) throw new Error('Unknown visibility node');
   }
-  return { schemaVersion: 1, id: data.id, approval: data.approval, modelUrl: modelUrl(data.modelUrl), axisUrl: modelUrl(data.axisUrl), modelSha256: data.modelSha256, metrics: parsedMetrics, views, requiredNodes, modeHidden };
+  return { schemaVersion: 1, id: data.id, approval: data.approval, modelUrl: modelUrl(data.modelUrl), axisUrl: modelUrl(data.axisUrl), modelSha256: data.modelSha256, lighting, metrics: parsedMetrics, views, requiredNodes, modeHidden };
 }
 
 export function blockoutCameraProfile(manifest: BlockoutManifest): CameraProfile {

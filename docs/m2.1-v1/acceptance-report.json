@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-29",
+  "stage": "M2.1 V1",
+  "status": "implementation-complete-awaiting-human",
+  "scope": "P0/P1/P2 corrections only; M2.2 not started",
+  "modelSha256": "2992f132f2c6f852475568074c5481dc0730a0667e369bbc54c18779df32c51d",
+  "checks": {
+    "lint": "passed",
+    "strictTypecheck": "passed",
+    "build": "passed",
+    "unitTests": 26,
+    "browserTests": 11,
+    "assetChecks": 70,
+    "reproducibleGLB": true,
+    "v0Preserved": true
+  },
+  "visualApproval": "pending-human",
+  "knownIssues": [
+    "broad diagnostic rock faces remain",
+    "compact single-occupant plan; schematic outward bath door",
+    "open basement zones",
+    "finite grid survey is not gameplay navigation",
+    "no FPS or physical mobile certification",
+    "placeholder art only"
+  ]
+}

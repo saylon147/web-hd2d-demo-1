@@ -1,0 +1,77 @@
+{
+  "baselineCommit": "788087e",
+  "files": [
+    {
+      "file": "art-source/parameters/island_cottage_v1.json",
+      "sha256": "415415433ca9d85594a3652e4eceab0cdc673b0f264dc7feb356cea4dec11c4a",
+      "normalizedSha256": "415415433ca9d85594a3652e4eceab0cdc673b0f264dc7feb356cea4dec11c4a",
+      "unchanged": true
+    },
+    {
+      "file": "art-source/blender/island_cottage_blockout_v1.blend",
+      "sha256": "efa360252be40298e16180a5479e4b84603ef924574176986bfb9c9ea554e3d6",
+      "normalizedSha256": "efa360252be40298e16180a5479e4b84603ef924574176986bfb9c9ea554e3d6",
+      "unchanged": true
+    },
+    {
+      "file": "public/assets/models/island_cottage_blockout_v1.glb",
+      "sha256": "8eca8043b21f6780d959b9d1ecbfa0261e911a9a8b653be6c5f552ea00393f32",
+      "normalizedSha256": "8eca8043b21f6780d959b9d1ecbfa0261e911a9a8b653be6c5f552ea00393f32",
+      "unchanged": true
+    },
+    {
+      "file": "public/assets/models/axis_test_01.glb",
+      "sha256": "360fad16bad6b2c5e9530dbe1549a928e23a118586b52b0d95e8991cbe77e506",
+      "normalizedSha256": "360fad16bad6b2c5e9530dbe1549a928e23a118586b52b0d95e8991cbe77e506",
+      "unchanged": true
+    },
+    {
+      "file": "public/assets/manifests/blockout_v1.json",
+      "sha256": "4a3e17a955e0f55ea203582ea96d9dc2e4b9d4a4134a2829c33ccec265ff85ea",
+      "normalizedSha256": "eaf54d33a963be5ca0d96ccbacbde53d7565c713e8b21f65d373bf2f70b6bb16",
+      "unchanged": true
+    },
+    {
+      "file": "docs/screenshots/m2.1/web-exterior.png",
+      "sha256": "98cd27627676f4dcc1bac474f0c29730f33dadc9b8830270f1300f58235e1b18",
+      "normalizedSha256": "98cd27627676f4dcc1bac474f0c29730f33dadc9b8830270f1300f58235e1b18",
+      "unchanged": true
+    },
+    {
+      "file": "docs/screenshots/m2.1/web-ground-floor.png",
+      "sha256": "87dc619967ef4e9109f15fcda993df0a814ee82c49fc4fcf2d1ea2d6b40ddbe4",
+      "normalizedSha256": "87dc619967ef4e9109f15fcda993df0a814ee82c49fc4fcf2d1ea2d6b40ddbe4",
+      "unchanged": true
+    },
+    {
+      "file": "docs/screenshots/m2.1/web-basement.png",
+      "sha256": "fa5c2b9238b971158e1c9791985cb3da942660d000c9f5063bab82d18d0c2230",
+      "normalizedSha256": "fa5c2b9238b971158e1c9791985cb3da942660d000c9f5063bab82d18d0c2230",
+      "unchanged": true
+    },
+    {
+      "file": "docs/screenshots/m2.1/blender-exterior.png",
+      "sha256": "c427d4dad325f6a567a5b9908e46215414502837fd19e7de0456f846d34c2453",
+      "normalizedSha256": "c427d4dad325f6a567a5b9908e46215414502837fd19e7de0456f846d34c2453",
+      "unchanged": true
+    },
+    {
+      "file": "docs/screenshots/m2.1/reference-comparison.png",
+      "sha256": "338a0ced93372fa11b9435d435fe90eff4a265b1e8268c8e87b85c1aed0193a7",
+      "normalizedSha256": "338a0ced93372fa11b9435d435fe90eff4a265b1e8268c8e87b85c1aed0193a7",
+      "unchanged": true
+    },
+    {
+      "file": "docs/screenshots/m2.1/floor-plan-check.png",
+      "sha256": "bd17c170e2c5de64c96ba84f818e06e73fb54f6b8eadefdde0d6274390da980e",
+      "normalizedSha256": "bd17c170e2c5de64c96ba84f818e06e73fb54f6b8eadefdde0d6274390da980e",
+      "unchanged": true
+    },
+    {
+      "file": "docs/screenshots/m2.1/height-and-stair-check.png",
+      "sha256": "81c4eca37d1bdd85b342f2bea4e56c6f3f40dfe1c86e4a4d64aed8ef0d82baa2",
+      "normalizedSha256": "81c4eca37d1bdd85b342f2bea4e56c6f3f40dfe1c86e4a4d64aed8ef0d82baa2",
+      "unchanged": true
+    }
+  ]
+}

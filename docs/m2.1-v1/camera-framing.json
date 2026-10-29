@@ -1,0 +1,67 @@
+{
+  "method": "project all mesh vertices of selected exterior groups to the same camera; bounding rectangles, not pixel silhouette occupancy",
+  "camera": {
+    "target": {
+      "x": 0,
+      "y": 3.4,
+      "z": 3
+    },
+    "baseYaw": 35,
+    "yawOffset": 0,
+    "pitch": 42,
+    "distance": 40,
+    "fov": 35
+  },
+  "canvas": {
+    "width": 1600,
+    "height": 866
+  },
+  "versions": [
+    {
+      "version": "V0",
+      "cottage": {
+        "boundsNormalized": [
+          0.4850562988996253,
+          0.1952595808991867,
+          0.6862296862605934,
+          0.5077086220711571
+        ],
+        "widthFraction": 0.20117338736096813,
+        "heightFraction": 0.31244904117197037
+      },
+      "island": {
+        "boundsNormalized": [
+          0.24004260625773044,
+          0.1325395653961532,
+          0.7679326844661719,
+          0.9435875512016805
+        ],
+        "widthFraction": 0.5278900782084415,
+        "heightFraction": 0.8110479858055273
+      }
+    },
+    {
+      "version": "V1",
+      "cottage": {
+        "boundsNormalized": [
+          0.4868588565630359,
+          0.24375316981218353,
+          0.681658902653901,
+          0.5385237940924525
+        ],
+        "widthFraction": 0.19480004609086515,
+        "heightFraction": 0.294770624280269
+      },
+      "island": {
+        "boundsNormalized": [
+          0.24004260625773044,
+          0.16379233185984776,
+          0.8378634557692073,
+          0.9480439729913461
+        ],
+        "widthFraction": 0.5978208495114768,
+        "heightFraction": 0.7842516411314984
+      }
+    }
+  ]
+}

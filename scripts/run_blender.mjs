@@ -7,8 +7,9 @@ import process from 'node:process';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const windowsDefault = 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe';
 const command = process.env.BLENDER_PATH || (existsSync(windowsDefault) ? windowsDefault : 'blender');
+const legacy = process.argv.includes('--v0');
 const child = spawn(command, ['--background', '--factory-startup', '--python-exit-code', '1',
-  '--python', resolve(root, 'scripts/generate_blockout.py'), '--', ...process.argv.slice(2)], {
+  '--python', resolve(root, legacy ? 'scripts/archive/generate_blockout_v0.py' : 'scripts/generate_blockout.py'), '--', ...process.argv.slice(2).filter((arg) => arg !== '--v0')], {
   cwd: root, stdio: 'inherit', shell: false, windowsHide: true,
 });
 child.on('error', (error) => {

@@ -1,0 +1,25 @@
+{
+  "referenceSource": "unchanged local Golden Reference V1 crop",
+  "referencePerspectiveEquivalent": false,
+  "defaultCamera": {
+    "target": {
+      "x": 0,
+      "y": 3.4,
+      "z": 3
+    },
+    "baseYaw": 35,
+    "yawOffset": 0,
+    "pitch": 42,
+    "distance": 40,
+    "fov": 35
+  },
+  "canvasAspect": "1.8475750577367205",
+  "outputs": [
+    "v0-v1-exterior",
+    "review-sheet",
+    "annotated-plans",
+    "land-footprint",
+    "annotated-section"
+  ],
+  "approval": "awaiting-human"
+}

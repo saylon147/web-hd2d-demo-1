@@ -1,5 +1,8 @@
 # Asset Pipeline — Blender to Web
 
+M2.1 V1 default source/export/manifest names use `v2`; review screenshots/reports use `m2.1-v1`. `v1` assets remain V0. Current heights, palette/light presets and surface-union metrics are in [spatial contract](M2_SPATIAL_SPEC.md) and [V1 handoff](M2_1_V1_HANDOFF.md). `assets:blockout`, `assets:validate` and `assets:reproduce` target V1. V0 tools are archived and selected explicitly. The historical source contract below describes V0.
+
+
 ## Source vs runtime
 ```text
 art-source/blender/          # editable .blend files

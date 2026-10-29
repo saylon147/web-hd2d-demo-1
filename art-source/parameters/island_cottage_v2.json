@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "candidate": "m2.1-v1",
+  "seed": 17,
+  "house": {
+    "width": 6,
+    "depth": 6,
+    "center": [
+      2,
+      -1
+    ],
+    "floorY": 4,
+    "clearHeight": 2.7,
+    "wallThickness": 0.3,
+    "floorThickness": 0.4,
+    "basementFloorY": 1.2,
+    "basementFloorThickness": 0.2,
+    "roofRise": 1.15,
+    "eaves": 0.25
+  },
+  "internalStair": {
+    "flightWidth": 0.9,
+    "gap": 0.15,
+    "landing": 0.95,
+    "stepsPerFlight": 8,
+    "tread": 0.275
+  },
+  "island": {
+    "landRatioRange": [
+      8.5,
+      9.5
+    ],
+    "plateauY": 3.8,
+    "terraceY": 2.2,
+    "beachY": 0.45,
+    "terrain": {
+      "segments": 64,
+      "center": [
+        0,
+        -1.8
+      ],
+      "radiusX": 10.5,
+      "radiusZ": 9.4,
+      "frontCompression": 0.17,
+      "shoreExpansion": 1.2,
+      "beachExtension": 4.2,
+      "edgeVariation": 0.42,
+      "slopeLimitDegrees": 30,
+      "areaGrid": 0.1
+    },
+    "mainStairX": -2.3,
+    "mainStairStartZ": 4.3,
+    "mainStairWidth": 1.6,
+    "mainStairTread": 0.25,
+    "upperSteps": 13,
+    "lowerSteps": 11,
+    "landing": 0.9
+  },
+  "pier": {
+    "width": 1.8,
+    "length": 5,
+    "startZ": 11.8,
+    "deckY": 0.65
+  },
+  "palette": {
+    "walls": "d8c9aa",
+    "rock": "8f8277",
+    "roof": "aa654d",
+    "furniture": "817e68",
+    "paths": "b9aa91",
+    "garden": "849877",
+    "water": "668c99",
+    "floor": "b0a08a",
+    "basementFloor": "a89c89",
+    "stairs": "68645b",
+    "land": "929e7e",
+    "sand": "cfbc97"
+  },
+  "lighting": {
+    "hemisphere": 1.05,
+    "sun": 2,
+    "basementFill": 1.5,
+    "exposure": 1,
+    "blenderWorld": 0.45,
+    "blenderSun": 1.8
+  },
+  "views": {
+    "exterior": {
+      "target": {
+        "x": 0,
+        "y": 3.4,
+        "z": 3
+      },
+      "baseYaw": 35,
+      "yawOffset": 0,
+      "pitch": 42,
+      "distance": 40,
+      "fov": 35
+    },
+    "ground-floor": {
+      "target": {
+        "x": 2,
+        "y": 4.8,
+        "z": -1
+      },
+      "baseYaw": 35,
+      "yawOffset": 0,
+      "pitch": 55,
+      "distance": 15,
+      "fov": 35
+    },
+    "basement": {
+      "target": {
+        "x": 2,
+        "y": 2,
+        "z": -0.8
+      },
+      "baseYaw": 35,
+      "yawOffset": 0,
+      "pitch": 50,
+      "distance": 16,
+      "fov": 35
+    }
+  },
+  "outputs": {
+    "blend": "art-source/blender/island_cottage_blockout_v2.blend",
+    "model": "public/assets/models/island_cottage_blockout_v2.glb",
+    "axis": "public/assets/models/axis_test_02.glb",
+    "manifest": "public/assets/manifests/blockout_v2.json",
+    "report": "docs/m2.1-v1/spatial-report.json",
+    "evidence": "docs/screenshots/m2.1-v1"
+  }
+}

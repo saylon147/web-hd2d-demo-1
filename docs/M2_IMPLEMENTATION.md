@@ -1,5 +1,8 @@
 # M2 implementation plan — Golden Reference V1
 
+Current status (2026-10-29): M2.1 V0 was visually rejected. The V1 corrective candidate is in [M2_1_V1_HANDOFF.md](M2_1_V1_HANDOFF.md), with v2 source/export names and new spatial/lighting contracts. The prior candidate text below is historical planning context; M2.2 remains blocked on human confirmation.
+
+
 Status (2026-10-28): **M2.1 candidate implemented, awaiting human spatial approval**. Formal reference is available locally at `docs/references/golden-reference-v1.png`; its original binary remains outside Git. See [M2.1 handoff](M2_1_HANDOFF.md) for source, exports, measured dimensions, screenshots and validation. Do not treat the concept illustration as a dimensioned drawing.
 
 ## Art direction

@@ -2,8 +2,10 @@ import { expect, test } from '@playwright/test';
 import type { Page } from '@playwright/test';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { readFileSync } from 'node:fs';
+const manifest = JSON.parse(readFileSync('public/assets/manifests/blockout_v2.json', 'utf8')) as { metrics: { landRatio: number } };
 
-const evidence = resolve('docs/screenshots/m2.1');
+const evidence = resolve('docs/screenshots/m2.1-v1');
 async function ready(page: Page): Promise<void> {
   await page.goto('/');
   await expect(page.locator('#scene')).toHaveAttribute('data-loaded', 'true');
@@ -17,7 +19,7 @@ test('GLB scene and three named cutaways render at fixed camera presets', async 
   page.on('pageerror', (error) => errors.push(error.message));
   page.on('console', (message) => { if (message.type() === 'error' || message.type() === 'warning') errors.push(message.text()); });
   await ready(page);
-  await expect(page.locator('#spatial-metrics')).toContainText('9.00×');
+  await expect(page.locator('#spatial-metrics')).toContainText(`${manifest.metrics.landRatio.toFixed(2)}×`);
   await page.getByRole('button', { name: '调试参数', exact: true }).click();
   await mkdir(evidence, { recursive: true });
   const records: Record<string, unknown>[] = [];
@@ -32,7 +34,14 @@ test('GLB scene and three named cutaways render at fixed camera presets', async 
     records.push({ mode, ...await page.locator('#scene').evaluate((canvas) => ({ ...canvas.dataset })) });
   }
   expect(errors).toEqual([]);
-  await writeFile(resolve('docs/m2.1/runtime-report.json'), JSON.stringify({ browser: browser.version(), viewport: { width: 1600, height: 1000 }, errors, records }, null, 2)+'\n');
+  await page.goto('/?version=v0');
+  await expect(page.locator('#scene')).toHaveAttribute('data-loaded', 'true');
+  await expect(page.locator('#scene')).toHaveAttribute('data-version', 'island_cottage_blockout_v1');
+  await expect(page.locator('#scene')).toHaveAttribute('data-distance', '40');
+  await expect(page.locator('#spatial-metrics')).toContainText('9.00×');
+  await page.locator('#scene').screenshot({ path: resolve(evidence, 'web-v0-exterior.png'), style: '.scene-heading,.view-controls,.scene-footer,.debug-panel { visibility: hidden !important; }' });
+  expect(errors).toEqual([]);
+  await writeFile(resolve('docs/m2.1-v1/runtime-report.json'), JSON.stringify({ browser: browser.version(), viewport: { width: 1600, height: 1000 }, errors, records }, null, 2)+'\n');
 });
 
 test('M2 orbit/zoom clamps and reset retain the current inspection mode', async ({ page }) => {
@@ -57,7 +66,7 @@ test('M2 orbit/zoom clamps and reset retain the current inspection mode', async 
 });
 
 test('failed GLB requests present asset errors and disable view buttons', async ({ page }) => {
-  await page.route('**/assets/models/island_cottage_blockout_v1.glb', (route) => route.fulfill({ status: 404, body: 'Missing asset' }));
+  await page.route('**/assets/models/island_cottage_blockout_v2.glb', (route) => route.fulfill({ status: 404, body: 'Missing asset' }));
   await page.goto('/');
   await expect(page.locator('#error-panel')).toContainText('HTTP 404');
   await expect(page.getByRole('button', { name: '一层剖视', exact: true })).toBeDisabled();

@@ -16,11 +16,15 @@ import sys
 import bpy
 import bmesh
 from mathutils import Vector
+from mathutils.bvhtree import BVHTree
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from terrain_blockout import coastal_mesh
+from survey_blockout import survey_land, net_floor_area
 
 
 ROOT = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser()
-parser.add_argument('--params', type=Path, default=ROOT / 'art-source/parameters/island_cottage_v1.json')
+parser.add_argument('--params', type=Path, default=ROOT / 'art-source/parameters/island_cottage_v2.json')
 parser.add_argument('--skip-renders', action='store_true')
 args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else [])
 params_bytes = args.params.read_bytes().replace(b'\r\n', b'\n')  # Stable provenance across Git newline settings.
@@ -34,6 +38,7 @@ bpy.ops.wm.read_factory_settings(use_empty=True)
 rng = random.Random(p['seed'])
 nodes = {}
 walls = []
+wall_plans = []
 furniture_blockers = []
 
 
@@ -66,15 +71,19 @@ def material(name, hex_color):
     return mat
 
 
-clay = material('clay_structure_placeholder', 'deded8')
-rock = material('clay_rock_placeholder', 'b9bdb9')
-roof_mat = material('clay_roof_placeholder', '9ca5a4')
-furniture = material('clay_furniture_placeholder', 'a2aaa4')
-paving = material('clay_paths_placeholder', 'e6e4db')
-garden_mat = material('clay_garden_placeholder', 'bfc7b8')
-water_mat = material('clay_water_placeholder', 'bad6df')
-route_mat = material('inspection_route_placeholder', '849b8b')
-
+palette = p['palette']
+clay = material('diagnostic_walls_placeholder', palette['walls'])
+rock = material('diagnostic_rock_placeholder', palette['rock'])
+roof_mat = material('diagnostic_roof_placeholder', palette['roof'])
+furniture = material('diagnostic_furniture_placeholder', palette['furniture'])
+paving = material('diagnostic_paths_placeholder', palette['paths'])
+garden_mat = material('diagnostic_garden_placeholder', palette['garden'])
+water_mat = material('diagnostic_water_placeholder', palette['water'])
+floor_mat = material('diagnostic_floor_placeholder', palette['floor'])
+bs_floor_mat = material('diagnostic_basementFloor_placeholder', palette['basementFloor'])
+stair_mat = material('diagnostic_stairs_placeholder', palette['stairs'])
+land_mat = material('diagnostic_land_placeholder', palette['land'])
+sand_mat = material('diagnostic_sand_placeholder', palette['sand'])
 
 def mesh(name, vertices, faces, parent, mat):
     data = bpy.data.meshes.new(name)
@@ -169,6 +178,7 @@ i = p['island']
 s = p['internalStair']
 cx, cz = h['center']
 w, d = h['width'], h['depth']
+assert w == 6 and d == 6, 'V1 retains the reviewed 6×6 plan. Revise net-room plans together before changing the footprint.'
 sx, sz = w / 6, d / 6
 floor_y, basement_y, thickness = h['floorY'], h['basementFloorY'], h['wallThickness']
 basement_ceiling = floor_y - h['floorThickness']
@@ -190,54 +200,54 @@ def house_box(name, center, size, parent, mat=clay):
     return box(name, (cx+x*sx, y, cz+z*sz), (size[0]*sx, size[1], size[2]*sz), parent, mat)
 
 
-raw_outlines = [i['plateauOutline'], i['terraceOutline'], i['beachOutline']]
-land_target = w*d*i['landAreaRatio']
-land_scale = math.sqrt(land_target / sum(area(o) for o in raw_outlines))
-outlines = [[(x*land_scale, z*land_scale) for x,z in o] for o in raw_outlines]
-rock_meshes = [
-    prism('Plateau_RockMass', outlines[0], -0.25, i['plateauY'], terrain_ext, rock),
-    prism('Lower_Terrace_RockMass', outlines[1], -0.25, i['terraceY'], terrain_ext, rock),
-]
-beach = prism('Beach', outlines[2], -0.2, i['beachY'], shore, paving)
-
-# A real basement cavity and real recesses for the coastal stairs, not overlapping solids.
-for obj in rock_meshes:
-    difference(obj, (cx, (i['plateauY']+basement_y)/2, cz), (w+0.08, i['plateauY']-basement_y+0.2, d+0.08))
+vertices, faces, zones, plateau_outline = coastal_mesh(i['terrain'], i['plateauY'], i['beachY'], p['seed'])
+coast = mesh('Organic_Coastal_Mass', vertices, faces, terrain_ext, rock)
+coast.data.materials.append(land_mat)
+coast.data.materials.append(sand_mat)
+for poly, zone in zip(coast.data.polygons, zones):
+    poly.material_index = {'rock': 0, 'land': 1, 'sand': 2}[zone]
+rock_meshes = [coast]
+outlines = [plateau_outline]
+# True basement excavation in the high rock core.
+difference(coast, (cx, (i['plateauY']+basement_y)/2, cz),
+           (w+0.08, i['plateauY']-basement_y+0.2, d+0.08))
 upper_end = i['mainStairStartZ'] + i['upperSteps']*i['mainStairTread']
 lower_start = upper_end + i['landing']
 lower_end = lower_start + i['lowerSteps']*i['mainStairTread']
-for obj in rock_meshes + [beach]:
-    difference(obj, (i['mainStairX'], (i['plateauY']+i['terraceY'])/2+0.1, (i['mainStairStartZ']+upper_end)/2),
-               (i['mainStairWidth']+0.12, i['plateauY']-i['terraceY']+0.2, upper_end-i['mainStairStartZ']))
-    difference(obj, (i['mainStairX'], (i['terraceY']+i['beachY'])/2+0.1, (lower_start+lower_end)/2),
-               (i['mainStairWidth']+0.12, i['terraceY']-i['beachY']+0.2, lower_end-lower_start))
-
-for original in rock_meshes:
-    section = original.copy()
-    section.data = original.data.copy()
-    bpy.context.collection.objects.link(section)
-    section.parent = terrain_section
-    section.name = original.name + '_Section'
-    # Open a front/right inspection bay; retain rear/left rock to show embedding.
-    difference(section, (cx+1.5, 7, cz+7), (w+5, 10, d+16))
-
-box('Sea_Plane', (0,-0.05,2), (56,0.1,56), water, water_mat)
-for index, (x,z) in enumerate(outlines[0]):
-    bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=1, radius=1, location=source((x*1.025, 0.6, z*1.025)))
+# Cut to each tread elevation, not a broad rectangular canyon.
+for start, start_y, end_y, count in [(i['mainStairStartZ'], i['plateauY'], i['terraceY'], i['upperSteps']),
+                                   (lower_start, i['terraceY'], i['beachY'], i['lowerSteps'])]:
+    for step in range(count):
+        top = start_y-(start_y-end_y)*(step+1)/count
+        recess = top-0.025  # Separate the terrain from the visible tread to prevent coplanar flicker.
+        difference(coast, (i['mainStairX'], (recess+10)/2, start+(step+0.5)*i['mainStairTread']),
+                   (i['mainStairWidth']+0.06, 10-recess, i['mainStairTread']+0.002))
+difference(coast, (i['mainStairX'], (i['terraceY']-0.025+10)/2, (upper_end+lower_start)/2),
+           (i['mainStairWidth']+0.06, 10-i['terraceY']+0.025, i['landing']))
+section = coast.copy()
+section.data = coast.data.copy()
+bpy.context.collection.objects.link(section)
+section.parent = terrain_section
+section.name = 'Organic_Coastal_Section'
+difference(section, (cx+1.5, 5, cz+7), (w+5, 12, d+16))
+box('Sea_Plane', (0,-0.05,2), (120,0.1,120), water, water_mat)
+# Detached rocks are visual only; they no longer define the main silhouette.
+for index, (x,z) in enumerate([(-11,-4),(-9,8),(10,3),(8,9),(-7,11)]):
+    bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=1, radius=1, location=source((x, 0.4, z)))
     obj = bpy.context.object
-    obj.name = f'Coastal_Rock_{index:02d}'
-    obj.scale = (rng.uniform(0.8,1.4),rng.uniform(0.8,1.4),rng.uniform(0.6,1.4))
+    obj.name = f'Coastal_Rock_Visual_{index:02d}'
+    obj.scale = (rng.uniform(0.65,1.1),rng.uniform(0.8,1.3),rng.uniform(0.5,0.95))
     obj.parent = shore
     obj.data.materials.append(rock)
     obj['placeholder'] = True
-
-courtyard_outline = [(-5.5,0),(-1.15,0),(-1.15,2.3),(5.1,2.3),(5.1,4.2),(-5.5,4.2)]
-prism('Courtyard', courtyard_outline, i['plateauY'], i['plateauY']+0.035, terrace, paving)
-box('Observation_Pad', (6.2,i['plateauY']+0.025,0.2), (2.4,0.05,2.4), terrace,paving)
+courtyard_outline = [(-4.3,1.5),(-1.1,1.5),(-1.1,2.25),(5.2,2.25),(5.2,3.8),(-4.3,4.3)]
+prism('Courtyard', courtyard_outline, i['plateauY']-0.02, i['plateauY']+0.035, terrace, paving)
 box('Garden_Loop_Path', (-5.9,i['plateauY']+0.03,-2), (1.2,0.06,4.6), paths,paving)
 box('Back_Garden_Path', (-2.9,i['plateauY']+0.03,-5.9), (6.2,0.06,1.2), paths,paving)
 box('Right_House_Path', (5.9,i['plateauY']+0.03,-2), (1.2,0.06,5.7), paths,paving)
-box('Stair_Approach', (i['mainStairX'],i['plateauY']+0.03,4.25), (1.6,0.06,0.3), paths,paving)
+box('Stair_Approach', (i['mainStairX'],i['plateauY']+0.03,4.05), (1.6,0.06,0.5), paths,paving)
+for index in range(5):
+    box(f'Local_Retaining_Stone_{index}', (0.3+index*0.85,i['plateauY']-0.15,3.9-index*0.04), (0.82,0.35,0.35), terrace, rock)
 for index in range(3):
     box(f'Garden_Bed_{index}', (-3.8+index*1.25,i['plateauY']+0.18,-3.1), (0.9,0.36,3),garden,garden_mat)
 for index, (x,z) in enumerate([(-6.7,-3.8),(-4.5,-6.8),(1,-6.7),(6,-4.8)]):
@@ -267,9 +277,9 @@ for row in range(4):
     for side in (-1,1):
         box(f'Pier_Post_{row}_{side}', (i['mainStairX']+side*q['width']/2,0.4,q['startZ']+0.3+row*(q['length']-0.6)/3), (0.18,1.5,0.18),pier,furniture)
 
-gf_slab=house_box('GroundFloor_Slab',(0,floor_y-h['floorThickness']/2,0),(6,h['floorThickness'],6),gf_structure)
+gf_slab=house_box('GroundFloor_Slab',(0,floor_y-h['floorThickness']/2,0),(6,h['floorThickness'],6),gf_structure,floor_mat)
 difference(gf_slab,(cx+(bay_left+bay_right)/2,floor_y,cz+(bay_back+bay_front)/2),(stair_width,1.2,stair_depth))
-house_box('Basement_Slab',(0,basement_y-h['basementFloorThickness']/2,0),(6,h['basementFloorThickness'],6),bs_structure)
+house_box('Basement_Slab',(0,basement_y-h['basementFloorThickness']/2,0),(6,h['basementFloorThickness'],6),bs_structure,bs_floor_mat)
 
 
 def wall(name, axis, fixed, low, high, floor, height, parent, openings=(), record=False):
@@ -283,6 +293,8 @@ def wall(name, axis, fixed, low, high, floor, height, parent, openings=(), recor
         difference(obj,center,size)
     if record:
         walls.append(obj)
+        wall_plans.append({'name':name, 'axis':axis, 'fixed':fixed, 'low':low, 'high':high,
+                           'floorY':floor, 'height':height, 'thickness':thickness, 'openings':list(openings)})
     return obj
 
 
@@ -296,10 +308,10 @@ house_box('Front_Door_Placeholder',(-0.2,floor_y+1.04,3-thickness/2),(0.94,2.08,
 house_box('Porch_Threshold',(-0.2,(floor_y+i['plateauY'])/2,3.18),(1.3,floor_y-i['plateauY'],0.36),terrace,paving)
 
 for parent,height,record in [(gf_full,h['clearHeight'],True),(gf_cut,1.05,False)]:
-    wall('GF_Bedroom_Front_'+parent.name,'x',0.3,0.4,2.7,floor_y,height,parent,[(1.0,0.9,0,2.1)],record)
-    wall('GF_Bedroom_Left_'+parent.name,'z',0.4,-2.7,0.3,floor_y,height,parent,record=record)
-    wall('GF_Bathroom_Left_'+parent.name,'z',1.4,0.75,2.7,floor_y,height,parent,[(1.7,0.85,0,2.1)],record)
-    wall('GF_Bathroom_Back_'+parent.name,'x',0.75,1.4,2.7,floor_y,height,parent,record=record)
+    wall('GF_Bedroom_Front_'+parent.name,'x',0.3,0.4,2.7,floor_y,height,parent,record=record)
+    wall('GF_Bedroom_Left_'+parent.name,'z',0.4,-2.7,0.3,floor_y,height,parent,[(-0.5,0.9,0,2.1)],record)
+    wall('GF_Bathroom_Left_'+parent.name,'z',1.15,0.65,2.7,floor_y,height,parent,[(1.65,0.9,0,2.1)],record)
+    wall('GF_Bathroom_Back_'+parent.name,'x',0.65,1.15,2.7,floor_y,height,parent,record=record)
 for parent,height,record in [(bs_full,basement_clear,True),(bs_cut,0.95,False)]:
     wall('BS_Storage_Right_'+parent.name,'z',-0.65,0.65,2.7,basement_y,height,parent,[(1.4,0.9,0,2.1)],record)
     wall('BS_Workshop_Front_'+parent.name,'x',0.3,0.3,2.7,basement_y,height,parent,[(0.85,0.9,0,2.1)],record)
@@ -311,6 +323,7 @@ for name,center,size in [
     ('Bedroom_Bed',(2.0,floor_y+0.25,-1.6),(1.3,0.5,2.0)),
     ('Bathroom_Shower',(2.2,floor_y+0.04,2.24),(0.8,0.08,0.8)),
     ('Bathroom_Toilet',(2.25,floor_y+0.22,1.20),(0.42,0.44,0.55)),
+    ('Bathroom_Basin',(1.62,floor_y+0.4,0.99),(0.48,0.8,0.32)),
 ]:
     furniture_blockers.append(house_box(name,center,size,gf_furniture,furniture))
 for name,center,size in [
@@ -327,11 +340,11 @@ mid_y=(floor_y+basement_y)/2
 for step in range(s['stepsPerFlight']):
     top=basement_y+(step+1)*riser
     box(f'Internal_Stair_Lower_{step+1:02d}',(cx+bay_left+s['flightWidth']/2,(top+basement_y)/2,cz+bay_front-(step+0.5)*s['tread']),
-        (s['flightWidth'],top-basement_y,s['tread']),stair,clay)
+        (s['flightWidth'],top-basement_y,s['tread']),stair,stair_mat)
     top=mid_y+(step+1)*riser
     box(f'Internal_Stair_Upper_{step+1:02d}',(cx+bay_right-s['flightWidth']/2,(top+basement_y)/2,cz+bay_back+s['landing']+(step+0.5)*s['tread']),
-        (s['flightWidth'],top-basement_y,s['tread']),stair,clay)
-box('Internal_Stair_MidLanding',(cx+(bay_left+bay_right)/2,(mid_y+basement_y)/2,cz+bay_back+s['landing']/2),(stair_width,mid_y-basement_y,s['landing']),stair)
+        (s['flightWidth'],top-basement_y,s['tread']),stair,stair_mat)
+box('Internal_Stair_MidLanding',(cx+(bay_left+bay_right)/2,(mid_y+basement_y)/2,cz+bay_back+s['landing']/2),(stair_width,mid_y-basement_y,s['landing']),stair,stair_mat)
 box('Stair_Void_Guard',(cx+bay_right+0.03,floor_y+0.5,cz+(bay_back+bay_front)/2),(0.06,1.0,stair_depth),gf_structure,furniture)
 stairs_up.location=source((cx+bay_left+s['flightWidth']/2,basement_y,cz+bay_front))
 
@@ -340,17 +353,18 @@ rw,rd=w/2+h['eaves'],d/2+h['eaves']
 roof_vertices=[(cx-rw,eave_y,cz-rd),(cx+rw,eave_y,cz-rd),(cx,eave_y+h['roofRise'],cz-rd),
                (cx-rw,eave_y,cz+rd),(cx+rw,eave_y,cz+rd),(cx,eave_y+h['roofRise'],cz+rd)]
 mesh('Pitched_Roof_Blockout',roof_vertices,[(0,2,5,3),(2,1,4,5),(0,1,2),(3,5,4),(0,3,4,1)],roof,roof_mat)
-house_box('Chimney_Blockout',(1.7,eave_y+h['roofRise']-0.1,-1.2),(0.55,1.4,0.55),roof,clay)
+house_box('Chimney_Blockout',(1.7,eave_y+h['roofRise']-0.1,-1.2),(0.48,0.95,0.48),roof,clay)
 
 # Validate circulation against the actual Boolean-opened wall meshes (including door headroom).
 routes={
     'ground-to-stair': [('ground',(-0.2,3.3)),('ground',(-0.2,1.6)),('ground',(-1.25,0.9)),('ground',(-1.25,bay_front))],
-    'ground-to-bedroom': [('ground',(-0.2,3.3)),('ground',(-0.2,1.6)),('ground',(0.95,0.5)),('ground',(0.95,-1.0))],
-    'ground-to-bathroom': [('ground',(-0.2,3.3)),('ground',(-0.2,1.6)),('ground',(0.7,1.6)),('ground',(1.7,1.6))],
+    'ground-to-bedroom': [('ground',(-0.2,3.3)),('ground',(-0.2,1.6)),('ground',(-0.2,-0.5)),('ground',(0.95,-0.5)),('ground',(0.95,-1.0))],
+    'ground-to-bathroom': [('ground',(-0.2,3.3)),('ground',(-0.2,1.6)),('ground',(0.55,1.65)),('ground',(1.65,1.65))],
     'ground-to-kitchen': [('ground',(-0.2,3.3)),('ground',(-0.2,1.6)),('ground',(-1.7,2.0))],
     'basement-to-workshop': [('basement',(-2.25,bay_front)),('basement',(-2.25,1.4)),('basement',(-0.2,1.4)),('basement',(0.85,0.8)),('basement',(0.85,-0.2))],
 }
 bpy.context.view_layer.update()
+clearance_checks = 0
 for label,points in routes.items():
     for (_,a),(_,b) in zip(points,points[1:]):
         for height in (0.25,1.1,2.05):
@@ -358,9 +372,12 @@ for label,points in routes.items():
             start=Vector(source((cx+a[0]*sx,y,cz+a[1]*sz)))
             end=Vector(source((cx+b[0]*sx,y,cz+b[1]*sz)))
             direction=(end-start).normalized()
-            for obj in walls+furniture_blockers:
-                hit,_,_,_=obj.ray_cast(start,direction,distance=(end-start).length)
-                assert not hit, f'Circulation route {label} at {height}m intersects {obj.name}'
+            side = Vector((-direction.y,direction.x,0))
+            for offset in (-0.3,0,0.3):
+                for obj in walls+furniture_blockers:
+                    hit,_,_,_=obj.ray_cast(start+side*offset,direction,distance=(end-start).length)
+                    assert not hit, f'Circulation route {label} at {height}m / offset {offset} intersects {obj.name}'
+                clearance_checks += 1
 
 
 def set_mode(mode):
@@ -397,10 +414,10 @@ scene.render.image_settings.file_format='PNG'
 scene.world=bpy.data.worlds.new('Clay_World')
 scene.world.use_nodes=True
 scene.world.node_tree.nodes['Background'].inputs[0].default_value=(0.7,0.73,0.7,1)
-scene.world.node_tree.nodes['Background'].inputs[1].default_value=0.7
+scene.world.node_tree.nodes['Background'].inputs[1].default_value=p['lighting']['blenderWorld']
 scene.view_settings.view_transform='AgX'
 light_data=bpy.data.lights.new('Inspection_Sun','SUN')
-light_data.energy=2.3
+light_data.energy=p['lighting']['blenderSun']
 light_data.angle=0.12
 light=bpy.data.objects.new('Inspection_Sun',light_data)
 scene.collection.objects.link(light)
@@ -439,6 +456,10 @@ def export_selected(path, objects):
         export_apply=True,export_extras=True,export_cameras=False,export_lights=False)
 
 
+bpy.context.view_layer.update()
+land_metrics = survey_land([coast]+list(paths.children_recursive)+[bpy.data.objects['Courtyard'], bpy.data.objects['Beach_Pier_Path']],
+                          [obj for obj in garden.children_recursive if obj.name.startswith(('Garden_Bed','Tree_Trunk'))],
+                          h, {**i['terrain'], 'ratioRange': i['landRatioRange']})
 export_selected(outputs['model'], [root]+list(root.children_recursive))
 axis_root=group('AxisTestRoot')
 axis_objects=[axis_root]
@@ -455,44 +476,58 @@ for obj in axis_objects:
 nodes.pop('AxisTestRoot')
 
 rooms_ground=[
-    {'name':'Living / kitchen','rect':[-2.7,0.65,1.35,2.7]},
-    {'name':'Bedroom','rect':[0.4,-2.7,2.7,0.3]},
-    {'name':'Bathroom','rect':[1.4,0.75,2.7,2.7]},
+    {'name':'Living / kitchen','rect':[-2.7,0.65,1.0,2.7]},
+    {'name':'Bedroom','rect':[0.55,-2.7,2.7,0.15]},
+    {'name':'Bathroom','rect':[1.30,0.80,2.7,2.7]},
 ]
 rooms_basement=[
-    {'name':'Storage','rect':[-2.7,0.65,-0.65,2.7]},
-    {'name':'Workshop','rect':[0.3,-2.7,2.7,0.3]},
+    {'name':'Storage','rect':[-2.7,0.65,-0.8,2.7]},
+    {'name':'Workshop','rect':[0.3,-2.7,2.7,0.15]},
     {'name':'Rest / reading','rect':[0.3,0.65,2.7,2.7]},
 ]
 for room in rooms_ground+rooms_basement:
     rect=room['rect']
     room['areaM2']=round((rect[2]-rect[0])*sx*(rect[3]-rect[1])*sz,3)
+rooms_ground[0]['areaM2'] = net_floor_area(walls, [cx-2.7,cz-2.7,cx+2.7,cz+2.7],
+    [cx+bay_left,cz+bay_back,cx+bay_right,cz+bay_front],
+    [[cx+a,cz+b,cx+c,cz+d] for a,b,c,d in [rooms_ground[1]['rect'],rooms_ground[2]['rect']]], floor_y)
+rooms_ground[0]['definition'] = 'net living/kitchen plus shared circulation, excludes partitions/stair/closed rooms; furniture occupies part of this floor'
 report={
     'schemaVersion':1,'approval':'candidate-awaiting-human','generator':'scripts/generate_blockout.py',
     'blenderVersion':bpy.app.version_string,'parametersSha256':hashlib.sha256(params_bytes).hexdigest(),
     'coordinates':{'source':'Blender Z-up','runtime':'Three.js Y-up','mapping':'(x,y,z) -> (x,z,-y)','units':'meters'},
-    'land':{'definition':'sum of nonoverlapping usable plateau, lower terrace and beach plan areas; includes cottage and circulation, excludes coastal rocks/water/pier',
-            'areaM2':sum(area(o) for o in outlines),'cottageFootprintM2':w*d,'ratio':sum(area(o) for o in outlines)/(w*d),
-            'outlineScale':land_scale,'outlines':outlines,'plateauY':i['plateauY'],'terraceY':i['terraceY'],'beachY':i['beachY']},
+    'land':{**land_metrics,
+            'areaM2':land_metrics['areaM2'],'cottageFootprintM2':w*d,'ratio':land_metrics['areaM2']/(w*d),
+            'outlineScale':1,'outlines':outlines,'plateauY':i['plateauY'],'terraceY':i['terraceY'],'beachY':i['beachY']},
     'house':{**h,'basementClearHeight':basement_clear,'basementCeilingY':basement_ceiling,'groundCeilingY':eave_y,
              'aboveGroundStoreys':1,'basementStoreys':1,'seaClearance':basement_y-h['basementFloorThickness'],
              'groundRooms':rooms_ground,'basementRooms':rooms_basement,
-             'roomAreaDefinition':'allocated zone envelopes, before partition thickness; not net architectural room areas'},
+             'roomAreaDefinition':'bedroom and bathroom rectangles are net clear faces; living/circulation sampled minus stair, walls, closed rooms; basement open zones are shared, not net enclosed rooms'},
     'stair':{'footprint':[bay_left,bay_back,bay_right,bay_front],'riser':riser,'tread':s['tread'],
              'flightWidth':s['flightWidth'],'landing':s['landing'],'totalRisers':s['stepsPerFlight']*2,
              'rise':floor_y-basement_y,'minimumHeadroom':min(basement_clear,h['clearHeight']),
              'headroomBasis':'full stair-bay opening through ground slab; no slab above either flight',
              'corridorWidth':0.4*sx-thickness*sx/2-bay_right-0.06},
-    'coastalStair':{'upperRiser':(i['plateauY']-i['terraceY'])/i['upperSteps'],
+    'coastalStair':{'x':i['mainStairX'],'upperRiser':(i['plateauY']-i['terraceY'])/i['upperSteps'],
                     'lowerRiser':(i['terraceY']-i['beachY'])/i['lowerSteps'],'width':i['mainStairWidth'],
                     'upperStartZ':i['mainStairStartZ'],'upperEndZ':upper_end,'lowerStartZ':lower_start,'lowerEndZ':lower_end},
     'courtyard':{'outline':courtyard_outline,'areaM2':area(courtyard_outline)},
-    'circulation':{'routes':routes,'wallRayTestsPassed':True,'primaryOutdoorPathWidth':1.2},
+    'circulation':{'routes':routes,'wallRayTestsPassed':True,'primaryOutdoorPathWidth':1.2,
+                   'sweptWidthM':0.6,'rayChecks':clearance_checks,
+                   'clearances':{'entranceDoor':1.0,'bedroomDoor':0.9,'bathroomDoor':0.9,
+                                 'bedSide':0.8,'bedFoot':0.75,'bathroomEntryToToilet':0.74,
+                                 'gardenPaths':1.2,'coastalStair':1.6,'pier':1.8}},
+    'planWalls':wall_plans,
+    'planFurniture':[{'name':obj.name,'boundsXZ':[min(v.co.x for v in obj.data.vertices)-cx,
+                       min(-v.co.y for v in obj.data.vertices)-cz,max(v.co.x for v in obj.data.vertices)-cx,
+                       max(-v.co.y for v in obj.data.vertices)-cz],
+                     'floor':'ground' if obj.parent == gf_furniture else 'basement'} for obj in furniture_blockers],
     'views':p['views'],'sourceMeshes':sum(obj.type=='MESH' for obj in root.children_recursive),
+    'section':{'sliceX':cx+bay_right-s['flightWidth']/2,'targetY':eave_y/2,'orthoScale':14},
 }
 outputs['report'].write_text(json.dumps(report,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
 manifest={
-    'schemaVersion':1,'id':'island_cottage_blockout_v1','approval':'placeholder-awaiting-human',
+    'schemaVersion':1,'id':'island_cottage_blockout_v2','lighting':p['lighting'],'approval':'placeholder-awaiting-human',
     'modelUrl':'/assets/models/'+outputs['model'].name,'axisUrl':'/assets/models/'+outputs['axis'].name,
     'modelSha256':hashlib.sha256(outputs['model'].read_bytes()).hexdigest(),'units':'meters','upAxis':'Y',
     'metrics':{'landAreaM2':report['land']['areaM2'],'houseAreaM2':w*d,'landRatio':report['land']['ratio'],
@@ -518,9 +553,42 @@ if not args.skip_renders:
         scene.render.filepath=str(outputs['evidence']/('blender-'+mode+'.png'))
         print('RENDER',mode,flush=True)
         bpy.ops.render.render(write_still=True)
-    for label,mode,y,ortho,pitch in [('ground-plan','ground-floor',floor_y,8,90),('basement-plan','basement',basement_y,8,90),('section','basement',4.6,10,0)]:
+    for label,mode,y,ortho,pitch in [('ground-plan','ground-floor',floor_y,8,90),('basement-plan','basement',basement_y,8,90)]:
         set_mode(mode)
         set_camera({'target':{'x':cx,'y':y,'z':cz},'baseYaw':0,'yawOffset':0,'pitch':pitch,'distance':20,'fov':35},ortho)
         scene.render.filepath=str(outputs['evidence']/('blender-'+label+'.png'))
         bpy.ops.render.render(write_still=True)
+    # Render-only physical slice through the upper internal flight. It is not exported.
+    set_mode('exterior')
+    section_objects = []
+    slice_x = cx+bay_right-s['flightWidth']/2
+    for parent in [terrain_ext, roof, exterior, gf_structure, stair, bs_structure, water]:
+        for original in parent.children_recursive:
+            if original.type != 'MESH':
+                continue
+            obj = original.copy()
+            obj.data = original.data.copy()
+            obj.parent = None
+            bpy.context.collection.objects.link(obj)
+            cutter = box('_slice_cut', (slice_x,5,0), (0.16,13,34), None)
+            bpy.context.view_layer.objects.active = obj
+            mod = obj.modifiers.new('inspection_slice','BOOLEAN')
+            mod.operation = 'INTERSECT'
+            mod.solver = 'EXACT'
+            mod.object = cutter
+            bpy.ops.object.modifier_apply(modifier=mod.name)
+            cutter_data = cutter.data
+            bpy.data.objects.remove(cutter,do_unlink=True)
+            bpy.data.meshes.remove(cutter_data)
+            obj.hide_render = False
+            section_objects.append(obj)
+    for obj in root.children_recursive:
+        obj.hide_render = True
+    set_camera({'target':{'x':slice_x,'y':report['section']['targetY'],'z':0},'baseYaw':90,'yawOffset':0,'pitch':0,'distance':25,'fov':35},report['section']['orthoScale'])
+    scene.render.filepath=str(outputs['evidence']/'blender-section.png')
+    bpy.ops.render.render(write_still=True)
+    for obj in section_objects:
+        data = obj.data
+        bpy.data.objects.remove(obj,do_unlink=True)
+        bpy.data.meshes.remove(data)
 print('M2.1_GENERATION_COMPLETE',flush=True)
