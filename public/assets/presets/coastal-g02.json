@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "instance": "front-shoulder",
+  "asset": "A4",
+  "baselineCommit": "382401c",
+  "status": "candidates-only; await human choice; default placement unchanged",
+  "coordinates": "meters, Three.js Y-up; position = bottom-center anchor; yaw degrees around +Y",
+  "candidates": [
+    { "id": "C1", "name": "水平内收", "position": [8.15,1.85,3.55], "yaw": -20, "scale": [1.05,0.9,0.95], "reason": "X inward 0.45m, Z inward 0.65m; retain height, orientation and size to isolate horizontal embedding." },
+    { "id": "C2", "name": "内收并旋转", "position": [7.95,1.85,3.35], "yaw": -8, "scale": [1.05,0.9,0.95], "reason": "X inward 0.65m, Z inward 0.85m; yaw +12deg; unchanged height/size; compare overhang direction and plateau seam." },
+    { "id": "C3", "name": "内收旋转加轻微降高", "position": [7.95,1.65,3.35], "yaw": -8, "scale": [1.05,0.9,0.95], "reason": "Same as C2, lower by 0.20m to compare bottom-gap improvement against loss of top continuity; lowering alone is not acceptance." }
+  ]
+}

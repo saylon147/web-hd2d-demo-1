@@ -2,7 +2,9 @@
 
 M2.2 局部海岸拼装实验：四份本地 A1–A4 GLB，运行 `npm run coastal:pipeline`，页面 `?scene=coastal-assembly`。原始基线保留，实验不自动合并。[工作流](docs/m2.2-coastal-assembly/PIPELINE.md) / [验收报告](docs/m2.2-coastal-assembly/RESULTS.md)。
 
-M2.2 **G01 仅几何诊断，等待人工审图**：`npm run build` 后运行 `npm run evidence:coastal:g01`；手工打开 `?scene=coastal-assembly&diagnostic=g01&diagnosticView=below&overlay=ids`。诊断层默认关闭，没有修改摆放/材质/地形。[问题坐标、固定主/侧/背/低视截图和验证](docs/m2.2-coastal-assembly/review-gates/G01/REPORT.md)。G02 尚未获准，未执行。
+M2.2 **G01 几何诊断已完成，证据独立保留**：`npm run build` 后运行 `npm run evidence:coastal:g01`；手工打开 `?scene=coastal-assembly&diagnostic=g01&diagnosticView=below&overlay=ids`。诊断层默认关闭，没有修改摆放/材质/地形。[问题坐标、固定主/侧/背/低视截图和验证](docs/m2.2-coastal-assembly/review-gates/G01/REPORT.md)。后续已获准的 G02 候选实验见下方。
+
+M2.2 **G02 front-shoulder/A4 三候选，等待人工选择**：`npm run build` 后运行 `npm run evidence:coastal:g02`；手工入口 `?scene=coastal-assembly&diagnostic=g02&candidate=C2&diagnosticView=golden&overlay=off`。[候选参数、三视图、底盖面积/间隙与顶部衔接对比](docs/m2.2-coastal-assembly/review-gates/G02/REPORT.md)。默认摆放未改，原 GLB/材质/地形和其他实例保留；未进入 G03。
 
 Tripo 岩石数据来源实验使用独立 `?scene=tripo-rock` 路由，基线保留。把原始 GLB 放入 `art-source/tripo/inbox/rocky pyramid 3d model.glb`，运行 `npm run tripo:pipeline` 即可自动优化、导出、验证与截图；原始/生成二进制 ignored。[工作流说明](docs/TRIPO_ASSET_PIPELINE.md) / [实测结果](docs/tripo-rock-spike/RESULTS.md)。
 

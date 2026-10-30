@@ -1,4 +1,4 @@
-import { AxesHelper, Box3, Box3Helper, BufferGeometry, Color, Group, LineBasicMaterial, LineSegments, Mesh, MeshBasicMaterial, PerspectiveCamera, Raycaster, SphereGeometry, Vector3 } from 'three';
+import { AxesHelper, Box3, Box3Helper, BufferGeometry, Color, Group, LineBasicMaterial, LineSegments, Matrix3, Mesh, MeshBasicMaterial, PerspectiveCamera, Raycaster, SphereGeometry, Vector2, Vector3 } from 'three';
 import type { Object3D, Scene } from 'three';
 import type { CoastalPlacement } from '../config/coastal';
 
@@ -174,6 +174,45 @@ export class CoastalDiagnostics {
       }
       return { id: instance.name, cameraDirectionInInstanceLocal: instance.worldToLocal(camera.position.clone()).normalize().toArray(), downwardFacesTested: tested, visibleDownwardFacesSampled: visible, visibleBottomFacesSampled: visibleBottom, bottomWitnesses, witnesses, method: 'sampled actual n.y<-0.35 faces (bottom subset n.y<-0.9); exact scene first-hit test at centroid (0.02m tolerance), then pixel projection; counts are sparse samples, not screen area; +Z local is a geometric axis, no art-facing semantic assumed' };
     });
+  }
+  reviewMetrics(camera: PerspectiveCamera, width: number, height: number): object {
+    const subject = this.subjects.find((s) => s.instance.name === 'front-shoulder')!;
+    const meshes: Mesh[] = [];
+    this.scene.traverse((node) => {
+      if (!(node instanceof Mesh)) return;
+      let parent: Object3D | null = node;
+      while (parent) { if (!parent.visible || parent === this.root) return; parent = parent.parent; }
+      meshes.push(node);
+    });
+    const projected = subject.faces.flatMap((f) => [f.a, f.b, f.c]).map((v) => v.clone().project(camera));
+    const minX = Math.max(0, Math.floor(Math.min(...projected.map((v) => (v.x + 1) * width / 2)))), maxX = Math.min(width, Math.ceil(Math.max(...projected.map((v) => (v.x + 1) * width / 2))));
+    const minY = Math.max(0, Math.floor(Math.min(...projected.map((v) => (1 - v.y) * height / 2)))), maxY = Math.min(height, Math.ceil(Math.max(...projected.map((v) => (1 - v.y) * height / 2))));
+    const ray = new Raycaster(), uv = new Vector2(), normalMatrix = new Matrix3();
+    const step = 6, mask: [number, number][] = [];
+    let visibleTiles = 0, downwardTiles = 0, bottomTiles = 0;
+    // Same absolute 6px sampling grid for every candidate; first-hit queries include original occluders.
+    for (let y = Math.ceil(minY / step) * step + step / 2; y < maxY; y += step) for (let x = Math.ceil(minX / step) * step + step / 2; x < maxX; x += step) {
+      uv.set(x / width * 2 - 1, 1 - y / height * 2); ray.setFromCamera(uv, camera);
+      const hit = ray.intersectObjects(meshes, false)[0];
+      if (!hit?.face) continue;
+      let parent: Object3D | null = hit.object; while (parent && parent !== subject.instance) parent = parent.parent;
+      if (!parent) continue;
+      visibleTiles++;
+      const normal = hit.face.normal.clone().applyNormalMatrix(normalMatrix.getNormalMatrix(hit.object.matrixWorld));
+      if (normal.y < -0.35) downwardTiles++;
+      if (normal.y < -0.9) { bottomTiles++; mask.push([x - step / 2, y - step / 2]); }
+    }
+    const terrain = this.scene.getObjectByName('Organic_Coastal_Mass')!;
+    const cells = new Set<string>(), topSamples: { point: number[]; terrainY: number | null; differenceM: number | null }[] = [];
+    for (const face of subject.faces) {
+      if (face.normal.y < 0.8) continue;
+      const p = face.center, key = `${Math.floor(p.x / 0.25)},${Math.floor(p.z / 0.25)}`;
+      if (cells.has(key)) continue; cells.add(key);
+      ray.set(new Vector3(p.x, 20, p.z), new Vector3(0, -1, 0));
+      const terrainY = ray.intersectObject(terrain, true)[0]?.point.y ?? null;
+      topSamples.push({ point: p.toArray(), terrainY, differenceM: terrainY === null ? null : p.y - terrainY });
+    }
+    return { instance: 'front-shoulder', visiblePixelsEstimate: visibleTiles * step * step, downwardPixelsEstimate: downwardTiles * step * step, bottomPixelsEstimate: bottomTiles * step * step, bottomPercentOfVisible: visibleTiles ? 100 * bottomTiles / visibleTiles : 0, mask, sampleStepPx: step, projectedBounds: { minX, minY, maxX, maxY }, topSamples, topSummary: { count: topSamples.length, outsideTerrain: topSamples.filter((s) => s.terrainY === null).length, buriedMoreThan10cm: topSamples.filter((s) => s.differenceM !== null && s.differenceM < -0.1).length, within10cm: topSamples.filter((s) => s.differenceM !== null && Math.abs(s.differenceM) <= 0.1).length, raisedMoreThan10cm: topSamples.filter((s) => s.differenceM !== null && s.differenceM > 0.1).length }, method: '6x6px grid, actual visible scene first-hit normal classification; bottom nY<-0.9, downward lip nY<-0.35; estimated projected area, not exact raster/GPU mask; top 0.25m grid nY>0.8 samples vs original terrain top; above/below not a solid containment or connectivity certificate' };
   }
   update(camera: PerspectiveCamera, width: number, height: number): void {
     if (!this.root.visible) return;
