@@ -12,6 +12,8 @@ Tripo 岩石数据来源实验使用独立 `?scene=tripo-rock` 路由，基线�
 
 ## Run
 
+G02.2 局部主体替换实验：`?scene=coastal-assembly&diagnostic=g022&variant=baseline|replacement&diagnosticView=golden|side|below`。Baseline 为 C2；replacement 使用单个 A4 渲染副本（Y 高度倍率1.8），保守裁去其覆盖的旧崖面，并用一片台地过渡连接顶部。原实例、GLB、碰撞和旧实验保留，普通入口不启用。[审图报告](docs/m2.2-coastal-assembly/review-gates/G022/REPORT.md)。运行 `npm run build`、`npm run evidence:coastal:g022` 复现；等待人工审图。
+
 G02.1-A 局部几何融合实验：`?scene=coastal-assembly&diagnostic=g021&variant=baseline` 为 G02 C2，切换 `variant=geometry` 查看隔离的崖壁渲染副本；`diagnosticView=golden|side|below` 复用固定相机。默认场景不启用。运行 `npm run build`、`npm run evidence:coastal:g021` 生成前后对比与边界图。[参数、限制与验证](docs/m2.2-coastal-assembly/review-gates/G021-A/REPORT.md)。等待人工审图，未进入 G02.1-B 或 G03。
 
 Node.js 22.12+ (24 recommended), npm and a WebGL2 browser:

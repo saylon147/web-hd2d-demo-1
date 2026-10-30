@@ -1,0 +1,719 @@
+{
+  "browser": "156.0.8078.79",
+  "backend": {
+    "api": "WebGL2",
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3070 Ti (0x00002207) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+  },
+  "viewport": {
+    "width": 1600,
+    "height": 811,
+    "dpr": 1
+  },
+  "sourceCommit": "4175fe3",
+  "parameters": {
+    "schemaVersion": 1,
+    "baseCandidate": "C2",
+    "sourceNode": "Organic_Coastal_Mass",
+    "cliffMesh": "Organic_Coastal_Mass_1",
+    "landMesh": "Organic_Coastal_Mass_2",
+    "region": {
+      "min": [
+        6,
+        1.9,
+        1.9
+      ],
+      "max": [
+        9.3,
+        3.6,
+        4.95
+      ]
+    },
+    "rimXZ": [
+      [
+        6.338,
+        3.754
+      ],
+      [
+        6.74,
+        3.097
+      ],
+      [
+        7.371,
+        2.587
+      ],
+      [
+        8.158,
+        2.096
+      ]
+    ],
+    "renderHeightScale": 1.8,
+    "apronWidthM": 0.8,
+    "apronEmbedM": 0.035,
+    "rockInteriorMarginM": 0.025,
+    "segmentsPerEdge": 6,
+    "depthSegments": 4,
+    "subdivisionLevels": 2,
+    "notes": "G02.2 render-only subject replacement: C2 A4 clone with Y height multiplier 1.8, original C2 instance retained and hidden only in variant. Remove cliff subfaces covered by replacement volume; one land apron meets sampled top. No source GLB, neighbour, collision or material edits."
+  },
+  "summary": {
+    "sourceTriangles": 604,
+    "removedTriangles": 99,
+    "removedAreaM2": 3.8808817895984524,
+    "retainedTriangles": 9565,
+    "apronTriangles": 136,
+    "addedRockInstances": 0,
+    "subjectRenderHeightScale": 1.8,
+    "subjectRenderMatrix": [
+      1.039781472178649,
+      0,
+      0.14613175600806871,
+      0,
+      0,
+      1.62,
+      0,
+      0,
+      -0.13221444591206216,
+      0,
+      0.9407546653044918,
+      0,
+      7.95,
+      1.85,
+      3.35,
+      1
+    ],
+    "rim": [
+      [
+        6.338460445404053,
+        3.4926915168762207,
+        3.753849506378174
+      ],
+      [
+        6.739902019500732,
+        3.5195178985595703,
+        3.096951723098755
+      ],
+      [
+        7.370944976806641,
+        3.548745632171631,
+        2.5871031284332275
+      ],
+      [
+        8.158056259155273,
+        3.546098470687866,
+        2.096468210220337
+      ]
+    ],
+    "contactRows": [
+      {
+        "rim": [
+          6.338460445404053,
+          3.4926915168762207,
+          3.753849506378174
+        ],
+        "outer": [
+          6.338460445404053,
+          3.4926915168762207,
+          3.753849506378174
+        ],
+        "rockTopY": 3.1330190754105787,
+        "taperedEndpoint": true
+      },
+      {
+        "rim": [
+          6.405367374420166,
+          3.4971625804901123,
+          3.6443665424982705
+        ],
+        "outer": [
+          6.624126887338114,
+          3.0369087625997393,
+          3.7780542568577036
+        ],
+        "rockTopY": 3.0719087625997394,
+        "taperedEndpoint": false
+      },
+      {
+        "rim": [
+          6.472274303436279,
+          3.501633644104004,
+          3.5348835786183677
+        ],
+        "outer": [
+          6.812145916896339,
+          3.037320027095848,
+          3.7425849881391073
+        ],
+        "rockTopY": 3.072320027095848,
+        "taperedEndpoint": false
+      },
+      {
+        "rim": [
+          6.539181232452393,
+          3.5061047077178955,
+          3.4254006147384644
+        ],
+        "outer": [
+          6.974203813737141,
+          3.0330326222365627,
+          3.691250423100912
+        ],
+        "rockTopY": 3.068032622236563,
+        "taperedEndpoint": false
+      },
+      {
+        "rim": [
+          6.606088161468506,
+          3.510575771331787,
+          3.315917650858561
+        ],
+        "outer": [
+          7.118271175043889,
+          2.99357528308024,
+          3.62892153126262
+        ],
+        "rockTopY": 3.02857528308024,
+        "taperedEndpoint": false
+      },
+      {
+        "rim": [
+          6.672995090484619,
+          3.5150468349456787,
+          3.2064346869786577
+        ],
+        "outer": [
+          7.247040669336932,
+          3.1749430348249374,
+          3.5572438488352587
+        ],
+        "rockTopY": 3.2099430348249376,
+        "taperedEndpoint": false
+      },
+      {
+        "rim": [
+          6.739902019500732,
+          3.5195178985595703,
+          3.096951723098755
+        ],
+        "outer": [
+          7.197790920872219,
+          3.2162253292093306,
+          3.6636838264373397
+        ],
+        "rockTopY": 3.2512253292093307,
+        "taperedEndpoint": false
+      },
+      {
+        "rim": [
+          6.845075845718384,
+          3.5243891874949136,
+          3.011976957321167
+        ],
+        "outer": [
+          7.327918898409122,
+          3.2110277892509327,
+          3.609594977793426
+        ],
+        "rockTopY": 3.246027789250933,
+        "taperedEndpoint": false
+      },
+      {
+        "rim": [
+          6.950249671936035,
+          3.5292604764302573,
+          2.927002191543579
+        ],
+        "outer": [
+          7.448036791241068,
+          3.18105294168509,
+          3.5431165815049965
+        ],
+        "rockTopY": 3.2160529416850903,
+        "taperedEndpoint": false
+      },
+      {
+        "rim": [
+          7.0554234981536865,
+          3.5341317653656006,
+          2.842027425765991
+        ],
+        "outer": [
+          7.558188694584214,
+          3.169033300193519,
+          3.464303214510961
+        ],
+        "rockTopY": 3.2040333001935193,
+        "taperedEndpoint": false
+      },
+      {
+        "rim": [
+          7.160597324371338,
+          3.539003054300944,
+          2.7570526599884033
+        ],
+        "outer": [
+          7.658384443676371,
+          3.072170645016956,
+          3.3731670499498208
+        ],
+        "rockTopY": 3.1071706450169563,
+        "taperedEndpoint": false
+      },
+      {
+        "rim": [
+          7.265771150588989,
+          3.5438743432362876,
+          2.6720778942108154
+        ],
+        "outer": [
+          7.748614203279727,
+          3.057733429381581,
+          3.2696959146830746
+        ],
+        "rockTopY": 3.0927334293815814,
+        "taperedEndpoint": false
+      },
+      {
+        "rim": [
+          7.370944976806641,
+          3.548745632171631,
+          2.5871031284332275
+        ],
+        "outer": [
+          7.756358342410521,
+          3.05514596456742,
+          3.2054105443418943
+        ],
+        "rockTopY": 3.0901459645674203,
+        "taperedEndpoint": false
+      },
+      {
+        "rim": [
+          7.502130190531413,
+          3.5483044385910034,
+          2.5053306420644126
+        ],
+        "outer": [
+          7.858004747068458,
+          3.0483996821083803,
+          3.076249808542452
+        ],
+        "rockTopY": 3.0833996821083804,
+        "taperedEndpoint": false
+      },
+      {
+        "rim": [
+          7.633315404256185,
+          3.547863245010376,
+          2.423558155695597
+        ],
+        "outer": [
+          7.950838802287338,
+          3.0612745286430014,
+          2.93295167768612
+        ],
+        "rockTopY": 3.0962745286430016,
+        "taperedEndpoint": false
+      },
+      {
+        "rim": [
+          7.764500617980957,
+          3.5474220514297485,
+          2.3417856693267822
+        ],
+        "outer": [
+          8.034189078099104,
+          3.00580108515604,
+          2.774438996267762
+        ],
+        "rockTopY": 3.04080108515604,
+        "taperedEndpoint": false
+      },
+      {
+        "rim": [
+          7.895685831705729,
+          3.546980857849121,
+          2.2600131829579673
+        ],
+        "outer": [
+          8.106386278108342,
+          3.105625595749953,
+          2.598033760791013
+        ],
+        "rockTopY": 3.140625595749953,
+        "taperedEndpoint": false
+      },
+      {
+        "rim": [
+          8.026871045430502,
+          3.5465396642684937,
+          2.178240696589152
+        ],
+        "outer": [
+          8.162489100017007,
+          3.0966906436551787,
+          2.395808784168463
+        ],
+        "rockTopY": 3.131690643655179,
+        "taperedEndpoint": false
+      },
+      {
+        "rim": [
+          8.158056259155273,
+          3.546098470687866,
+          2.096468210220337
+        ],
+        "outer": [
+          8.158056259155273,
+          3.546098470687866,
+          2.096468210220337
+        ],
+        "rockTopY": 2.578502179075481,
+        "taperedEndpoint": true
+      }
+    ],
+    "originalRockBounds": {
+      "min": [
+        5.143162741168526,
+        1.852374738175422,
+        0.7904793008264748
+      ],
+      "max": [
+        10.760115869196083,
+        2.7698435187339783,
+        5.905208703029137
+      ]
+    },
+    "rockBounds": {
+      "min": [
+        5.143162741168526,
+        1.8542745287157596,
+        0.7904793008264748
+      ],
+      "max": [
+        10.760115869196083,
+        3.505718333721161,
+        5.905208703029137
+      ]
+    },
+    "region": {
+      "min": [
+        6,
+        1.9,
+        1.9
+      ],
+      "max": [
+        9.3,
+        3.6,
+        4.95
+      ]
+    },
+    "method": "one C2 A4 render replacement, conservative covered cliff subface removal plus one land apron; original terrain remains the query/collision source"
+  },
+  "instances": [
+    {
+      "id": "east-cliff",
+      "matrixWorld": [
+        0.9659258262890683,
+        0,
+        -0.25881904510252074,
+        0,
+        0,
+        1.2,
+        0,
+        0,
+        0.2458780928473947,
+        0,
+        0.9176295349746149,
+        0,
+        9.5,
+        -0.16,
+        0.8,
+        1
+      ]
+    },
+    {
+      "id": "front-wall",
+      "matrixWorld": [
+        1.1456239028055073,
+        0,
+        0.1002291041598069,
+        0,
+        0,
+        1.2,
+        0,
+        0,
+        -0.08279795561027527,
+        0,
+        0.9463849631871583,
+        0,
+        8.9,
+        -0.15,
+        4.5,
+        1
+      ]
+    },
+    {
+      "id": "cove-turn",
+      "matrixWorld": [
+        0.901067248717891,
+        0,
+        0.6309340799861507,
+        0,
+        0,
+        1.15,
+        0,
+        0,
+        -0.5448976145334937,
+        0,
+        0.7781944420745421,
+        0,
+        5.6,
+        -0.15,
+        6.4,
+        1
+      ]
+    },
+    {
+      "id": "east-shoulder",
+      "matrixWorld": [
+        0.9659258262890683,
+        0,
+        -0.25881904510252074,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0.2458780928473947,
+        0,
+        0.9176295349746149,
+        0,
+        8.9,
+        2.62,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "front-shoulder",
+      "matrixWorld": [
+        1.039781472178649,
+        0,
+        0.14613175600806871,
+        0,
+        0,
+        0.9,
+        0,
+        0,
+        -0.13221444591206216,
+        0,
+        0.9407546653044918,
+        0,
+        7.95,
+        1.85,
+        3.35,
+        1
+      ]
+    }
+  ],
+  "records": [
+    {
+      "variant": "baseline",
+      "view": "golden",
+      "camera": {
+        "position": [
+          17.050014427601752,
+          30.165224254354328,
+          27.34994411970374
+        ],
+        "target": [
+          0,
+          3.4,
+          3
+        ],
+        "fov": 35
+      }
+    },
+    {
+      "variant": "baseline",
+      "view": "side",
+      "camera": {
+        "position": [
+          30,
+          2.8,
+          3
+        ],
+        "target": [
+          8,
+          2.8,
+          3
+        ],
+        "fov": 35
+      }
+    },
+    {
+      "variant": "baseline",
+      "view": "below",
+      "camera": {
+        "position": [
+          22,
+          0.3,
+          12
+        ],
+        "target": [
+          8.5,
+          2.8,
+          2.5
+        ],
+        "fov": 35
+      }
+    },
+    {
+      "variant": "replacement",
+      "view": "golden",
+      "camera": {
+        "position": [
+          17.050014427601752,
+          30.165224254354328,
+          27.34994411970374
+        ],
+        "target": [
+          0,
+          3.4,
+          3
+        ],
+        "fov": 35
+      }
+    },
+    {
+      "variant": "replacement",
+      "view": "side",
+      "camera": {
+        "position": [
+          30,
+          2.8,
+          3
+        ],
+        "target": [
+          8,
+          2.8,
+          3
+        ],
+        "fov": 35
+      }
+    },
+    {
+      "variant": "replacement",
+      "view": "below",
+      "camera": {
+        "position": [
+          22,
+          0.3,
+          12
+        ],
+        "target": [
+          8.5,
+          2.8,
+          2.5
+        ],
+        "fov": 35
+      }
+    }
+  ],
+  "preservation": [
+    {
+      "path": "public/assets/presets/coastal-assembly.json",
+      "sha256": "e6d1d5258f3b510a3decf2c7b995df92b2aa6129d2271acd3ab89f0dee7d151f"
+    },
+    {
+      "path": "public/assets/presets/coastal-g01.json",
+      "sha256": "550b5180124b4879ac14db2446c4654fc54af3ff6f56ab5b463977c65e7df3aa"
+    },
+    {
+      "path": "public/assets/presets/coastal-g02.json",
+      "sha256": "0f4182c4a4eb77a59f7abba016bb3ccad984e9ff7023216e51969b3a89ed0d2f"
+    },
+    {
+      "path": "public/assets/presets/coastal-g021.json",
+      "sha256": "69db0b4aa172f486004676bdbc88ee1c501882a22a0c9260a09b4016dfda8ebf"
+    },
+    {
+      "path": "src/world/coastal.ts",
+      "sha256": "0ad27baef87915034d503de0d2f795d15e54d7fbd790c5f72b8f1c7d25b07d21"
+    },
+    {
+      "path": "src/world/blockout.ts",
+      "sha256": "ff537bbf89334a701915297b4d4c4606978a817f26c265fa37b80cd0135ec788"
+    },
+    {
+      "path": "src/world/coastalFusion.ts",
+      "sha256": "b00b4fa322d4e1bbdc61c68e5e33a6f6a2a91e21b7bd6c3f3695c0afaaeab541"
+    },
+    {
+      "path": "art-source/parameters/island_cottage_v2.json",
+      "sha256": "9182aca07b8777f71df5ec75a494b7de3036e6df32ae6a2172f77851572dfef3"
+    },
+    {
+      "path": "public/assets/models/island_cottage_blockout_v2.glb",
+      "sha256": "2992f132f2c6f852475568074c5481dc0730a0667e369bbc54c18779df32c51d"
+    },
+    {
+      "path": "art-source/tripo/inbox/coastal_cliff_A1_multiview.glb",
+      "sha256": "2a1a9977d08b1a1db1b3981094a4fdd22acda418c5cf907ba966743a41de4805"
+    },
+    {
+      "path": "public/assets/models/coastal-assembly/A1/rock-20k-2k.glb",
+      "sha256": "d4416ba1f7632d28a47b3a90eec888d7a41f4a3ddc31c283ec697dd599b5a28f"
+    },
+    {
+      "path": "public/assets/models/coastal-assembly/A1/rock-10k-1k.glb",
+      "sha256": "622c7df96353f35add8811f14528a09d3cd1cdd86f62667a183c52bdebc67ed5"
+    },
+    {
+      "path": "art-source/tripo/inbox/coastal_cliff_A2_multiview.glb",
+      "sha256": "fd24331c347bd24c6772a47923a701460f8297cd50edf1bcb4b0aea104070e13"
+    },
+    {
+      "path": "public/assets/models/coastal-assembly/A2/rock-20k-2k.glb",
+      "sha256": "28823fe2910158b363092ceb4a31bdf21967fdb05ca59180127ff72dddd40f79"
+    },
+    {
+      "path": "public/assets/models/coastal-assembly/A2/rock-10k-1k.glb",
+      "sha256": "1f7d69dff49c99c4d9c4343f113f20b02eaece432d5470182cd49dfed9ed42ff"
+    },
+    {
+      "path": "art-source/tripo/inbox/coastal_corner_A3_multiview.glb",
+      "sha256": "e179cbb37b51736aa6fb7e9c103dfd7ff79a15979dbe87aecd3a99282d1f06bc"
+    },
+    {
+      "path": "public/assets/models/coastal-assembly/A3/rock-20k-2k.glb",
+      "sha256": "ce9dd331c34da061e735102f6e2cc27b1db28c1fd030be1228018f298f201240"
+    },
+    {
+      "path": "public/assets/models/coastal-assembly/A3/rock-10k-1k.glb",
+      "sha256": "e79a163acf4bd92868dd62447691c7585115881bcf4a3b3f218a2c3ad145e649"
+    },
+    {
+      "path": "art-source/tripo/inbox/coastal_platform_A4_multiview.glb",
+      "sha256": "13f1d85b36fe7192d43d8130c07583138d53fd8694f0276b0a32576582e54672"
+    },
+    {
+      "path": "public/assets/models/coastal-assembly/A4/rock-20k-2k.glb",
+      "sha256": "1491277274630c76bd9075d8897794661814256fee3025535c37432317597813"
+    },
+    {
+      "path": "public/assets/models/coastal-assembly/A4/rock-10k-1k.glb",
+      "sha256": "4854a6c5c75bb843db2ba0f85160d25f616aa1989d53115a39c05df2ff1e707c"
+    }
+  ],
+  "baselineRestore": {
+    "changedPixels": 0,
+    "maxChannelDelta": 0,
+    "maxChangedPixelsAllowed": 20,
+    "maxChannelDeltaAllowed": 1
+  },
+  "previousRoutesRetained": true,
+  "ordinarySceneUnchanged": true,
+  "errors": [],
+  "failedRequests": []
+}

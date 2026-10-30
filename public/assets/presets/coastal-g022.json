@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "baseCandidate": "C2",
+  "sourceNode": "Organic_Coastal_Mass",
+  "cliffMesh": "Organic_Coastal_Mass_1",
+  "landMesh": "Organic_Coastal_Mass_2",
+  "region": { "min": [6.0,1.9,1.9], "max": [9.3,3.6,4.95] },
+  "rimXZ": [[6.338,3.754],[6.74,3.097],[7.371,2.587],[8.158,2.096]],
+  "renderHeightScale": 1.8,
+  "apronWidthM": 0.8,
+  "apronEmbedM": 0.035,
+  "rockInteriorMarginM": 0.025,
+  "segmentsPerEdge": 6,
+  "depthSegments": 4,
+  "subdivisionLevels": 2,
+  "notes": "G02.2 render-only subject replacement: C2 A4 clone with Y height multiplier 1.8, original C2 instance retained and hidden only in variant. Remove cliff subfaces covered by replacement volume; one land apron meets sampled top. No source GLB, neighbour, collision or material edits."
+}
