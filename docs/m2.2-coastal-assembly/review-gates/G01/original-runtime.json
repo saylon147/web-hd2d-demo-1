@@ -1,0 +1,101 @@
+{
+  "errors": [],
+  "requests": [],
+  "browser": "156.0.8078.74",
+  "performance": {
+    "frames": 120,
+    "frameMeanMs": 16.666666666666668,
+    "frameMedianMs": 16.699999999999818,
+    "frameP95Ms": 16.799999999999955,
+    "fps": 59.99999999999999,
+    "cpuSubmissionP95Ms": 0.6000000014901161,
+    "mode": "assembly",
+    "lod": "10k-1k",
+    "asset": "A1",
+    "view": "golden",
+    "instances": 5,
+    "uniqueAssets": 4,
+    "moduleTriangles": 50000,
+    "transferBytes": 8307112,
+    "fetchMs": 103.30000000447035,
+    "parseMs": 63.69999999552965,
+    "textureEstimateBytes": 67108864,
+    "drawCalls": 237,
+    "triangles": 105524,
+    "textures": 15,
+    "viewport": {
+      "width": 1600,
+      "height": 811,
+      "dpr": 1
+    },
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3070 Ti (0x00002207) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "method": "60 warmup frames / 120 RAF samples; CPU submission excludes GPU completion; sequential localhost fetch/parse; unique loaded GLB bytes; RGBA8+mip estimate, not measured VRAM"
+  },
+  "bounds": [
+    {
+      "id": "east-cliff",
+      "min": [
+        5.988565233432154,
+        -0.15950450683245435,
+        -2.6069159332444016
+      ],
+      "max": [
+        13.010212927483355,
+        3.7740581893920897,
+        4.211272055875939
+      ]
+    },
+    {
+      "id": "front-wall",
+      "min": [
+        5.232793407972011,
+        -0.1397895734757185,
+        1.6034430423167665
+      ],
+      "max": [
+        12.564075272712639,
+        2.345612812042236,
+        7.399423338209634
+      ]
+    },
+    {
+      "id": "cove-turn",
+      "min": [
+        1.9972888660201549,
+        -0.1486414512793999,
+        2.9006518327035087
+      ],
+      "max": [
+        9.200007761136302,
+        2.46443475484848,
+        9.904929109874374
+      ]
+    },
+    {
+      "id": "east-shoulder",
+      "min": [
+        6.003029799600201,
+        2.622638597972691,
+        -1.7765085596882964
+      ],
+      "max": [
+        11.79818161227459,
+        3.642048354148865,
+        3.77129090964406
+      ]
+    },
+    {
+      "id": "front-shoulder",
+      "min": [
+        5.46924861894035,
+        1.852374738175422,
+        1.2417694867156888
+      ],
+      "max": [
+        11.73485486033071,
+        2.7698435187339783,
+        7.154694406025743
+      ]
+    }
+  ]
+}

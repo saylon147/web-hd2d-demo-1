@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "coordinates": "meters, Y-up; diagnostic cameras use explicit world position/target and bypass interaction clamps only in G01",
+  "views": {
+    "golden": { "position": [17.050014427601752,30.165224254354328,27.34994411970374], "target": [0,3.4,3], "fov": 35 },
+    "side": { "position": [30,2.8,3], "target": [8,2.8,3], "fov": 35 },
+    "back": { "position": [21,6,-16], "target": [8,2,2], "fov": 35 },
+    "below": { "position": [22,0.3,12], "target": [8.5,2.8,2.5], "fov": 35 }
+  }
+}

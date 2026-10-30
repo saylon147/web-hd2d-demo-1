@@ -165,3 +165,5 @@ h1 { margin: 12px 0 8px; font-size: 27px; font-weight: 550; letter-spacing: .08e
 .coastal-shell .scene-heading { max-width: min(320px, calc(100% - 40px)); padding: 12px; border-radius: 8px; background: #f8f9f1de; }
 .coastal-shell h1 { margin: 8px 0; font-size: 23px; }
 .coastal-shell .placeholder-badge, .coastal-shell .spatial-metrics { margin-top: 10px; }
+.g01-labels { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.g01-labels span { position: absolute; transform: translate(-50%, -100%); background: #122431e8; color: white; border: 2px solid; border-radius: 3px; padding: 3px 5px; font: 11px ui-monospace, monospace; white-space: nowrap; }
