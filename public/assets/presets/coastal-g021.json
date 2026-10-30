@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "baseCandidate": "C2",
+  "sourceNode": "Organic_Coastal_Mass",
+  "region": { "min": [5.7,0.65,1.4], "max": [9.0,3.35,4.9] },
+  "centerXZ": [7.1,3.05],
+  "outwardXZ": [0.82,0.57],
+  "outwardM": 1.35,
+  "irregularityM": 0.12,
+  "contactDropMaxM": 0.32,
+  "contactEmbedM": 0.08,
+  "contactBlendGain": 2,
+  "unmatchedReachM": 0.18,
+  "subdivisionLevels": 2,
+  "protectedNormalY": 0.65,
+  "protectedTopY": 3.35,
+  "notes": "G02.1-A render-only steep cliff proxy; original geometry/materials and top/beach boundaries retained; deterministic irregular shoulder contact, no material phase"
+}
