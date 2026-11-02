@@ -67,6 +67,13 @@ The Golden Reference original is intentionally ignored at `docs/references/golde
 
 ## Review evidence
 
+M2.3 **G03-A0 only**: [coastline extraction report](docs/m2.3-cliff-section/review-gates/G03-A0/REPORT.md).
+Run `npm run build` then `npm run evidence:coastal:g03-a0` for four fixed boundary screenshots and the compact coordinate report.
+Open `/?scene=coastal-assembly&diagnostic=g03-a0&diagnosticView=golden&markers=on` in dev/preview;
+`diagnosticView=side|below` uses the existing G01 cameras, `markers=off` restores the C2 baseline.
+Golden-close is the same Golden capture cropped at `[750,430,540,350]`, not a different camera.
+This entry reads original terrain geometry and adds only projected markers; G03-A1 requires separate human approval.
+
 [Complete V1 handoff](docs/M2_1_V1_HANDOFF.md), [same-camera V0/V1](docs/screenshots/m2.1-v1/v0-v1-exterior.png), [full review sheet](docs/screenshots/m2.1-v1/review-sheet.png), [annotated plans](docs/screenshots/m2.1-v1/annotated-plans.png), [physical section](docs/screenshots/m2.1-v1/annotated-section.png), [acceptance](docs/M2_ACCEPTANCE.md). V0 history: [handoff](docs/M2_1_HANDOFF.md), [review](docs/M2_1_REVIEW.md). Read [PLAN](PLAN.md), [M2 implementation](docs/M2_IMPLEMENTATION.md), [art pipeline](docs/M2_ART_PIPELINE.md), [asset pipeline](docs/ASSET_PIPELINE.md) and [AGENTS](AGENTS.md).
 
 **Stop for human confirmation.** No detailed roofing tiles, painted textures, dense foliage, ComfyUI, characters or M2.2 work has started.

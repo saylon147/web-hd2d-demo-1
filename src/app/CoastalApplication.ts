@@ -21,6 +21,8 @@ import { CoastalFusion, FUSION_PRESET_URL, parseFusionPreset } from '../world/co
 import type { FusionPreset } from '../world/coastalFusion';
 import { CoastalReplacement, REPLACEMENT_PRESET_URL, parseReplacementPreset } from '../world/coastalReplacement';
 import type { ReplacementPreset } from '../world/coastalReplacement';
+import { CliffBoundaryDiagnostics, CLIFF_BOUNDARY_PRESET_URL, parseCliffBoundaryPreset } from '../world/cliffBoundary';
+import type { CliffBoundaryPreset } from '../world/cliffBoundary';
 
 const labels: Record<CoastalView, string> = { golden: '全景', front: '近景', side: '侧面', back: '背面', corner: '转角', top: '顶部' };
 export class CoastalApplication {
@@ -61,13 +63,19 @@ export class CoastalApplication {
   private replacementPreset: ReplacementPreset | undefined;
   private replacement: CoastalReplacement | undefined;
   private replacementVariant = 'baseline';
+  private g03A0: boolean;
+  private boundaryPreset: CliffBoundaryPreset | undefined;
+  private boundary: CliffBoundaryDiagnostics | undefined;
+  private boundaryMarkers = true;
   constructor(root: HTMLElement) {
     this.shell = createShell(root, false);
     const query = new URLSearchParams(location.search);
     this.g02 = query.get('diagnostic') === 'g02';
     this.g021 = query.get('diagnostic') === 'g021';
     this.g022 = query.get('diagnostic') === 'g022';
-    this.g01 = query.get('diagnostic') === 'g01' || this.g02 || this.g021 || this.g022;
+    this.g03A0 = query.get('diagnostic') === 'g03-a0';
+    this.boundaryMarkers = query.get('markers') !== 'off';
+    this.g01 = query.get('diagnostic') === 'g01' || this.g02 || this.g021 || this.g022 || this.g03A0;
     this.replacementVariant = this.g022 && query.get('variant') === 'replacement' ? 'replacement' : 'baseline';
     this.fusionVariant = this.g021 && query.get('variant') === 'geometry' ? 'geometry' : 'baseline';
     this.candidate = query.get('candidate') ?? 'baseline';
@@ -97,11 +105,11 @@ export class CoastalApplication {
     const preset = await fetch(COASTAL_PRESET_URL, { signal: this.events.signal });
     if (!preset.ok) throw new Error('海岸摆放配置缺失。');
     this.preset = parseCoastalPreset(await preset.json() as unknown, this.manifest);
-    if (this.g02 || this.g021 || this.g022) {
+    if (this.g02 || this.g021 || this.g022 || this.g03A0) {
       const response = await fetch(G02_PRESET_URL, { signal: this.events.signal });
       if (!response.ok) throw new Error('G02 候选参数缺失');
       this.candidates = parseCoastalCandidates(await response.json() as unknown, this.preset.placements);
-      if (this.g021 || this.g022) this.candidate = 'C2';
+      if (this.g021 || this.g022 || this.g03A0) this.candidate = 'C2';
       if (!this.candidates.some((c) => c.id === this.candidate)) this.candidate = 'baseline';
       if (this.g02) {
         this.shell.viewControls.insertAdjacentHTML('beforeend', `<label>G02 候选 <select id="g02-candidate"><option value="baseline">G01 原摆放</option>${this.candidates.map((c) => `<option value="${c.id}">${c.id} ${c.name}</option>`).join('')}</select></label>`);
@@ -124,7 +132,7 @@ export class CoastalApplication {
       if (!response.ok) throw new Error('G01 诊断相机配置缺失');
       this.diagnosticPreset = parseDiagnosticPreset(await response.json() as unknown);
       this.select('#g01-view').value = this.diagnosticView; this.select('#g01-overlay').value = this.overlay;
-      if (this.g021 || this.g022) this.select('#g01-overlay').closest('label')!.hidden = true;
+      if (this.g021 || this.g022 || this.g03A0) this.select('#g01-overlay').closest('label')!.hidden = true;
     }
     if (this.g022) {
       const response = await fetch(REPLACEMENT_PRESET_URL, { signal: this.events.signal });
@@ -135,11 +143,21 @@ export class CoastalApplication {
       this.select('#g022-variant').value = this.replacementVariant; this.select('#coastal-mode').disabled = true;
       this.shell.viewport.querySelector('.placeholder-badge')!.textContent = 'G02.2 局部替换实验 · 等待人工审图';
     }
+    if (this.g03A0) {
+      const response = await fetch(CLIFF_BOUNDARY_PRESET_URL, { signal: this.events.signal });
+      if (!response.ok) throw new Error('G03-A0 边界提取参数缺失');
+      this.boundaryPreset = parseCliffBoundaryPreset(await response.json() as unknown);
+      this.mode = 'assembly';
+      this.shell.viewControls.insertAdjacentHTML('beforeend', '<label>G03-A0 边界 <select id="g03-markers"><option value="on">标记真实边界</option><option value="off">关闭标记 / C2 baseline</option></select></label>');
+      this.select('#g03-markers').value = this.boundaryMarkers ? 'on' : 'off'; this.select('#coastal-mode').disabled = true;
+      this.shell.viewport.querySelector('.eyebrow')!.textContent = 'M2.3 / G03-A0';
+      this.shell.viewport.querySelector('.placeholder-badge')!.textContent = '边界提取 · 未生成崖壁 · 等待审图';
+    }
     this.world = await createBlockoutWorld(this.events.signal);
     if (this.disposed) { this.world.dispose(); return; }
     this.renderer.toneMappingExposure = this.preset.lighting.exposure;
     const signal = this.events.signal;
-    for (const select of this.shell.viewControls.querySelectorAll<HTMLSelectElement>('select:not([id^="g01-"]):not([id^="g02-"]):not([id^="g021-"]):not([id^="g022-"])')) select.addEventListener('change', () => {
+    for (const select of this.shell.viewControls.querySelectorAll<HTMLSelectElement>('select:not([id^="g01-"]):not([id^="g02-"]):not([id^="g021-"]):not([id^="g022-"]):not([id^="g03-"])')) select.addEventListener('change', () => {
       this.mode = COASTAL_MODES.find((item) => item === this.select('#coastal-mode').value) ?? 'assembly';
       this.lod = COASTAL_LODS.find((item) => item === this.select('#coastal-lod').value) ?? '10k-1k';
       this.asset = COASTAL_ASSETS.find((item) => item === this.select('#coastal-asset').value) ?? 'A1';
@@ -158,6 +176,10 @@ export class CoastalApplication {
       this.replacementVariant = this.select('#g022-variant').value;
       this.replacement?.setVariant(this.replacementVariant === 'replacement');
       this.syncReplacementEvidence(); this.shell.canvas.dataset.rendered = 'false'; this.syncQuery();
+    }, { signal });
+    if (this.g03A0) this.select('#g03-markers').addEventListener('change', () => {
+      this.boundaryMarkers = this.select('#g03-markers').value === 'on'; this.boundary?.setVisible(this.boundaryMarkers);
+      this.evidenceCamera = ''; this.shell.canvas.dataset.rendered = 'false'; this.syncQuery();
     }, { signal });
     if (this.g01) {
       this.select('#g01-view').addEventListener('change', () => {
@@ -192,6 +214,7 @@ export class CoastalApplication {
     this.evidenceCamera = '';
     this.fusion?.dispose(); this.fusion = undefined;
     this.replacement?.dispose(); this.replacement = undefined;
+    this.boundary?.dispose(); this.boundary = undefined; delete this.shell.canvas.dataset.g03Boundary;
     this.diagnostics?.dispose(); this.diagnostics = undefined; delete this.shell.canvas.dataset.g01Report;
     if (this.modules) { disposeObject(this.modules.root); this.modules = undefined; }
     this.select('#coastal-mode').value = this.mode; this.select('#coastal-asset').value = this.asset; this.select('#coastal-lod').value = this.lod;
@@ -203,7 +226,7 @@ export class CoastalApplication {
       if (node) node.visible = this.mode !== 'assembly';
     }
     if (this.mode !== 'baseline') {
-      const placements = this.mode === 'assembly' ? candidatePlacements(this.preset.placements, this.g02 || this.g021 || this.g022 ? this.candidates.find((c) => c.id === this.candidate) : undefined) : [{ id: 'module-preview', asset: this.asset, position: [0, 0, 0] as [number, number, number], scale: [1, 1, 1] as [number, number, number], tint: [1, 1, 1] as [number, number, number], yaw: 0, embeddingM: 0.1 }];
+      const placements = this.mode === 'assembly' ? candidatePlacements(this.preset.placements, this.g02 || this.g021 || this.g022 || this.g03A0 ? this.candidates.find((c) => c.id === this.candidate) : undefined) : [{ id: 'module-preview', asset: this.asset, position: [0, 0, 0] as [number, number, number], scale: [1, 1, 1] as [number, number, number], tint: [1, 1, 1] as [number, number, number], yaw: 0, embeddingM: 0.1 }];
       let loaded: CoastalLoaded;
       try { loaded = await loadCoastalModules(this.manifest, placements, this.lod, this.loading.signal); }
       catch (error: unknown) { if (this.disposed || selection !== this.selection) return; throw error; }
@@ -223,7 +246,13 @@ export class CoastalApplication {
         this.replacement.setVariant(this.replacementVariant === 'replacement'); this.syncReplacementEvidence();
         this.shell.canvas.dataset.replacementInstances = JSON.stringify(loaded.root.children.map((node) => ({ id: node.name, matrixWorld: node.matrixWorld.toArray() })));
       }
-      if (this.g01 && !this.g021 && !this.g022 && this.mode === 'assembly') {
+      if (this.g03A0 && this.boundaryPreset) {
+        this.boundary = new CliffBoundaryDiagnostics(this.world.scene, this.shell.viewport, this.boundaryPreset);
+        this.boundary.setVisible(this.boundaryMarkers);
+        this.shell.canvas.dataset.g03Boundary = JSON.stringify(this.boundary.report);
+        this.shell.canvas.dataset.g03Instances = JSON.stringify(loaded.root.children.map((node) => ({ id: node.name, matrixWorld: node.matrixWorld.toArray() })));
+      }
+      if (this.g01 && !this.g021 && !this.g022 && !this.g03A0 && this.mode === 'assembly') {
         this.diagnostics = new CoastalDiagnostics(this.world.scene, loaded.root, placements, this.shell.viewport);
         this.diagnostics.setVisible(this.overlay !== 'off', this.overlay === 'terrain');
         this.shell.canvas.dataset.g01Report = JSON.stringify(this.diagnostics.report);
@@ -274,6 +303,7 @@ export class CoastalApplication {
     if (this.g02) url.searchParams.set('candidate', this.candidate);
     if (this.g021) url.searchParams.set('variant', this.fusionVariant);
     if (this.g022) url.searchParams.set('variant', this.replacementVariant);
+    if (this.g03A0) url.searchParams.set('markers', this.boundaryMarkers ? 'on' : 'off');
     history.replaceState(null, '', url);
   }
   private resetSamples(): void { this.samples.reset(); delete this.shell.canvas.dataset.performance; }
@@ -290,6 +320,12 @@ export class CoastalApplication {
       this.camera.update(this.previousFrame ? Math.min(0.1, (time - this.previousFrame) / 1000) : 0);
       this.previousFrame = time;
       const activeCamera = this.fixedCamera ?? this.camera.camera;
+      if (this.boundary && this.fixedCamera) {
+        const key = `${this.diagnosticView}:${this.shell.viewport.clientWidth}:${this.shell.viewport.clientHeight}:${this.boundaryMarkers}`;
+        if (key !== this.evidenceCamera) {
+          this.evidenceCamera = key; this.boundary.update(activeCamera, this.shell.viewport.clientWidth, this.shell.viewport.clientHeight);
+        }
+      }
       if (this.fusion && this.fixedCamera) {
         const key = `${this.diagnosticView}:${this.shell.viewport.clientWidth}:${this.shell.viewport.clientHeight}`;
         if (key !== this.evidenceCamera) {
@@ -319,7 +355,7 @@ export class CoastalApplication {
           method: '60 warmup frames / 120 RAF samples; CPU submission excludes GPU completion; sequential localhost fetch/parse; unique loaded GLB bytes; RGBA8+mip estimate, not measured VRAM' });
       }
       this.shell.status.textContent = `WebGL2 · ${this.mode === 'baseline' ? 'M2.1' : this.lod}`;
-      this.shell.readout.textContent = this.fixedCamera ? `${this.g022 ? `G02.2 ${this.replacementVariant}` : this.g021 ? `G02.1-A ${this.fusionVariant}` : this.g02 ? `G02 ${this.candidate}` : 'G01'} ${this.diagnosticView} · ${this.overlay} · 固定相机` : `${labels[this.view]} · ${this.camera.state.pitch.toFixed(1)}° · ${this.camera.state.distance.toFixed(1)} m`;
+      this.shell.readout.textContent = this.fixedCamera ? `${this.g03A0 ? 'G03-A0 边界提取' : this.g022 ? `G02.2 ${this.replacementVariant}` : this.g021 ? `G02.1-A ${this.fusionVariant}` : this.g02 ? `G02 ${this.candidate}` : 'G01'} ${this.diagnosticView} · ${this.overlay} · 固定相机` : `${labels[this.view]} · ${this.camera.state.pitch.toFixed(1)}° · ${this.camera.state.distance.toFixed(1)} m`;
       this.frame = requestAnimationFrame(this.render);
     } catch (error: unknown) { this.fail(error); }
   };
@@ -336,6 +372,7 @@ export class CoastalApplication {
     this.diagnostics?.dispose();
     this.fusion?.dispose();
     this.replacement?.dispose();
+    this.boundary?.dispose();
     if (this.modules) disposeObject(this.modules.root);
     this.world?.dispose(); this.renderer?.dispose();
   }

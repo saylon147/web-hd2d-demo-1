@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "sourceNode": "Organic_Coastal_Mass",
+  "cliffMesh": "Organic_Coastal_Mass_1",
+  "landMesh": "Organic_Coastal_Mass_2",
+  "seaNode": "Sea_Plane",
+  "profileOriginXZ": [0, -1.8],
+  "rimSelectionXZ": { "min": [6.3, 2.0], "max": [8.3, 4.0] },
+  "weldToleranceM": 0.00001,
+  "notes": "G03-A0 read-only extraction from the current post-Boolean GLB. Selection covers the G022 front-shoulder rim; origin is the existing terrain generator center. No cliff generation or source/placement/material edits."
+}
