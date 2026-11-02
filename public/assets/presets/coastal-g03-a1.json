@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "baseCandidate": "C2",
+  "sourceNode": "Organic_Coastal_Mass",
+  "cliffMesh": "Organic_Coastal_Mass_1",
+  "subjectInstance": "front-shoulder",
+  "profileOriginXZ": [0, -1.8],
+  "subdivisionLevels": 2,
+  "largeScaleOffsetM": 0.24,
+  "boundaryFadeM": 0.5,
+  "material": { "color": "#b8b6af", "roughness": 0.95 },
+  "notes": "G03-A1 only: clip current post-Boolean cliff against approved A0 endpoint planes and sea; preserve original middle profiles and exact T/F/W/E; broad outward relief, zero displacement at all interfaces. No high-frequency detail or new Tripo assets."
+}

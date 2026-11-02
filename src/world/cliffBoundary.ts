@@ -145,7 +145,7 @@ export class CliffBoundaryDiagnostics {
   readonly report: CliffBoundaryReport;
   private layer: HTMLDivElement;
   private visible = true;
-  constructor(private scene: Scene, viewport: HTMLElement, config: CliffBoundaryPreset) {
+  constructor(private scene: Scene, viewport: HTMLElement, config: CliffBoundaryPreset, private stage = 'G03-A0') {
     this.report = extractCliffBoundary(scene, config);
     this.layer = document.createElement('div'); this.layer.className = 'g03-boundary-overlay';
     this.layer.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:5'; viewport.append(this.layer);
@@ -172,7 +172,7 @@ export class CliffBoundaryDiagnostics {
       }
       points.forEach((p, i) => { const [x, y] = project(p); parts.push(`<circle cx="${x}" cy="${y}" r="3.5" fill="${curve.color}" stroke="#14252c" stroke-width="1"/>`); if (curve.id.startsWith('T')) parts.push(`<text x="${x + 7}" y="${y - 7}" fill="${curve.color}" stroke="#14252c" stroke-width="3" paint-order="stroke" font-size="15" font-weight="700">T${i}</text>`); });
     }
-    this.layer.innerHTML = `<svg width="${width}" height="${height}" style="position:absolute;inset:0" fill="none">${parts.join('')}</svg><div style="position:absolute;left:16px;top:16px;padding:10px 14px;background:#14252ce8;color:white;font:14px/1.65 Segoe UI,Microsoft YaHei;border-radius:5px">G03-A0 · 原始 GLB 边界 · ${this.report.rimLengthM.toFixed(3)} m<br>${this.report.curves.map((c) => `<span style="color:${c.color}">${c.id}</span>`).join(' &nbsp; ')}<br>实线 = 可见；虚线 = 遮挡后投影；圆点 = 提取点<br>F: Y=${this.report.footY.toFixed(3)} m；W: Y=${this.report.seaY.toFixed(3)} m · 未生成崖壁</div>`;
+    this.layer.innerHTML = `<svg width="${width}" height="${height}" style="position:absolute;inset:0" fill="none">${parts.join('')}</svg><div style="position:absolute;left:16px;top:16px;padding:10px 14px;background:#14252ce8;color:white;font:14px/1.65 Segoe UI,Microsoft YaHei;border-radius:5px">${this.stage} · 原始 GLB 边界 · ${this.report.rimLengthM.toFixed(3)} m<br>${this.report.curves.map((c) => `<span style="color:${c.color}">${c.id}</span>`).join(' &nbsp; ')}<br>实线 = 可见；虚线 = 遮挡后投影；圆点 = 提取点<br>F: Y=${this.report.footY.toFixed(3)} m；W: Y=${this.report.seaY.toFixed(3)} m · ${this.stage === 'G03-A0' ? '未生成崖壁' : '仅标记原边界'}</div>`;
   }
   dispose(): void { this.layer.remove(); }
 }

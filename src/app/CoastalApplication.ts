@@ -22,7 +22,10 @@ import type { FusionPreset } from '../world/coastalFusion';
 import { CoastalReplacement, REPLACEMENT_PRESET_URL, parseReplacementPreset } from '../world/coastalReplacement';
 import type { ReplacementPreset } from '../world/coastalReplacement';
 import { CliffBoundaryDiagnostics, CLIFF_BOUNDARY_PRESET_URL, parseCliffBoundaryPreset } from '../world/cliffBoundary';
-import type { CliffBoundaryPreset } from '../world/cliffBoundary';
+import type { CliffBoundaryPreset, CliffBoundaryReport } from '../world/cliffBoundary';
+import { extractCliffBoundary } from '../world/cliffBoundary';
+import { APPROVED_BOUNDARY_URL, CliffBlockout, CLIFF_BLOCKOUT_PRESET_URL, parseCliffBlockoutPreset } from '../world/cliffBlockout';
+import type { CliffBlockoutPreset } from '../world/cliffBlockout';
 
 const labels: Record<CoastalView, string> = { golden: '全景', front: '近景', side: '侧面', back: '背面', corner: '转角', top: '顶部' };
 export class CoastalApplication {
@@ -67,6 +70,12 @@ export class CoastalApplication {
   private boundaryPreset: CliffBoundaryPreset | undefined;
   private boundary: CliffBoundaryDiagnostics | undefined;
   private boundaryMarkers = true;
+  private g03A1: boolean;
+  private blockoutPreset: CliffBlockoutPreset | undefined;
+  private approvedBoundary: CliffBoundaryReport | undefined;
+  private cliffBlockout: CliffBlockout | undefined;
+  private cliffVariant = 'baseline';
+  private cliffDiagnosticOnly = false;
   constructor(root: HTMLElement) {
     this.shell = createShell(root, false);
     const query = new URLSearchParams(location.search);
@@ -74,8 +83,11 @@ export class CoastalApplication {
     this.g021 = query.get('diagnostic') === 'g021';
     this.g022 = query.get('diagnostic') === 'g022';
     this.g03A0 = query.get('diagnostic') === 'g03-a0';
+    this.g03A1 = query.get('diagnostic') === 'g03-a1';
+    this.cliffVariant = this.g03A1 && query.get('variant') === 'cliff-blockout' ? 'cliff-blockout' : 'baseline';
+    this.cliffDiagnosticOnly = this.g03A1 && query.get('geometryOnly') === 'true';
     this.boundaryMarkers = query.get('markers') !== 'off';
-    this.g01 = query.get('diagnostic') === 'g01' || this.g02 || this.g021 || this.g022 || this.g03A0;
+    this.g01 = query.get('diagnostic') === 'g01' || this.g02 || this.g021 || this.g022 || this.g03A0 || this.g03A1;
     this.replacementVariant = this.g022 && query.get('variant') === 'replacement' ? 'replacement' : 'baseline';
     this.fusionVariant = this.g021 && query.get('variant') === 'geometry' ? 'geometry' : 'baseline';
     this.candidate = query.get('candidate') ?? 'baseline';
@@ -105,11 +117,11 @@ export class CoastalApplication {
     const preset = await fetch(COASTAL_PRESET_URL, { signal: this.events.signal });
     if (!preset.ok) throw new Error('海岸摆放配置缺失。');
     this.preset = parseCoastalPreset(await preset.json() as unknown, this.manifest);
-    if (this.g02 || this.g021 || this.g022 || this.g03A0) {
+    if (this.g02 || this.g021 || this.g022 || this.g03A0 || this.g03A1) {
       const response = await fetch(G02_PRESET_URL, { signal: this.events.signal });
       if (!response.ok) throw new Error('G02 候选参数缺失');
       this.candidates = parseCoastalCandidates(await response.json() as unknown, this.preset.placements);
-      if (this.g021 || this.g022 || this.g03A0) this.candidate = 'C2';
+      if (this.g021 || this.g022 || this.g03A0 || this.g03A1) this.candidate = 'C2';
       if (!this.candidates.some((c) => c.id === this.candidate)) this.candidate = 'baseline';
       if (this.g02) {
         this.shell.viewControls.insertAdjacentHTML('beforeend', `<label>G02 候选 <select id="g02-candidate"><option value="baseline">G01 原摆放</option>${this.candidates.map((c) => `<option value="${c.id}">${c.id} ${c.name}</option>`).join('')}</select></label>`);
@@ -132,7 +144,7 @@ export class CoastalApplication {
       if (!response.ok) throw new Error('G01 诊断相机配置缺失');
       this.diagnosticPreset = parseDiagnosticPreset(await response.json() as unknown);
       this.select('#g01-view').value = this.diagnosticView; this.select('#g01-overlay').value = this.overlay;
-      if (this.g021 || this.g022 || this.g03A0) this.select('#g01-overlay').closest('label')!.hidden = true;
+      if (this.g021 || this.g022 || this.g03A0 || this.g03A1) this.select('#g01-overlay').closest('label')!.hidden = true;
     }
     if (this.g022) {
       const response = await fetch(REPLACEMENT_PRESET_URL, { signal: this.events.signal });
@@ -143,15 +155,27 @@ export class CoastalApplication {
       this.select('#g022-variant').value = this.replacementVariant; this.select('#coastal-mode').disabled = true;
       this.shell.viewport.querySelector('.placeholder-badge')!.textContent = 'G02.2 局部替换实验 · 等待人工审图';
     }
-    if (this.g03A0) {
+    if (this.g03A0 || this.g03A1) {
       const response = await fetch(CLIFF_BOUNDARY_PRESET_URL, { signal: this.events.signal });
       if (!response.ok) throw new Error('G03-A0 边界提取参数缺失');
       this.boundaryPreset = parseCliffBoundaryPreset(await response.json() as unknown);
       this.mode = 'assembly';
       this.shell.viewControls.insertAdjacentHTML('beforeend', '<label>G03-A0 边界 <select id="g03-markers"><option value="on">标记真实边界</option><option value="off">关闭标记 / C2 baseline</option></select></label>');
       this.select('#g03-markers').value = this.boundaryMarkers ? 'on' : 'off'; this.select('#coastal-mode').disabled = true;
-      this.shell.viewport.querySelector('.eyebrow')!.textContent = 'M2.3 / G03-A0';
-      this.shell.viewport.querySelector('.placeholder-badge')!.textContent = '边界提取 · 未生成崖壁 · 等待审图';
+      this.shell.viewport.querySelector('.eyebrow')!.textContent = this.g03A1 ? 'M2.3 / G03-A1' : 'M2.3 / G03-A0';
+      this.shell.viewport.querySelector('.placeholder-badge')!.textContent = this.g03A1 ? '中性基础崖壁 · 等待审图' : '边界提取 · 未生成崖壁 · 等待审图';
+    }
+    if (this.g03A1) {
+      const response = await fetch(CLIFF_BLOCKOUT_PRESET_URL, { signal: this.events.signal });
+      if (!response.ok) throw new Error('G03-A1 生成参数缺失');
+      this.blockoutPreset = parseCliffBlockoutPreset(await response.json() as unknown);
+      const approved = await fetch(APPROVED_BOUNDARY_URL, { signal: this.events.signal });
+      if (!approved.ok) throw new Error('G03-A0 已批准边界数据缺失');
+      this.approvedBoundary = await approved.json() as CliffBoundaryReport;
+      this.shell.viewControls.insertAdjacentHTML('beforeend', '<label>G03-A1 <select id="g03-variant"><option value="baseline">C2 baseline</option><option value="cliff-blockout">基础崖壁 / 隐藏 A4</option></select></label>');
+      this.select('#g03-variant').value = this.cliffVariant;
+      this.shell.viewControls.insertAdjacentHTML('beforeend', '<label>几何诊断 <select id="g03-geometry-only"><option value="false">完整场景</option><option value="true">仅显示新网格</option></select></label>');
+      this.select('#g03-geometry-only').value = String(this.cliffDiagnosticOnly);
     }
     this.world = await createBlockoutWorld(this.events.signal);
     if (this.disposed) { this.world.dispose(); return; }
@@ -177,9 +201,16 @@ export class CoastalApplication {
       this.replacement?.setVariant(this.replacementVariant === 'replacement');
       this.syncReplacementEvidence(); this.shell.canvas.dataset.rendered = 'false'; this.syncQuery();
     }, { signal });
-    if (this.g03A0) this.select('#g03-markers').addEventListener('change', () => {
-      this.boundaryMarkers = this.select('#g03-markers').value === 'on'; this.boundary?.setVisible(this.boundaryMarkers);
+    if (this.g03A0 || this.g03A1) this.select('#g03-markers').addEventListener('change', () => {
+      this.boundaryMarkers = this.select('#g03-markers').value === 'on'; this.boundary?.setVisible(this.boundaryMarkers && !this.cliffDiagnosticOnly);
       this.evidenceCamera = ''; this.shell.canvas.dataset.rendered = 'false'; this.syncQuery();
+    }, { signal });
+    if (this.g03A1) this.select('#g03-variant').addEventListener('change', () => {
+      this.cliffVariant = this.select('#g03-variant').value; this.cliffBlockout?.setVariant(this.cliffVariant === 'cliff-blockout');
+      this.syncCliffEvidence(); this.evidenceCamera = ''; this.shell.canvas.dataset.rendered = 'false'; this.syncQuery();
+    }, { signal });
+    if (this.g03A1) this.select('#g03-geometry-only').addEventListener('change', () => {
+      this.cliffDiagnosticOnly = this.select('#g03-geometry-only').value === 'true'; this.boundary?.setVisible(this.boundaryMarkers && !this.cliffDiagnosticOnly); this.evidenceCamera = ''; this.shell.canvas.dataset.rendered = 'false'; this.syncQuery();
     }, { signal });
     if (this.g01) {
       this.select('#g01-view').addEventListener('change', () => {
@@ -214,6 +245,7 @@ export class CoastalApplication {
     this.evidenceCamera = '';
     this.fusion?.dispose(); this.fusion = undefined;
     this.replacement?.dispose(); this.replacement = undefined;
+    this.cliffBlockout?.dispose(); this.cliffBlockout = undefined; delete this.shell.canvas.dataset.g03Blockout;
     this.boundary?.dispose(); this.boundary = undefined; delete this.shell.canvas.dataset.g03Boundary;
     this.diagnostics?.dispose(); this.diagnostics = undefined; delete this.shell.canvas.dataset.g01Report;
     if (this.modules) { disposeObject(this.modules.root); this.modules = undefined; }
@@ -226,7 +258,7 @@ export class CoastalApplication {
       if (node) node.visible = this.mode !== 'assembly';
     }
     if (this.mode !== 'baseline') {
-      const placements = this.mode === 'assembly' ? candidatePlacements(this.preset.placements, this.g02 || this.g021 || this.g022 || this.g03A0 ? this.candidates.find((c) => c.id === this.candidate) : undefined) : [{ id: 'module-preview', asset: this.asset, position: [0, 0, 0] as [number, number, number], scale: [1, 1, 1] as [number, number, number], tint: [1, 1, 1] as [number, number, number], yaw: 0, embeddingM: 0.1 }];
+      const placements = this.mode === 'assembly' ? candidatePlacements(this.preset.placements, this.g02 || this.g021 || this.g022 || this.g03A0 || this.g03A1 ? this.candidates.find((c) => c.id === this.candidate) : undefined) : [{ id: 'module-preview', asset: this.asset, position: [0, 0, 0] as [number, number, number], scale: [1, 1, 1] as [number, number, number], tint: [1, 1, 1] as [number, number, number], yaw: 0, embeddingM: 0.1 }];
       let loaded: CoastalLoaded;
       try { loaded = await loadCoastalModules(this.manifest, placements, this.lod, this.loading.signal); }
       catch (error: unknown) { if (this.disposed || selection !== this.selection) return; throw error; }
@@ -246,13 +278,21 @@ export class CoastalApplication {
         this.replacement.setVariant(this.replacementVariant === 'replacement'); this.syncReplacementEvidence();
         this.shell.canvas.dataset.replacementInstances = JSON.stringify(loaded.root.children.map((node) => ({ id: node.name, matrixWorld: node.matrixWorld.toArray() })));
       }
-      if (this.g03A0 && this.boundaryPreset) {
-        this.boundary = new CliffBoundaryDiagnostics(this.world.scene, this.shell.viewport, this.boundaryPreset);
-        this.boundary.setVisible(this.boundaryMarkers);
+      if (this.g03A1 && this.blockoutPreset && this.approvedBoundary && this.boundaryPreset) {
+        const current = extractCliffBoundary(this.world.scene, this.boundaryPreset);
+        if (current.curves.some((c, i) => c.points.length !== this.approvedBoundary!.curves[i]?.points.length || c.points.some((xyz, j) => xyz.some((n, k) => Math.abs(n - (this.approvedBoundary!.curves[i]?.points[j]?.[k] ?? Infinity)) > 1e-8)))) throw new Error('G03-A0 approved boundary no longer matches source terrain');
+        const subject = loaded.root.getObjectByName('front-shoulder');
+        if (!subject) throw new Error('G03-A1 requires original A4 instance');
+        this.cliffBlockout = new CliffBlockout(this.world.scene, subject, this.blockoutPreset, this.approvedBoundary);
+        this.cliffBlockout.setVariant(this.cliffVariant === 'cliff-blockout'); this.syncCliffEvidence();
+      }
+      if ((this.g03A0 || this.g03A1) && this.boundaryPreset) {
+        this.boundary = new CliffBoundaryDiagnostics(this.world.scene, this.shell.viewport, this.boundaryPreset, this.g03A1 ? 'G03-A1' : 'G03-A0');
+        this.boundary.setVisible(this.boundaryMarkers && !this.cliffDiagnosticOnly);
         this.shell.canvas.dataset.g03Boundary = JSON.stringify(this.boundary.report);
         this.shell.canvas.dataset.g03Instances = JSON.stringify(loaded.root.children.map((node) => ({ id: node.name, matrixWorld: node.matrixWorld.toArray() })));
       }
-      if (this.g01 && !this.g021 && !this.g022 && !this.g03A0 && this.mode === 'assembly') {
+      if (this.g01 && !this.g021 && !this.g022 && !this.g03A0 && !this.g03A1 && this.mode === 'assembly') {
         this.diagnostics = new CoastalDiagnostics(this.world.scene, loaded.root, placements, this.shell.viewport);
         this.diagnostics.setVisible(this.overlay !== 'off', this.overlay === 'terrain');
         this.shell.canvas.dataset.g01Report = JSON.stringify(this.diagnostics.report);
@@ -303,10 +343,17 @@ export class CoastalApplication {
     if (this.g02) url.searchParams.set('candidate', this.candidate);
     if (this.g021) url.searchParams.set('variant', this.fusionVariant);
     if (this.g022) url.searchParams.set('variant', this.replacementVariant);
-    if (this.g03A0) url.searchParams.set('markers', this.boundaryMarkers ? 'on' : 'off');
+    if (this.g03A0 || this.g03A1) url.searchParams.set('markers', this.boundaryMarkers ? 'on' : 'off');
+    if (this.g03A1) { url.searchParams.set('variant', this.cliffVariant); url.searchParams.set('geometryOnly', String(this.cliffDiagnosticOnly)); }
     history.replaceState(null, '', url);
   }
   private resetSamples(): void { this.samples.reset(); delete this.shell.canvas.dataset.performance; }
+  private syncCliffEvidence(): void {
+    this.shell.canvas.dataset.g03Variant = this.cliffVariant;
+    this.shell.canvas.dataset.g03Blockout = JSON.stringify(this.cliffBlockout?.summary);
+    this.shell.canvas.dataset.g03Protection = JSON.stringify(this.cliffBlockout?.preservation());
+    this.shell.canvas.dataset.g03Neighbours = JSON.stringify(this.modules?.root.children.filter((node) => node.name !== 'front-shoulder').map((node) => ({ id: node.name, visible: node.visible, matrixWorld: node.matrixWorld.toArray() })));
+  }
   private resize = (): void => {
     if (!this.renderer || !this.camera) return;
     const width = Math.max(1, this.shell.viewport.clientWidth), height = Math.max(1, this.shell.viewport.clientHeight);
@@ -342,7 +389,7 @@ export class CoastalApplication {
         }
       }
       this.diagnostics?.update(activeCamera, this.shell.viewport.clientWidth, this.shell.viewport.clientHeight);
-      const start = performance.now(); this.renderer.render(this.world.scene, activeCamera); const submitted = performance.now() - start;
+      const start = performance.now(); this.renderer.render(this.g03A1 && this.cliffDiagnosticOnly && this.cliffBlockout ? this.cliffBlockout.diagnosticScene : this.world.scene, activeCamera); const submitted = performance.now() - start;
       if (this.shell.canvas.dataset.loaded === 'true') this.shell.canvas.dataset.rendered = 'true';
       if (this.shell.canvas.dataset.loaded === 'true' && this.samples.sample(time, submitted) && !this.shell.canvas.dataset.performance) {
         const context = this.renderer.getContext(), debug = context.getExtension('WEBGL_debug_renderer_info');
@@ -355,7 +402,7 @@ export class CoastalApplication {
           method: '60 warmup frames / 120 RAF samples; CPU submission excludes GPU completion; sequential localhost fetch/parse; unique loaded GLB bytes; RGBA8+mip estimate, not measured VRAM' });
       }
       this.shell.status.textContent = `WebGL2 · ${this.mode === 'baseline' ? 'M2.1' : this.lod}`;
-      this.shell.readout.textContent = this.fixedCamera ? `${this.g03A0 ? 'G03-A0 边界提取' : this.g022 ? `G02.2 ${this.replacementVariant}` : this.g021 ? `G02.1-A ${this.fusionVariant}` : this.g02 ? `G02 ${this.candidate}` : 'G01'} ${this.diagnosticView} · ${this.overlay} · 固定相机` : `${labels[this.view]} · ${this.camera.state.pitch.toFixed(1)}° · ${this.camera.state.distance.toFixed(1)} m`;
+      this.shell.readout.textContent = this.fixedCamera ? `${this.g03A1 ? `G03-A1 ${this.cliffVariant}` : this.g03A0 ? 'G03-A0 边界提取' : this.g022 ? `G02.2 ${this.replacementVariant}` : this.g021 ? `G02.1-A ${this.fusionVariant}` : this.g02 ? `G02 ${this.candidate}` : 'G01'} ${this.diagnosticView} · ${this.overlay} · 固定相机` : `${labels[this.view]} · ${this.camera.state.pitch.toFixed(1)}° · ${this.camera.state.distance.toFixed(1)} m`;
       this.frame = requestAnimationFrame(this.render);
     } catch (error: unknown) { this.fail(error); }
   };
@@ -372,6 +419,7 @@ export class CoastalApplication {
     this.diagnostics?.dispose();
     this.fusion?.dispose();
     this.replacement?.dispose();
+    this.cliffBlockout?.dispose();
     this.boundary?.dispose();
     if (this.modules) disposeObject(this.modules.root);
     this.world?.dispose(); this.renderer?.dispose();

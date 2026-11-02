@@ -74,6 +74,15 @@ Open `/?scene=coastal-assembly&diagnostic=g03-a0&diagnosticView=golden&markers=o
 Golden-close is the same Golden capture cropped at `[750,430,540,350]`, not a different camera.
 This entry reads original terrain geometry and adds only projected markers; G03-A1 requires separate human approval.
 
+M2.3 **G03-A1** (A0 approved in chat): [neutral cliff report](docs/m2.3-cliff-section/review-gates/G03-A1/REPORT.md).
+Run `npm run build` then `npm run evidence:coastal:g03-a1` for four fixed Before/After views and geometry diagnostics.
+Entry: `/?scene=coastal-assembly&diagnostic=g03-a1&variant=baseline&markers=off`;
+switch `variant=cliff-blockout` to replace only the approved original cliff surface and hide `front-shoulder` A4.
+`diagnosticView=golden|side|below` retains G01 cameras; Golden-close is the original fixed crop.
+`geometryOnly=true` is a supplemental unoccluded view of the new surface, using the same renderer/camera/lights.
+The approved T/F/W/E coordinates are frozen in `coastal-g03-a0-boundaries.json`; the original terrain is still the query/collision source.
+No source GLBs or other placements are edited. Stop for human review; G03-B remains unauthorized.
+
 [Complete V1 handoff](docs/M2_1_V1_HANDOFF.md), [same-camera V0/V1](docs/screenshots/m2.1-v1/v0-v1-exterior.png), [full review sheet](docs/screenshots/m2.1-v1/review-sheet.png), [annotated plans](docs/screenshots/m2.1-v1/annotated-plans.png), [physical section](docs/screenshots/m2.1-v1/annotated-section.png), [acceptance](docs/M2_ACCEPTANCE.md). V0 history: [handoff](docs/M2_1_HANDOFF.md), [review](docs/M2_1_REVIEW.md). Read [PLAN](PLAN.md), [M2 implementation](docs/M2_IMPLEMENTATION.md), [art pipeline](docs/M2_ART_PIPELINE.md), [asset pipeline](docs/ASSET_PIPELINE.md) and [AGENTS](AGENTS.md).
 
 **Stop for human confirmation.** No detailed roofing tiles, painted textures, dense foliage, ComfyUI, characters or M2.2 work has started.
