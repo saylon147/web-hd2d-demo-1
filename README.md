@@ -83,6 +83,16 @@ switch `variant=cliff-blockout` to replace only the approved original cliff surf
 The approved T/F/W/E coordinates are frozen in `coastal-g03-a0-boundaries.json`; the original terrain is still the query/collision source.
 No source GLBs or other placements are edited. Stop for human review; G03-B remains unauthorized.
 
+M2.3 **G03-P0 feasibility experiment**: [stylized coastal report](docs/m2.3-cliff-section/review-gates/G03-P0/REPORT.md).
+Run `npm run build` then `npm run evidence:coastal:g03-p0` for Golden/Golden-close three-way comparisons,
+side/below checks and isolated material views. Entry:
+`/?scene=coastal-assembly&diagnostic=g03-p0&variant=stylized&markers=off`.
+`variant=neutral|stylized|tripo` switches retained A1 neutral, six broad palette regions, or G02 C2 Tripo.
+Neutral/stylized hide A4 identically; Tripo restores A4. Other rocks remain unchanged.
+`geometryOnly=true` isolates neutral/stylized; selecting Tripo returns to the complete scene.
+This reuses A1 geometry and Three.js vertex colors; it does not establish Blender procedural modeling as the final route.
+Stop for human review. No G03-B work is authorized.
+
 [Complete V1 handoff](docs/M2_1_V1_HANDOFF.md), [same-camera V0/V1](docs/screenshots/m2.1-v1/v0-v1-exterior.png), [full review sheet](docs/screenshots/m2.1-v1/review-sheet.png), [annotated plans](docs/screenshots/m2.1-v1/annotated-plans.png), [physical section](docs/screenshots/m2.1-v1/annotated-section.png), [acceptance](docs/M2_ACCEPTANCE.md). V0 history: [handoff](docs/M2_1_HANDOFF.md), [review](docs/M2_1_REVIEW.md). Read [PLAN](PLAN.md), [M2 implementation](docs/M2_IMPLEMENTATION.md), [art pipeline](docs/M2_ART_PIPELINE.md), [asset pipeline](docs/ASSET_PIPELINE.md) and [AGENTS](AGENTS.md).
 
 **Stop for human confirmation.** No detailed roofing tiles, painted textures, dense foliage, ComfyUI, characters or M2.2 work has started.

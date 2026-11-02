@@ -30,6 +30,7 @@
     "evidence:coastal:g022": "playwright test tests/browser/coastal-g022.spec.ts",
     "evidence:coastal:g03-a0": "playwright test tests/browser/coastal-g03-a0.spec.ts",
     "evidence:coastal:g03-a1": "playwright test tests/browser/coastal-g03-a1.spec.ts",
+    "evidence:coastal:g03-p0": "playwright test tests/browser/coastal-g03-p0.spec.ts",
     "build": "npm run typecheck && vite build",
     "preview": "vite preview --host 127.0.0.1"
   },

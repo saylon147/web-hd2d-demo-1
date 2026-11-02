@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "subjectInstance": "front-shoulder",
+  "transitionWidth": 0.07,
+  "regions": [
+    { "id": "cool-foot", "center": [0.16, 0.10], "color": "#747a74" },
+    { "id": "warm-foot", "center": [0.78, 0.14], "color": "#a29881" },
+    { "id": "left-body", "center": [0.12, 0.52], "color": "#b8a184" },
+    { "id": "sun-body", "center": [0.66, 0.49], "color": "#c9b28b" },
+    { "id": "pale-shoulder", "center": [0.88, 0.84], "color": "#ded0ac" },
+    { "id": "light-rim", "center": [0.34, 0.94], "color": "#eee0bc" }
+  ],
+  "notes": "G03-P0 feasibility only: six deliberately placed broad palette cells over unchanged G03-A1 geometry, narrow linear-color transitions, built-in Lambert diffuse. No Blender work, noise, microgeometry, texture, vegetation or production art claim."
+}
