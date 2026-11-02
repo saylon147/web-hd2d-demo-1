@@ -1,0 +1,2844 @@
+{
+  "stage": "G04-A0 analysis only; no G04-A1 modeling",
+  "sourceCommit": "15c4efb0dbb00217c47ab85f9492278fa939fe59",
+  "coordinates": "meters, Three.js +Y up, +X east, +Z south; position bottom-center anchor; yaw about +Y",
+  "viewport": {
+    "width": 1600,
+    "height": 811,
+    "dpr": 1
+  },
+  "goldenCloseCrop": [
+    750,
+    430,
+    540,
+    350
+  ],
+  "browser": "156.0.8078.79",
+  "backend": {
+    "api": "WebGL2",
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3070 Ti (0x00002207) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+  },
+  "terrain": [
+    {
+      "name": "Coastal_Rock_Visual_00",
+      "parent": "Shoreline",
+      "triangles": 20,
+      "matrixWorld": [
+        0.8848927617073059,
+        0,
+        0,
+        0,
+        0,
+        0.9322226643562317,
+        0,
+        0,
+        0,
+        0,
+        1.2033454179763794,
+        0,
+        -11,
+        0.4000000059604645,
+        -4,
+        1
+      ],
+      "bounds": {
+        "min": [
+          -11.7914701861955,
+          -0.5322226583957672,
+          -5.023613745039164
+        ],
+        "max": [
+          -10.2085298138045,
+          1.3322226703166962,
+          -2.976386254960836
+        ]
+      },
+      "materials": [
+        {
+          "name": "diagnostic_rock_placeholder",
+          "type": "MeshStandardMaterial"
+        }
+      ]
+    },
+    {
+      "name": "Coastal_Rock_Visual_01",
+      "parent": "Shoreline",
+      "triangles": 20,
+      "matrixWorld": [
+        0.7803314328193665,
+        0,
+        0,
+        0,
+        0,
+        0.8168989419937134,
+        0,
+        0,
+        0,
+        0,
+        1.183053731918335,
+        0,
+        -9,
+        0.4000000059604645,
+        8,
+        1
+      ],
+      "bounds": {
+        "min": [
+          -9.697947922227474,
+          -0.4168989360332489,
+          6.99364717476719
+        ],
+        "max": [
+          -8.302052077772526,
+          1.2168989479541779,
+          9.00635282523281
+        ]
+      },
+      "materials": [
+        {
+          "name": "diagnostic_rock_placeholder",
+          "type": "MeshStandardMaterial"
+        }
+      ]
+    },
+    {
+      "name": "Coastal_Rock_Visual_02",
+      "parent": "Shoreline",
+      "triangles": 20,
+      "matrixWorld": [
+        0.9476223587989807,
+        0,
+        0,
+        0,
+        0,
+        0.5121215581893921,
+        0,
+        0,
+        0,
+        0,
+        0.8550810217857361,
+        0,
+        10,
+        0.4000000059604645,
+        3,
+        1
+      ],
+      "bounds": {
+        "min": [
+          9.15242289549914,
+          -0.11212155222892761,
+          2.272633880557816
+        ],
+        "max": [
+          10.84757710450086,
+          0.9121215641498566,
+          3.727366119442184
+        ]
+      },
+      "materials": [
+        {
+          "name": "diagnostic_rock_placeholder",
+          "type": "MeshStandardMaterial"
+        }
+      ]
+    },
+    {
+      "name": "Coastal_Rock_Visual_03",
+      "parent": "Shoreline",
+      "triangles": 20,
+      "matrixWorld": [
+        0.8228769898414612,
+        0,
+        0,
+        0,
+        0,
+        0.6135727167129517,
+        0,
+        0,
+        0,
+        0,
+        1.173197627067566,
+        0,
+        8,
+        0.4000000059604645,
+        9,
+        1
+      ],
+      "bounds": {
+        "min": [
+          7.263998269000151,
+          -0.21357271075248718,
+          8.002031171786733
+        ],
+        "max": [
+          8.736001730999849,
+          1.0135727226734161,
+          9.997968828213267
+        ]
+      },
+      "materials": [
+        {
+          "name": "diagnostic_rock_placeholder",
+          "type": "MeshStandardMaterial"
+        }
+      ]
+    },
+    {
+      "name": "Coastal_Rock_Visual_04",
+      "parent": "Shoreline",
+      "triangles": 20,
+      "matrixWorld": [
+        0.8757212162017822,
+        0,
+        0,
+        0,
+        0,
+        0.8808475136756897,
+        0,
+        0,
+        0,
+        0,
+        0.9587175250053406,
+        0,
+        -7,
+        0.4000000059604645,
+        11,
+        1
+      ],
+      "bounds": {
+        "min": [
+          -7.78326692683676,
+          -0.4808475077152252,
+          10.184476525571764
+        ],
+        "max": [
+          -6.21673307316324,
+          1.2808475196361542,
+          11.815523474428236
+        ]
+      },
+      "materials": [
+        {
+          "name": "diagnostic_rock_placeholder",
+          "type": "MeshStandardMaterial"
+        }
+      ]
+    },
+    {
+      "name": "Organic_Coastal_Mass_1",
+      "parent": "Organic_Coastal_Mass",
+      "triangles": 604,
+      "matrixWorld": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "bounds": {
+        "min": [
+          -12.892891883850098,
+          -0.3199999928474426,
+          -12.203551292419434
+        ],
+        "max": [
+          13.886457443237305,
+          4.367880344390869,
+          12.781588554382324
+        ]
+      },
+      "materials": [
+        {
+          "name": "diagnostic_rock_placeholder",
+          "type": "MeshStandardMaterial"
+        }
+      ]
+    },
+    {
+      "name": "Organic_Coastal_Mass_2",
+      "parent": "Organic_Coastal_Mass",
+      "triangles": 296,
+      "matrixWorld": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "bounds": {
+        "min": [
+          -10.59105110168457,
+          3.23211932182312,
+          -10.750423431396484
+        ],
+        "max": [
+          11.045307159423828,
+          4.367880344390869,
+          7.107419013977051
+        ]
+      },
+      "materials": [
+        {
+          "name": "diagnostic_land_placeholder",
+          "type": "MeshStandardMaterial"
+        }
+      ]
+    },
+    {
+      "name": "Organic_Coastal_Mass_3",
+      "parent": "Organic_Coastal_Mass",
+      "triangles": 79,
+      "matrixWorld": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "bounds": {
+        "min": [
+          -6.327144622802734,
+          -0.3199999928474426,
+          5.757321834564209
+        ],
+        "max": [
+          7.0637898445129395,
+          2.1223642826080322,
+          13.470458030700684
+        ]
+      },
+      "materials": [
+        {
+          "name": "diagnostic_sand_placeholder",
+          "type": "MeshStandardMaterial"
+        }
+      ]
+    },
+    {
+      "name": "Organic_Coastal_Mass_4",
+      "parent": "Organic_Coastal_Mass",
+      "triangles": 229,
+      "matrixWorld": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "bounds": {
+        "min": [
+          -3.130000114440918,
+          0.42500001192092896,
+          4.298999786376953
+        ],
+        "max": [
+          -1.4700000286102295,
+          4.092454433441162,
+          11.14676570892334
+        ]
+      },
+      "materials": [
+        {
+          "name": "diagnostic_walls_placeholder",
+          "type": "MeshStandardMaterial"
+        }
+      ]
+    },
+    {
+      "name": "Sea_Plane",
+      "parent": "Water",
+      "triangles": 12,
+      "matrixWorld": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "bounds": {
+        "min": [
+          -60,
+          -0.10000000149011612,
+          -58
+        ],
+        "max": [
+          60,
+          0,
+          62
+        ]
+      },
+      "materials": [
+        {
+          "name": "diagnostic_water_placeholder",
+          "type": "MeshStandardMaterial"
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "id": "A1",
+      "input": "art-source/tripo/inbox/coastal_cliff_A1_multiview.glb",
+      "sourceTriangles": 1992384,
+      "variants": [
+        {
+          "id": "20k-2k",
+          "triangles": 20000,
+          "dimensions": [
+            5.806338787078857,
+            3.278190210010507,
+            5.7989723682403564
+          ],
+          "modelUrl": "/assets/models/coastal-assembly/A1/rock-20k-2k.glb"
+        },
+        {
+          "id": "10k-1k",
+          "triangles": 10000,
+          "dimensions": [
+            5.793956995010376,
+            3.2779689135204535,
+            5.796022653579712
+          ],
+          "modelUrl": "/assets/models/coastal-assembly/A1/rock-10k-1k.glb"
+        }
+      ]
+    },
+    {
+      "id": "A2",
+      "input": "art-source/tripo/inbox/coastal_cliff_A2_multiview.glb",
+      "sourceTriangles": 1895462,
+      "variants": [
+        {
+          "id": "20k-2k",
+          "triangles": 20000,
+          "dimensions": [
+            6.000787019729614,
+            2.072013612370938,
+            5.485252141952515
+          ],
+          "modelUrl": "/assets/models/coastal-assembly/A2/rock-20k-2k.glb"
+        },
+        {
+          "id": "10k-1k",
+          "triangles": 10000,
+          "dimensions": [
+            6.002699851989746,
+            2.0711686545982957,
+            5.488606929779053
+          ],
+          "modelUrl": "/assets/models/coastal-assembly/A2/rock-10k-1k.glb"
+        }
+      ]
+    },
+    {
+      "id": "A3",
+      "input": "art-source/tripo/inbox/coastal_corner_A3_multiview.glb",
+      "sourceTriangles": 1894158,
+      "variants": [
+        {
+          "id": "20k-2k",
+          "triangles": 20000,
+          "dimensions": [
+            5.005661964416504,
+            2.284405248821713,
+            4.942502498626709
+          ],
+          "modelUrl": "/assets/models/coastal-assembly/A3/rock-20k-2k.glb"
+        },
+        {
+          "id": "10k-1k",
+          "triangles": 10000,
+          "dimensions": [
+            5.004047393798828,
+            2.272240179241635,
+            4.943562984466553
+          ],
+          "modelUrl": "/assets/models/coastal-assembly/A3/rock-10k-1k.glb"
+        }
+      ]
+    },
+    {
+      "id": "A4",
+      "input": "art-source/tripo/inbox/coastal_platform_A4_multiview.glb",
+      "sourceTriangles": 1879474,
+      "variants": [
+        {
+          "id": "20k-2k",
+          "triangles": 20000,
+          "dimensions": [
+            4.803152322769165,
+            1.0247172960953321,
+            4.6879096031188965
+          ],
+          "modelUrl": "/assets/models/coastal-assembly/A4/rock-20k-2k.glb"
+        },
+        {
+          "id": "10k-1k",
+          "triangles": 10000,
+          "dimensions": [
+            4.805644989013672,
+            1.0194097561761737,
+            4.690353631973267
+          ],
+          "modelUrl": "/assets/models/coastal-assembly/A4/rock-10k-1k.glb"
+        }
+      ]
+    }
+  ],
+  "instances": {
+    "default": [
+      {
+        "id": "east-cliff",
+        "asset": "A1",
+        "position": [
+          9.5,
+          -0.16,
+          0.8
+        ],
+        "scale": [
+          1,
+          1.2,
+          0.95
+        ],
+        "yawDegrees": 15,
+        "matrixWorld": [
+          0.9659258262890683,
+          0,
+          -0.25881904510252074,
+          0,
+          0,
+          1.2,
+          0,
+          0,
+          0.2458780928473947,
+          0,
+          0.9176295349746149,
+          0,
+          9.5,
+          -0.16,
+          0.8,
+          1
+        ],
+        "actualBounds": {
+          "min": [
+            6.727125485274726,
+            -0.15950450683245435,
+            -1.7974934018621818
+          ],
+          "max": [
+            12.452206969476844,
+            3.7740581893920897,
+            3.6182177217208613
+          ]
+        },
+        "probes": [
+          {
+            "point": [
+              10.721266354180766,
+              -0.11959458500146865,
+              2.7568589145313305
+            ],
+            "terrainTopY": null,
+            "otherTopY": null,
+            "otherAbove": false,
+            "supportY": null,
+            "supportId": null,
+            "gapM": null,
+            "terrainAbove": false
+          },
+          {
+            "point": [
+              10.27018406010067,
+              3.2133867645263665,
+              2.3879586329409834
+            ],
+            "terrainTopY": null,
+            "otherTopY": null,
+            "otherAbove": false,
+            "supportY": null,
+            "supportId": null,
+            "gapM": null,
+            "terrainAbove": false
+          },
+          {
+            "point": [
+              10.763079461290724,
+              1.1033416652679442,
+              2.3484051121949325
+            ],
+            "terrainTopY": null,
+            "otherTopY": null,
+            "otherAbove": false,
+            "supportY": null,
+            "supportId": null,
+            "gapM": null,
+            "terrainAbove": false
+          }
+        ],
+        "undersideSampleCount": 240,
+        "exposedSampleCount": 46
+      },
+      {
+        "id": "front-wall",
+        "asset": "A2",
+        "position": [
+          8.9,
+          -0.15,
+          4.5
+        ],
+        "scale": [
+          1.15,
+          1.2,
+          0.95
+        ],
+        "yawDegrees": -5,
+        "matrixWorld": [
+          1.1456239028055073,
+          0,
+          0.1002291041598069,
+          0,
+          0,
+          1.2,
+          0,
+          0,
+          -0.08279795561027527,
+          0,
+          0.9463849631871583,
+          0,
+          8.9,
+          -0.15,
+          4.5,
+          1
+        ],
+        "actualBounds": {
+          "min": [
+            5.46492848871161,
+            -0.1397895734757185,
+            1.8102012112471808
+          ],
+          "max": [
+            12.27362832425894,
+            2.345612812042236,
+            7.081015397877092
+          ]
+        },
+        "probes": [
+          {
+            "point": [
+              7.563664549677953,
+              -0.13759533986449238,
+              6.260003888992058
+            ],
+            "terrainTopY": null,
+            "otherTopY": null,
+            "otherAbove": false,
+            "supportY": null,
+            "supportId": null,
+            "gapM": null,
+            "terrainAbove": false
+          },
+          {
+            "point": [
+              8.70130840603916,
+              1.4440401077270508,
+              6.304123664781207
+            ],
+            "terrainTopY": null,
+            "otherTopY": null,
+            "otherAbove": false,
+            "supportY": null,
+            "supportId": null,
+            "gapM": null,
+            "terrainAbove": false
+          },
+          {
+            "point": [
+              10.608896632932895,
+              -0.13827541135251523,
+              3.353902812432197
+            ],
+            "terrainTopY": null,
+            "otherTopY": null,
+            "otherAbove": false,
+            "supportY": null,
+            "supportId": null,
+            "gapM": null,
+            "terrainAbove": false
+          }
+        ],
+        "undersideSampleCount": 229,
+        "exposedSampleCount": 81
+      },
+      {
+        "id": "cove-turn",
+        "asset": "A3",
+        "position": [
+          5.6,
+          -0.15,
+          6.4
+        ],
+        "scale": [
+          1.1,
+          1.15,
+          0.95
+        ],
+        "yawDegrees": -35,
+        "matrixWorld": [
+          0.901067248717891,
+          0,
+          0.6309340799861507,
+          0,
+          0,
+          1.15,
+          0,
+          0,
+          -0.5448976145334937,
+          0,
+          0.7781944420745421,
+          0,
+          5.6,
+          -0.15,
+          6.4,
+          1
+        ],
+        "actualBounds": {
+          "min": [
+            2.816236573276777,
+            -0.1486414512793999,
+            3.4648854587089395
+          ],
+          "max": [
+            7.777486228509904,
+            2.46443475484848,
+            8.763982478528074
+          ]
+        },
+        "probes": [
+          {
+            "point": [
+              7.350548727476223,
+              -0.10360640439515312,
+              7.297654573938859
+            ],
+            "terrainTopY": null,
+            "otherTopY": null,
+            "otherAbove": false,
+            "supportY": null,
+            "supportId": null,
+            "gapM": null,
+            "terrainAbove": false
+          },
+          {
+            "point": [
+              7.241246469869847,
+              0.7434061119953791,
+              7.543159396974802
+            ],
+            "terrainTopY": null,
+            "otherTopY": null,
+            "otherAbove": false,
+            "supportY": null,
+            "supportId": null,
+            "gapM": null,
+            "terrainAbove": false
+          }
+        ],
+        "undersideSampleCount": 184,
+        "exposedSampleCount": 19
+      },
+      {
+        "id": "east-shoulder",
+        "asset": "A4",
+        "position": [
+          8.9,
+          2.62,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          0.95
+        ],
+        "yawDegrees": 15,
+        "matrixWorld": [
+          0.9659258262890683,
+          0,
+          -0.25881904510252074,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0.2458780928473947,
+          0,
+          0.9176295349746149,
+          0,
+          8.9,
+          2.62,
+          1,
+          1
+        ],
+        "actualBounds": {
+          "min": [
+            6.366780135008025,
+            2.622638597972691,
+            -1.326670957149414
+          ],
+          "max": [
+            11.426978590759425,
+            3.642048354148865,
+            3.2473362227550697
+          ]
+        },
+        "probes": [
+          {
+            "point": [
+              9.012738884627518,
+              3.0868212234973904,
+              2.731877824354273
+            ],
+            "terrainTopY": 0.8950873133167114,
+            "otherTopY": 2.1716643440441246,
+            "otherAbove": false,
+            "supportY": 2.1716643440441223,
+            "supportId": "front-shoulder",
+            "gapM": 0.9151568794532681,
+            "terrainAbove": false
+          },
+          {
+            "point": [
+              11.400788760119754,
+              2.627643907641371,
+              1.6940165778197636
+            ],
+            "terrainTopY": null,
+            "otherTopY": 1.964775780687529,
+            "otherAbove": false,
+            "supportY": 1.9647757806875286,
+            "supportId": "east-cliff",
+            "gapM": 0.6628681269538423,
+            "terrainAbove": false
+          },
+          {
+            "point": [
+              8.240019640630717,
+              3.266726091702779,
+              2.8744402164196217
+            ],
+            "terrainTopY": 1.1241205092910604,
+            "otherTopY": 2.646097909958253,
+            "otherAbove": false,
+            "supportY": 2.6460979099582547,
+            "supportId": "front-shoulder",
+            "gapM": 0.6206281817445243,
+            "terrainAbove": false
+          }
+        ],
+        "undersideSampleCount": 160,
+        "exposedSampleCount": 32
+      },
+      {
+        "id": "front-shoulder",
+        "asset": "A4",
+        "position": [
+          8.6,
+          1.85,
+          4.2
+        ],
+        "scale": [
+          1.05,
+          0.9,
+          0.95
+        ],
+        "yawDegrees": -20,
+        "matrixWorld": [
+          0.9866772518252039,
+          0,
+          0.3591211504919521,
+          0,
+          0,
+          0.9,
+          0,
+          0,
+          -0.3249191361593852,
+          0,
+          0.8927079897466129,
+          0,
+          8.6,
+          1.85,
+          4.2,
+          1
+        ],
+        "actualBounds": {
+          "min": [
+            5.9570512284430315,
+            1.852374738175422,
+            1.6428311322491727
+          ],
+          "max": [
+            11.160823449250783,
+            2.7698435187339783,
+            6.343133078551817
+          ]
+        },
+        "probes": [
+          {
+            "point": [
+              10.044385603255591,
+              1.8546190069988369,
+              6.271727474804337
+            ],
+            "terrainTopY": null,
+            "otherTopY": -0.0705282641075854,
+            "otherAbove": false,
+            "supportY": -0.07052826410758328,
+            "supportId": "front-wall",
+            "gapM": 1.9251472711064201,
+            "terrainAbove": false
+          },
+          {
+            "point": [
+              7.809298135158883,
+              1.8678015993908048,
+              6.262172772818937
+            ],
+            "terrainTopY": null,
+            "otherTopY": 0.02687274889626251,
+            "otherAbove": false,
+            "supportY": 0.026872748896263066,
+            "supportId": "front-wall",
+            "gapM": 1.8409288504945418,
+            "terrainAbove": false
+          },
+          {
+            "point": [
+              10.504541592814597,
+              1.8598749774508179,
+              3.1351728983085008
+            ],
+            "terrainTopY": null,
+            "otherTopY": 0.09823696865111911,
+            "otherAbove": false,
+            "supportY": 0.09823696865112044,
+            "supportId": "front-wall",
+            "gapM": 1.7616380087996975,
+            "terrainAbove": false
+          }
+        ],
+        "undersideSampleCount": 165,
+        "exposedSampleCount": 100
+      }
+    ],
+    "c2": [
+      {
+        "id": "east-cliff",
+        "asset": "A1",
+        "position": [
+          9.5,
+          -0.16,
+          0.8
+        ],
+        "scale": [
+          1,
+          1.2,
+          0.95
+        ],
+        "yawDegrees": 15,
+        "matrixWorld": [
+          0.9659258262890683,
+          0,
+          -0.25881904510252074,
+          0,
+          0,
+          1.2,
+          0,
+          0,
+          0.2458780928473947,
+          0,
+          0.9176295349746149,
+          0,
+          9.5,
+          -0.16,
+          0.8,
+          1
+        ],
+        "actualBounds": {
+          "min": [
+            6.727125485274726,
+            -0.15950450683245435,
+            -1.7974934018621818
+          ],
+          "max": [
+            12.452206969476844,
+            3.7740581893920897,
+            3.6182177217208613
+          ]
+        },
+        "probes": [
+          {
+            "point": [
+              10.2445438413945,
+              0.8056474351882934,
+              2.556188634900572
+            ],
+            "terrainTopY": null,
+            "otherTopY": null,
+            "otherAbove": false,
+            "supportY": null,
+            "supportId": null,
+            "gapM": null,
+            "terrainAbove": false
+          },
+          {
+            "point": [
+              10.721266354180766,
+              -0.11959458500146865,
+              2.7568589145313305
+            ],
+            "terrainTopY": null,
+            "otherTopY": null,
+            "otherAbove": false,
+            "supportY": null,
+            "supportId": null,
+            "gapM": null,
+            "terrainAbove": false
+          },
+          {
+            "point": [
+              10.27018406010067,
+              3.2133867645263665,
+              2.3879586329409834
+            ],
+            "terrainTopY": null,
+            "otherTopY": null,
+            "otherAbove": false,
+            "supportY": null,
+            "supportId": null,
+            "gapM": null,
+            "terrainAbove": false
+          }
+        ],
+        "undersideSampleCount": 240,
+        "exposedSampleCount": 48
+      },
+      {
+        "id": "front-wall",
+        "asset": "A2",
+        "position": [
+          8.9,
+          -0.15,
+          4.5
+        ],
+        "scale": [
+          1.15,
+          1.2,
+          0.95
+        ],
+        "yawDegrees": -5,
+        "matrixWorld": [
+          1.1456239028055073,
+          0,
+          0.1002291041598069,
+          0,
+          0,
+          1.2,
+          0,
+          0,
+          -0.08279795561027527,
+          0,
+          0.9463849631871583,
+          0,
+          8.9,
+          -0.15,
+          4.5,
+          1
+        ],
+        "actualBounds": {
+          "min": [
+            5.46492848871161,
+            -0.1397895734757185,
+            1.8102012112471808
+          ],
+          "max": [
+            12.27362832425894,
+            2.345612812042236,
+            7.081015397877092
+          ]
+        },
+        "probes": [
+          {
+            "point": [
+              7.563664549677953,
+              -0.13759533986449238,
+              6.260003888992058
+            ],
+            "terrainTopY": null,
+            "otherTopY": null,
+            "otherAbove": false,
+            "supportY": null,
+            "supportId": null,
+            "gapM": null,
+            "terrainAbove": false
+          },
+          {
+            "point": [
+              7.738424072964172,
+              0.9112425088882445,
+              5.95320352039984
+            ],
+            "terrainTopY": null,
+            "otherTopY": null,
+            "otherAbove": false,
+            "supportY": null,
+            "supportId": null,
+            "gapM": null,
+            "terrainAbove": false
+          },
+          {
+            "point": [
+              9.144419839633056,
+              -0.13809273540973663,
+              5.1617758675215715
+            ],
+            "terrainTopY": null,
+            "otherTopY": null,
+            "otherAbove": false,
+            "supportY": null,
+            "supportId": null,
+            "gapM": null,
+            "terrainAbove": false
+          }
+        ],
+        "undersideSampleCount": 229,
+        "exposedSampleCount": 114
+      },
+      {
+        "id": "cove-turn",
+        "asset": "A3",
+        "position": [
+          5.6,
+          -0.15,
+          6.4
+        ],
+        "scale": [
+          1.1,
+          1.15,
+          0.95
+        ],
+        "yawDegrees": -35,
+        "matrixWorld": [
+          0.901067248717891,
+          0,
+          0.6309340799861507,
+          0,
+          0,
+          1.15,
+          0,
+          0,
+          -0.5448976145334937,
+          0,
+          0.7781944420745421,
+          0,
+          5.6,
+          -0.15,
+          6.4,
+          1
+        ],
+        "actualBounds": {
+          "min": [
+            2.816236573276777,
+            -0.1486414512793999,
+            3.4648854587089395
+          ],
+          "max": [
+            7.777486228509904,
+            2.46443475484848,
+            8.763982478528074
+          ]
+        },
+        "probes": [
+          {
+            "point": [
+              7.350548727476223,
+              -0.10360640439515312,
+              7.297654573938859
+            ],
+            "terrainTopY": null,
+            "otherTopY": null,
+            "otherAbove": false,
+            "supportY": null,
+            "supportId": null,
+            "gapM": null,
+            "terrainAbove": false
+          },
+          {
+            "point": [
+              7.241246469869847,
+              0.7434061119953791,
+              7.543159396974802
+            ],
+            "terrainTopY": null,
+            "otherTopY": null,
+            "otherAbove": false,
+            "supportY": null,
+            "supportId": null,
+            "gapM": null,
+            "terrainAbove": false
+          }
+        ],
+        "undersideSampleCount": 184,
+        "exposedSampleCount": 19
+      },
+      {
+        "id": "east-shoulder",
+        "asset": "A4",
+        "position": [
+          8.9,
+          2.62,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          0.95
+        ],
+        "yawDegrees": 15,
+        "matrixWorld": [
+          0.9659258262890683,
+          0,
+          -0.25881904510252074,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0.2458780928473947,
+          0,
+          0.9176295349746149,
+          0,
+          8.9,
+          2.62,
+          1,
+          1
+        ],
+        "actualBounds": {
+          "min": [
+            6.366780135008025,
+            2.622638597972691,
+            -1.326670957149414
+          ],
+          "max": [
+            11.426978590759425,
+            3.642048354148865,
+            3.2473362227550697
+          ]
+        },
+        "probes": [
+          {
+            "point": [
+              8.240019640630717,
+              3.266726091702779,
+              2.8744402164196217
+            ],
+            "terrainTopY": 1.1241205092910604,
+            "otherTopY": 2.4858994414507114,
+            "otherAbove": false,
+            "supportY": 2.4858994414507123,
+            "supportId": "front-shoulder",
+            "gapM": 0.7808266502520667,
+            "terrainAbove": false
+          },
+          {
+            "point": [
+              11.400788760119754,
+              2.627643907641371,
+              1.6940165778197636
+            ],
+            "terrainTopY": null,
+            "otherTopY": 1.964775780687529,
+            "otherAbove": false,
+            "supportY": 1.9647757806875286,
+            "supportId": "east-cliff",
+            "gapM": 0.6628681269538423,
+            "terrainAbove": false
+          },
+          {
+            "point": [
+              9.65173963294626,
+              3.186153784592946,
+              2.647387049639489
+            ],
+            "terrainTopY": 0.09199862954497107,
+            "otherTopY": 2.531388059399473,
+            "otherAbove": false,
+            "supportY": 2.5313880593994753,
+            "supportId": "front-shoulder",
+            "gapM": 0.6547657251934709,
+            "terrainAbove": false
+          }
+        ],
+        "undersideSampleCount": 160,
+        "exposedSampleCount": 39
+      },
+      {
+        "id": "front-shoulder",
+        "asset": "A4",
+        "position": [
+          7.95,
+          1.85,
+          3.35
+        ],
+        "scale": [
+          1.05,
+          0.9,
+          0.95
+        ],
+        "yawDegrees": -8,
+        "matrixWorld": [
+          1.039781472178649,
+          0,
+          0.14613175600806871,
+          0,
+          0,
+          0.9,
+          0,
+          0,
+          -0.13221444591206216,
+          0,
+          0.9407546653044918,
+          0,
+          7.95,
+          1.85,
+          3.35,
+          1
+        ],
+        "actualBounds": {
+          "min": [
+            5.371115842719076,
+            1.852374738175422,
+            0.9536772702276313
+          ],
+          "max": [
+            10.421037437357825,
+            2.7698435187339783,
+            5.5497584703479905
+          ]
+        },
+        "probes": [
+          {
+            "point": [
+              10.143163074468674,
+              1.8648675136268138,
+              2.9444933071063137
+            ],
+            "terrainTopY": null,
+            "otherTopY": 0.28392867805969924,
+            "otherAbove": false,
+            "supportY": 0.28392867805969957,
+            "supportId": "front-wall",
+            "gapM": 1.5809388355671143,
+            "terrainAbove": false
+          },
+          {
+            "point": [
+              7.189355807835405,
+              2.4303643524646756,
+              4.6008599177021186
+            ],
+            "terrainTopY": 0.37041662461583513,
+            "otherTopY": 1.5346133830499618,
+            "otherAbove": false,
+            "supportY": 1.534613383049964,
+            "supportId": "front-wall",
+            "gapM": 0.8957509694147117,
+            "terrainAbove": false
+          },
+          {
+            "point": [
+              8.639633179725383,
+              2.5227110385894775,
+              4.664269747226987
+            ],
+            "terrainTopY": null,
+            "otherTopY": 1.9600225566983007,
+            "otherAbove": false,
+            "supportY": 1.9600225566982967,
+            "supportId": "front-wall",
+            "gapM": 0.5626884818911808,
+            "terrainAbove": false
+          }
+        ],
+        "undersideSampleCount": 169,
+        "exposedSampleCount": 58
+      }
+    ]
+  },
+  "visibility": [
+    {
+      "route": "a1",
+      "protection": {
+        "sourceGeometryRetained": true,
+        "sourceMaterialRetained": true,
+        "attributesUnchanged": true,
+        "indicesUnchanged": true,
+        "subjectTransformUnchanged": true,
+        "subjectVisible": false,
+        "originalQueryNodeRetained": true
+      },
+      "neighbours": [
+        {
+          "id": "east-cliff",
+          "visible": true,
+          "matrixWorld": [
+            0.9659258262890683,
+            0,
+            -0.25881904510252074,
+            0,
+            0,
+            1.2,
+            0,
+            0,
+            0.2458780928473947,
+            0,
+            0.9176295349746149,
+            0,
+            9.5,
+            -0.16,
+            0.8,
+            1
+          ]
+        },
+        {
+          "id": "front-wall",
+          "visible": true,
+          "matrixWorld": [
+            1.1456239028055073,
+            0,
+            0.1002291041598069,
+            0,
+            0,
+            1.2,
+            0,
+            0,
+            -0.08279795561027527,
+            0,
+            0.9463849631871583,
+            0,
+            8.9,
+            -0.15,
+            4.5,
+            1
+          ]
+        },
+        {
+          "id": "cove-turn",
+          "visible": true,
+          "matrixWorld": [
+            0.901067248717891,
+            0,
+            0.6309340799861507,
+            0,
+            0,
+            1.15,
+            0,
+            0,
+            -0.5448976145334937,
+            0,
+            0.7781944420745421,
+            0,
+            5.6,
+            -0.15,
+            6.4,
+            1
+          ]
+        },
+        {
+          "id": "east-shoulder",
+          "visible": true,
+          "matrixWorld": [
+            0.9659258262890683,
+            0,
+            -0.25881904510252074,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0.2458780928473947,
+            0,
+            0.9176295349746149,
+            0,
+            8.9,
+            2.62,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "route": "p0",
+      "protection": {
+        "sourceGeometryRetained": true,
+        "sourceMaterialRetained": true,
+        "attributesUnchanged": true,
+        "indicesUnchanged": true,
+        "subjectTransformUnchanged": true,
+        "subjectVisible": false,
+        "originalQueryNodeRetained": true
+      },
+      "neighbours": [
+        {
+          "id": "east-cliff",
+          "visible": true,
+          "matrixWorld": [
+            0.9659258262890683,
+            0,
+            -0.25881904510252074,
+            0,
+            0,
+            1.2,
+            0,
+            0,
+            0.2458780928473947,
+            0,
+            0.9176295349746149,
+            0,
+            9.5,
+            -0.16,
+            0.8,
+            1
+          ]
+        },
+        {
+          "id": "front-wall",
+          "visible": true,
+          "matrixWorld": [
+            1.1456239028055073,
+            0,
+            0.1002291041598069,
+            0,
+            0,
+            1.2,
+            0,
+            0,
+            -0.08279795561027527,
+            0,
+            0.9463849631871583,
+            0,
+            8.9,
+            -0.15,
+            4.5,
+            1
+          ]
+        },
+        {
+          "id": "cove-turn",
+          "visible": true,
+          "matrixWorld": [
+            0.901067248717891,
+            0,
+            0.6309340799861507,
+            0,
+            0,
+            1.15,
+            0,
+            0,
+            -0.5448976145334937,
+            0,
+            0.7781944420745421,
+            0,
+            5.6,
+            -0.15,
+            6.4,
+            1
+          ]
+        },
+        {
+          "id": "east-shoulder",
+          "visible": true,
+          "matrixWorld": [
+            0.9659258262890683,
+            0,
+            -0.25881904510252074,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0.2458780928473947,
+            0,
+            0.9176295349746149,
+            0,
+            8.9,
+            2.62,
+            1,
+            1
+          ]
+        }
+      ]
+    }
+  ],
+  "records": [
+    {
+      "route": "default",
+      "view": "golden",
+      "camera": {
+        "position": [
+          17.050014427601752,
+          30.165224254354328,
+          27.34994411970374
+        ],
+        "target": [
+          0,
+          3.4,
+          3
+        ],
+        "fov": 35
+      }
+    },
+    {
+      "route": "default",
+      "view": "side",
+      "camera": {
+        "position": [
+          30,
+          2.8,
+          3
+        ],
+        "target": [
+          8,
+          2.8,
+          3
+        ],
+        "fov": 35
+      }
+    },
+    {
+      "route": "default",
+      "view": "below",
+      "camera": {
+        "position": [
+          22,
+          0.3,
+          12
+        ],
+        "target": [
+          8.5,
+          2.8,
+          2.5
+        ],
+        "fov": 35
+      }
+    },
+    {
+      "route": "c2",
+      "view": "golden",
+      "camera": {
+        "position": [
+          17.050014427601752,
+          30.165224254354328,
+          27.34994411970374
+        ],
+        "target": [
+          0,
+          3.4,
+          3
+        ],
+        "fov": 35
+      }
+    },
+    {
+      "route": "c2",
+      "view": "side",
+      "camera": {
+        "position": [
+          30,
+          2.8,
+          3
+        ],
+        "target": [
+          8,
+          2.8,
+          3
+        ],
+        "fov": 35
+      }
+    },
+    {
+      "route": "c2",
+      "view": "below",
+      "camera": {
+        "position": [
+          22,
+          0.3,
+          12
+        ],
+        "target": [
+          8.5,
+          2.8,
+          2.5
+        ],
+        "fov": 35
+      }
+    },
+    {
+      "route": "a1",
+      "view": "golden",
+      "camera": {
+        "position": [
+          17.050014427601752,
+          30.165224254354328,
+          27.34994411970374
+        ],
+        "target": [
+          0,
+          3.4,
+          3
+        ],
+        "fov": 35
+      }
+    },
+    {
+      "route": "a1",
+      "view": "side",
+      "camera": {
+        "position": [
+          30,
+          2.8,
+          3
+        ],
+        "target": [
+          8,
+          2.8,
+          3
+        ],
+        "fov": 35
+      }
+    },
+    {
+      "route": "a1",
+      "view": "below",
+      "camera": {
+        "position": [
+          22,
+          0.3,
+          12
+        ],
+        "target": [
+          8.5,
+          2.8,
+          2.5
+        ],
+        "fov": 35
+      }
+    },
+    {
+      "route": "p0",
+      "view": "golden",
+      "camera": {
+        "position": [
+          17.050014427601752,
+          30.165224254354328,
+          27.34994411970374
+        ],
+        "target": [
+          0,
+          3.4,
+          3
+        ],
+        "fov": 35
+      }
+    },
+    {
+      "route": "p0",
+      "view": "side",
+      "camera": {
+        "position": [
+          30,
+          2.8,
+          3
+        ],
+        "target": [
+          8,
+          2.8,
+          3
+        ],
+        "fov": 35
+      }
+    },
+    {
+      "route": "p0",
+      "view": "below",
+      "camera": {
+        "position": [
+          22,
+          0.3,
+          12
+        ],
+        "target": [
+          8.5,
+          2.8,
+          2.5
+        ],
+        "fov": 35
+      }
+    }
+  ],
+  "mapping": [
+    {
+      "view": "golden",
+      "zone": "01",
+      "instance": "front-wall",
+      "projectedBounds": {
+        "x": 873.1425220922094,
+        "y": 478.8104235398895,
+        "width": 308.3103841056677,
+        "height": 282.16488017610266
+      },
+      "method": "projected world AABB envelope, includes occluded parts; not visible silhouette"
+    },
+    {
+      "view": "golden",
+      "zone": "01",
+      "instance": "cove-turn",
+      "projectedBounds": {
+        "x": 764.2228601380285,
+        "y": 472.229153482625,
+        "width": 247.79651403373862,
+        "height": 250.95131679213108
+      },
+      "method": "projected world AABB envelope, includes occluded parts; not visible silhouette"
+    },
+    {
+      "view": "golden",
+      "zone": "01",
+      "worldAnchor": [
+        9.2,
+        0.8,
+        6
+      ],
+      "pixel": [
+        1007.8009235116433,
+        659.4673668111681
+      ],
+      "method": "manual design-intent anchor projected with fixed camera; may be occluded"
+    },
+    {
+      "view": "golden",
+      "zone": "02",
+      "instance": "front-shoulder",
+      "projectedBounds": {
+        "x": 904.4839978817038,
+        "y": 472.30511716054974,
+        "width": 245.16909224539268,
+        "height": 206.08831569809018
+      },
+      "method": "projected world AABB envelope, includes occluded parts; not visible silhouette"
+    },
+    {
+      "view": "golden",
+      "zone": "02",
+      "worldAnchor": [
+        9,
+        2.45,
+        4
+      ],
+      "pixel": [
+        1041.603743030727,
+        572.8149200927453
+      ],
+      "method": "manual design-intent anchor projected with fixed camera; may be occluded"
+    },
+    {
+      "view": "golden",
+      "zone": "03",
+      "instance": "east-cliff",
+      "projectedBounds": {
+        "x": 969.4252499093395,
+        "y": 394.9753463460383,
+        "width": 276.40524325023625,
+        "height": 282.5888473332596
+      },
+      "method": "projected world AABB envelope, includes occluded parts; not visible silhouette"
+    },
+    {
+      "view": "golden",
+      "zone": "03",
+      "instance": "east-shoulder",
+      "projectedBounds": {
+        "x": 973.2784228509662,
+        "y": 402.01110663995485,
+        "width": 231.76037122299215,
+        "height": 188.21642854031313
+      },
+      "method": "projected world AABB envelope, includes occluded parts; not visible silhouette"
+    },
+    {
+      "view": "golden",
+      "zone": "03",
+      "worldAnchor": [
+        11.2,
+        2.9,
+        1
+      ],
+      "pixel": [
+        1160.9351083617098,
+        530.4735098950667
+      ],
+      "method": "manual design-intent anchor projected with fixed camera; may be occluded"
+    },
+    {
+      "view": "golden",
+      "zone": "04",
+      "worldAnchor": [
+        8,
+        3.65,
+        3
+      ],
+      "pixel": [
+        1031.393285855465,
+        507.3546756636839
+      ],
+      "method": "manual design-intent anchor projected with fixed camera; may be occluded"
+    },
+    {
+      "view": "golden-close",
+      "zone": "01",
+      "instance": "front-wall",
+      "projectedBounds": {
+        "x": 873.1425220922094,
+        "y": 478.8104235398895,
+        "width": 308.3103841056677,
+        "height": 282.16488017610266
+      },
+      "method": "projected world AABB envelope, includes occluded parts; not visible silhouette"
+    },
+    {
+      "view": "golden-close",
+      "zone": "01",
+      "instance": "cove-turn",
+      "projectedBounds": {
+        "x": 764.2228601380285,
+        "y": 472.229153482625,
+        "width": 247.79651403373862,
+        "height": 250.95131679213108
+      },
+      "method": "projected world AABB envelope, includes occluded parts; not visible silhouette"
+    },
+    {
+      "view": "golden-close",
+      "zone": "01",
+      "worldAnchor": [
+        9.2,
+        0.8,
+        6
+      ],
+      "pixel": [
+        1007.8009235116433,
+        659.4673668111681
+      ],
+      "method": "manual design-intent anchor projected with fixed camera; may be occluded"
+    },
+    {
+      "view": "golden-close",
+      "zone": "02",
+      "instance": "front-shoulder",
+      "projectedBounds": {
+        "x": 904.4839978817038,
+        "y": 472.30511716054974,
+        "width": 245.16909224539268,
+        "height": 206.08831569809018
+      },
+      "method": "projected world AABB envelope, includes occluded parts; not visible silhouette"
+    },
+    {
+      "view": "golden-close",
+      "zone": "02",
+      "worldAnchor": [
+        9,
+        2.45,
+        4
+      ],
+      "pixel": [
+        1041.603743030727,
+        572.8149200927453
+      ],
+      "method": "manual design-intent anchor projected with fixed camera; may be occluded"
+    },
+    {
+      "view": "golden-close",
+      "zone": "03",
+      "instance": "east-cliff",
+      "projectedBounds": {
+        "x": 969.4252499093395,
+        "y": 394.9753463460383,
+        "width": 276.40524325023625,
+        "height": 282.5888473332596
+      },
+      "method": "projected world AABB envelope, includes occluded parts; not visible silhouette"
+    },
+    {
+      "view": "golden-close",
+      "zone": "03",
+      "instance": "east-shoulder",
+      "projectedBounds": {
+        "x": 973.2784228509662,
+        "y": 402.01110663995485,
+        "width": 231.76037122299215,
+        "height": 188.21642854031313
+      },
+      "method": "projected world AABB envelope, includes occluded parts; not visible silhouette"
+    },
+    {
+      "view": "golden-close",
+      "zone": "03",
+      "worldAnchor": [
+        11.2,
+        2.9,
+        1
+      ],
+      "pixel": [
+        1160.9351083617098,
+        530.4735098950667
+      ],
+      "method": "manual design-intent anchor projected with fixed camera; may be occluded"
+    },
+    {
+      "view": "golden-close",
+      "zone": "04",
+      "worldAnchor": [
+        8,
+        3.65,
+        3
+      ],
+      "pixel": [
+        1031.393285855465,
+        507.3546756636839
+      ],
+      "method": "manual design-intent anchor projected with fixed camera; may be occluded"
+    },
+    {
+      "view": "side",
+      "zone": "01",
+      "instance": "front-wall",
+      "projectedBounds": {
+        "x": 503.9146371603669,
+        "y": 429.3181104711993,
+        "width": 382.40750861180703,
+        "height": 189.4691667558156
+      },
+      "method": "projected world AABB envelope, includes occluded parts; not visible silhouette"
+    },
+    {
+      "view": "side",
+      "zone": "01",
+      "instance": "cove-turn",
+      "projectedBounds": {
+        "x": 466.42152112335856,
+        "y": 421.37581202817694,
+        "width": 311.58444265348163,
+        "height": 154.77066959013166
+      },
+      "method": "projected world AABB envelope, includes occluded parts; not visible silhouette"
+    },
+    {
+      "view": "side",
+      "zone": "01",
+      "worldAnchor": [
+        9.2,
+        0.8,
+        6
+      ],
+      "pixel": [
+        614.5074482175551,
+        529.1617011882964
+      ],
+      "method": "manual design-intent anchor projected with fixed camera; may be occluded"
+    },
+    {
+      "view": "side",
+      "zone": "02",
+      "instance": "front-shoulder",
+      "projectedBounds": {
+        "x": 571.7765298360722,
+        "y": 407.113100740291,
+        "width": 320.87242589461437,
+        "height": 63.0778106254898
+      },
+      "method": "projected world AABB envelope, includes occluded parts; not visible silhouette"
+    },
+    {
+      "view": "side",
+      "zone": "02",
+      "worldAnchor": [
+        9,
+        2.45,
+        4
+      ],
+      "pixel": [
+        738.7580146496052,
+        426.93469487263803
+      ],
+      "method": "manual design-intent anchor projected with fixed camera; may be occluded"
+    },
+    {
+      "view": "side",
+      "zone": "03",
+      "instance": "east-cliff",
+      "projectedBounds": {
+        "x": 754.6906843263042,
+        "y": 334.11105653059576,
+        "width": 396.91868459048067,
+        "height": 288.29169346585627
+      },
+      "method": "projected world AABB envelope, includes occluded parts; not visible silhouette"
+    },
+    {
+      "view": "side",
+      "zone": "03",
+      "instance": "east-shoulder",
+      "projectedBounds": {
+        "x": 782.8732988061872,
+        "y": 347.19268701685303,
+        "width": 316.7253601432758,
+        "height": 70.58863474831935
+      },
+      "method": "projected world AABB envelope, includes occluded parts; not visible silhouette"
+    },
+    {
+      "view": "side",
+      "zone": "03",
+      "worldAnchor": [
+        11.2,
+        2.9,
+        1
+      ],
+      "pixel": [
+        936.8172013147106,
+        398.6591399342645
+      ],
+      "method": "manual design-intent anchor projected with fixed camera; may be occluded"
+    },
+    {
+      "view": "side",
+      "zone": "04",
+      "worldAnchor": [
+        8,
+        3.65,
+        3
+      ],
+      "pixel": [
+        799.9999999999998,
+        355.8104800679754
+      ],
+      "method": "manual design-intent anchor projected with fixed camera; may be occluded"
+    },
+    {
+      "view": "below",
+      "zone": "01",
+      "instance": "front-wall",
+      "projectedBounds": {
+        "x": 361.29530319462174,
+        "y": 357.7133829004188,
+        "width": 697.4778657680656,
+        "height": 296.53730519576715
+      },
+      "method": "projected world AABB envelope, includes occluded parts; not visible silhouette"
+    },
+    {
+      "view": "below",
+      "zone": "01",
+      "instance": "cove-turn",
+      "projectedBounds": {
+        "x": 175.50248953085745,
+        "y": 394.2509169692419,
+        "width": 531.6006841468076,
+        "height": 249.9829813700697
+      },
+      "method": "projected world AABB envelope, includes occluded parts; not visible silhouette"
+    },
+    {
+      "view": "below",
+      "zone": "01",
+      "worldAnchor": [
+        9.2,
+        0.8,
+        6
+      ],
+      "pixel": [
+        571.4333824365222,
+        553.2750975148808
+      ],
+      "method": "manual design-intent anchor projected with fixed camera; may be occluded"
+    },
+    {
+      "view": "below",
+      "zone": "02",
+      "instance": "front-shoulder",
+      "projectedBounds": {
+        "x": 439.2821659369695,
+        "y": 340.20228892991526,
+        "width": 553.5232879642944,
+        "height": 154.33749994712798
+      },
+      "method": "projected world AABB envelope, includes occluded parts; not visible silhouette"
+    },
+    {
+      "view": "below",
+      "zone": "02",
+      "worldAnchor": [
+        9,
+        2.45,
+        4
+      ],
+      "pixel": [
+        721.5121198264817,
+        418.50371960956073
+      ],
+      "method": "manual design-intent anchor projected with fixed camera; may be occluded"
+    },
+    {
+      "view": "below",
+      "zone": "03",
+      "instance": "east-cliff",
+      "projectedBounds": {
+        "x": 654.0599947348596,
+        "y": 252.92499070825932,
+        "width": 626.1998760963131,
+        "height": 395.4677216846869
+      },
+      "method": "projected world AABB envelope, includes occluded parts; not visible silhouette"
+    },
+    {
+      "view": "below",
+      "zone": "03",
+      "instance": "east-shoulder",
+      "projectedBounds": {
+        "x": 668.3900808405975,
+        "y": 290.42281616826887,
+        "width": 507.28570809783935,
+        "height": 162.98725282914893
+      },
+      "method": "projected world AABB envelope, includes occluded parts; not visible silhouette"
+    },
+    {
+      "view": "below",
+      "zone": "03",
+      "worldAnchor": [
+        11.2,
+        2.9,
+        1
+      ],
+      "pixel": [
+        1032.4932812477084,
+        380.39511214209296
+      ],
+      "method": "manual design-intent anchor projected with fixed camera; may be occluded"
+    },
+    {
+      "view": "below",
+      "zone": "04",
+      "worldAnchor": [
+        8,
+        3.65,
+        3
+      ],
+      "pixel": [
+        747.1194438384482,
+        343.0836234762358
+      ],
+      "method": "manual design-intent anchor projected with fixed camera; may be occluded"
+    },
+    {
+      "purpose": "G04-A1 candidate proposal only; not extracted interfaces",
+      "searchWindowM": {
+        "x": [
+          8.2,
+          11.2
+        ],
+        "y": [
+          0,
+          2.35
+        ],
+        "z": [
+          5,
+          7.2
+        ]
+      },
+      "projectedBounds": {
+        "x": 952.9543615304934,
+        "y": 585.0191416956201,
+        "width": 144.46727303295427,
+        "height": 156.40089239170936
+      }
+    }
+  ],
+  "protection": [
+    {
+      "path": "art-source/parameters/island_cottage_v1.json",
+      "sha256": "415415433ca9d85594a3652e4eceab0cdc673b0f264dc7feb356cea4dec11c4a"
+    },
+    {
+      "path": "art-source/parameters/island_cottage_v2.json",
+      "sha256": "9182aca07b8777f71df5ec75a494b7de3036e6df32ae6a2172f77851572dfef3"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-A0/REPORT.md",
+      "sha256": "0af7faf70ca740cb1b3e8158da6c13f402f25f24630c59dbb77235ed589bb554"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-A0/boundary-below.png",
+      "sha256": "e193996472816880ca2179ede07270018394cbcfd339925393bd0bccaf9725ba"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-A0/boundary-golden-close.png",
+      "sha256": "93825d7ec620ca25e8f1fc15210973a12d280b2854267aee237df3a1440cfded"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-A0/boundary-golden.png",
+      "sha256": "501d6590f330b7aede42544f40363b9e94226cdb695ac7a43a462b12e11f1d65"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-A0/boundary-side.png",
+      "sha256": "015b7293512015eb05b2bcc179d56748158881d2183c1b67845a90ac82a88dda"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-A0/summary.json",
+      "sha256": "52806861429e9790079aa7adf1ac806aa0481b918332406e3b66b084e1f72ccf"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-A1/REPORT.md",
+      "sha256": "b285574a74f26bcd6ebd54c8bcfdcf0d40cb701e2d2092d3216fb3741cc2eb4d"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-A1/baseline-below.png",
+      "sha256": "67b1058000a35fcba7036f8959c7af2a8ae10101ed240cb9c57b5ac1321ff3f9"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-A1/baseline-golden.png",
+      "sha256": "d27f1da15aed7708e340c33c189d8decc5ea841fccbe0da11425e422a26a606c"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-A1/baseline-side.png",
+      "sha256": "ae174143fb4c8c771d44b243b2e6ea5f292186c86e0c72ca9d4c9cb887735a82"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-A1/boundary-golden.png",
+      "sha256": "eee3a4be911b7571c09368e3100197dcd0ca716db1f0bd7c39c7c8ba8ea0556d"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-A1/cliff-blockout-below.png",
+      "sha256": "c41465ba0efe7ddab8b61a266aa148e037e54b5761ebc5b40b1620eb9d1ea8f1"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-A1/cliff-blockout-golden.png",
+      "sha256": "d451aa95af1f63726f84640352e0c60f26fe5638afe2578a6f582476b2c267b3"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-A1/cliff-blockout-side.png",
+      "sha256": "d6d56c01d016c246a0f52388a4ce03836406acd0f060431512b0af380a1b5965"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-A1/comparison-below.png",
+      "sha256": "18593251f602d9beed050aa1aba2f46512bfa84974c7a3a123a083d7ab4773b2"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-A1/comparison-golden-close.png",
+      "sha256": "82c360aff905dce5993d79ecddc78f304b91c5ed6f12d20f2f46de1e00bd0419"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-A1/comparison-golden.png",
+      "sha256": "440507f6cc7c94fea3483cbece5e4d895a2c7f70cd0c0e5fd476c74d5f7871ac"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-A1/comparison-side.png",
+      "sha256": "2dfb67e52d3de46e8c96364f24ccc78a019387963a2e77f18a660ef2d9862b70"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-A1/geometry-diagnostic.png",
+      "sha256": "9c0e38993b7a978f20f4dd977bfaf90d7bf687796b3d280436855bbaa76558cd"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-A1/geometry-golden.png",
+      "sha256": "afe9c9765983e3823f9361fa81593cff8d4963dc8a298460edcac63d5052dfd3"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-A1/geometry-side.png",
+      "sha256": "0dda8addb311451ebdc89e8755a504b32248ee72fea91669240e080f2982e6f8"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-A1/summary.json",
+      "sha256": "ac3312baed6428404e77f88eabed4f38b112a8fc4a96f77b7abfa934aa227fb4"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-P0/REPORT.md",
+      "sha256": "8524fa70b4c3fee0be23fc4fdd5176ad3be9b8f3970f643dc3fccf64a1d642d6"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-P0/comparison-below.png",
+      "sha256": "266964c3665ec154c8cf6a847aef81b62ba32a62b57614b1c8c602f88dceda35"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-P0/comparison-golden-close.png",
+      "sha256": "369c59b919f0dc2881c0fe3b0700f7da4bfe39bb1d992d40614f6bc93f6ea3b9"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-P0/comparison-golden.png",
+      "sha256": "f986a7ac620802c06b141d3503a1af06ab679e370e904c02dad632274b56e334"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-P0/comparison-isolated-golden.png",
+      "sha256": "d3749af9781db141dc0e29f24c8fad0ec325faf5c808b42a41c32c1cf5a505c1"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-P0/comparison-isolated-side.png",
+      "sha256": "62ab03175a1c997fd928f58dca735f81a822da86f93ba3c6997e9542ab528b6f"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-P0/comparison-side.png",
+      "sha256": "a2432f8d3ec6ec3fdc745279903a3f9ee833f767c5ee78efa69ed9fa36120c25"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-P0/isolated-neutral-golden.png",
+      "sha256": "afe9c9765983e3823f9361fa81593cff8d4963dc8a298460edcac63d5052dfd3"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-P0/isolated-neutral-side.png",
+      "sha256": "0dda8addb311451ebdc89e8755a504b32248ee72fea91669240e080f2982e6f8"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-P0/isolated-stylized-golden.png",
+      "sha256": "d0e2edc48d9e886514fa4186304e172344fef6ebfda475713c52c4d7f8897f77"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-P0/isolated-stylized-side.png",
+      "sha256": "aaad52e3ffcdcb9a6cc2f8da10674b986757534fa9ff86aa94ad66b43c8bb33e"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-P0/neutral-below.png",
+      "sha256": "c41465ba0efe7ddab8b61a266aa148e037e54b5761ebc5b40b1620eb9d1ea8f1"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-P0/neutral-golden.png",
+      "sha256": "d451aa95af1f63726f84640352e0c60f26fe5638afe2578a6f582476b2c267b3"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-P0/neutral-side.png",
+      "sha256": "d6d56c01d016c246a0f52388a4ce03836406acd0f060431512b0af380a1b5965"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-P0/stylized-below.png",
+      "sha256": "2ecb366f21c5fcb8a1a4f3065439af203a6d08c8e8ce145fd92588f4a471a9bc"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-P0/stylized-golden.png",
+      "sha256": "db28812183691b47c9704dd50dccfed6eef243a5da3c8f97b235f170af502613"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-P0/stylized-side.png",
+      "sha256": "5c1b8edfef18d3149be19b72fb394aece1c7492924698f7bbb8d8a7c97d5abf0"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-P0/summary.json",
+      "sha256": "83f181e0a853c211230feee8c45602ae8d33ad86e6918bc2d2e7009e86357b72"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-P0/tripo-below.png",
+      "sha256": "0cffb9eaa6f859e7e995ebc8615235e0208825d9d028748bea2809581e651a9c"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-P0/tripo-golden.png",
+      "sha256": "609cad9ca7ad30330d3f28fd08cc812e510fcdadff8000352fafe9e7396b1ea2"
+    },
+    {
+      "path": "docs/m2.3-cliff-section/review-gates/G03-P0/tripo-side.png",
+      "sha256": "ae174143fb4c8c771d44b243b2e6ea5f292186c86e0c72ca9d4c9cb887735a82"
+    },
+    {
+      "path": "public/assets/manifests/blockout_v1.json",
+      "sha256": "eaf54d33a963be5ca0d96ccbacbde53d7565c713e8b21f65d373bf2f70b6bb16"
+    },
+    {
+      "path": "public/assets/manifests/blockout_v2.json",
+      "sha256": "396986d68f59baa4356d3b915ec378b21c523b9abec880632ee7cad5c2b7ce3d"
+    },
+    {
+      "path": "public/assets/manifests/coastal-assembly.json",
+      "sha256": "390cd8ed273a98b3b32d038227dbf1dfd0aa36d4d2f4c5a4e4e5f99087c55cd5"
+    },
+    {
+      "path": "public/assets/manifests/tripo_rock_spike.json",
+      "sha256": "ea0655ba507a1241414409d3d1fb5cbb0cf293225d0032f64e0284065bea8866"
+    },
+    {
+      "path": "public/assets/models/axis_test_01.glb",
+      "sha256": "360fad16bad6b2c5e9530dbe1549a928e23a118586b52b0d95e8991cbe77e506"
+    },
+    {
+      "path": "public/assets/models/axis_test_02.glb",
+      "sha256": "ef065f3329f34b6a97a6c929b95b4e1d33430b88d8170700c9dfd2f60f17beeb"
+    },
+    {
+      "path": "public/assets/models/coastal-assembly/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "public/assets/models/island_cottage_blockout_v1.glb",
+      "sha256": "8eca8043b21f6780d959b9d1ecbfa0261e911a9a8b653be6c5f552ea00393f32"
+    },
+    {
+      "path": "public/assets/models/island_cottage_blockout_v2.glb",
+      "sha256": "2992f132f2c6f852475568074c5481dc0730a0667e369bbc54c18779df32c51d"
+    },
+    {
+      "path": "public/assets/models/tripo-rock/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "public/assets/presets/coastal-assembly.json",
+      "sha256": "e6d1d5258f3b510a3decf2c7b995df92b2aa6129d2271acd3ab89f0dee7d151f"
+    },
+    {
+      "path": "public/assets/presets/coastal-g01.json",
+      "sha256": "550b5180124b4879ac14db2446c4654fc54af3ff6f56ab5b463977c65e7df3aa"
+    },
+    {
+      "path": "public/assets/presets/coastal-g02.json",
+      "sha256": "0f4182c4a4eb77a59f7abba016bb3ccad984e9ff7023216e51969b3a89ed0d2f"
+    },
+    {
+      "path": "public/assets/presets/coastal-g021.json",
+      "sha256": "69db0b4aa172f486004676bdbc88ee1c501882a22a0c9260a09b4016dfda8ebf"
+    },
+    {
+      "path": "public/assets/presets/coastal-g022.json",
+      "sha256": "d041f9893aa925f7020cad5e9b45c6ce0fa7df4d8993a9d1060297a23ce3ceba"
+    },
+    {
+      "path": "public/assets/presets/coastal-g03-a0-boundaries.json",
+      "sha256": "7439c95197c9c5679f9debc7219a7277923c317c6a018ad3c8e6cb4f53902125"
+    },
+    {
+      "path": "public/assets/presets/coastal-g03-a0.json",
+      "sha256": "9ae0a28a6c2ce3b06d9b544a3d84c1c18cf7544897d4078c6115777d6bd4500b"
+    },
+    {
+      "path": "public/assets/presets/coastal-g03-a1.json",
+      "sha256": "d1c7284e179b566a689a8e202c6d2dd0b15741432f7b7d316edca5f9e064af43"
+    },
+    {
+      "path": "public/assets/presets/coastal-g03-p0.json",
+      "sha256": "c1be8351fff71bc78410d2e1c1b08668f119c7d0995478ca33f920c2dda192f6"
+    },
+    {
+      "path": "scripts/archive/compare_blockout_v0.mjs",
+      "sha256": "6ffe1924dfefa97bb56dc93c2bb256519dac08e75de66947f3e67ffd8d16b5e5"
+    },
+    {
+      "path": "scripts/archive/generate_blockout_v0.py",
+      "sha256": "96f8e56999d6c995eb3d145e944975d795a8931ca69a3c366eefa74c63cd50b8"
+    },
+    {
+      "path": "scripts/archive/validate_blockout_v0.mjs",
+      "sha256": "459b2233e9a9213851aa2a3734648f3483e60ceda6c402e0c748e9ebfa8a1a9f"
+    },
+    {
+      "path": "scripts/coastal_batch.mjs",
+      "sha256": "0857843881640d7f19f2c1b4561774e9976cb49082c9bb861f740cd970fa6f37"
+    },
+    {
+      "path": "scripts/coastal_pipeline.mjs",
+      "sha256": "d2975d38556df3201d4148b6be139438b947794419c3ff14458527bcc8825269"
+    },
+    {
+      "path": "scripts/compare_blockout.mjs",
+      "sha256": "48e2951311ce078edd7844675a7ed3424298f369587d2ce7b3fc8ec5bc3df73b"
+    },
+    {
+      "path": "scripts/evidence_plans.mjs",
+      "sha256": "32f21729d554d80e9ce9ca1699907702637743511715805dd88ee42ead3fc43b"
+    },
+    {
+      "path": "scripts/generate_blockout.py",
+      "sha256": "818cc47b8ff09298ea15013603326443d733adc0f3f389bfb2c88a227c2704df"
+    },
+    {
+      "path": "scripts/glb_geometry.mjs",
+      "sha256": "eeef756682613e59799ac574242fd873f7b987026dc4c4229ef239fa61aaae4b"
+    },
+    {
+      "path": "scripts/inspect_glb.py",
+      "sha256": "53a37bb227eb4f26a07de6ddb64db08904db56b2939813254bb823d51daf5961"
+    },
+    {
+      "path": "scripts/optimize_tripo_asset.py",
+      "sha256": "2d6ddd943e849254c38ed5ecf4fc7ef2e09b7cc23e967732d47780c7437d3a79"
+    },
+    {
+      "path": "scripts/render_coastal.py",
+      "sha256": "eb1844e0cf030b233bf817d30f8c084f09c4fe7c0e35441ef606b99b8b1df9aa"
+    },
+    {
+      "path": "scripts/render_tripo.py",
+      "sha256": "a6413a0880db9a688fa3652014335e4ab7bcb6992562e657aa4fffbba0ddcb81"
+    },
+    {
+      "path": "scripts/report_coastal.mjs",
+      "sha256": "96f5e739e2e4c8af35327532af3041c18be9e32f2924f81041dbfd5081148ff3"
+    },
+    {
+      "path": "scripts/report_tripo.mjs",
+      "sha256": "47ca9a22fa9a3474e5c7bec7a3e2e1526bda19ece534002fed1bd297feeb652d"
+    },
+    {
+      "path": "scripts/reproduce_blockout.mjs",
+      "sha256": "ed4a737d2cdfd7d3f2362fde4eb843bd4c716e6e5035c1db81567a03942e9f59"
+    },
+    {
+      "path": "scripts/run_blender.mjs",
+      "sha256": "287bdda04625fe9e419fb40f6e741f4f3717e077b874fa1c569c2d9b5cea601b"
+    },
+    {
+      "path": "scripts/run_tripo.mjs",
+      "sha256": "42b4ecd1aaf27da45d45f2501fd44aedef9c22ae1993e73cf64a2b0fdd3c8684"
+    },
+    {
+      "path": "scripts/survey_blockout.py",
+      "sha256": "9a54287188182bd655d3cc510b91453f14173eb6f06de0f0604f59f05dd95bef"
+    },
+    {
+      "path": "scripts/terrain_blockout.py",
+      "sha256": "8f6e5534e5ceecfce82dc5b46be2ed6d12be7053846b4adaaec1985d4a496b8a"
+    },
+    {
+      "path": "scripts/tripo_pipeline.mjs",
+      "sha256": "dcc8210069fdabc14a1a76a0876257a39e00b10011763ce92772319a7a409ee1"
+    },
+    {
+      "path": "scripts/validate_blockout.mjs",
+      "sha256": "f880bb3df30ba59862df336003e00fc9e47dadae2c09e6be850d327b57a71c58"
+    },
+    {
+      "path": "scripts/validate_coastal.mjs",
+      "sha256": "e4dd1a9cb154534d5dbfc5ced85f4eb9be64664bd5aefd6478e80b5d2f5678cf"
+    },
+    {
+      "path": "scripts/validate_tripo.mjs",
+      "sha256": "93a48f1bc2eb81cf60c36fc32e4e201d444b5b70a3d93951ad5ee2dc0809abb5"
+    },
+    {
+      "path": "src/app/Application.ts",
+      "sha256": "aeaf7e77541da3f40ace4ee99da1700d00dc85b818c2942d2b7cdb13f5a97f5f"
+    },
+    {
+      "path": "src/app/CoastalApplication.ts",
+      "sha256": "497b90902ddb2e95faf3be5eec16875a4456570eff5a42066f1b564e95e64db0"
+    },
+    {
+      "path": "src/app/TripoApplication.ts",
+      "sha256": "d099c52e1ca8d80ffa649bf223e9f200caac1afce60c6121f3e58c28eb55300a"
+    },
+    {
+      "path": "src/app/shell.ts",
+      "sha256": "f5353a233b813d6654bdf16a6088f36c37b224a1916e8c5cfa6afdbfa3e15556"
+    },
+    {
+      "path": "src/art-lab/debugPanel.ts",
+      "sha256": "b63b2611b089025faffbe1d17607b573f69b97e09e950fb957ce34ecda57d74a"
+    },
+    {
+      "path": "src/camera/ConstrainedCamera.ts",
+      "sha256": "b2072da68d673ee573d7bcfa44076f9548fe038badc382dbc482e72a6903d67d"
+    },
+    {
+      "path": "src/camera/math.ts",
+      "sha256": "d7e28c18ff4ee7047e0a6a2d70a2d0bc732a79d5f58e923c1fd0c96678a66bdd"
+    },
+    {
+      "path": "src/config/blockout.ts",
+      "sha256": "637187ab7eff1dc46bfe5956422ebccb23abb1d21ddd5578b9f359172d21f89f"
+    },
+    {
+      "path": "src/config/camera.ts",
+      "sha256": "6ee408e1bc2492dd701fb529efafb5d24dd9d02a82eabce166043b3fc75b7575"
+    },
+    {
+      "path": "src/config/coastal.ts",
+      "sha256": "d3a1e69d1b23e06c8f4caf093ddca8d66d3a9d2785042b8cce613df846b273b2"
+    },
+    {
+      "path": "src/config/coastalReview.ts",
+      "sha256": "9b13ec5777edea529fa847310de0cdc0a6844aeeba555f173349085361249d30"
+    },
+    {
+      "path": "src/config/tripo.ts",
+      "sha256": "3fc5b59f419fa2443186754d190d84fccf4e4dfd22756c1d9d7b1edf34c8a1b0"
+    },
+    {
+      "path": "src/core/dispose.ts",
+      "sha256": "c4223d8c4c6437970e3f09923ced1460d3fd88b50455c9821e1eee23d1f2eb85"
+    },
+    {
+      "path": "src/core/frameMetrics.ts",
+      "sha256": "534f4532151919bbcc9f465eaa017e96eea93e8733a21488c9699bf09eceee15"
+    },
+    {
+      "path": "src/core/renderer.ts",
+      "sha256": "ea84d5e6fd8dd68c051ff3faa0063c4ca85f946b0c9ed98209f6cacfba5d262a"
+    },
+    {
+      "path": "src/main.ts",
+      "sha256": "46d0fc3ad305f5ce13908afa3171da73bab807dc82989090e2fdc2abe03ee8dd"
+    },
+    {
+      "path": "src/style.css",
+      "sha256": "8ae17712bac2e6ebc5e93f0e2f095a7e3b5c295511f751ed4b4b86eb3c6d61ca"
+    },
+    {
+      "path": "src/world/blockout.ts",
+      "sha256": "ff537bbf89334a701915297b4d4c4606978a817f26c265fa37b80cd0135ec788"
+    },
+    {
+      "path": "src/world/cliffBlockout.ts",
+      "sha256": "4e8bda6b51a28730fc92ff29da5dfc87a79d6157a22c8f922d2cc0b33c15939a"
+    },
+    {
+      "path": "src/world/cliffBoundary.ts",
+      "sha256": "59626c85bed29fbef0b7532526b4bd761bd3b69b0674bd8fe9446ff2a3f3617a"
+    },
+    {
+      "path": "src/world/coastal.ts",
+      "sha256": "0ad27baef87915034d503de0d2f795d15e54d7fbd790c5f72b8f1c7d25b07d21"
+    },
+    {
+      "path": "src/world/coastalDiagnostics.ts",
+      "sha256": "ed1327440c6392629617ddc26a93e6228104247066aa66232a8c8ceb6ddd069a"
+    },
+    {
+      "path": "src/world/coastalFusion.ts",
+      "sha256": "b00b4fa322d4e1bbdc61c68e5e33a6f6a2a91e21b7bd6c3f3695c0afaaeab541"
+    },
+    {
+      "path": "src/world/coastalReplacement.ts",
+      "sha256": "7a0685d3b2207be923d17022cfc590f056a7f8afcc2e43b16bb383e028d16695"
+    },
+    {
+      "path": "src/world/coastalStylized.ts",
+      "sha256": "e03d01baf63c798075e729df241d12744aa0952c126c1566b515dea70b23bace"
+    },
+    {
+      "path": "src/world/foundation.ts",
+      "sha256": "61451fbf7921416c2d4f5b7d8e76a90a02bb676f11025249d492bec16b17b0e9"
+    },
+    {
+      "path": "src/world/tripo.ts",
+      "sha256": "c7f1b45a5d3bb9c9f2212c02f307400986ea51f71774a8736d7e24c57d87b406"
+    },
+    {
+      "path": "art-source/tripo/inbox/coastal_cliff_A1_multiview.glb",
+      "sha256": "2a1a9977d08b1a1db1b3981094a4fdd22acda418c5cf907ba966743a41de4805"
+    },
+    {
+      "path": "public/assets/models/coastal-assembly/A1/rock-20k-2k.glb",
+      "sha256": "d4416ba1f7632d28a47b3a90eec888d7a41f4a3ddc31c283ec697dd599b5a28f"
+    },
+    {
+      "path": "public/assets/models/coastal-assembly/A1/rock-10k-1k.glb",
+      "sha256": "622c7df96353f35add8811f14528a09d3cd1cdd86f62667a183c52bdebc67ed5"
+    },
+    {
+      "path": "art-source/tripo/inbox/coastal_cliff_A2_multiview.glb",
+      "sha256": "fd24331c347bd24c6772a47923a701460f8297cd50edf1bcb4b0aea104070e13"
+    },
+    {
+      "path": "public/assets/models/coastal-assembly/A2/rock-20k-2k.glb",
+      "sha256": "28823fe2910158b363092ceb4a31bdf21967fdb05ca59180127ff72dddd40f79"
+    },
+    {
+      "path": "public/assets/models/coastal-assembly/A2/rock-10k-1k.glb",
+      "sha256": "1f7d69dff49c99c4d9c4343f113f20b02eaece432d5470182cd49dfed9ed42ff"
+    },
+    {
+      "path": "art-source/tripo/inbox/coastal_corner_A3_multiview.glb",
+      "sha256": "e179cbb37b51736aa6fb7e9c103dfd7ff79a15979dbe87aecd3a99282d1f06bc"
+    },
+    {
+      "path": "public/assets/models/coastal-assembly/A3/rock-20k-2k.glb",
+      "sha256": "ce9dd331c34da061e735102f6e2cc27b1db28c1fd030be1228018f298f201240"
+    },
+    {
+      "path": "public/assets/models/coastal-assembly/A3/rock-10k-1k.glb",
+      "sha256": "e79a163acf4bd92868dd62447691c7585115881bcf4a3b3f218a2c3ad145e649"
+    },
+    {
+      "path": "art-source/tripo/inbox/coastal_platform_A4_multiview.glb",
+      "sha256": "13f1d85b36fe7192d43d8130c07583138d53fd8694f0276b0a32576582e54672"
+    },
+    {
+      "path": "public/assets/models/coastal-assembly/A4/rock-20k-2k.glb",
+      "sha256": "1491277274630c76bd9075d8897794661814256fee3025535c37432317597813"
+    },
+    {
+      "path": "public/assets/models/coastal-assembly/A4/rock-10k-1k.glb",
+      "sha256": "4854a6c5c75bb843db2ba0f85160d25f616aa1989d53115a39c05df2ff1e707c"
+    }
+  ],
+  "errors": [],
+  "failedRequests": []
+}

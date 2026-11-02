@@ -1,0 +1,20 @@
+[
+  {
+    "path": "docs/references/golden-reference-v1.png",
+    "sha256": "6d538a42441a2c9b5b2e6736522687fa85aef08b8d87e1a71b0fa3ec2a1e61e3",
+    "bytes": 3321901,
+    "width": 1536,
+    "height": 1024,
+    "authority": "original Golden Reference V1",
+    "originalNotCommitted": true
+  },
+  {
+    "path": "docs/references/20261102195825_187_18.jpg",
+    "sha256": "21b1639089390b7e2d5945a9fecadff4c333090c804fd10759ba0392fcf8cf16",
+    "bytes": 300087,
+    "width": 1536,
+    "height": 1024,
+    "authority": "supplementary concept, not geometric blueprint",
+    "originalNotCommitted": true
+  }
+]
