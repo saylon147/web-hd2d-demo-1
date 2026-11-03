@@ -28,6 +28,8 @@ import { APPROVED_BOUNDARY_URL, CliffBlockout, CLIFF_BLOCKOUT_PRESET_URL, parseC
 import type { CliffBlockoutPreset } from '../world/cliffBlockout';
 import { CoastalStylized, STYLIZED_PRESET_URL, STYLIZED_VARIANTS, parseStylizedPreset } from '../world/coastalStylized';
 import type { StylizedPreset, StylizedVariant } from '../world/coastalStylized';
+import { CoastalRockPrototype, ROCK_PROTOTYPE_URL, parseRockPrototypePreset } from '../world/coastalRockPrototype';
+import type { RockPrototypePreset } from '../world/coastalRockPrototype';
 
 const labels: Record<CoastalView, string> = { golden: '全景', front: '近景', side: '侧面', back: '背面', corner: '转角', top: '顶部' };
 export class CoastalApplication {
@@ -82,6 +84,11 @@ export class CoastalApplication {
   private stylizedPreset: StylizedPreset | undefined;
   private stylized: CoastalStylized | undefined;
   private stylizedVariant: StylizedVariant = 'neutral';
+  private g04A1: boolean;
+  private rockPreset: RockPrototypePreset | undefined;
+  private rock: CoastalRockPrototype | undefined;
+  private rockVariant = 'baseline';
+  private rockIsolated = false;
   constructor(root: HTMLElement) {
     this.shell = createShell(root, false);
     const query = new URLSearchParams(location.search);
@@ -91,11 +98,14 @@ export class CoastalApplication {
     this.g03A0 = query.get('diagnostic') === 'g03-a0';
     this.g03P0 = query.get('diagnostic') === 'g03-p0';
     this.g03A1 = query.get('diagnostic') === 'g03-a1' || this.g03P0;
+    this.g04A1 = query.get('diagnostic') === 'g04-a1';
+    this.rockVariant = this.g04A1 && query.get('variant') === 'candidate' ? 'candidate' : 'baseline';
+    this.rockIsolated = this.g04A1 && query.get('isolated') === 'true';
     this.stylizedVariant = STYLIZED_VARIANTS.find((v) => v === query.get('variant')) ?? 'neutral';
     this.cliffVariant = this.g03A1 && query.get('variant') === 'cliff-blockout' ? 'cliff-blockout' : 'baseline';
     this.cliffDiagnosticOnly = this.g03A1 && query.get('geometryOnly') === 'true';
     this.boundaryMarkers = query.get('markers') !== 'off';
-    this.g01 = query.get('diagnostic') === 'g01' || this.g02 || this.g021 || this.g022 || this.g03A0 || this.g03A1;
+    this.g01 = query.get('diagnostic') === 'g01' || this.g02 || this.g021 || this.g022 || this.g03A0 || this.g03A1 || this.g04A1;
     this.replacementVariant = this.g022 && query.get('variant') === 'replacement' ? 'replacement' : 'baseline';
     this.fusionVariant = this.g021 && query.get('variant') === 'geometry' ? 'geometry' : 'baseline';
     this.candidate = query.get('candidate') ?? 'baseline';
@@ -197,11 +207,23 @@ export class CoastalApplication {
       this.shell.viewport.querySelector('.eyebrow')!.textContent = 'M2.3 / G03-P0';
       this.shell.viewport.querySelector('.placeholder-badge')!.textContent = '风格化可行性实验 · 等待人工审图';
     }
+    if (this.g04A1) {
+      const response = await fetch(ROCK_PROTOTYPE_URL, { signal: this.events.signal });
+      if (!response.ok) throw new Error('G04-A1 A2 小样参数缺失');
+      this.rockPreset = parseRockPrototypePreset(await response.json() as unknown);
+      this.mode = 'assembly';
+      this.select('#coastal-mode').disabled = true;
+      this.select('#g01-overlay').closest('label')!.hidden = true;
+      this.shell.viewControls.insertAdjacentHTML('beforeend', '<label>G04-A1 A2 <select id="g04-variant"><option value="baseline">原 A2 / baseline</option><option value="candidate">单块宽基座 / candidate</option></select></label><label>模型检查 <select id="g04-isolated"><option value="false">完整场景</option><option value="true">无遮蔽斜侧视图</option></select></label>');
+      this.select('#g04-variant').value = this.rockVariant; this.select('#g04-isolated').value = String(this.rockIsolated);
+      this.shell.viewport.querySelector('.eyebrow')!.textContent = 'M2.3 / G04-A1';
+      this.shell.viewport.querySelector('.placeholder-badge')!.textContent = 'A2 单块占位小样 · 等待人工审图';
+    }
     this.world = await createBlockoutWorld(this.events.signal);
     if (this.disposed) { this.world.dispose(); return; }
     this.renderer.toneMappingExposure = this.preset.lighting.exposure;
     const signal = this.events.signal;
-    for (const select of this.shell.viewControls.querySelectorAll<HTMLSelectElement>('select:not([id^="g01-"]):not([id^="g02-"]):not([id^="g021-"]):not([id^="g022-"]):not([id^="g03-"])')) select.addEventListener('change', () => {
+    for (const select of this.shell.viewControls.querySelectorAll<HTMLSelectElement>('select:not([id^="g01-"]):not([id^="g02-"]):not([id^="g021-"]):not([id^="g022-"]):not([id^="g03-"]):not([id^="g04-"])')) select.addEventListener('change', () => {
       this.mode = COASTAL_MODES.find((item) => item === this.select('#coastal-mode').value) ?? 'assembly';
       this.lod = COASTAL_LODS.find((item) => item === this.select('#coastal-lod').value) ?? '10k-1k';
       this.asset = COASTAL_ASSETS.find((item) => item === this.select('#coastal-asset').value) ?? 'A1';
@@ -237,6 +259,17 @@ export class CoastalApplication {
       this.applyStylizedVariant(); this.syncCliffEvidence();
       this.shell.canvas.dataset.rendered = 'false'; this.syncQuery();
     }, { signal });
+    if (this.g04A1) {
+      this.select('#g04-variant').addEventListener('change', () => {
+        this.rockVariant = this.select('#g04-variant').value;
+        this.rock?.setVariant(this.rockVariant === 'candidate'); this.syncRockEvidence();
+        this.shell.canvas.dataset.rendered = 'false'; this.syncQuery();
+      }, { signal });
+      this.select('#g04-isolated').addEventListener('change', () => {
+        this.rockIsolated = this.select('#g04-isolated').value === 'true';
+        this.resize(); this.shell.canvas.dataset.rendered = 'false'; this.syncQuery();
+      }, { signal });
+    }
     if (this.g01) {
       this.select('#g01-view').addEventListener('change', () => {
         this.diagnosticView = G01_VIEWS.find((v) => v === this.select('#g01-view').value) ?? 'golden';
@@ -268,6 +301,7 @@ export class CoastalApplication {
     this.shell.canvas.dataset.loaded = 'false';
     this.shell.canvas.dataset.rendered = 'false';
     this.evidenceCamera = '';
+    this.rock?.dispose(); this.rock = undefined; delete this.shell.canvas.dataset.g04Summary;
     this.fusion?.dispose(); this.fusion = undefined;
     this.replacement?.dispose(); this.replacement = undefined;
     this.stylized?.dispose(); this.stylized = undefined; delete this.shell.canvas.dataset.g03P0;
@@ -323,7 +357,13 @@ export class CoastalApplication {
         this.shell.canvas.dataset.g03Boundary = JSON.stringify(this.boundary.report);
         this.shell.canvas.dataset.g03Instances = JSON.stringify(loaded.root.children.map((node) => ({ id: node.name, matrixWorld: node.matrixWorld.toArray() })));
       }
-      if (this.g01 && !this.g021 && !this.g022 && !this.g03A0 && !this.g03A1 && this.mode === 'assembly') {
+      if (this.g04A1 && this.rockPreset) {
+        const subject = loaded.root.getObjectByName('front-wall');
+        if (!subject) throw new Error('G04-A1 requires original A2 instance');
+        this.rock = new CoastalRockPrototype(this.world.scene, subject, this.rockPreset);
+        this.rock.setVariant(this.rockVariant === 'candidate'); this.syncRockEvidence();
+      }
+      if (this.g01 && !this.g021 && !this.g022 && !this.g03A0 && !this.g03A1 && !this.g04A1 && this.mode === 'assembly') {
         this.diagnostics = new CoastalDiagnostics(this.world.scene, loaded.root, placements, this.shell.viewport);
         this.diagnostics.setVisible(this.overlay !== 'off', this.overlay === 'terrain');
         this.shell.canvas.dataset.g01Report = JSON.stringify(this.diagnostics.report);
@@ -367,6 +407,13 @@ export class CoastalApplication {
     this.shell.canvas.dataset.replacementSummary = JSON.stringify(this.replacement?.summary);
     this.shell.canvas.dataset.replacementProtection = JSON.stringify(this.replacement?.preservation());
   }
+  private syncRockEvidence(): void {
+    this.shell.canvas.dataset.g04Variant = this.rockVariant;
+    this.shell.canvas.dataset.g04Summary = JSON.stringify(this.rock?.summary);
+    this.shell.canvas.dataset.g04Measurement = JSON.stringify(this.rock?.measurement);
+    this.shell.canvas.dataset.g04Protection = JSON.stringify(this.rock?.preservation());
+    this.shell.canvas.dataset.g04Instances = JSON.stringify(this.modules?.root.children.map((node) => ({ id: node.name, visible: node.visible, matrixWorld: node.matrixWorld.toArray() })));
+  }
   private syncQuery(): void {
     const url = new URL(location.href);
     for (const [key, value] of Object.entries({ mode: this.mode, lod: this.lod, asset: this.asset, view: this.view })) url.searchParams.set(key, value);
@@ -377,6 +424,7 @@ export class CoastalApplication {
     if (this.g03A0 || this.g03A1) url.searchParams.set('markers', this.boundaryMarkers ? 'on' : 'off');
     if (this.g03A1) { url.searchParams.set('variant', this.cliffVariant); url.searchParams.set('geometryOnly', String(this.cliffDiagnosticOnly)); }
     if (this.g03P0) url.searchParams.set('variant', this.stylizedVariant);
+    if (this.g04A1) { url.searchParams.set('variant', this.rockVariant); url.searchParams.set('isolated', String(this.rockIsolated)); }
     history.replaceState(null, '', url);
   }
   private resetSamples(): void { this.samples.reset(); delete this.shell.canvas.dataset.performance; }
@@ -401,6 +449,7 @@ export class CoastalApplication {
     const width = Math.max(1, this.shell.viewport.clientWidth), height = Math.max(1, this.shell.viewport.clientHeight);
     this.renderer.setPixelRatio(Math.min(2, devicePixelRatio || 1)); this.renderer.setSize(width, height, false); this.camera.resize(width, height);
     if (this.fixedCamera) { this.fixedCamera.aspect = width / height; this.fixedCamera.updateProjectionMatrix(); }
+    if (this.rock) { this.rock.isolatedCamera.aspect = width / height; this.rock.isolatedCamera.updateProjectionMatrix(); }
     this.resetSamples();
   };
   private render = (time: number): void => {
@@ -408,7 +457,7 @@ export class CoastalApplication {
     try {
       this.camera.update(this.previousFrame ? Math.min(0.1, (time - this.previousFrame) / 1000) : 0);
       this.previousFrame = time;
-      const activeCamera = this.fixedCamera ?? this.camera.camera;
+      const activeCamera = this.g04A1 && this.rockIsolated && this.rock ? this.rock.isolatedCamera : this.fixedCamera ?? this.camera.camera;
       if (this.boundary && this.fixedCamera) {
         const key = `${this.diagnosticView}:${this.shell.viewport.clientWidth}:${this.shell.viewport.clientHeight}:${this.boundaryMarkers}`;
         if (key !== this.evidenceCamera) {
@@ -431,7 +480,8 @@ export class CoastalApplication {
         }
       }
       this.diagnostics?.update(activeCamera, this.shell.viewport.clientWidth, this.shell.viewport.clientHeight);
-      const start = performance.now(); this.renderer.render(this.g03A1 && this.cliffDiagnosticOnly && this.cliffBlockout ? this.cliffBlockout.diagnosticScene : this.world.scene, activeCamera); const submitted = performance.now() - start;
+      const renderScene = this.g04A1 && this.rockIsolated && this.rock ? this.rock.isolatedScene : this.g03A1 && this.cliffDiagnosticOnly && this.cliffBlockout ? this.cliffBlockout.diagnosticScene : this.world.scene;
+      const start = performance.now(); this.renderer.render(renderScene, activeCamera); const submitted = performance.now() - start;
       if (this.shell.canvas.dataset.loaded === 'true') this.shell.canvas.dataset.rendered = 'true';
       if (this.shell.canvas.dataset.loaded === 'true' && this.samples.sample(time, submitted) && !this.shell.canvas.dataset.performance) {
         const context = this.renderer.getContext(), debug = context.getExtension('WEBGL_debug_renderer_info');
@@ -444,7 +494,7 @@ export class CoastalApplication {
           method: '60 warmup frames / 120 RAF samples; CPU submission excludes GPU completion; sequential localhost fetch/parse; unique loaded GLB bytes; RGBA8+mip estimate, not measured VRAM' });
       }
       this.shell.status.textContent = `WebGL2 · ${this.mode === 'baseline' ? 'M2.1' : this.lod}`;
-      this.shell.readout.textContent = this.fixedCamera ? `${this.g03P0 ? `G03-P0 ${this.stylizedVariant}` : this.g03A1 ? `G03-A1 ${this.cliffVariant}` : this.g03A0 ? 'G03-A0 边界提取' : this.g022 ? `G02.2 ${this.replacementVariant}` : this.g021 ? `G02.1-A ${this.fusionVariant}` : this.g02 ? `G02 ${this.candidate}` : 'G01'} ${this.diagnosticView} · ${this.overlay} · 固定相机` : `${labels[this.view]} · ${this.camera.state.pitch.toFixed(1)}° · ${this.camera.state.distance.toFixed(1)} m`;
+      this.shell.readout.textContent = this.fixedCamera ? `${this.g04A1 ? `G04-A1 ${this.rockVariant}${this.rockIsolated ? ' / isolated' : ''}` : this.g03P0 ? `G03-P0 ${this.stylizedVariant}` : this.g03A1 ? `G03-A1 ${this.cliffVariant}` : this.g03A0 ? 'G03-A0 边界提取' : this.g022 ? `G02.2 ${this.replacementVariant}` : this.g021 ? `G02.1-A ${this.fusionVariant}` : this.g02 ? `G02 ${this.candidate}` : 'G01'} ${this.diagnosticView} · ${this.overlay} · 固定相机` : `${labels[this.view]} · ${this.camera.state.pitch.toFixed(1)}° · ${this.camera.state.distance.toFixed(1)} m`;
       this.frame = requestAnimationFrame(this.render);
     } catch (error: unknown) { this.fail(error); }
   };
@@ -459,6 +509,7 @@ export class CoastalApplication {
     if (this.disposed) return; this.disposed = true;
     cancelAnimationFrame(this.frame); this.events.abort(); this.loading?.abort(); this.observer?.disconnect(); this.camera?.dispose();
     this.diagnostics?.dispose();
+    this.rock?.dispose();
     this.fusion?.dispose();
     this.replacement?.dispose();
     this.stylized?.dispose();
