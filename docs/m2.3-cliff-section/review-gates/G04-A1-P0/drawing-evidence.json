@@ -1,0 +1,69 @@
+{
+  "stage": "G04-A1-P0: 2D screen-space design only, no model or measured interfaces",
+  "source": "../G04-A0/default-golden.png",
+  "sourceSha256": "7ac378ce9c19675e91f2d8978b275a3943d96b660d7c757b67fcbdffa9e79a85",
+  "originalCanvas": {
+    "width": 1600,
+    "height": 811,
+    "dpr": 1
+  },
+  "camera": {
+    "position": [
+      17.050014427601752,
+      30.165224254354328,
+      27.34994411970374
+    ],
+    "target": [
+      0,
+      3.4,
+      3
+    ],
+    "fov": 35
+  },
+  "goldenCloseCrop": [
+    750,
+    430,
+    540,
+    350
+  ],
+  "scheme": "S1: broad core, inset crown, asymmetric return, small low foot",
+  "browser": "156.0.8078.79",
+  "sharedGeometrySha256": "830a13a3a84054f5db1e68d25ded9d473795beac576ef314aad909319be3e6e4",
+  "figures": [
+    {
+      "path": "a2-silhouette-golden.png",
+      "viewBox": [
+        0,
+        0,
+        1600,
+        811
+      ],
+      "sharedGeometrySha256": "830a13a3a84054f5db1e68d25ded9d473795beac576ef314aad909319be3e6e4",
+      "dimensions": {
+        "width": 2170,
+        "height": 1110,
+        "innerWidth": 2170,
+        "innerHeight": 1110
+      },
+      "sha256": "55e377fb900ba0ca1ba0e35a6abb3cbf875a88d7ee04f72eec7ecc299272010b"
+    },
+    {
+      "path": "a2-silhouette-golden-close.png",
+      "viewBox": [
+        750,
+        430,
+        540,
+        350
+      ],
+      "sharedGeometrySha256": "830a13a3a84054f5db1e68d25ded9d473795beac576ef314aad909319be3e6e4",
+      "dimensions": {
+        "width": 1780,
+        "height": 1180,
+        "innerWidth": 1780,
+        "innerHeight": 1180
+      },
+      "sha256": "7d5791059c249708ebf7a333c2df931fb346e302e905c635557b3a8a48c0a067"
+    }
+  ],
+  "errors": []
+}
