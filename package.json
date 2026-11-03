@@ -10,6 +10,8 @@
     "lint": "eslint . --max-warnings 0",
     "test": "vitest run",
     "test:browser": "playwright test",
+    "cottage:inspect": "node scripts/inspect_cottage.mjs",
+    "evidence:cottage:p0-p1": "playwright test tests/browser/cottage-p0-p1.spec.ts",
     "assets:blockout": "node scripts/run_blender.mjs",
     "assets:blockout:v0": "node scripts/run_blender.mjs --v0",
     "assets:validate": "node scripts/validate_blockout.mjs",

@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "id": "cottage-candidate-01",
+  "sourceFile": "art-source/tripo/inbox/tripo_cottage.glb",
+  "localUrl": "/__local-assets/cottage-candidate-01.glb",
+  "inspectionOutput": "docs/m2.4-cottage-tripo/review-gates/P0-P1/inspection.json",
+  "manifestOutput": "public/assets/manifests/cottage-candidate-01.json",
+  "scope": "P0/P1 isolated original HD inspection only; no island integration or optimization"
+}

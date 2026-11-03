@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "id": "cottage-candidate-01",
+  "manifestUrl": "/assets/manifests/cottage-candidate-01.json",
+  "fov": 35,
+  "frontYawDegrees": 0,
+  "viewPadding": 1.3,
+  "frontMeaning": "visually confirmed door-facing side is source +Z; back -Z, left -X, right +X; no island alignment in P1",
+  "backgrounds": { "neutral": "#e3e7e4", "warm": "#e7dfce" },
+  "scope": "P0/P1 isolated HD viewer; source centered at bottom for inspection only, no physical scale calibration"
+}

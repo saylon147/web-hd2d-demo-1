@@ -1,0 +1,144 @@
+{
+  "input": "art-source/tripo/inbox/tripo_cottage.glb",
+  "fileBytes": 67361380,
+  "sha256": "a7101c0dce3570e9ac6deacf78e0b31ad9a0ac90dbe14501319e9ef93f66b7a4",
+  "asset": {
+    "version": "2.0",
+    "generator": "Tripo"
+  },
+  "nodes": [
+    {
+      "name": "tripo_node_d725aefe-6c34-496c-b739-c213000250bf",
+      "mesh": 0
+    }
+  ],
+  "meshes": 1,
+  "primitives": [
+    {
+      "mode": 4,
+      "vertices": 1023693,
+      "triangles": 1907653,
+      "attributes": {
+        "POSITION": 0,
+        "NORMAL": 1,
+        "TEXCOORD_0": 2
+      },
+      "material": 0,
+      "positionBounds": [
+        [
+          -0.4900970160961151,
+          0,
+          -0.443084716796875
+        ],
+        [
+          0.4900970160961151,
+          0.702789306640625,
+          0.443084716796875
+        ]
+      ]
+    }
+  ],
+  "triangleCount": 1907653,
+  "images": [
+    {
+      "name": "tripo_cottage_basecolor.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 4215511,
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "sha256": "9759b3feda96a73cd3e063acaaaa5c40a4a3e3ad1c7a60b4e921555ecc1f41b5"
+    },
+    {
+      "name": "tripo_cottage_rm.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 2082336,
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "sha256": "da080b83e893d4ef140b5664305534a8bd7247634ad3440b495d9bfd21ae4279"
+    },
+    {
+      "name": "tripo_cottage_normal.png",
+      "mimeType": "image/png",
+      "bytes": 5411527,
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "sha256": "58348a25535cbeb7eb4d2dce64a9c3b65e5eacddb951bdaf8c6c1c655a9f6fe3"
+    }
+  ],
+  "materials": [
+    {
+      "name": "tripo_material_d725aefe-6c34-496c-b739-c213000250bf",
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicRoughnessTexture": {
+          "index": 1
+        }
+      },
+      "normalTexture": {
+        "index": 2
+      }
+    }
+  ],
+  "textures": [
+    {
+      "source": 0,
+      "sampler": 0
+    },
+    {
+      "source": 1,
+      "sampler": 1
+    },
+    {
+      "source": 2,
+      "sampler": 2
+    }
+  ],
+  "extensionsUsed": [
+    "KHR_materials_volume",
+    "FB_ngon_encoding"
+  ],
+  "extensionsRequired": [],
+  "gpuTextureRgbaMipEstimateBytes": 268435456,
+  "gpuEstimateDefinition": "RGBA8 plus complete mip chain; excludes geometry/framebuffer; browser allocation may differ",
+  "sceneCount": 1,
+  "nodeCount": 1,
+  "vertexCount": 1023693,
+  "spatial": {
+    "aabb": {
+      "min": [
+        -0.4900970160961151,
+        0,
+        -0.443084716796875
+      ],
+      "max": [
+        0.4900970160961151,
+        0.702789306640625,
+        0.443084716796875
+      ]
+    },
+    "dimensions": [
+      0.9801940321922302,
+      0.702789306640625,
+      0.88616943359375
+    ],
+    "center": [
+      0,
+      0.3513946533203125,
+      0
+    ],
+    "positionSamples": 1023693,
+    "method": "every actual POSITION vertex with full scene-node matrices; unmodified authored GLB units",
+    "axis": "glTF +Y up, right-handed; no extra Blender rotation",
+    "units": "glTF unit convention; Tripo normalized scale is not calibrated to this island",
+    "front": "visually confirmed door-facing side is source +Z; back -Z, left -X, right +X; no island alignment in P1",
+    "frontYawDegrees": 0
+  }
+}
