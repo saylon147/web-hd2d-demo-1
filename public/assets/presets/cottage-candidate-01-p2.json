@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "scope": "P2 visual comparison only; keep default A; no P3 or asset optimization",
+  "manifestUrl": "/assets/manifests/cottage-candidate-01.json",
+  "coastalLod": "10k-1k",
+  "baselineMeaning": "unchanged ordinary coastal-assembly placements; five existing Tripo instances, no G02/G03/G04 geometry variants",
+  "alignment": {
+    "footprintNode": "GroundFloor_Slab",
+    "doorNode": "Front_Door_Placeholder",
+    "sourceDoorAnchor": [-0.06058338099474373, 0.04645830231343734, 0.29338764339938916],
+    "anchorEvidence": "P0/P1 front.png 1320x811 pixel [615,632], raycast against original POSITION/index data with runtime front camera; source door bottom surface, not a semantic Tripo node",
+    "uniformScaleMultiplier": 1,
+    "yawDegrees": 0,
+    "translationOffsetM": [0, 0.08, 0],
+    "translationReason": "8cm upward allowance keeps generated stone paving close to the retained floor slab at Y=4; report actual overlaps and exposed stair opening rather than alter terrain/foundation",
+    "hiddenCottageNodes": ["Roof", "ExteriorWalls", "GroundFloor_InteriorWalls", "GroundFloor_Furniture"]
+  },
+  "goldenCloseCrop": [700, 120, 500, 420],
+  "cropReferenceCanvas": [1600, 811],
+  "cameras": {
+    "house": { "position": [10, 15, 14], "target": [2, 5.5, -1], "fov": 35 },
+    "front": { "position": [1.8, 7.3, 15.5], "target": [1.8, 5.7, 1.85], "fov": 35 },
+    "back": { "position": [2, 8, -15], "target": [2, 5.5, -1], "fov": 35 },
+    "left": { "position": [-13, 7, -1], "target": [2, 5.5, -1], "fov": 35 },
+    "right": { "position": [17, 7, -1], "target": [2, 5.5, -1], "fov": 35 },
+    "contact-front": { "position": [7, 5, 9], "target": [1.8, 3.9, 2], "fov": 35 },
+    "contact-back": { "position": [9, 6, -9], "target": [1, 3.9, -2.6], "fov": 35 },
+    "top": { "position": [2, 21, -0.99], "target": [2, 4, -1], "fov": 35 }
+  }
+}

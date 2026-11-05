@@ -6,6 +6,8 @@ if (!root) throw new Error('Application root is missing.');
 const scene = new URLSearchParams(location.search).get('scene');
 const app = scene === 'coastal-assembly'
   ? new (await import('./app/CoastalApplication')).CoastalApplication(root)
+  : scene === 'cottage-ab'
+  ? new (await import('./app/CottageComparisonApplication')).CottageComparisonApplication(root)
   : scene === 'cottage-candidate-01'
   ? new (await import('./app/CottageApplication')).CottageApplication(root)
   : scene === 'tripo-rock'
