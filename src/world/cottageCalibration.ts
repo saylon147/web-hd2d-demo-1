@@ -2,10 +2,11 @@ import { Box3, MathUtils, Matrix3, Mesh, Plane, Raycaster, Vector3 } from 'three
 import type { Object3D, Scene } from 'three';
 import type { CottageManifest, Triple } from '../config/cottageCandidate';
 import type { CottageComparisonPreset } from '../config/cottageComparison';
-import { COTTAGE_CALIBRATION_VARIANTS } from '../config/cottageCalibration';
-import type { CalibrationVariant, CottageCalibrationPreset, TripoCalibrationVariant } from '../config/cottageCalibration';
+import { COTTAGE_B20_VARIANTS, COTTAGE_CALIBRATION_VARIANTS } from '../config/cottageCalibration';
+import type { CottageReviewVariant, CottageCalibrationPreset, TripoReviewVariant } from '../config/cottageCalibration';
 import type { loadCottageCandidate } from './cottageCandidate';
 import { CottageComparison } from './cottageComparison';
+import { measureCottageStructure } from './cottageStructure';
 
 type Bounds = { min: Triple; max: Triple };
 interface BaseProfile {
@@ -25,7 +26,7 @@ interface ContactReport {
   maxGapM: number; maxEmbeddingM: number; samples: SupportSample[];
 }
 interface CalibrationRecord {
-  variant: TripoCalibrationVariant; relativeScale: number; uniformScale: number; position: Triple; offsetFromB0: Triple;
+  variant: TripoReviewVariant; relativeScale: number; uniformScale: number; position: Triple; offsetFromB0: Triple;
   center: Triple; dimensions: Triple; bounds: Bounds; baseBounds: Bounds; basePlaneY: number;
   door: Triple; doorOffsetFromOriginal: Triple; yawDegrees: number;
   courtyardFrontEdgeZ: number; doorToFrontEdgeM: number; frontBaseToEdgeM: number; stairBoundsClearanceM: number;
@@ -96,24 +97,32 @@ export class CottageCalibration {
   readonly baseline: CottageComparison;
   private root: Object3D | undefined;
   private profile: BaseProfile | undefined;
-  private records = new Map<TripoCalibrationVariant, CalibrationRecord>();
-  private variant: CalibrationVariant = 'A';
+  private records = new Map<TripoReviewVariant, CalibrationRecord>();
+  private variant: CottageReviewVariant = 'A';
+  private structure: ReturnType<typeof measureCottageStructure> | undefined;
   constructor(private scene: Scene, private manifest: CottageManifest, p2: CottageComparisonPreset, readonly preset: CottageCalibrationPreset) {
     this.baseline = new CottageComparison(scene, manifest, p2);
   }
   install(candidate: Awaited<ReturnType<typeof loadCottageCandidate>>): void {
     this.baseline.install(candidate); this.root = candidate.root;
     this.profile = measureBase(candidate.root, candidate.size.y, this.preset);
-    for (const variant of COTTAGE_CALIBRATION_VARIANTS) {
+    for (const variant of this.preset.gate === 'P3-B0' ? COTTAGE_B20_VARIANTS : COTTAGE_CALIBRATION_VARIANTS) {
       if (variant === 'A') continue;
       this.applyTransform(variant); this.baseline.setVariant('B');
-      this.records.set(variant, this.measure(variant));
+      const measured = this.measure(variant);
+      this.records.set(variant, measured);
+      if (variant === 'B20') this.structure = measureCottageStructure(this.scene, candidate.root, measured.baseBounds, measured.groundContact.samples);
     }
     this.setVariant('A');
   }
-  private applyTransform(variant: TripoCalibrationVariant): void {
+  private scaleFactor(variant: TripoReviewVariant): number {
+    const scale = this.preset.relativeScales[variant];
+    if (scale === undefined) throw new Error(`Cottage candidate ${variant} is not enabled in this gate`);
+    return scale;
+  }
+  private applyTransform(variant: TripoReviewVariant): void {
     if (!this.root || !this.profile) throw new Error('P3-A candidate not loaded');
-    const root = this.root, scale = this.baseline.scale * this.preset.relativeScales[variant];
+    const root = this.root, scale = this.baseline.scale * this.scaleFactor(variant);
     root.scale.setScalar(scale); root.rotation.y = MathUtils.degToRad(this.baseline.preset.alignment.yawDegrees);
     if (variant === 'B0') root.position.copy(this.baseline.position);
     else {
@@ -137,17 +146,18 @@ export class CottageCalibration {
     }
     this.scene.updateMatrixWorld(true);
   }
-  setVariant(variant: CalibrationVariant): void {
+  setVariant(variant: CottageReviewVariant): void {
     if (this.root) this.applyTransform(variant === 'A' ? 'B0' : variant);
     this.baseline.setVariant(variant === 'A' ? 'A' : 'B'); this.variant = variant;
   }
   current(): CalibrationRecord | undefined { return this.variant === 'A' ? undefined : this.records.get(this.variant); }
   summary() {
-    return { phase: 'P3-A only; human review pending', variant: this.variant, sourceSha256: this.manifest.sha256,
+    return { phase: this.preset.gate === 'P3-B0' ? 'P3-B0 only; human review pending' : 'P3-A only; human review pending', variant: this.variant, sourceSha256: this.manifest.sha256,
       originalP2: this.baseline.summary(), sourceBase: this.profile ?? null, variants: Object.fromEntries(this.records), current: this.current() ?? null,
+      ...(this.preset.gate === 'P3-B0' ? { structure: this.structure ?? null } : {}),
       defaultReplacement: false, optimization: false, diagnostics: 'Actual source lower-surface samples vs visible existing supports. Convex obstacle vertex containment proves positive conflicts only; absence of a sampled conflict is not complete collision proof.' };
   }
-  private measure(variant: TripoCalibrationVariant): CalibrationRecord {
+  private measure(variant: TripoReviewVariant): CalibrationRecord {
     const root = this.root!, profile = this.profile!, b = new Box3().setFromObject(root, true);
     const base = new Box3(new Vector3(...profile.bounds.min), new Vector3(...profile.bounds.max)).applyMatrix4(root.matrixWorld);
     const door = this.baseline.sourceAnchor.clone().applyMatrix4(root.matrixWorld), groundContact = this.measureContact();
@@ -160,7 +170,7 @@ export class CottageCalibration {
     if (groundContact.noSupport) constraints.push('At least one actual lower-surface sample has no visible support below it.');
     if (frontEdge - base.max.z < this.preset.placement.minimumFrontClearanceM) constraints.push('Front base leaves less than the configured 1m approach inspection target.');
     if (conflicts.some((c) => c.enclosedCandidateVertices > 0)) constraints.push('Actual source vertices intersect retained convex obstacles; see conflicts.');
-    return { variant, relativeScale: this.preset.relativeScales[variant], uniformScale: root.scale.x, position: root.position.toArray(),
+    return { variant, relativeScale: this.scaleFactor(variant), uniformScale: root.scale.x, position: root.position.toArray(),
       offsetFromB0: root.position.clone().sub(this.baseline.position).toArray(), center: b.getCenter(new Vector3()).toArray(), dimensions: b.getSize(new Vector3()).toArray(),
       bounds: bounds(b), baseBounds: bounds(base), basePlaneY: root.position.y + profile.planeY * root.scale.y,
       door: door.toArray(), doorOffsetFromOriginal: door.clone().sub(this.baseline.referenceDoor).toArray(), yawDegrees: MathUtils.radToDeg(root.rotation.y),
@@ -234,5 +244,5 @@ export class CottageCalibration {
     }
     return results;
   }
-  dispose(): void { this.baseline.dispose(); this.root = undefined; this.profile = undefined; this.records.clear(); }
+  dispose(): void { this.baseline.dispose(); this.root = undefined; this.profile = undefined; this.structure = undefined; this.records.clear(); }
 }

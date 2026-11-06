@@ -1,12 +1,23 @@
 export const COTTAGE_CALIBRATION_VARIANTS = ['A', 'B0', 'B1', 'B2', 'B3'] as const;
 export type CalibrationVariant = typeof COTTAGE_CALIBRATION_VARIANTS[number];
 export type TripoCalibrationVariant = Exclude<CalibrationVariant, 'A'>;
+export const COTTAGE_B20_VARIANTS = ['A', 'B0', 'B1', 'B20', 'B2', 'B3'] as const;
+export type CottageReviewVariant = typeof COTTAGE_B20_VARIANTS[number];
+export type TripoReviewVariant = Exclude<CottageReviewVariant, 'A'>;
 export const COTTAGE_CALIBRATION_VIEWS = ['golden', 'front', 'top', 'contact-front'] as const;
 export interface CottageCalibrationPreset {
   p2PresetUrl: string;
-  relativeScales: Record<TripoCalibrationVariant, number>;
+  relativeScales: Record<TripoCalibrationVariant, number> & { B20?: number };
+  gate?: 'P3-B0';
   contact: { lowerBandFraction: number; gridSteps: number; toleranceM: number };
   placement: { gardenMarginM: number; treeMarginM: number; minimumFrontClearanceM: number };
+}
+export function parseCottageB20Preset(value: unknown, baseline: CottageCalibrationPreset): CottageCalibrationPreset {
+  const p = record(value);
+  if (p.schemaVersion !== 1 || p.baselinePresetUrl !== '/assets/presets/cottage-candidate-01-p3-a.json' || p.relativeScale !== 1.2 || baseline.gate) {
+    throw new Error('P3-B0 must add only the authorized 1.20x candidate to the original P3-A preset');
+  }
+  return { ...baseline, gate: 'P3-B0', relativeScales: { ...baseline.relativeScales, B20: 1.2 } };
 }
 const record = (value: unknown): Record<string, unknown> => {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new Error('Invalid P3-A configuration');

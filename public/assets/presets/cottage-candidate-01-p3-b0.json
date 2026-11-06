@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "scope": "P3-B0 visual and measured review only; no platform/base integration",
+  "baselinePresetUrl": "/assets/presets/cottage-candidate-01-p3-a.json",
+  "relativeScale": 1.2,
+  "candidateId": "B20",
+  "label": "1.20× relative to B0/P2",
+  "placementRule": "Use unchanged P3-A source base plane, door anchor and placement rules. Retain A/B0/B1/B2/B3; report guard/stair penetration and support gaps without changing geometry."
+}

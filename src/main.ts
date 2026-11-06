@@ -10,6 +10,8 @@ const app = scene === 'coastal-assembly'
   ? new (await import('./app/CottageComparisonApplication')).CottageComparisonApplication(root)
   : scene === 'cottage-calibration'
   ? new (await import('./app/CottageCalibrationApplication')).CottageCalibrationApplication(root)
+  : scene === 'cottage-scale-review'
+  ? new (await import('./app/CottageScaleReviewApplication')).CottageScaleReviewApplication(root)
   : scene === 'cottage-candidate-01'
   ? new (await import('./app/CottageApplication')).CottageApplication(root)
   : scene === 'tripo-rock'
