@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "scope": "P3-A uniform scale and placement only; stop for human review",
+  "p2PresetUrl": "/assets/presets/cottage-candidate-01-p2.json",
+  "relativeScales": { "B0": 1, "B1": 1.15, "B2": 1.25, "B3": 1.35 },
+  "contact": { "lowerBandFraction": 0.01, "gridSteps": 21, "toleranceM": 0.01 },
+  "placement": { "gardenMarginM": 0.03, "treeMarginM": 0.05, "minimumFrontClearanceM": 1 },
+  "placementRule": "B0 exact P2 transform. B1-B3 initially align source door XZ to P2 reference, shift right only as needed to clear actual garden-bed bounds, then forward only as needed to clear tree bounds. Height places the largest horizontal underside plane on the actual GroundFloor_Slab top. Report unsupported spill and entrance restrictions; do not alter surroundings.",
+  "diagnosticLimits": "1m front clearance is an inspection target, not a navigation or building-code certification. Lower-surface grid and convex-obstacle vertex tests identify conflicts but cannot prove a watertight collision-free installation."
+}

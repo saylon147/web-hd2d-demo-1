@@ -1,0 +1,97 @@
+{
+  "method": "Read existing 10k-1k coastal GLB POSITION/index in memory, excluding texture decoding only; apply unchanged preset transforms and compute exact world AABB. No model generated or saved. Disjoint 3D AABBs exclude overlap; overlapping AABBs alone do not prove a collision.",
+  "sourceCommit": "d7fdc35a23e97314572e5e3fe8fa443d4c7f032b",
+  "instances": [
+    {
+      "id": "east-cliff",
+      "file": "public/assets/models/coastal-assembly/A1/rock-10k-1k.glb",
+      "sha256": "622c7df96353f35add8811f14528a09d3cd1cdd86f62667a183c52bdebc67ed5",
+      "bounds": {
+        "min": [
+          6.727125485274726,
+          -0.15950450683245435,
+          -1.7974934018621818
+        ],
+        "max": [
+          12.452206969476844,
+          3.7740581893920897,
+          3.6182177217208613
+        ]
+      }
+    },
+    {
+      "id": "front-wall",
+      "file": "public/assets/models/coastal-assembly/A2/rock-10k-1k.glb",
+      "sha256": "1f7d69dff49c99c4d9c4343f113f20b02eaece432d5470182cd49dfed9ed42ff",
+      "bounds": {
+        "min": [
+          5.46492848871161,
+          -0.1397895734757185,
+          1.8102012112471808
+        ],
+        "max": [
+          12.27362832425894,
+          2.345612812042236,
+          7.081015397877092
+        ]
+      }
+    },
+    {
+      "id": "cove-turn",
+      "file": "public/assets/models/coastal-assembly/A3/rock-10k-1k.glb",
+      "sha256": "e79a163acf4bd92868dd62447691c7585115881bcf4a3b3f218a2c3ad145e649",
+      "bounds": {
+        "min": [
+          2.816236573276777,
+          -0.1486414512793999,
+          3.4648854587089395
+        ],
+        "max": [
+          7.777486228509904,
+          2.46443475484848,
+          8.763982478528074
+        ]
+      }
+    },
+    {
+      "id": "east-shoulder",
+      "file": "public/assets/models/coastal-assembly/A4/rock-10k-1k.glb",
+      "sha256": "4854a6c5c75bb843db2ba0f85160d25f616aa1989d53115a39c05df2ff1e707c",
+      "bounds": {
+        "min": [
+          6.366780135008025,
+          2.622638597972691,
+          -1.326670957149414
+        ],
+        "max": [
+          11.426978590759425,
+          3.642048354148865,
+          3.2473362227550697
+        ]
+      }
+    },
+    {
+      "id": "front-shoulder",
+      "file": "public/assets/models/coastal-assembly/A4/rock-10k-1k.glb",
+      "sha256": "4854a6c5c75bb843db2ba0f85160d25f616aa1989d53115a39c05df2ff1e707c",
+      "bounds": {
+        "min": [
+          5.9570512284430315,
+          1.852374738175422,
+          1.6428311322491727
+        ],
+        "max": [
+          11.160823449250783,
+          2.7698435187339783,
+          6.343133078551817
+        ]
+      }
+    }
+  ],
+  "candidateAabbOverlaps": {
+    "B0": [],
+    "B1": [],
+    "B2": [],
+    "B3": []
+  }
+}
