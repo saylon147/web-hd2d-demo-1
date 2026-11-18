@@ -5,7 +5,7 @@ test('courtyard preview loads, orbits and resets', async ({page})=>{
   const errors: string[] = [];
   page.on('pageerror', e=>errors.push(e.message));
   await page.setViewportSize({width:1440,height:960});
-  await page.goto('/?scene=courtyard');
+  await page.goto('/?scene=courtyard&actor=0');
   const scene = page.locator('#scene');
   await expect(scene).toHaveAttribute('data-loaded','true');
   await expect(scene).toHaveAttribute('data-distance','27');

@@ -11,7 +11,7 @@ test('H3-B isolated sampling probes and localized bloom pairs',async({page,brows
   const canvas=page.locator('#scene');
   const records: {file:string;url:string;camera:string|undefined;resolution:string|null;viewport:{width:number;height:number}|null;draws:string|undefined;triangles:string|undefined;meanMs:number;p95Ms:number|undefined}[]=[];
   async function capture(group:string,name:string,query:string){
-    const url='/?scene=courtyard&'+query;
+    const url='/?scene=courtyard&actor=0&'+query;
     await page.goto(url);
     await expect(canvas).toHaveAttribute('data-loaded','true');
     const samples=await page.evaluate(async count=>{

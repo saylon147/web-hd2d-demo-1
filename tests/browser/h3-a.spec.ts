@@ -32,7 +32,7 @@ test('H3-A atmosphere, camera locks, lamp and shadow isolation',async({page,brow
   const errors:string[]=[];
   page.on('pageerror',e=>errors.push(e.message));
   page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
-  await page.goto('/?scene=courtyard&render=pixel&pixelWidth=480');
+  await page.goto('/?scene=courtyard&actor=0&render=pixel&pixelWidth=480');
   const canvas=page.locator('#scene');
   await expect(canvas).toHaveAttribute('data-loaded','true');
   await page.locator('.lighting-panel summary').click();

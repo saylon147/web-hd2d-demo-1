@@ -15,6 +15,8 @@ import type { BlockoutWorld } from '../world/blockout';
 import { blockoutCameraProfile, VIEW_MODES } from '../config/blockout';
 import type { ViewMode } from '../config/blockout';
 import { FOUNDATION_CAMERA_PROFILE } from '../config/camera';
+import { createGardener } from '../character/gardener';
+import { disposeObject } from '../core/dispose';
 
 export class Application {
   private readonly shell: AppShell;
@@ -26,6 +28,7 @@ export class Application {
   private renderer: WebGLRenderer | undefined;
   private orbit: ConstrainedCamera | undefined;
   private world: FoundationWorld | undefined;
+  private gardener: Awaited<ReturnType<typeof createGardener>> | undefined;
   private gui: GUI | undefined;
   private resizeObserver: ResizeObserver | undefined;
   private frameId = 0;
@@ -69,6 +72,10 @@ export class Application {
     if ('setLighting' in loadedWorld) {
       const courtyard = loadedWorld as Awaited<ReturnType<typeof createCourtyardWorld>>;
       mountLightingControls(this.shell.readout.parentElement!,this.orbit,courtyard.setLighting,this.events.signal);
+      const gardener = await createGardener(this.events.signal);
+      if (this.disposed || this.failed) { disposeObject(gardener.group); return; }
+      courtyard.scene.add(gardener.group);
+      this.gardener = gardener;
     }
     if (this.courtyard && new URLSearchParams(location.search).get('probe') === 'depth-precision') {
       this.orbit.camera.near = 1;
@@ -77,6 +84,7 @@ export class Application {
     const guiContainer = this.shell.debugPanel.querySelector<HTMLElement>('#gui');
     if (!guiContainer) throw new Error('无法创建相机调试面板。');
     this.gui = createDebugPanel(guiContainer, this.orbit, this.world);
+    this.gardener?.controls(this.gui);
 
     this.shell.resetButton.addEventListener('click', () => this.orbit?.reset(), options);
     for (const button of this.shell.viewControls.querySelectorAll<HTMLButtonElement>('button')) {
@@ -140,9 +148,11 @@ export class Application {
     if (!this.renderer || !this.orbit || !this.world || this.failed || this.disposed) return;
     try {
       if (this.pixelRatio !== Math.min(2, window.devicePixelRatio || 1)) this.resize();
-      const delta = this.previousTime ? Math.min(0.1, (time - this.previousTime) / 1000) : 0;
+      const elapsed = this.previousTime ? (time - this.previousTime) / 1000 : 0;
+      const delta = Math.min(0.1, elapsed);
       this.previousTime = time;
       this.orbit.update(delta);
+      if (this.gardener) this.shell.canvas.dataset.gardener = this.gardener.update(elapsed, this.orbit.camera);
       this.world.updateTarget(this.orbit.state.target);
       if (this.presentation) this.presentation.render(this.world.scene, this.orbit.camera);
       else this.renderer.render(this.world.scene, this.orbit.camera);
@@ -200,6 +210,7 @@ export class Application {
     this.gui?.destroy();
     this.orbit?.dispose();
     this.world?.dispose();
+    this.gardener = undefined;
     this.presentation?.dispose();
     this.presentation = undefined;
     this.renderer?.dispose();

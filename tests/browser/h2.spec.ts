@@ -10,7 +10,7 @@ test('H2 courtyard focus controls, reproducible order and A/B frames',async({pag
   const errors:string[]=[];
   page.on('pageerror',e=>errors.push(e.message));
   page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
-  await page.goto('/?scene=courtyard&render=pixel&pixelWidth=480&dof=1&focus=27&plane=50&tilt=15&blur=12&order=before');
+  await page.goto('/?scene=courtyard&actor=0&render=pixel&pixelWidth=480&dof=1&focus=27&plane=50&tilt=15&blur=12&order=before');
   const canvas=page.locator('#scene'),mode=page.getByLabel('渲染模式'),width=page.getByLabel('像素参考宽度');
   const panel=page.locator('.dof-panel'), toggle=page.getByLabel('启用景深'),order=page.getByLabel('处理顺序');
   await expect(canvas).toHaveAttribute('data-loaded','true');

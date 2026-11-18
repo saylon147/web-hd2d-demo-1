@@ -1,0 +1,197 @@
+{
+  "browser": "157.0.8103.52",
+  "records": [
+    {
+      "url": "/?scene=courtyard&walk=0&pixelWidth=480&walkTime=0&sky=day&bloom=0&render=native",
+      "file": "day-native-0.png",
+      "state": "-2.700,6.200,right,idle,0,true",
+      "draws": "12",
+      "meanMs": 16.669999999999998,
+      "p95Ms": 16.799999999999955
+    },
+    {
+      "url": "/?scene=courtyard&walk=0&pixelWidth=480&walkTime=0&sky=day&bloom=1&render=native",
+      "file": null,
+      "state": "-2.700,6.200,right,idle,0,true",
+      "draws": "13",
+      "meanMs": 16.666666666666664,
+      "p95Ms": 16.800000000000068
+    },
+    {
+      "url": "/?scene=courtyard&walk=0&pixelWidth=480&walkTime=2.45&sky=day&bloom=0&render=pixel",
+      "file": null,
+      "state": "-1.889,4.436,right,walk,0,true",
+      "draws": "13",
+      "meanMs": 16.666666666666668,
+      "p95Ms": 16.799999999999955
+    },
+    {
+      "url": "/?scene=courtyard&walk=0&pixelWidth=480&walkTime=2.45&sky=day&bloom=1&render=pixel",
+      "file": null,
+      "state": "-1.889,4.436,right,walk,0,true",
+      "draws": "13",
+      "meanMs": 16.666666666666668,
+      "p95Ms": 16.800000000000068
+    },
+    {
+      "url": "/?scene=courtyard&walk=0&pixelWidth=480&walkTime=2.45&sky=day&bloom=0&render=pixel&msaa=4",
+      "file": null,
+      "state": "-1.889,4.436,right,walk,0,true",
+      "draws": "13",
+      "meanMs": 16.67,
+      "p95Ms": 16.80000000000001
+    },
+    {
+      "url": "/?scene=courtyard&walk=0&pixelWidth=480&walkTime=2.45&sky=day&bloom=1&render=pixel&msaa=4",
+      "file": null,
+      "state": "-1.889,4.436,right,walk,0,true",
+      "draws": "13",
+      "meanMs": 16.663333333333334,
+      "p95Ms": 16.800000000000068
+    },
+    {
+      "url": "/?scene=courtyard&walk=0&pixelWidth=480&walkTime=2.45&sky=day&bloom=0&render=pixel&dof=1&order=after&focus=24",
+      "file": null,
+      "state": "-1.889,4.436,right,walk,0,true",
+      "draws": "13",
+      "meanMs": 16.669999999999998,
+      "p95Ms": 16.80000000000001
+    },
+    {
+      "url": "/?scene=courtyard&walk=0&pixelWidth=480&walkTime=2.45&sky=day&bloom=1&render=pixel&dof=1&order=after&focus=24",
+      "file": null,
+      "state": "-1.889,4.436,right,walk,0,true",
+      "draws": "14",
+      "meanMs": 16.669999999999998,
+      "p95Ms": 16.800000000000068
+    },
+    {
+      "url": "/?scene=courtyard&walk=0&pixelWidth=480&walkTime=2.45&sky=dusk&bloom=0&render=native",
+      "file": "dusk-native-0.png",
+      "state": "-1.889,4.436,right,walk,0,true",
+      "draws": "12",
+      "meanMs": 16.67,
+      "p95Ms": 16.799999999999955
+    },
+    {
+      "url": "/?scene=courtyard&walk=0&pixelWidth=480&walkTime=2.45&sky=dusk&bloom=1&render=native",
+      "file": null,
+      "state": "-1.889,4.436,right,walk,0,true",
+      "draws": "13",
+      "meanMs": 16.666666666666668,
+      "p95Ms": 16.799999999999955
+    },
+    {
+      "url": "/?scene=courtyard&walk=0&pixelWidth=480&walkTime=2.45&sky=dusk&bloom=0&render=pixel",
+      "file": null,
+      "state": "-1.889,4.436,right,walk,0,true",
+      "draws": "13",
+      "meanMs": 16.663333333333334,
+      "p95Ms": 16.800000000000068
+    },
+    {
+      "url": "/?scene=courtyard&walk=0&pixelWidth=480&walkTime=2.45&sky=dusk&bloom=1&render=pixel",
+      "file": null,
+      "state": "-1.889,4.436,right,walk,0,true",
+      "draws": "13",
+      "meanMs": 16.66,
+      "p95Ms": 16.90000000000009
+    },
+    {
+      "url": "/?scene=courtyard&walk=0&pixelWidth=480&walkTime=2.45&sky=dusk&bloom=0&render=pixel&msaa=4",
+      "file": "dusk-msaa-0.png",
+      "state": "-1.889,4.436,right,walk,0,true",
+      "draws": "13",
+      "meanMs": 16.666666666666668,
+      "p95Ms": 16.90000000000009
+    },
+    {
+      "url": "/?scene=courtyard&walk=0&pixelWidth=480&walkTime=2.45&sky=dusk&bloom=1&render=pixel&msaa=4",
+      "file": null,
+      "state": "-1.889,4.436,right,walk,0,true",
+      "draws": "13",
+      "meanMs": 16.666666666666668,
+      "p95Ms": 16.899999999999977
+    },
+    {
+      "url": "/?scene=courtyard&walk=0&pixelWidth=480&walkTime=2.45&sky=dusk&bloom=0&render=pixel&dof=1&order=after&focus=24",
+      "file": null,
+      "state": "-1.889,4.436,right,walk,0,true",
+      "draws": "13",
+      "meanMs": 16.663333333333334,
+      "p95Ms": 16.800000000000068
+    },
+    {
+      "url": "/?scene=courtyard&walk=0&pixelWidth=480&walkTime=2.45&sky=dusk&bloom=1&render=pixel&dof=1&order=after&focus=24",
+      "file": null,
+      "state": "-1.889,4.436,right,walk,0,true",
+      "draws": "14",
+      "meanMs": 16.676666666666666,
+      "p95Ms": 17.100000000000023
+    },
+    {
+      "url": "/?scene=courtyard&walk=0&pixelWidth=480&walkTime=2.45&sky=night&bloom=0&render=native",
+      "file": null,
+      "state": "-1.889,4.436,right,walk,0,true",
+      "draws": "12",
+      "meanMs": 16.669999999999998,
+      "p95Ms": 17
+    },
+    {
+      "url": "/?scene=courtyard&walk=0&pixelWidth=480&walkTime=2.45&sky=night&bloom=1&render=native",
+      "file": null,
+      "state": "-1.889,4.436,right,walk,0,true",
+      "draws": "13",
+      "meanMs": 16.663333333333334,
+      "p95Ms": 16.899999999999977
+    },
+    {
+      "url": "/?scene=courtyard&walk=0&pixelWidth=480&walkTime=2.45&sky=night&bloom=0&render=pixel",
+      "file": null,
+      "state": "-1.889,4.436,right,walk,0,true",
+      "draws": "13",
+      "meanMs": 16.663333333333334,
+      "p95Ms": 17
+    },
+    {
+      "url": "/?scene=courtyard&walk=0&pixelWidth=480&walkTime=2.45&sky=night&bloom=1&render=pixel",
+      "file": null,
+      "state": "-1.889,4.436,right,walk,0,true",
+      "draws": "13",
+      "meanMs": 16.666666666666668,
+      "p95Ms": 17
+    },
+    {
+      "url": "/?scene=courtyard&walk=0&pixelWidth=480&walkTime=2.45&sky=night&bloom=0&render=pixel&msaa=4",
+      "file": null,
+      "state": "-1.889,4.436,right,walk,0,true",
+      "draws": "13",
+      "meanMs": 16.666666666666668,
+      "p95Ms": 17
+    },
+    {
+      "url": "/?scene=courtyard&walk=0&pixelWidth=480&walkTime=2.45&sky=night&bloom=1&render=pixel&msaa=4",
+      "file": null,
+      "state": "-1.889,4.436,right,walk,0,true",
+      "draws": "13",
+      "meanMs": 16.663333333333334,
+      "p95Ms": 16.90000000000009
+    },
+    {
+      "url": "/?scene=courtyard&walk=0&pixelWidth=480&walkTime=2.45&sky=night&bloom=0&render=pixel&dof=1&order=after&focus=24",
+      "file": null,
+      "state": "-1.889,4.436,right,walk,0,true",
+      "draws": "13",
+      "meanMs": 16.673333333333332,
+      "p95Ms": 16.899999999999977
+    },
+    {
+      "url": "/?scene=courtyard&walk=0&pixelWidth=480&walkTime=2.45&sky=night&bloom=1&render=pixel&dof=1&order=after&focus=24",
+      "file": "night-dof-1.png",
+      "state": "-1.889,4.436,right,walk,0,true",
+      "draws": "14",
+      "meanMs": 16.67666666666667,
+      "p95Ms": 16.900000000000034
+    }
+  ]
+}

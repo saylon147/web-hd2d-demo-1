@@ -1,5 +1,12 @@
 # Character rendering specification
 
+The courtyard H4 experiment uses 48×48 cells with 44 visible pixels, aligned to
+a shared foot anchor at (24, 46). The sprite covers 1.72 world metres vertically.
+Walk frames advance every 0.16 metres, equivalent to 160 ms at the default speed
+of 1 m/s. The level paved route uses a fixed ground height. For the tested scope,
+asset format, screenshots and camera-relative movement behaviour, see the
+[H4 courtyard report](hd2d-render-study/H4/README.md).
+
 ## Goals
 A 2D pixel-art character moves in a true 3D world without looking blurry, floating, or incorrectly layered.
 

@@ -9,7 +9,7 @@ test('H1-A fixed views, presentation, frame pacing and controls', async ({page,b
   const errors: string[]=[];
   page.on('pageerror',e=>errors.push(e.message));
   page.on('console',m=>{if(m.type()==='error') errors.push(m.text());});
-  await page.goto('/?scene=courtyard');
+  await page.goto('/?scene=courtyard&actor=0');
   const canvas=page.locator('#scene');
   const mode=page.getByLabel('渲染模式'), width=page.getByLabel('像素参考宽度');
   const resolution=page.getByLabel('实际渲染尺寸');
@@ -63,7 +63,7 @@ test('H1-A fixed views, presentation, frame pacing and controls', async ({page,b
 test('DPR 2 uses drawing-buffer dimensions and confines Pixel to the courtyard',async({browser})=>{
   const page=await browser.newPage({viewport:{width:390,height:844},deviceScaleFactor:2});
   try {
-    await page.goto('/?scene=courtyard&render=pixel&pixelWidth=640');
+    await page.goto('/?scene=courtyard&actor=0&render=pixel&pixelWidth=640');
     const canvas=page.locator('#scene');
     await expect(canvas).toHaveAttribute('data-loaded','true');
     const [w,h]=await canvas.evaluate(el=>{const c=el as HTMLCanvasElement;return [c.width,c.height] as const;});
