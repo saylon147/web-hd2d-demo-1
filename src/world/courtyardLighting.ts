@@ -15,6 +15,7 @@ export function createLightingRig(scene:Scene, key:DirectionalLight, ambient:Hem
   const bulbs=anchors.map(([x,y,z],index)=>{
     const bulb=new PointLight(index===2?'#ffb66d':'#ffca87',0,index===2?2.4:4);
     bulb.position.set(x,y,z);
+    bulb.name='courtyard-lamp-'+index;
     scene.add(bulb);
     return bulb;
   });
@@ -37,17 +38,17 @@ export function mountLightingControls(parent:HTMLElement,orbit:ConstrainedCamera
   apply:ReturnType<typeof createLightingRig>,signal:AbortSignal){
   const panel=document.createElement('details');
   panel.className='lighting-panel';
-  panel.innerHTML='<summary>光照与镜头</summary><section><label>时段 <select aria-label="时段"><option value="day">日间</option><option value="dusk">黄昏</option><option value="night">夜景</option></select></label><label>镜头 <select aria-label="固定镜头"><option value="entrance">庭院入口</option><option value="house">房屋近景</option></select></label><label><input name="lamps" type="checkbox"> 门窗局部光</label><label><input name="shadows" type="checkbox"> 主光投影</label></section>';
+  panel.innerHTML='<summary>光照与镜头</summary><section><label>时段 <select aria-label="时段"><option value="day">日间</option><option value="dusk">黄昏</option><option value="night">夜景</option></select></label><label>镜头 <select aria-label="固定镜头"><option value="entrance">庭院入口</option><option value="house">房屋近景</option><option value="detail">屋瓦排查</option></select></label><label><input name="lamps" type="checkbox"> 门窗局部光</label><label><input name="shadows" type="checkbox"> 主光投影</label></section>';
   const sky=panel.querySelector<HTMLSelectElement>('[aria-label="时段"]')!;
   const shot=panel.querySelector<HTMLSelectElement>('[aria-label="固定镜头"]')!;
   const lamps=panel.querySelector<HTMLInputElement>('[name=lamps]')!;
   const shadows=panel.querySelector<HTMLInputElement>('[name=shadows]')!;
   const params=new URL(location.href).searchParams;
   sky.value=['dusk','night'].includes(params.get('sky')??'')?params.get('sky')!:'day';
-  shot.value=params.get('shot')==='house'?'house':'entrance';
+  shot.value=['house','detail'].includes(params.get('shot')??'')?params.get('shot')!:'entrance';
   lamps.checked=params.get('lamps')!=='0';shadows.checked=params.get('shadows')!=='0';
-  const setShot=()=>orbit.setPreset(shot.value==='house'
-    ? {...orbit.profile.defaults, target:{x:2.5,y:1.8,z:-1.2},pitch:30,distance:12}
+  const setShot=()=>orbit.setPreset(shot.value!=='entrance'
+    ? {...orbit.profile.defaults, target:{x:2.5,y:1.8,z:-1.2},pitch:30,distance:shot.value==='detail'?9:12,yawOffset:shot.value==='detail'?-2.09:0}
     : orbit.profile.defaults);
   setShot();apply(sky.value as Sky,lamps.checked,shadows.checked);
   panel.addEventListener('change',event=>{

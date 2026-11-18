@@ -1,0 +1,318 @@
+{
+  "sampling": {
+    "native": {
+      "roof": {
+        "peaks": 26,
+        "peakDelta": 74,
+        "samples": 27972
+      },
+      "wall": {
+        "peaks": 10,
+        "peakDelta": 49,
+        "samples": 22848
+      }
+    },
+    "480-default": {
+      "roof": {
+        "peaks": 35,
+        "peakDelta": 102,
+        "samples": 9900
+      },
+      "wall": {
+        "peaks": 22,
+        "peakDelta": 83,
+        "samples": 8165
+      }
+    },
+    "480-no-mips": {
+      "roof": {
+        "peaks": 38,
+        "peakDelta": 102,
+        "samples": 9900
+      },
+      "wall": {
+        "peaks": 42,
+        "peakDelta": 83,
+        "samples": 8165
+      }
+    },
+    "480-aniso": {
+      "roof": {
+        "peaks": 36,
+        "peakDelta": 102,
+        "samples": 9900
+      },
+      "wall": {
+        "peaks": 36,
+        "peakDelta": 83,
+        "samples": 8165
+      }
+    },
+    "480-msaa": {
+      "roof": {
+        "peaks": 7,
+        "peakDelta": 52,
+        "samples": 9900
+      },
+      "wall": {
+        "peaks": 3,
+        "peakDelta": 45,
+        "samples": 8165
+      }
+    },
+    "480-double": {
+      "roof": {
+        "peaks": 11,
+        "peakDelta": 54,
+        "samples": 9900
+      },
+      "wall": {
+        "peaks": 14,
+        "peakDelta": 75,
+        "samples": 8165
+      }
+    },
+    "480-double-msaa": {
+      "roof": {
+        "peaks": 0,
+        "peakDelta": 29,
+        "samples": 9900
+      },
+      "wall": {
+        "peaks": 4,
+        "peakDelta": 55,
+        "samples": 8165
+      }
+    },
+    "480-no-specular": {
+      "roof": {
+        "peaks": 31,
+        "peakDelta": 102,
+        "samples": 9900
+      },
+      "wall": {
+        "peaks": 24,
+        "peakDelta": 83,
+        "samples": 8165
+      }
+    },
+    "480-no-normal": {
+      "roof": {
+        "peaks": 35,
+        "peakDelta": 102,
+        "samples": 9900
+      },
+      "wall": {
+        "peaks": 20,
+        "peakDelta": 83,
+        "samples": 8165
+      }
+    },
+    "480-solid": {
+      "roof": {
+        "peaks": 28,
+        "peakDelta": 83,
+        "samples": 9900
+      },
+      "wall": {
+        "peaks": 26,
+        "peakDelta": 72,
+        "samples": 8165
+      }
+    },
+    "480-no-shadows": {
+      "roof": {
+        "peaks": 34,
+        "peakDelta": 100,
+        "samples": 9900
+      },
+      "wall": {
+        "peaks": 35,
+        "peakDelta": 86,
+        "samples": 8165
+      }
+    },
+    "480-depth-precision": {
+      "roof": {
+        "peaks": 35,
+        "peakDelta": 102,
+        "samples": 9900
+      },
+      "wall": {
+        "peaks": 22,
+        "peakDelta": 83,
+        "samples": 8165
+      }
+    },
+    "640-default": {
+      "roof": {
+        "peaks": 62,
+        "peakDelta": 104,
+        "samples": 17512
+      },
+      "wall": {
+        "peaks": 35,
+        "peakDelta": 91,
+        "samples": 14288
+      }
+    },
+    "640-no-mips": {
+      "roof": {
+        "peaks": 66,
+        "peakDelta": 104,
+        "samples": 17512
+      },
+      "wall": {
+        "peaks": 46,
+        "peakDelta": 91,
+        "samples": 14288
+      }
+    },
+    "640-aniso": {
+      "roof": {
+        "peaks": 65,
+        "peakDelta": 104,
+        "samples": 17512
+      },
+      "wall": {
+        "peaks": 41,
+        "peakDelta": 91,
+        "samples": 14288
+      }
+    },
+    "640-msaa": {
+      "roof": {
+        "peaks": 17,
+        "peakDelta": 61,
+        "samples": 17512
+      },
+      "wall": {
+        "peaks": 5,
+        "peakDelta": 57,
+        "samples": 14288
+      }
+    },
+    "640-double": {
+      "roof": {
+        "peaks": 21,
+        "peakDelta": 88,
+        "samples": 17512
+      },
+      "wall": {
+        "peaks": 17,
+        "peakDelta": 60,
+        "samples": 14288
+      }
+    },
+    "640-double-msaa": {
+      "roof": {
+        "peaks": 1,
+        "peakDelta": 38,
+        "samples": 17512
+      },
+      "wall": {
+        "peaks": 5,
+        "peakDelta": 57,
+        "samples": 14288
+      }
+    },
+    "640-no-specular": {
+      "roof": {
+        "peaks": 60,
+        "peakDelta": 105,
+        "samples": 17512
+      },
+      "wall": {
+        "peaks": 34,
+        "peakDelta": 94,
+        "samples": 14288
+      }
+    },
+    "640-no-normal": {
+      "roof": {
+        "peaks": 63,
+        "peakDelta": 104,
+        "samples": 17512
+      },
+      "wall": {
+        "peaks": 38,
+        "peakDelta": 92,
+        "samples": 14288
+      }
+    },
+    "640-solid": {
+      "roof": {
+        "peaks": 58,
+        "peakDelta": 86,
+        "samples": 17512
+      },
+      "wall": {
+        "peaks": 51,
+        "peakDelta": 72,
+        "samples": 14288
+      }
+    },
+    "640-no-shadows": {
+      "roof": {
+        "peaks": 64,
+        "peakDelta": 104,
+        "samples": 17512
+      },
+      "wall": {
+        "peaks": 46,
+        "peakDelta": 91,
+        "samples": 14288
+      }
+    },
+    "640-depth-precision": {
+      "roof": {
+        "peaks": 62,
+        "peakDelta": 104,
+        "samples": 17512
+      },
+      "wall": {
+        "peaks": 35,
+        "peakDelta": 91,
+        "samples": 14288
+      }
+    }
+  },
+  "bloom": {
+    "native": {
+      "changedPercent": 1.044,
+      "bounds": [
+        491,
+        380,
+        899,
+        555
+      ]
+    },
+    "480": {
+      "changedPercent": 1.064,
+      "bounds": [
+        490,
+        384,
+        898,
+        555
+      ]
+    },
+    "480-before": {
+      "changedPercent": 1.036,
+      "bounds": [
+        491,
+        378,
+        897,
+        554
+      ]
+    },
+    "480-after": {
+      "changedPercent": 1.065,
+      "bounds": [
+        490,
+        384,
+        898,
+        554
+      ]
+    }
+  }
+}

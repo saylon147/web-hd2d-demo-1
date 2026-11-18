@@ -1,3 +1,4 @@
+import { inspectCottage } from './inspectCottage';
 import { createLightingRig } from './courtyardLighting';
 import { AxesHelper, Box3, BoxGeometry, Color, CylinderGeometry, DirectionalLight, DodecahedronGeometry, FogExp2, GridHelper, HemisphereLight, InstancedMesh, Matrix4, Mesh, MeshStandardMaterial, Object3D, Scene, Vector3 } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
@@ -11,10 +12,11 @@ export const courtyardCamera = {
 };
 const cottageUrl = import.meta.env.BASE_URL + 'assets/models/courtyard_cottage_preview.glb';
 
-export async function createCourtyardWorld(signal: AbortSignal): Promise<FoundationWorld & {setLighting:ReturnType<typeof createLightingRig>}> {
+export async function createCourtyardWorld(signal: AbortSignal, maxAnisotropy:number): Promise<FoundationWorld & {setLighting:ReturnType<typeof createLightingRig>}> {
   const response = await fetch(cottageUrl, { signal });
   if (!response.ok) throw new Error(`小屋模型加载失败（HTTP ${response.status}）`);
   const { scene: house } = await new GLTFLoader().parseAsync(await response.arrayBuffer(), '');
+  inspectCottage(house,new URLSearchParams(location.search).get('probe'),maxAnisotropy);
   const bounds = new Box3().setFromObject(house);
   const size = bounds.getSize(new Vector3());
   const center = bounds.getCenter(new Vector3());

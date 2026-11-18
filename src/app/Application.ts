@@ -61,7 +61,7 @@ export class Application {
     if (this.courtyard) {
       this.presentation = new PixelPresentation(this.renderer, this.shell.readout.parentElement!, this.events.signal);
     }
-    const loadedWorld = this.courtyard ? await createCourtyardWorld(this.events.signal) : this.foundation ? createFoundationWorld() : await createBlockoutWorld(this.events.signal);
+    const loadedWorld = this.courtyard ? await createCourtyardWorld(this.events.signal,this.renderer.capabilities.getMaxAnisotropy()) : this.foundation ? createFoundationWorld() : await createBlockoutWorld(this.events.signal);
     if (this.disposed || this.failed) { loadedWorld.dispose(); return; }
     this.world = loadedWorld;
     if (!this.foundation && !this.courtyard) this.blockout = loadedWorld as BlockoutWorld;
@@ -69,6 +69,10 @@ export class Application {
     if ('setLighting' in loadedWorld) {
       const courtyard = loadedWorld as Awaited<ReturnType<typeof createCourtyardWorld>>;
       mountLightingControls(this.shell.readout.parentElement!,this.orbit,courtyard.setLighting,this.events.signal);
+    }
+    if (this.courtyard && new URLSearchParams(location.search).get('probe') === 'depth-precision') {
+      this.orbit.camera.near = 1;
+      this.orbit.camera.updateProjectionMatrix();
     }
     const guiContainer = this.shell.debugPanel.querySelector<HTMLElement>('#gui');
     if (!guiContainer) throw new Error('无法创建相机调试面板。');
