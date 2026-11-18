@@ -1,3 +1,4 @@
+import { createLightingRig } from './courtyardLighting';
 import { AxesHelper, Box3, BoxGeometry, Color, CylinderGeometry, DirectionalLight, DodecahedronGeometry, FogExp2, GridHelper, HemisphereLight, InstancedMesh, Matrix4, Mesh, MeshStandardMaterial, Object3D, Scene, Vector3 } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { disposeObject } from '../core/dispose';
@@ -10,7 +11,7 @@ export const courtyardCamera = {
 };
 const cottageUrl = import.meta.env.BASE_URL + 'assets/models/courtyard_cottage_preview.glb';
 
-export async function createCourtyardWorld(signal: AbortSignal): Promise<FoundationWorld> {
+export async function createCourtyardWorld(signal: AbortSignal): Promise<FoundationWorld & {setLighting:ReturnType<typeof createLightingRig>}> {
   const response = await fetch(cottageUrl, { signal });
   if (!response.ok) throw new Error(`小屋模型加载失败（HTTP ${response.status}）`);
   const { scene: house } = await new GLTFLoader().parseAsync(await response.arrayBuffer(), '');
@@ -142,8 +143,10 @@ export async function createCourtyardWorld(signal: AbortSignal): Promise<Foundat
   sun.position.set(-7,13,8);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);
   Object.assign(sun.shadow.camera,{left:-11,right:11,top:11,bottom:-11,far:40});
   sun.shadow.camera.updateProjectionMatrix();sun.shadow.normalBias=0.018;
-  scene.add(sun,new HemisphereLight('#fff4df','#b4aa86',1.55));
-  return {scene,grid,axes,updateTarget(){},dispose(){
+  const ambient=new HemisphereLight('#fff4df','#b4aa86',1.55);
+  scene.add(sun,ambient);
+  const setLighting=createLightingRig(scene,sun,ambient);
+  return {scene,grid,axes,setLighting,updateTarget(){},dispose(){
     scene.traverse(o=>{if(o instanceof InstancedMesh)o.dispose();});
     disposeObject(scene);grid.dispose();axes.dispose();sun.dispose();scene.clear();
   }};

@@ -1,3 +1,4 @@
+import { mountLightingControls } from '../world/courtyardLighting';
 import { PixelPresentation } from '../core/PixelPresentation';
 import { createCourtyardWorld, courtyardCamera } from '../world/courtyard';
 import type GUI from 'lil-gui';
@@ -65,6 +66,10 @@ export class Application {
     this.world = loadedWorld;
     if (!this.foundation && !this.courtyard) this.blockout = loadedWorld as BlockoutWorld;
     this.orbit = new ConstrainedCamera(this.shell.canvas, this.courtyard ? courtyardCamera : this.blockout ? blockoutCameraProfile(this.blockout.manifest) : FOUNDATION_CAMERA_PROFILE);
+    if ('setLighting' in loadedWorld) {
+      const courtyard = loadedWorld as Awaited<ReturnType<typeof createCourtyardWorld>>;
+      mountLightingControls(this.shell.readout.parentElement!,this.orbit,courtyard.setLighting,this.events.signal);
+    }
     const guiContainer = this.shell.debugPanel.querySelector<HTMLElement>('#gui');
     if (!guiContainer) throw new Error('无法创建相机调试面板。');
     this.gui = createDebugPanel(guiContainer, this.orbit, this.world);
