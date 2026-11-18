@@ -1,5 +1,6 @@
-import { SRGBColorSpace, ShaderMaterial, NearestFilter, Vector2, WebGLRenderTarget } from 'three';
-import type { Camera, Scene, WebGLRenderer } from 'three';
+import { DepthOfField } from './DepthOfField';
+import { DepthTexture, UnsignedIntType, SRGBColorSpace, ShaderMaterial, NearestFilter, Vector2, WebGLRenderTarget } from 'three';
+import type { PerspectiveCamera, Scene, WebGLRenderer } from 'three';
 import { FullScreenQuad } from 'three/addons/postprocessing/Pass.js';
 
 // Three r186 uses this flag for offscreen display targets (WebGLPrograms and
@@ -19,6 +20,11 @@ export class PixelPresentation {
     depthTest: false, depthWrite: false, toneMapped: false,
   });
   private readonly quad = new FullScreenQuad(this.material);
+  private readonly dof: DepthOfField;
+  private readonly depthSource = new DisplayTarget(1,1,{
+    colorSpace: SRGBColorSpace, internalFormat:'RGBA8', minFilter:NearestFilter, magFilter:NearestFilter,
+    depthTexture:new DepthTexture(1,1,UnsignedIntType), generateMipmaps:false,
+  });
   private readonly buffer = new Vector2();
   private readonly mode: HTMLSelectElement;
   private readonly width: HTMLSelectElement;
@@ -43,6 +49,7 @@ export class PixelPresentation {
       history.replaceState(history.state, '', next);
       this.resize();
     }, { signal });
+    this.dof = new DepthOfField(parent,signal,()=>this.resize());
     renderer.info.autoReset = false;
   }
 
@@ -57,12 +64,33 @@ export class PixelPresentation {
       h = Math.max(1,Math.round(h*scale));
       this.target.setSize(w,h);
     }
+    this.dof.configure(pixel);
+    if (this.dof.enabled) {
+      const full = !pixel || this.dof.before;
+      const samples = full ? Math.min(4,this.renderer.capabilities.maxSamples) : 0;
+      if (this.depthSource.samples !== samples) {
+        this.depthSource.dispose();
+        this.depthSource.samples = samples;
+      }
+      this.depthSource.setSize(full ? this.buffer.x : w, full ? this.buffer.y : h);
+    }
     this.resolution.value = w+'×'+h;
   }
 
-  render(scene: Scene, camera: Camera): void {
+  render(scene: Scene, camera: PerspectiveCamera): void {
     const renderer = this.renderer;
     renderer.info.reset();
+    if (this.dof.enabled) {
+      const beforePixel = this.mode.value==='pixel' && this.dof.before;
+      renderer.setRenderTarget(this.depthSource);
+      renderer.render(scene,camera);
+      this.dof.render(renderer,camera,this.depthSource,beforePixel ? this.target : null);
+      if (beforePixel) {
+        renderer.setRenderTarget(null);
+        this.quad.render(renderer);
+      }
+      return;
+    }
     if (this.mode.value === 'native') {
       renderer.render(scene,camera);
       return;
@@ -76,6 +104,8 @@ export class PixelPresentation {
   dispose(): void {
     this.renderer.info.autoReset = true;
     this.controls.remove();
+    this.dof.dispose();
+    this.depthSource.dispose();
     this.quad.dispose();
     this.material.dispose();
     this.target.dispose();
