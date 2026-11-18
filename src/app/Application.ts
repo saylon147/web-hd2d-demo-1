@@ -1,3 +1,4 @@
+import { createCourtyardWorld, courtyardCamera } from '../world/courtyard';
 import type GUI from 'lil-gui';
 import type { WebGLRenderer } from 'three';
 import { createDebugPanel } from '../art-lab/debugPanel';
@@ -16,6 +17,7 @@ import { FOUNDATION_CAMERA_PROFILE } from '../config/camera';
 export class Application {
   private readonly shell: AppShell;
   private readonly foundation = new URLSearchParams(window.location.search).get('scene') === 'foundation';
+  private readonly courtyard = new URLSearchParams(window.location.search).get('scene') === 'courtyard';
   private blockout: BlockoutWorld | undefined;
   private readonly events = new AbortController();
   private renderer: WebGLRenderer | undefined;
@@ -31,7 +33,7 @@ export class Application {
   private pixelRatio = 0;
 
   constructor(root: HTMLElement) {
-    this.shell = createShell(root, this.foundation);
+    this.shell = createShell(root, this.foundation, this.courtyard);
     void this.initialize().catch((error: unknown) => {
       if (this.disposed || this.failed) return;
       this.showError(error);
@@ -53,11 +55,11 @@ export class Application {
       this.showError(new Error('WebGL 上下文已丢失。请重新加载页面以恢复场景。'));
       this.disposeResources();
     }, options);
-    const loadedWorld = this.foundation ? createFoundationWorld() : await createBlockoutWorld(this.events.signal);
+    const loadedWorld = this.courtyard ? await createCourtyardWorld(this.events.signal) : this.foundation ? createFoundationWorld() : await createBlockoutWorld(this.events.signal);
     if (this.disposed || this.failed) { loadedWorld.dispose(); return; }
     this.world = loadedWorld;
-    if (!this.foundation) this.blockout = loadedWorld as BlockoutWorld;
-    this.orbit = new ConstrainedCamera(this.shell.canvas, this.blockout ? blockoutCameraProfile(this.blockout.manifest) : FOUNDATION_CAMERA_PROFILE);
+    if (!this.foundation && !this.courtyard) this.blockout = loadedWorld as BlockoutWorld;
+    this.orbit = new ConstrainedCamera(this.shell.canvas, this.courtyard ? courtyardCamera : this.blockout ? blockoutCameraProfile(this.blockout.manifest) : FOUNDATION_CAMERA_PROFILE);
     const guiContainer = this.shell.debugPanel.querySelector<HTMLElement>('#gui');
     if (!guiContainer) throw new Error('无法创建相机调试面板。');
     this.gui = createDebugPanel(guiContainer, this.orbit, this.world);
@@ -76,13 +78,13 @@ export class Application {
       const queryMode = new URLSearchParams(window.location.search).get('view');
       this.selectView(VIEW_MODES.find((mode) => mode === queryMode) ?? 'exterior');
     }
-    this.shell.canvas.dataset.scene = this.foundation ? 'foundation' : 'blockout';
+    this.shell.canvas.dataset.scene = this.courtyard ? 'courtyard' : this.foundation ? 'foundation' : 'blockout';
     this.shell.canvas.dataset.loaded = 'true';
     const setDebugVisible = (visible: boolean): void => {
       this.shell.debugPanel.hidden = !visible;
       this.shell.debugToggle.setAttribute('aria-expanded', String(visible));
     };
-    setDebugVisible(!window.matchMedia('(max-width: 700px)').matches);
+    setDebugVisible(!this.courtyard && !window.matchMedia('(max-width: 700px)').matches);
     this.shell.debugToggle.addEventListener('click', () => setDebugVisible(this.shell.debugPanel.hidden), options);
     window.addEventListener('resize', this.resize, options);
     document.addEventListener('visibilitychange', () => { this.previousTime = 0; }, options);

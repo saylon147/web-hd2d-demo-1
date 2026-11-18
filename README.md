@@ -80,3 +80,9 @@ M1 completed: [handoff](docs/M1_HANDOFF.md). M2.1 V1 ready for review: [handoff 
 Phase 1 targets Three.js/TypeScript/Vite, constrained perspective, a small diorama, crisp pixel characters and a Blender→GLB pipeline. Current work excludes gameplay, backend, accounts, detailed textures/vegetation and ComfyUI.
 
 Read [PLAN](PLAN.md), [M2 implementation](docs/M2_IMPLEMENTATION.md), [art pipeline](docs/M2_ART_PIPELINE.md), [asset pipeline](docs/ASSET_PIPELINE.md), [character rendering](docs/CHARACTER_RENDERING.md) and [Codex instructions](AGENTS.md).
+
+## Flat courtyard study
+
+Open [the courtyard](http://127.0.0.1:5173/?scene=courtyard) after running `npm run dev`. Drag to orbit and scroll to zoom. The [entry camera](docs/screenshots/courtyard/entrance.png) and [alternate angle](docs/screenshots/courtyard/side.png) show the actual Web scene.
+
+The Tripo cottage was reduced from 1,907,653 to 85,844 triangles for this exterior study. Rebuild the preview with Blender 5.2.1 in background mode using `--python scripts/export_courtyard_cottage.py` and the local source `art-source/tripo/inbox/tripo_cottage.glb`. The preview uses a provisional 6.7 m overall width. Trees, pergola, flower borders, vegetable beds and paving are seeded procedural placeholders. The next art pass is the orchard canopy and climbing vines at the cottage's level of detail.
