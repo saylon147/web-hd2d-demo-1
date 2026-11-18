@@ -126,3 +126,7 @@ h1 { margin: 12px 0 8px; font-size: 27px; font-weight: 550; letter-spacing: .08e
   .scene-heading p, .placeholder-badge { display: none; }
   .debug-panel { top: 12px; max-height: calc(100% - 62px); }
 }
+
+.pixel-controls { pointer-events: auto; display:flex; align-items:center; gap:5px; background:#f6f7f0; padding:4px 7px; border-radius:5px; color:#354537; font-size:11px; }
+.pixel-controls select { color:inherit; font:inherit; }
+@media (max-width:700px) { .scene-footer:has(.pixel-controls) { flex-wrap:wrap; } }

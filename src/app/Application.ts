@@ -1,3 +1,4 @@
+import { PixelPresentation } from '../core/PixelPresentation';
 import { createCourtyardWorld, courtyardCamera } from '../world/courtyard';
 import type GUI from 'lil-gui';
 import type { WebGLRenderer } from 'three';
@@ -20,6 +21,7 @@ export class Application {
   private readonly courtyard = new URLSearchParams(window.location.search).get('scene') === 'courtyard';
   private blockout: BlockoutWorld | undefined;
   private readonly events = new AbortController();
+  private presentation: PixelPresentation | undefined;
   private renderer: WebGLRenderer | undefined;
   private orbit: ConstrainedCamera | undefined;
   private world: FoundationWorld | undefined;
@@ -55,6 +57,9 @@ export class Application {
       this.showError(new Error('WebGL 上下文已丢失。请重新加载页面以恢复场景。'));
       this.disposeResources();
     }, options);
+    if (this.courtyard) {
+      this.presentation = new PixelPresentation(this.renderer, this.shell.readout.parentElement!, this.events.signal);
+    }
     const loadedWorld = this.courtyard ? await createCourtyardWorld(this.events.signal) : this.foundation ? createFoundationWorld() : await createBlockoutWorld(this.events.signal);
     if (this.disposed || this.failed) { loadedWorld.dispose(); return; }
     this.world = loadedWorld;
@@ -119,6 +124,7 @@ export class Application {
     this.renderer.setPixelRatio(this.pixelRatio);
     this.renderer.setSize(width, height, false);
     this.orbit.resize(width, height);
+    this.presentation?.resize();
   };
 
   private readonly renderFrame = (time: number): void => {
@@ -129,7 +135,8 @@ export class Application {
       this.previousTime = time;
       this.orbit.update(delta);
       this.world.updateTarget(this.orbit.state.target);
-      this.renderer.render(this.world.scene, this.orbit.camera);
+      if (this.presentation) this.presentation.render(this.world.scene, this.orbit.camera);
+      else this.renderer.render(this.world.scene, this.orbit.camera);
       this.shell.status.textContent = `WebGL2 · DPR ${this.pixelRatio.toFixed(1)}`;
       this.shell.status.classList.add('is-ready');
       if (time - this.previousReadoutTime >= 100) {
@@ -143,6 +150,7 @@ export class Application {
         this.shell.canvas.dataset.aspect = String(this.orbit.camera.aspect);
         this.shell.canvas.dataset.drawCalls = String(this.renderer.info.render.calls);
         this.shell.canvas.dataset.triangles = String(this.renderer.info.render.triangles);
+        if (this.presentation) this.shell.canvas.dataset.cameraMatrix = this.orbit.camera.matrixWorld.elements.join(',');
         this.previousReadoutTime = time;
       }
       this.frameId = requestAnimationFrame(this.renderFrame);
@@ -183,6 +191,8 @@ export class Application {
     this.gui?.destroy();
     this.orbit?.dispose();
     this.world?.dispose();
+    this.presentation?.dispose();
+    this.presentation = undefined;
     this.renderer?.dispose();
     this.resizeObserver = undefined;
     this.gui = undefined;
