@@ -43,8 +43,8 @@ export async function createBlockoutWorld(signal: AbortSignal): Promise<Blockout
   grid.visible = false;
   const axes = new AxesHelper(2);
   axes.visible = false;
-  scene.add(grid, axes, new HemisphereLight('#fffaf0', '#abb8b9', 2.4));
-  const sun = new DirectionalLight('#fff7e9', 3);
+  scene.add(grid, axes, new HemisphereLight('#fffaf0', '#ad9b83', 1.35));
+  const sun = new DirectionalLight('#ffe9cb', 2.1);
   sun.position.set(-8, 15, 10);
   sun.castShadow = true;
   sun.shadow.mapSize.set(2048, 2048);
@@ -55,7 +55,7 @@ export async function createBlockoutWorld(signal: AbortSignal): Promise<Blockout
   sun.shadow.camera.near = 0.5;
   sun.shadow.camera.far = 60;
   sun.shadow.normalBias = 0.03;
-  const interiorFill = new PointLight('#ffffff', 8, 10, 2);
+  const interiorFill = new PointLight('#ffdfb6', 4, 10, 2);
   interiorFill.position.set(manifest.views.basement.target.x, 4, manifest.views.basement.target.z);
   scene.add(sun, interiorFill);
   const world: BlockoutWorld = {

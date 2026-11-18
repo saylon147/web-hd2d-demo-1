@@ -20,7 +20,7 @@ from mathutils import Vector
 
 ROOT = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser()
-parser.add_argument('--params', type=Path, default=ROOT / 'art-source/parameters/island_cottage_v1.json')
+parser.add_argument('--params', type=Path, default=ROOT / 'art-source/parameters/island_cottage_v2.json')
 parser.add_argument('--skip-renders', action='store_true')
 args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else [])
 params_bytes = args.params.read_bytes().replace(b'\r\n', b'\n')  # Stable provenance across Git newline settings.
@@ -66,14 +66,14 @@ def material(name, hex_color):
     return mat
 
 
-clay = material('clay_structure_placeholder', 'deded8')
-rock = material('clay_rock_placeholder', 'b9bdb9')
-roof_mat = material('clay_roof_placeholder', '9ca5a4')
-furniture = material('clay_furniture_placeholder', 'a2aaa4')
-paving = material('clay_paths_placeholder', 'e6e4db')
-garden_mat = material('clay_garden_placeholder', 'bfc7b8')
-water_mat = material('clay_water_placeholder', 'bad6df')
-route_mat = material('inspection_route_placeholder', '849b8b')
+clay = material('clay_structure_placeholder', p.get('palette', {}).get('clay', 'deded8'))
+rock = material('clay_rock_placeholder', p.get('palette', {}).get('rock', 'b9bdb9'))
+roof_mat = material('clay_roof_placeholder', p.get('palette', {}).get('roof_mat', '9ca5a4'))
+furniture = material('clay_furniture_placeholder', p.get('palette', {}).get('furniture', 'a2aaa4'))
+paving = material('clay_paths_placeholder', p.get('palette', {}).get('paving', 'e6e4db'))
+garden_mat = material('clay_garden_placeholder', p.get('palette', {}).get('garden_mat', 'bfc7b8'))
+water_mat = material('clay_water_placeholder', p.get('palette', {}).get('water_mat', 'bad6df'))
+route_mat = material('inspection_route_placeholder', p.get('palette', {}).get('route_mat', '849b8b'))
 
 
 def mesh(name, vertices, faces, parent, mat):
@@ -192,13 +192,46 @@ def house_box(name, center, size, parent, mat=clay):
 
 raw_outlines = [i['plateauOutline'], i['terraceOutline'], i['beachOutline']]
 land_target = w*d*i['landAreaRatio']
-land_scale = math.sqrt(land_target / sum(area(o) for o in raw_outlines))
+land_scale = i.get('outlineScale', math.sqrt(land_target / sum(area(o) for o in raw_outlines)))
 outlines = [[(x*land_scale, z*land_scale) for x,z in o] for o in raw_outlines]
+def coast_mass(name, outline, bottom, top, parent, mat):
+    if 'palette' not in p:
+        return prism(name, outline, bottom, top, parent, mat)
+    ox = sum(x for x,z in outline)/len(outline)
+    oz = sum(z for x,z in outline)/len(outline)
+    rim = []
+    for a,b in zip(outline, outline[1:]+outline[:1]):
+        for fraction in (0, 1/3, 2/3):
+            rim.append(tuple(u+(v-u)*fraction for u,v in zip(a,b)))
+    n = len(rim)
+    vertices,faces = [],[]
+    for ring,(spread,height) in enumerate([(0,1),(0.9,0.8),(2.2,0.46),(3.5,0)]):
+        for j,(x,z) in enumerate(rim):
+            angle = math.atan2(z-oz,x-ox)
+            reach = spread*(0.9+0.31*math.sin(3*angle)+rng.uniform(-0.16,0.16))
+            if name == 'Beach':
+                reach *= 0.25
+            y = bottom+(top-bottom)*height
+            if ring in (1,2):
+                y += (top-bottom)*(0.08*math.sin(2*angle)+rng.uniform(-0.08,0.08))
+            vertices.append((x+reach*math.cos(angle),y,z+reach*math.sin(angle)))
+            if ring:
+                a = (ring-1)*n+j
+                b = (ring-1)*n+(j+1)%n
+                faces.extend([(a,b,b+n),(a,b+n,a+n)])
+    faces.extend([tuple(range(n)),tuple(range(3*n,4*n))])
+    obj = mesh(name,vertices,faces,parent,mat)
+    obj.data.materials.append(garden_mat if name.startswith('Plateau') else paving)
+    for face in obj.data.polygons:
+        if all(vertex < n for vertex in face.vertices):
+            face.material_index = 1
+    return obj
+
 rock_meshes = [
-    prism('Plateau_RockMass', outlines[0], -0.25, i['plateauY'], terrain_ext, rock),
-    prism('Lower_Terrace_RockMass', outlines[1], -0.25, i['terraceY'], terrain_ext, rock),
+    coast_mass('Plateau_RockMass', outlines[0], -0.25, i['plateauY'], terrain_ext, rock),
+    coast_mass('Lower_Terrace_RockMass', outlines[1], -0.25, i['terraceY'], terrain_ext, rock),
 ]
-beach = prism('Beach', outlines[2], -0.2, i['beachY'], shore, paving)
+beach = coast_mass('Beach', outlines[2], -0.2, i['beachY'], shore, paving)
 
 # A real basement cavity and real recesses for the coastal stairs, not overlapping solids.
 for obj in rock_meshes:
@@ -212,6 +245,14 @@ for obj in rock_meshes + [beach]:
     difference(obj, (i['mainStairX'], (i['terraceY']+i['beachY'])/2+0.1, (lower_start+lower_end)/2),
                (i['mainStairWidth']+0.12, i['terraceY']-i['beachY']+0.2, lower_end-lower_start))
 
+if 'palette' in p:
+    for obj in rock_meshes:
+        for start,end,level in [(upper_end,lower_start,i['terraceY']),
+                                (lower_start,lower_end,i['beachY']),
+                                (lower_end,p['pier']['startZ'],i['beachY'])]:
+            difference(obj,(i['mainStairX'],level+4,(start+end)/2),
+                       (i['mainStairWidth']+0.12,8,end-start))
+
 for original in rock_meshes:
     section = original.copy()
     section.data = original.data.copy()
@@ -221,7 +262,8 @@ for original in rock_meshes:
     # Open a front/right inspection bay; retain rear/left rock to show embedding.
     difference(section, (cx+1.5, 7, cz+7), (w+5, 10, d+16))
 
-box('Sea_Plane', (0,-0.05,2), (56,0.1,56), water, water_mat)
+sea_size = 180 if 'palette' in p else 56
+box('Sea_Plane', (0,-0.05,2), (sea_size,0.1,sea_size), water, water_mat)
 for index, (x,z) in enumerate(outlines[0]):
     bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=1, radius=1, location=source((x*1.025, 0.6, z*1.025)))
     obj = bpy.context.object
@@ -230,6 +272,59 @@ for index, (x,z) in enumerate(outlines[0]):
     obj.parent = shore
     obj.data.materials.append(rock)
     obj['placeholder'] = True
+
+if 'palette' in p:
+    sand = material('shore_sand_placeholder','dec08b')
+    beach.data.materials[1] = sand
+    limestone = material('limestone_placeholder','c4b19b')
+    foam = material('surf_placeholder','a7cebc')
+    # Outcrops follow the sloping shoulder and leave the stair approach open.
+    for a,b in zip(outlines[0], outlines[0][1:]+outlines[0][:1]):
+        for j in range(4):
+            fraction = (j+0.35)/4
+            x,z = (u+(v-u)*fraction for u,v in zip(a,b))
+            if z>3 and abs(x-i['mainStairX'])<2.5:
+                continue
+            angle = math.atan2(z+1,x)
+            for band in range(2):
+                reach = rng.uniform(0.5,1.1)+band*1.25
+                height = i['plateauY']-0.75-band*1.8+rng.uniform(-0.28,0.28)
+                bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=1,
+                    location=source((x+reach*math.cos(angle),height,z+reach*math.sin(angle))))
+                stone=bpy.context.object
+                stone.name='Cliff_Outcrop'
+                stone.scale=(rng.uniform(0.8,1.55),rng.uniform(0.6,1.18),rng.uniform(0.58,1.05))
+                stone.rotation_euler.z=angle+rng.uniform(-0.6,0.6)
+                stone.parent=shore
+                stone.data.materials.append(limestone if j%3 else rock)
+    for j in range(55):
+        angle = 2*math.pi*j/55
+        x = (11.8+1.3*math.sin(3*angle))*math.cos(angle)
+        z = (11+1.2*math.sin(4*angle))*math.sin(angle)-1
+        if z>4 and -7<x<5:
+            continue
+        bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=1,location=source((x,0.3,z)))
+        stone = bpy.context.object
+        stone.name = f'Shore_Boulder_{j}'
+        stone.scale = (rng.uniform(0.7,1.5),rng.uniform(0.6,1.4),rng.uniform(0.5,1.35))
+        stone.rotation_euler.z = angle
+        stone.parent = shore
+        stone.data.materials.append(limestone if j%3 else rock)
+        if j%2==0:
+            dx,dz = math.cos(angle),math.sin(angle)
+            wx,wz = x+1.5*dx,z+1.5*dz
+            mesh(f'Foam_{j}',[(wx-dz,0.03,wz+dx),(wx+0.13*dx,0.03,wz+0.13*dz),
+                (wx+dz,0.03,wz-dx),(wx-0.14*dx,0.03,wz-0.14*dz)],[(0,1,2,3)],shore,foam)
+
+    # These stones and foam marks always switch visibility with the shoreline.
+    for prefix in ('Shore_Boulder','Cliff_Outcrop','Foam_','Coastal_Rock'):
+        pieces = [obj for obj in shore.children if obj.name.startswith(prefix)]
+        bpy.ops.object.select_all(action='DESELECT')
+        for piece in pieces:
+            piece.select_set(True)
+        bpy.context.view_layer.objects.active = pieces[0]
+        bpy.ops.object.join()
+        bpy.context.object.name = prefix.rstrip('_')+'_Cluster'
 
 courtyard_outline = [(-5.5,0),(-1.15,0),(-1.15,2.3),(5.1,2.3),(5.1,4.2),(-5.5,4.2)]
 prism('Courtyard', courtyard_outline, i['plateauY'], i['plateauY']+0.035, terrace, paving)
@@ -260,9 +355,38 @@ for label,start,end,start_y,end_y,count in [
 box('Coast_Mid_Landing', (i['mainStairX'],i['terraceY']-0.05,(upper_end+lower_start)/2), (i['mainStairWidth'],0.1,i['landing']),paths,paving)
 box('Beach_Pier_Path', (i['mainStairX'],i['beachY']+0.025,(lower_end+p['pier']['startZ'])/2),
     (1.6,0.05,p['pier']['startZ']-lower_end),shore,paving)
+if 'palette' in p:
+    foliage = [material('olive_leaf_placeholder','859549'),material('deep_leaf_placeholder','526e40')]
+    # Group canopy volumes around each trunk to mark the garden at the exterior scale.
+    for tree in range(4):
+        crown = bpy.data.objects[f'Tree_Crown_Placeholder_{tree}']
+        for branch in range(3):
+            angle = branch*2.1+tree
+            leaf = crown.copy()
+            leaf.data = crown.data.copy()
+            bpy.context.collection.objects.link(leaf)
+            leaf.location.x += 0.84*math.cos(angle)
+            leaf.location.y += 0.84*math.sin(angle)
+            leaf.location.z += 0.25+0.28*branch
+            leaf.scale = (1.05,0.95,0.9)
+            leaf.data.materials[0] = foliage[branch%2]
+    timber = material('garden_timber_placeholder','755133')
+    for side,start,end,z in [('West',-6.4,-3.4,3.85),('East',-1.2,4.9,4.65)]:
+        count = math.ceil((end-start)/1.4)
+        for j in range(count+1):
+            box(f'Fence_{side}_Post_{j}',(start+(end-start)*j/count,i['plateauY']+0.45,z),
+                (0.13,0.9,0.13),garden,timber)
+        for j,height in enumerate([0.34,0.71]):
+            box(f'Fence_{side}_Rail_{j}',((start+end)/2,i['plateauY']+height,z),
+                (end-start,0.09,0.09),garden,timber)
 q=p['pier']
 box('Pier_Deck', (i['mainStairX'],q['deckY']-0.1,q['startZ']+q['length']/2), (q['width'],0.2,q['length']),pier,furniture)
-box('Pier_Access_Step', (i['mainStairX'],i['beachY']+0.05,q['startZ']-0.25), (q['width'],0.1,0.5),pier,paving)
+if 'palette' in p:
+    pitch = q['length']/17
+    for j in range(17):
+        box(f'Pier_Plank_{j}',(i['mainStairX'],q['deckY']+0.02,q['startZ']+(j+0.5)*pitch),
+            (q['width']+0.08,0.04,pitch-0.023),pier,timber if j%4==0 else furniture)
+box('Pier_Access_Step' , (i['mainStairX'],i['beachY']+0.05,q['startZ']-0.25), (q['width'],0.1,0.5),pier,paving)
 for row in range(4):
     for side in (-1,1):
         box(f'Pier_Post_{row}_{side}', (i['mainStairX']+side*q['width']/2,0.4,q['startZ']+0.3+row*(q['length']-0.6)/3), (0.18,1.5,0.18),pier,furniture)
@@ -340,7 +464,16 @@ rw,rd=w/2+h['eaves'],d/2+h['eaves']
 roof_vertices=[(cx-rw,eave_y,cz-rd),(cx+rw,eave_y,cz-rd),(cx,eave_y+h['roofRise'],cz-rd),
                (cx-rw,eave_y,cz+rd),(cx+rw,eave_y,cz+rd),(cx,eave_y+h['roofRise'],cz+rd)]
 mesh('Pitched_Roof_Blockout',roof_vertices,[(0,2,5,3),(2,1,4,5),(0,1,2),(3,5,4),(0,3,4,1)],roof,roof_mat)
-house_box('Chimney_Blockout',(1.7,eave_y+h['roofRise']-0.1,-1.2),(0.55,1.4,0.55),roof,clay)
+if 'palette' in p:
+    shutters = material('painted_shutters_placeholder','416e5a')
+    for side in [-1,1]:
+        house_box(f'Front_Shutter_{side}',(2+side*0.48,floor_y+1.78,3.04),(0.28,0.79,0.09),
+                  nodes['Exterior_Front'],shutters)
+        house_box(f'Side_Shutter_{side}',(3.04,floor_y+1.55,-1.4+side*0.85),(0.09,1.25,0.34),
+                  nodes['Exterior_Right'],shutters)
+    house_box('Door_Lintel',(-0.2,floor_y+2.2,3.05),(1.32,0.15,0.22),nodes['Exterior_Front'],timber)
+    house_box('Ridge_Cap',(0,eave_y+h['roofRise'],-0.01),(0.16,0.12,2*rd+0.1),roof,roof_mat)
+house_box('Chimney_Blockout' ,(1.7,eave_y+h['roofRise']-0.1,-1.2),(0.55,1.4,0.55),roof,clay)
 
 # Validate circulation against the actual Boolean-opened wall meshes (including door headroom).
 routes={
@@ -471,7 +604,7 @@ report={
     'schemaVersion':1,'approval':'candidate-awaiting-human','generator':'scripts/generate_blockout.py',
     'blenderVersion':bpy.app.version_string,'parametersSha256':hashlib.sha256(params_bytes).hexdigest(),
     'coordinates':{'source':'Blender Z-up','runtime':'Three.js Y-up','mapping':'(x,y,z) -> (x,z,-y)','units':'meters'},
-    'land':{'definition':'sum of nonoverlapping usable plateau, lower terrace and beach plan areas; includes cottage and circulation, excludes coastal rocks/water/pier',
+    'land':{'definition':'plan area of the three designed caps, including house and paths; exposed outdoor ground is sampled separately in asset validation',
             'areaM2':sum(area(o) for o in outlines),'cottageFootprintM2':w*d,'ratio':sum(area(o) for o in outlines)/(w*d),
             'outlineScale':land_scale,'outlines':outlines,'plateauY':i['plateauY'],'terraceY':i['terraceY'],'beachY':i['beachY']},
     'house':{**h,'basementClearHeight':basement_clear,'basementCeilingY':basement_ceiling,'groundCeilingY':eave_y,
@@ -492,7 +625,7 @@ report={
 }
 outputs['report'].write_text(json.dumps(report,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
 manifest={
-    'schemaVersion':1,'id':'island_cottage_blockout_v1','approval':'placeholder-awaiting-human',
+    'schemaVersion':1,'id':outputs['model'].stem,'approval':'placeholder-awaiting-human',
     'modelUrl':'/assets/models/'+outputs['model'].name,'axisUrl':'/assets/models/'+outputs['axis'].name,
     'modelSha256':hashlib.sha256(outputs['model'].read_bytes()).hexdigest(),'units':'meters','upAxis':'Y',
     'metrics':{'landAreaM2':report['land']['areaM2'],'houseAreaM2':w*d,'landRatio':report['land']['ratio'],

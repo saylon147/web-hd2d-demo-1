@@ -1,7 +1,7 @@
 # Golden Reference V1 — visual design brief
 
 ## Status
-Approved concept **direction**, not final geometry. Concept image generated in the ChatGPT discussion on 2026-10-28. The user supplied the formal local image at `docs/references/golden-reference-v1.png` (1536×1024). The original is intentionally excluded from Git; no original reference is served as a runtime asset. Do not fabricate or silently substitute a different image.
+Approved concept **direction**, not final geometry. Concept image generated in the ChatGPT discussion on 2026-10-28. The user supplied the formal local image at `docs/references/golden-reference-v1.png` (1536×1024). The repository includes the original for design review. The Web build serves assets from public/. Do not fabricate or silently substitute a different image.
 
 SHA-256: `6d538a42441a2c9b5b2e6736522687fa85aef08b8d87e1a71b0fa3ec2a1e61e3`.
 

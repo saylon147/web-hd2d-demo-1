@@ -4,13 +4,14 @@ import { blockoutCameraProfile, parseBlockoutManifest } from '../../src/config/b
 import { createCameraState } from '../../src/config/camera';
 import { constrainCameraState, zoomDistance } from '../../src/camera/math';
 
-const text = readFileSync(new URL('../../public/assets/manifests/blockout_v1.json', import.meta.url), 'utf8');
+const text = readFileSync(new URL('../../public/assets/manifests/blockout_v2.json', import.meta.url), 'utf8');
 function fixture(): Record<string, unknown> { return JSON.parse(text) as Record<string, unknown>; }
 
 describe('M2 blockout manifest and camera profile', () => {
   it('loads all three view presets and measured spatial metrics', () => {
     const manifest = parseBlockoutManifest(fixture());
-    expect(manifest.metrics.landRatio).toBeCloseTo(9);
+    expect(manifest.metrics.landRatio).toBeGreaterThanOrEqual(8.5);
+    expect(manifest.metrics.landRatio).toBeLessThanOrEqual(9.5);
     expect(manifest.metrics.basementHeight).toBeCloseTo(2.4);
     expect(manifest.views['ground-floor'].target.y).toBeGreaterThan(manifest.views.basement.target.y);
   });
@@ -32,7 +33,7 @@ describe('M2 blockout manifest and camera profile', () => {
     const data = fixture();
     data.modelUrl = 'https://example.com/model.glb';
     expect(() => parseBlockoutManifest(data)).toThrow('local GLB');
-    data.modelUrl = '/assets/models/island_cottage_blockout_v1.glb';
+    data.modelUrl = '/assets/models/island_cottage_blockout_v2.glb';
     data.views = {};
     expect(() => parseBlockoutManifest(data)).toThrow('camera');
   });

@@ -4,7 +4,7 @@ import type { CameraProfile, CameraState } from './camera';
 export const VIEW_MODES = ['exterior', 'ground-floor', 'basement'] as const;
 export type ViewMode = typeof VIEW_MODES[number];
 export const VIEW_LABELS: Record<ViewMode, string> = { exterior: '外景', 'ground-floor': '一层剖视', basement: '地下室剖视' };
-export const BLOCKOUT_MANIFEST_URL = `${import.meta.env.BASE_URL}assets/manifests/blockout_v1.json`;
+export const BLOCKOUT_MANIFEST_URL = `${import.meta.env.BASE_URL}assets/manifests/blockout_v2.json`;
 
 export interface BlockoutManifest {
   schemaVersion: 1;

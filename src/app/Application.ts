@@ -72,7 +72,7 @@ export class Application {
     }
     if (this.blockout) {
       const metrics = this.blockout.manifest.metrics;
-      this.shell.metrics.textContent = `陆地 ${metrics.landAreaM2.toFixed(0)}㎡ / 小屋 ${metrics.houseAreaM2.toFixed(0)}㎡\n面积比 ${metrics.landRatio.toFixed(2)}× · 庭院 ${metrics.courtyardAreaM2.toFixed(1)}㎡`;
+      this.shell.metrics.textContent = `平台投影 ${metrics.landAreaM2.toFixed(0)}㎡ / 小屋 ${metrics.houseAreaM2.toFixed(0)}㎡\n面积比 ${metrics.landRatio.toFixed(2)}× · 庭院 ${metrics.courtyardAreaM2.toFixed(1)}㎡`;
       const queryMode = new URLSearchParams(window.location.search).get('view');
       this.selectView(VIEW_MODES.find((mode) => mode === queryMode) ?? 'exterior');
     }

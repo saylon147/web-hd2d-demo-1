@@ -8,9 +8,9 @@ import { chromium } from 'playwright';
 // Static PNG evidence from actual screenshots + the user's unchanged local reference.
 // No image generation, reference substitution, or external network is involved.
 const root=fileURLToPath(new URL('../',import.meta.url));
-const output=resolve(root,'docs/screenshots/m2.1');
+const output=resolve(root,'docs/screenshots/m2.1-v1');
 await mkdir(output,{recursive:true});
-const report=JSON.parse(await readFile(resolve(root,'docs/m2.1/spatial-report.json'),'utf8'));
+const report=JSON.parse(await readFile(resolve(root,'docs/m2.1-v1/spatial-report.json'),'utf8'));
 const referenceBytes=await readFile(resolve(root,'docs/references/golden-reference-v1.png'));
 const dataUrl=(bytes)=>`data:image/png;base64,${bytes.toString('base64')}`;
 const reference=dataUrl(referenceBytes);
@@ -23,7 +23,7 @@ try {
   const page=await browser.newPage({viewport:{width:1800,height:2000},deviceScaleFactor:1});
   const crop=(x,y,w,h)=>`<svg viewBox="${x} ${y} ${w} ${h}" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="crop-${x}-${y}"><rect x="${x}" y="${y}" width="${w}" height="${h}"/></clipPath></defs><image href="${reference}" width="${refWidth}" height="${refHeight}" clip-path="url(#crop-${x}-${y})"/></svg>`;
   const rows=[
-    ['exterior','01 外景 · 岛屿与小屋','可用陆地 324㎡ / 小屋 36㎡ = 9.00× · L 形庭院 30.15㎡',[0,0,969,684]],
+    ['exterior','01 外景 · 岛屿与小屋',`水平平台投影 ${report.land.areaM2.toFixed(1)}㎡ · 小屋 ${report.land.cottageFootprintM2}㎡ · ${report.land.ratio.toFixed(2)}×`,[0,0,969,684]],
     ['ground-floor','02 一层剖视 · 房间与洞口','净高 2.70 m · 后左角双跑 U 形梯 · 楼板真实开洞',[970,0,566,381]],
     ['basement','03 地下室剖视 · 岩层与楼梯','净高 2.40 m · 16 级 × 0.175 m · 地板 Y=2.20 m',[970,383,566,301]],
   ];
@@ -35,6 +35,11 @@ try {
   await page.setContent(`<style>${style}</style>${html}`);
   await page.locator('img').evaluateAll((images)=>Promise.all(images.map((image)=>image.decode())));
   await page.screenshot({path:resolve(output,'reference-comparison.png'),fullPage:true});
+
+  const previous = dataUrl(await readFile(resolve(root,'docs/screenshots/m2.1/web-exterior.png')));
+  await page.setContent(`<style>${style}body{padding:24px}img{height:auto}</style><main><h1>岛屿空间白模 · 固定机位</h1><div class="pair"><article><label>V0</label><img src="${previous}"/></article><article><label>V1</label><img src="${await image('web-exterior.png')}"/></article></div></main>`);
+  await page.locator('img').evaluateAll((images)=>Promise.all(images.map((image)=>image.decode())));
+  await page.locator('main').screenshot({path:resolve(output,'exterior-before-after.png')});
 
   const h=report.house,s=report.stair;
   const plan=(rooms,level,title,offset)=>{
